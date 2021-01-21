@@ -39,9 +39,9 @@
                             </div>
                         </div>
                         <div class="col d-flex align-items-end justify-content-end">
-                            <div class="form-group float-right mb-0">
+                            <!-- <div class="form-group float-right mb-0">
                                 <button type="button" class="btn btn-success mr-15">Delete Selected</button>
-                            </div>
+                            </div> -->
                             <div class="form-group has-search filter-search mr-15">
                                 <span class="fa fa-search form-control-feedback"></span>
                                 <input type="text" class="form-control" [(ngModel)]="pageConfig.search_text" #searchInput id="inlineFormInputGroupUsername2" placeholder="Search">
@@ -55,9 +55,11 @@
                             <tr>
                                 <th>
                                     <div class="custom-control custom-checkbox">
-                                        <input [disabled]="
+                                        <!-- <input [disabled]="
                                     !privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
                                     && !privileges.privilegeHash['uam.views.CancelMultipleUser']['c']" [(ngModel)]="checkAll" (ngModelChange)="selectAll()" type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label> -->
+                                        <input  [(ngModel)]="checkAll" (ngModelChange)="selectAll()" type="checkbox" class="custom-control-input" id="customCheck5">
                                         <label class="custom-control-label" for="customCheck5"></label>
                                     </div>
                                 </th>
@@ -71,25 +73,30 @@
                         </thead>
                         <tbody *ngIf="!userLoader">
                             <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
-                            <tr *ngFor="let user of userList">
+                            <tr *ngFor="let team of teamList">
                                 <td>
                                     <div class="custom-control custom-checkbox">
-                                        <input [disabled]="
+                                        <!-- <input [disabled]="
                                     (!privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
                                      && !privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
                                      true : (privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
                                       || privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ? 
-                                    (user.status !== 'P' || user.imported_from_active_directory === true)
+                                    (team.status !== 'P' || team.imported_from_active_directory === true)
                                      : ''
-                                     " [(ngModel)]="user.check" type="checkbox" class="custom-control-input" id={{user.user_id}}>
-                                        <label class="custom-control-label" for={{user.user_id}}></label>
+                                     " [(ngModel)]="team.check" type="checkbox" class="custom-control-input" id={{team.id}}>
+                                        <label class="custom-control-label" for={{team.id}}></label>
+                                    </div> -->
+                                    <input  [(ngModel)]="team.check" type="checkbox" class="custom-control-input" id={{team.id}}>
+                                        <label class="custom-control-label" for={{team.id}}></label>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">OZOQO</td>
-                                <td>13</td>
-                                <td>Aamir</td>
-                                <td>01-21-2021</td>
-                                <td>Zulqarnain</td>
+                                <td class="text-uppercase">{{team.name}}</td>
+                                <td>{{team.team_users_count}}</td>
+                                <td><span>{{team.added_by__first_name}}</span>
+                                    <span> {{team.added_by__first_name}}</span></td>
+                                <td>{{team.updated_at | date:('d MMM yy')}} </td>
+                                <td><span>{{team.team_users_lead[0].user__first_name}}</span>
+                                    <span> {{team.team_users_lead[0].user__last_name}}</span></td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" (click)="redirectToCreateUser(user.id, 'edit')" alt="">
@@ -97,7 +104,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr *ngIf="userList.length === 0" class="text-center">
+                            <tr *ngIf="teamList.length === 0" class="text-center">
                                 <td colspan="8">
                                     <p class="p-5 font-16">No data found</p>
                                 </td>

@@ -59,6 +59,8 @@ export class UserTeamsComponent implements OnInit {
     num_pages: 0
   }
   userList: any = [];
+  teamList: any=[];
+
   userStats: any = {
     "total_users_count": 0,
     "locked_users_count": 0,
@@ -93,7 +95,7 @@ export class UserTeamsComponent implements OnInit {
    ) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getTeams();
     if(this.privileges.privilegeHash['uam.views.UsersList']['c']){
       this.getStats();
     }
@@ -132,7 +134,7 @@ export class UserTeamsComponent implements OnInit {
     debugger
     this.pageConfig.filter_by = this.selectedStatusFilter;
     this.pageConfig.page = 1;
-    this.getUsers();
+    this.getTeams();
   }
   public valueChanged(event: string) {
     console.log('value changed: ' + event);
@@ -151,7 +153,7 @@ export class UserTeamsComponent implements OnInit {
           // console.log(this.searchInput.nativeElement.value)
           this.pageConfig.page = 1;
           // this.pageConfig.search_text = this.searchInput.nativeElement.value;
-          this.getUsers()
+          this.getTeams()
         })
     )
     .subscribe();
@@ -160,7 +162,7 @@ export class UserTeamsComponent implements OnInit {
   changePageSize(){
     this.pageConfig.size = parseInt(this.selectedPageSize);
     this.pageConfig.page = 1;
-    this.getUsers();
+    this.getTeams();
   }
 
   //set tab
@@ -169,19 +171,25 @@ export class UserTeamsComponent implements OnInit {
   }
 
   selectAll(){
-    if(this.checkAll === true){
-      this.userList.map(it => {
-        (!this.privileges.privilegeHash['uam.views.ApproveMultipleUser']['c']
-          && !this.privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
+    // if(this.checkAll === true){
+    //   this.userList.map(it => {
+    //     (!this.privileges.privilegeHash['uam.views.ApproveMultipleUser']['c']
+    //       && !this.privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
 
-          '' : (this.privileges.privilegeHash['uam.views.ApproveMultipleUser']['c']
-            || this.privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
-            (it.status === 'P' && it.imported_from_active_directory === false)
-              ? it.check = true : ''
-            : ''
+    //       '' : (this.privileges.privilegeHash['uam.views.ApproveMultipleUser']['c']
+    //         || this.privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
+    //         (it.status === 'P' && it.imported_from_active_directory === false)
+    //           ? it.check = true : ''
+    //         : ''
+    //   });
+    // }else{
+    //   this.userList.map(it => it.check= false);
+    // }
+    if(this.checkAll === true){
+      this.teamList.map(it => {it.check = true
       });
     }else{
-      this.userList.map(it => it.check= false);
+      this.teamList.map(it => it.check= false);
     }
   }
   
@@ -225,13 +233,13 @@ export class UserTeamsComponent implements OnInit {
   //   this.modalRef = this.modalService.show(template);
   // }
 
-  getUsers(){
+  getTeams(){
     this.userLoader=true;
-    this.service.usersList(this.pageConfig).subscribe((res) => {
+    this.service.TeamList(this.pageConfig).subscribe((res) => {
       
       if(res.status === "success"){
-        this.userList = res.data.qs;
-        this.userList.map(it => it.check = false);
+        this.teamList = res.data.qs;
+        this.teamList.map(it => it.check = false);
         // this.userList[0].imported_from_active_directory = true;
         // this.userList[0].required_columns_missing_values = true;
         this.paginationConfig = res.data;
@@ -268,7 +276,7 @@ export class UserTeamsComponent implements OnInit {
   pageChanged(event: any): void {
     //debugger
     this.pageConfig.page = event.page;
-    this.getUsers();
+    this.getTeams();
     
   }
 
@@ -307,7 +315,7 @@ export class UserTeamsComponent implements OnInit {
      if(res.status === "success"){
       this.activateLoader=false;
       this.modalRef.hide();
-      this.getUsers();
+      this.getTeams;
       // this.router.navigate(['/user']);
      }else{
       // alert("Something went wrong try again");
@@ -328,7 +336,7 @@ export class UserTeamsComponent implements OnInit {
      if(res.status === "success"){
       this.deactivateLoader=false;
       this.modalRef.hide();
-      this.getUsers();
+      this.getTeams();
     
       // this.router.navigate(['/user']);
      }else{
@@ -363,7 +371,7 @@ export class UserTeamsComponent implements OnInit {
     this.service.deleteUser(obj).subscribe((res:any) => {
       
       if(res.status === "success"){
-        this.getUsers();
+        this.getTeams;
         this.getStats();
         this.modalRef.hide();
       }else{
@@ -398,7 +406,7 @@ export class UserTeamsComponent implements OnInit {
         this.checkAll = false;
         this.errors = ["User Approved Successfully"];
         this.getStats();
-        this.getUsers();
+        this.getTeams;
       }else{
         if(res.errors){
           let arr = [];
@@ -433,7 +441,7 @@ export class UserTeamsComponent implements OnInit {
         this.checkAll = false;
         this.errors = ["User Cancelled Successfully"];
         this.getStats();
-        this.getUsers();
+        this.getTeams;
       }else{
         if(res.errors){
           let arr = [];
@@ -458,6 +466,6 @@ export class UserTeamsComponent implements OnInit {
   filterByStatus(status:any){
     this.pageConfig.page = 1;
     this.pageConfig.filter_by = status;
-    this.getUsers();
+    this.getTeams;
   }
 }
