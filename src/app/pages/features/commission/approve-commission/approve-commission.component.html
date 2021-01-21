@@ -1,0 +1,578 @@
+<!-- edit flow -->
+<div class="hk-pg-wrapper" *ngIf="true">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/commission']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Approve Commission</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <div class="row" *ngIf="commissionDetails">
+            <div class="col-md-3">
+                <div class="mb-30">
+                    <h2>{{commissionDetails?.user__first_name}} {{commissionDetails?.user__last_name}}</h2>
+                    <div class="lead text-muted">{{commissionDetails?.user__employee_type__name}}</div>
+                    <p class="text-dark-80">{{commissionDetails?.user__department__name}} -
+                        {{commissionDetails?.user__branch_location__address}}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="set-commssion p-3 mb-20">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Currency:</div>
+                            <div>{{commissionDetails?.currency_code}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Gross Salary (Monthly):</div>
+                            <div>{{commissionDetails?.base_salary_type === 'M' ?
+                                commissionDetails?.base_salary : commissionDetails?.base_salary/12  | number:'1.0'}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Gross Salary (Yearly):</div>
+                            <div>{{commissionDetails?.base_salary_type === 'M' ?
+                                commissionDetails?.base_salary*12 : commissionDetails?.base_salary  | number:'1.0'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center" *ngIf="false">
+                <div class="commission-edit-tabs">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(0)">Salary<br>Flat</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(1)">Salary<br>Tier</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(2)">Target<br>Commission
+                        Amount</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(3)">Target<br>Commission %
+                        age</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-loader" *ngIf="!commissionDetails">
+            <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                <div class="spinner-border theme-color" role="status">
+                  <span class="sr-only"></span>
+                </div>
+            </div>
+        </div> 
+        <form novalidate class="mt-20">
+            <div class="row">
+                <div class="col-12">
+                    <tabset #staticTabs class="commission-edit-tabs-content" [ngClass]="{'d-none': !commissionType}">
+
+                        <tab heading="Salary Flat">
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Salary
+                                                Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Flat</span>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="
+                                    privileges.privilegeHash['ccm.views.FetchCommissionCompensationHistory']['m']
+                                    || privileges.privilegeHash['ccm.views.FetchCommissionCompensationHistory']['c']
+                                    "  >
+                                        <a href="javascript:void(0)"
+                                            (click)="FetchCommissionCompensationHistory(historyModal)"
+                                            class="text-purpal">
+                                            <span class="d-flex align-items-center">
+                                                View History
+                                                <span *ngIf="loader" class="spinner-border float-right w-25p h-25p ml-10" role="status"
+                                                aria-hidden="true"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="stats-grid stats-grid--cEdit">
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>{{commissionDetails?.base_salary_type === 'M' ?
+                                            commissionDetails?.base_salary : commissionDetails?.base_salary/12  | number:'1.0'}}
+                                        </h1>
+                                    </div>
+                                    <div>
+                                        <p>Break Even Amount</p>
+                                        <h1>{{commissionDetails?.child_break_even_points[0]?.break_even_target}}
+                                        </h1>
+                                    </div>
+                                    <div>
+                                        <p>Break Even Times</p>
+                                        <h1>{{commissionDetails?.child_break_even_points[0]?.break_even_times}}</h1>
+                                    </div>
+                                    <div>
+                                        <p>Commission</p>
+                                        <h1>{{commissionDetails?.child_break_even_points[0]?.commission_rate}}%</h1>
+                                    </div>
+                                </div>
+
+
+                                <div class="row set-commssion p-4">
+                                    <div class="col-md-4">
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent" [(ngModel)]="comment"
+                                            [ngModelOptions]="{standalone: true}"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Salary Tier">
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type: <span class="text-dark-80">Salary
+                                                Based</span></p>
+                                        <p class="text-gray font-16">Break Even: <span class="text-dark-80">Tier
+                                                Based</span>
+                                        </p>
+                                        <p class="text-gray font-16">Commission Percentage: <span class="text-dark-80">
+                                                {{commissionDetails?.child_break_even_points[0]?.commission_rate}}%</span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)"
+                                            (click)="FetchCommissionCompensationHistory(historyModal)"
+                                            class="text-purpal">
+                                            <span class="d-flex align-items-center">
+                                                View History
+                                                <span *ngIf="loader" class="spinner-border float-right w-25p h-25p ml-10" role="status"
+                                                aria-hidden="true"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even Times</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">MTD Base Target</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row"
+                                            *ngFor="let child of commissionDetails?.child_break_even_points">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.break_even_times}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.mtd_base_target}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row set-commssion p-4">
+                                    <div class="col-md-4">
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent" [(ngModel)]="comment"
+                                            [ngModelOptions]="{standalone: true}"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Target Commission Amount">
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>TARGET BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Target
+                                                Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Tier-rate
+                                                Flat Commission</span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)"
+                                            (click)="FetchCommissionCompensationHistory(historyModal)"
+                                            class="text-purpal">
+                                            <span class="d-flex align-items-center">
+                                                View History
+                                                <span *ngIf="loader" class="spinner-border float-right w-25p h-25p ml-10" role="status"
+                                                aria-hidden="true"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even(%)</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Commission Amount</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row"
+                                            *ngFor="let child of commissionDetails?.child_break_even_points">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.break_even_times}}%</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.commission_rate}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row set-commssion p-4">
+                                    <div class="col-md-4">
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent" [(ngModel)]="comment"
+                                            [ngModelOptions]="{standalone: true}"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Target Commission % age">
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>TARGET BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Target
+                                                Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">
+                                                Tier-rate Variable Commission
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)"
+                                            (click)="FetchCommissionCompensationHistory(historyModal)"
+                                            class="text-purpal">
+                                            <span class="d-flex align-items-center">
+                                                View History
+                                                <span *ngIf="loader" class="spinner-border float-right w-25p h-25p ml-10" role="status"
+                                                aria-hidden="true"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even Percentage</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Commission Percentage</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row"
+                                            *ngFor="let child of commissionDetails?.child_break_even_points">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.break_even_times}}%</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-value">{{child.commission_rate}}%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row set-commssion p-4">
+                                    <div class="col-md-4">
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent" [(ngModel)]="comment"
+                                            [ngModelOptions]="{standalone: true}" id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div *ngIf="commissionDetails?.status !== 'A'" class="text-right mt-30 mb-40">
+                <button *ngIf="privileges.privilegeHash['ccm.views.PendingCommissionCompensationWithSuggestion']['c']" type="button" class="btn btn-success loader-btn btn-lg previous"
+                    (click)="PendingCommissionCompensationWithSuggestion()">
+                    <span>
+                        Request for Update
+                        <span *ngIf="loaderCancel" class="spinner-border float-right" role="status"
+                            aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button *ngIf="privileges.privilegeHash['ccm.views.ApproveMultipleCommissionCompensation']['c']" type="button" class="btn btn-success loader-btn btn-lg"
+                    (click)="ApproveMultipleCommissionCompensation()">
+                    <span>
+                        Approve Commission
+                        <span *ngIf="loaderApprove" class="spinner-border float-right" role="status"
+                            aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+<!-- edit flow end -->
+
+<!-- view history modal -->
+<ng-template #historyModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-xl unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">History of Commission</h4>
+            </div>
+            <div class="modal-body p-0 comment-content position-relative">
+                <div class="table-responsive mnh-200p">
+                <table id="datable_1" class="table theme-table commission-setting-history-table w-100 display pb-30">
+                    <thead>
+                        <tr>
+                            <th>COMMISSION TYPE</th>
+                            <th>BREAK EVEN</th>
+                            <th></th>
+                            <th>FROM DATE</th>
+                            <th>TO DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let history of commissionHistory">
+
+                            <tr *ngIf="history.data.break_even_type === 'FS'">
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)*</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'TS'">
+                                <td>Salary Based</td>
+                                <td>Tier Based</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">
+                                                    {{history?.data?.child_break_even_points[0]?.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">MTD Base Target</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                        *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.mtd_base_target}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'FT'">
+                                <td>Target Based</td>
+                                <td>Tier-rate Flat Commission</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even(%)</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission Amount</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'VT'">
+                                <td>Target Based</td>
+                                <td>Tier-rate Variable Commission</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even(%)</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <!-- <tr *ngIf="history.data.break_even_type === 'FS'">
+                                <td>Salary Based</td>
+                                <td>Tier Based</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr> -->
+                            <tr *ngIf="commissionHistory.length === 0" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr> 
+                        </ng-container> 
+                        <tr *ngIf="loadMoreHistory" class="text-center">
+                            <td colspan="8">
+                                <p class="p-5 font-16 text-purpal cursor-pointer" (click)="FetchCommissionCompensationHistory('more')">
+                                    Load More History
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody> 
+                </table>
+                </div>
+                <div *ngIf="loader" class="table-loader absolute">
+                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pb-0 pr-0">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-success btn-lg previous" (click)="closeModal()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- view history modal end -->

@@ -1,0 +1,444 @@
+  
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>  
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Users</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">User Dashboard</h1>
+            <div class="float-right mb-0">
+                <button *ngIf="privileges.privilegeHash['uam.views.CreateUser']['m']" type="button" [routerLink]="['/user/add']" class="btn btn-success">Add New User</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid" *ngIf="privileges.privilegeHash['uam.views.UsersList']['c']">
+        <div (click)="filterByStatus('All')" class="cursor-pointer">
+            <h1>{{userStats.total_users_count}}</h1>
+            <p>TOTAL USERS</p>
+        </div>
+        <div (click)="filterByStatus('ACTIVATED')" class="cursor-pointer">
+            <h1>{{userStats.activated_users_count}}</h1>
+            <p>ACTIVE USERS</p>
+        </div>
+        <div (click)="filterByStatus('DEACTIVATED')" class="cursor-pointer">
+            <h1>{{userStats.deactivated_users_count}}</h1>
+            <p>DISABLED USERS</p>
+        </div>
+        <div (click)="filterByStatus('PENDING')" class="cursor-pointer">
+            <h1>{{userStats.pending_users_count}}</h1>
+            <p>APPROVAL PENDING</p>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="hk-sec-wrapper">
+            <h6 class="hk-sec-title mb-10">USERS</h6>
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end flex-column">
+                            <div class="d-flex align-items-end justify-content-start w-100 mb-15">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show Users</span> 
+                                    <select (change)=statusFilter() [(ngModel)]="selectedStatusFilter"
+                                     class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="ALL">All</option> 
+                                        <option value="APPROVED" >Approved</option>
+                                        <option value="PENDING" >{{privileges.privilegeHash['uam.views.UsersList']['c'] ? 'Approval Required' : privileges.privilegeHash['uam.views.UsersList']['m'] ? 'Approval Pending' : 'Pending'}}</option>  
+                                        <option value="INCOMPLETE_PROFILE" >Incomplete Profile</option> 
+                                    </select>   
+                                </div> 
+                            </div>
+                            <div class="d-flex align-items-end justify-content-start w-100">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <select  [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>  
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <button *ngIf="showbtn() && privileges.privilegeHash['uam.views.ApproveMultipleUser']['c']" type="button" [disabled]="approveLoader || cancelLoader" (click)="approveAll()" class="btn btn-success mr-15">
+                                Approve Users
+                                <span *ngIf="approveLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" *ngIf="showbtn() && privileges.privilegeHash['uam.views.CancelMultipleUser']['c']" [disabled]="approveLoader || cancelLoader" (click)="cancelAll()" class="btn btn-success mr-15">
+                                Reject Users
+                                <span *ngIf="cancelLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                            </button>
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" class="form-control" [(ngModel)]="pageConfig.search_text" #searchInput id="inlineFormInputGroupUsername2" placeholder="Search">
+                            </div>
+                            <div class="btn-group theme-dropdown" dropdown>
+                                <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                        aria-controls="dropdown-basic">
+                                        Download Users <span class="caret"></span>
+                                </button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                                    role="menu" aria-labelledby="button-basic">
+                                  <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="downloadFile('csv')">CSV</a></li> 
+                                </ul>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative">
+                <table id="datable_1" class="table theme-table user-dashboard w-100 display pb-30">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="custom-control custom-checkbox">
+                                    <input [disabled]="
+                                    !privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
+                                    && !privileges.privilegeHash['uam.views.CancelMultipleUser']['c']" [(ngModel)]="checkAll" (ngModelChange)="selectAll()" type="checkbox" class="custom-control-input" id="customCheck5">
+                                    <label class="custom-control-label" for="customCheck5"></label>
+                                </div>
+                            </th>
+                            <th>User id</th>
+                            <th>User Name</th>
+                            <th>user email</th>
+                            <th>branch location</th>
+                            <th>role</th> 
+                            <th></th> 
+                            <th></th> 
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="!userLoader">
+                        <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
+                        <tr *ngFor="let user of userList" >
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input [disabled]="
+                                    (!privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
+                                     && !privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ?
+                                     true : (privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
+                                      || privileges.privilegeHash['uam.views.CancelMultipleUser']['c']) ? 
+                                    (user.status !== 'P' || user.imported_from_active_directory === true)
+                                     : ''
+                                     "
+                                      [(ngModel)]="user.check" type="checkbox" class="custom-control-input"  id={{user.user_id}}>
+                                    <label class="custom-control-label" for={{user.user_id}}></label>
+                                </div>
+                            </td>
+                            <td class="text-uppercase">{{user.user_id}}</td>
+                            <td [routerLink]="
+                            user.status === 'A' ? ['/user/view', user.id] :
+
+                            (user.status === 'P' || user.status === 'C')
+                            && (privileges.privilegeHash['uam.views.EditUser']['m']
+                                || privileges.privilegeHash['uam.views.ApproveMultipleUser']['c'] 
+                                || privileges.privilegeHash['uam.views.CancelMultipleUser']['c']
+                             )
+                             ? ['/user/approve', user.id] :
+                            []
+                            "
+                            class="cursor-pointer"> 
+                            <div class="d-flex align-items-center text-capitalize">
+                                <div class="user-img-name"> 
+                                    {{user.first_name.substring(0, 1) + user.last_name.substring(0, 1)}}
+                                </div>
+                                <!-- <img src="assets/images/add-comment.png" class="img-fluid user-img mr-10"> -->
+                                {{user.first_name + ' ' + user.last_name}}
+                            </div>
+                            </td>
+                            <td>{{user.email}}</td>
+                            <td>{{user?.branch_location__address}}</td>
+                            <td>
+                                <div class="d-flex align-items-start">
+                                    <span>{{user.user_role__name}}</span> 
+                                </div>
+                            </td>  
+                            <td>
+                                <span class="status" [class]="
+                                    user.status === 'P' && user.imported_from_active_directory ? 'pending' : 
+                                            user.status === 'P' ? 'approval' : 
+                                            user.status === 'A' ? '' : 
+                                            ''
+                                    " *ngIf="user.status">
+                                        {{
+                                            user.status === 'A' ? '' :
+                                            user.status === 'C' ? 'Rejected' : 
+                                            user.status === 'P' ? 
+                                            (privileges.privilegeHash['uam.views.UsersList']['m'] ? 
+                                            (user.imported_from_active_directory ? 'Incomplete Profile' : 'Approval Pending') : 
+                                            privileges.privilegeHash['uam.views.UsersList']['c'] ? 'Approval Required' : '')
+                                             : ''
+                                        }}
+                                    </span>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                <!-- <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" (click)="redirectToCreateUser(user.id, 'edit')" alt=""> -->
+                                <img *ngIf="privileges.privilegeHash['uam.views.DeleteUser']['m'] ||
+                                privileges.privilegeHash['uam.views.DeleteUser']['c']" src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" (click)="openDeleteUser(deleteUser,user)" alt="">
+                                <a href="javascript: void(0)" class="mr-10" *ngIf="!user.is_account_locked"  > 
+                                    <i>
+                                        <svg id="unlock" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16.32 20.77">
+                                            <defs>
+                                              <style>
+                                                #unlock {
+                                                  fill: #aaa;
+                                                }
+                                              </style>
+                                            </defs>
+                                            <g id="unlock" data-name="Group 35885" transform="translate(0 0)">
+                                              <g id="Group_35884" data-name="Group 35884">
+                                                <path id="Path_90634" data-name="Path 90634" class="cls-1" d="M66.844,7.421H54.233V6.679A5.193,5.193,0,0,1,64.241,4.732a.742.742,0,0,0,1.375-.556,6.677,6.677,0,0,0-12.867,2.5v.742h-.742a.742.742,0,0,0-.742.742V20.028a.742.742,0,0,0,.742.742H66.844a.742.742,0,0,0,.742-.742V8.162A.742.742,0,0,0,66.844,7.421ZM66.1,19.286H52.75V8.9H66.1Z" transform="translate(-51.266 0.001)"/>
+                                              </g>
+                                            </g>
+                                            <g id="Group_35887" data-name="Group 35887" transform="translate(5.931 11.102)">
+                                              <g id="Group_35886" data-name="Group 35886">
+                                                <path id="Path_90635" data-name="Path 90635" class="cls-1" d="M192.118,257.393a2.229,2.229,0,1,0-2.844,2.844v1.623a.743.743,0,1,0,1.486,0v-1.623A2.229,2.229,0,0,0,192.118,257.393Zm-2.1,1.5a.743.743,0,1,1,.743-.743A.743.743,0,0,1,190.016,258.888Z" transform="translate(-187.787 -255.907)"/>
+                                              </g>
+                                            </g>
+                                          </svg>
+                                          
+                                    </i>
+                                </a>
+
+                                 <a href="javascript: void(0)" class="mr-10" *ngIf="user.is_account_locked" (click)="openModalActivate(userActivate,user)"> 
+                                     <i>
+                                        <svg id="lock_2_" data-name="lock (2)" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16.321 20.772">
+                                            <defs>
+                                              <style>
+                                                .locked {
+                                                  fill: #69c7c8;
+                                                }
+                                              </style>
+                                            </defs>
+                                            <g id="Group_35881" data-name="Group 35881" transform="translate(0)">
+                                              <g id="Group_35880" data-name="Group 35880">
+                                                <path id="Path_90632" data-name="Path 90632" class="locked" d="M66.779,7.419h-.742V6.677a6.677,6.677,0,0,0-13.354,0v.742h-.742a.742.742,0,0,0-.742.742v11.87a.742.742,0,0,0,.742.742H66.779a.742.742,0,0,0,.742-.742V8.161A.742.742,0,0,0,66.779,7.419ZM54.168,6.677a5.193,5.193,0,1,1,10.386,0v.742H54.168Zm11.87,12.612H52.684V8.9H66.037Z" transform="translate(-51.2)"/>
+                                              </g>
+                                            </g>
+                                            <g id="Group_35883" data-name="Group 35883" transform="translate(5.936 11.128)">
+                                              <g id="Group_35882" data-name="Group 35882">
+                                                <path id="Path_90633" data-name="Path 90633" class="locked" d="M192.079,257.483a2.224,2.224,0,1,0-2.84,2.832v1.62a.742.742,0,1,0,1.484,0v-1.62A2.22,2.22,0,0,0,192.079,257.483Zm-2.1,1.485a.742.742,0,1,1,.742-.742A.742.742,0,0,1,189.981,258.967Z" transform="translate(-187.756 -256)"/>
+                                              </g>
+                                            </g>
+                                          </svg> 
+                                          
+                                     </i>
+                                </a>
+                                </div>
+                            </td>  
+                        </tr>
+                        <tr *ngIf="userList.length === 0" class="text-center">
+                            <td colspan="8">
+                                <p class="p-5 font-16">No data found</p>
+                            </td>
+                        </tr> 
+                    </tbody>   
+                </table> 
+                <div *ngIf="userLoader" class="table-loader absolute">
+                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div> 
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <select  [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select> 
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">  
+                        <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="pageConfig.size" [maxSize]="5" [rotate]="true"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> 
+
+<ng-template #deleteUser  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/delete.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Delete Client?</h2>
+        <p class="modal-title text-secondary font-21">Are you sure you want to delete this user?</p>
+        <p class="modal-title client-name">{{userData.first_name}} {{userData.last_name}}</p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20">
+                <button type="button" [disabled]="loader" class="btn btn-danger btn-lg loader-btn mr-15" (click)="deleteUserMethod()">
+                    <span>
+                        Yes,delete user
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">Cancel</button>
+                
+            </div> 
+        </div> 
+        <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+    </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #userDeactivate  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/lock.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Deactivate User?</h2>
+        <p class="modal-title text-secondary font-21">Are you sure you want to to deactivate to this user?</p>
+        <p class="modal-title client-name">{{userData.first_name}} {{userData.last_name}}</p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20">
+                <button type="button" class="btn btn-success btn-lg mr-15" *ngIf="!deactivateLoader" (click)="deactivateUser(userData.id)">Yes,deactivate user</button>
+                <button type="button" class="btn btn-success btn-lg previous"  data-dismiss="modal"
+                (click)="modalRef.hide()">Cancel</button> 
+            </div> 
+        </div> 
+        <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+    </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #userActivate  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/unlock.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Unlock User?</h2>
+        <p class="modal-title text-secondary font-21">Are you sure you want to unlock this user?</p>
+        <p class="modal-title client-name">{{userData.first_name}} {{userData.last_name}}</p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20">
+                <button type="button" class="btn btn-success btn-lg mr-15" *ngIf="!activateLoader" (click)="activateUser(userData.id)">Yes,I'm Sure</button>
+                <button type="button" class="btn btn-success btn-lg mr-15" *ngIf="activateLoader">
+                    <span> 
+                        Activating 
+                        <span class="spinner-border ml-2" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success btn-lg previous"  data-dismiss="modal"
+                (click)="modalRef.hide()">Cancel</button> 
+            </div> 
+        </div> 
+        <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+    </div>
+    </div>
+</div>
+</ng-template>
+
+<!-- model for users download start-->
+<!-- <div bsModal #usersDownload="bs-modal" class="modal fade modal-bg-white" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none mt-3 mr-3 pb-0">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="usersDownload.hide()">
+                <span aria-hidden="true"><i class="ti-close cursor-pointer"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-5">
+                <div class="input-group form-group">
+                    <label for="inputState">File Format</label>
+                    <span class="wrapper-select">
+                        <select [(ngModel)]="downloadType" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select file format"> 
+                            <option value="csv">.csv</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <button type="button" (click)="downloadFile()" class="button w-130">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<ng-template #usersDownload class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/delete.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Download Users</h2>
+        <div class="text-left">
+            <div class="form-label-group">
+                <select class="form-control selectDropdown ng-dirty" name="Business Type" [(ngModel)]="downloadType">
+                    <option value="csv">.csv</option>
+                </select>
+                <label class="selectHolder" for="">File Format</label> 
+            </div>
+        </div>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20">
+                <button type="button" [disabled]="loader" class="btn btn-success loader-btn loader-btn btn-lg mr-15" (click)="downloadFile()">
+                   <span>
+                    Download 
+                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success previous btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">Cancel</button>
+                
+            </div> 
+        </div> 
+        <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+    </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;" style="color: black;">
+                    <li *ngFor="let error of errors">{{error}}</li>
+                    <!-- <li>{{errorMessage}}</li> -->
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+  
+
+
+

@@ -1,0 +1,160 @@
+// NOTE: This file contains table SCSS.
+.content-wrapper{ 
+	table{
+		border-collapse: separate;  
+		padding: 0 5px; 
+		border-spacing: 0px 1.5rem;
+		thead{
+
+			th{
+				border-bottom: none;
+				border-top: none;
+				color: $gray-04-color;
+				font-size: 18px;
+				font-weight: 500; 
+				padding: 0 1.8rem;
+			}
+		}
+		tbody{
+			
+			tr{
+
+				box-shadow:0px 0px 6px rgba(0,0,0,.1);
+				border:1px solid #707070;
+				td{ 
+					color: #464A53; 
+					border-top: none;
+					padding: 1.8rem;
+					i{
+						font-size: 1.2rem;
+					}
+				}
+				&.nested{
+					td{
+						padding-left: 1rem;
+						// &:first-child::before{
+						// 	content: "\f068";
+						// 	display: inline-block;
+						// 	font: normal normal normal 14px/1 FontAwesome;
+						// 	font-size: inherit;
+						// 	text-rendering: auto;
+						// 	-webkit-font-smoothing: antialiased;
+						// 	-moz-osx-font-smoothing: grayscale;
+						// 	color: #6A707E;
+						// 	font-weight: normal;
+						// }
+						&:last-child{padding-left: 0.75rem;}
+					}
+					&__l1{
+						td{
+							padding-left: 2rem;
+							&:last-child{padding-left: 0.75rem;}
+						}
+					}
+					&__l2{
+						td{
+							padding-left: 3rem;
+							&:last-child{padding-left: 0.75rem;}
+						}
+					}
+					&__l3{
+						td{
+							padding-left: 4rem;
+							&:last-child{padding-left: 0.75rem;}
+						}
+					}
+					&__l4{
+						td{
+							padding-left: 5rem;
+							&:last-child{padding-left: 0.75rem;}
+						}
+					}
+					&__l5{
+						td{
+							padding-left: 6rem;
+							&:last-child{padding-left: 0.75rem;}
+						}
+					}
+				}
+				&:hover{
+					td{
+						color: #6A707E;
+					}
+				}
+				&.active{
+					background: #fde1e1;
+				}
+			}
+		}
+		&.table--grade{
+			thead{ 
+				tr{
+					th{
+						&:last-child{
+							width: 10rem;
+						}
+					}
+				} 
+			}
+		}
+		&.process-detail-table{
+			thead{ 
+				tr{
+					th{
+						&:last-child{
+							width: 18rem;
+						}
+					}
+				} 
+			}
+		}
+		&.associate{
+			thead{ 
+				tr{
+					th{
+						&:last-child{
+							width: 18rem;
+						}
+						&:first-child{
+							width: 5rem;
+						}
+					}
+				} 
+			}
+		}
+		&.mapping-table{  
+			tbody{ 
+				tr{
+					box-shadow: none;
+					td{
+						box-shadow: none;
+						padding: 0 2rem;
+					} 
+				} 
+			}
+			&.user-roles{
+				tbody{ 
+					tr{
+						box-shadow: none;
+						td{
+							box-shadow: none;
+							padding: 0 2rem;
+						} 
+						th{
+							&:first-child{width: 25%;}
+							&:nth-child(2){width: 25%;}
+						}
+					} 
+				}
+				thead{ 
+					tr{ 
+						th{
+							&:first-child{width: 25%;}
+							&:nth-child(2){width: 25%;}
+						}
+					} 
+				}
+			}
+		}
+	}
+}

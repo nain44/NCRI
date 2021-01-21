@@ -1,0 +1,41 @@
+@import "assets/dist/css/custom-style.scss";
+// @import "scss/plugins/bootstrap";
+// @import "scss/plugins/weather-icons";
+// @import "scss/plugins/themify-icons";
+// @import "scss/plugins/font-awesome";
+
+// @import "scss/variables";
+// @import "scss/custom-class";
+// @import "scss/mixins";
+// @import "scss/helpers";
+// @import "scss/typography";
+// @import "scss/customfont";
+// @import "scss/auth";
+// @import "scss/custom-class";
+
+// @import "scss/components/scroll-bar"; 
+// @import "scss/components/button"; 
+// @import "scss/components/multi-select";
+// @import "scss/components/group-btn";
+@import "scss/components/accodions";
+@import "scss/components/select2";
+@import "scss/components/floating-label";
+// @import "scss/components/table";
+// @import "scss/components/tabs";
+// @import "scss/components/modal";
+// @import "scss/components/progress-bar";
+
+// @import "scss/custon-field";
+// @import "scss/sidebar";
+// @import "scss/layout";
+// @import "scss/responsive";  
+// @import "scss/user";  
+@import "scss/target";  
+
+// .modal-dialog .modal-content {
+//     background: white !important;
+// }
+
+.unselect{
+    color: grey !important;
+}

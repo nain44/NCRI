@@ -1,0 +1,162 @@
+<router-outlet></router-outlet>
+<div class="hk-pg-wrapper" *ngIf="false">
+    <div class="container-fluid">
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Client Demographics</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">File Field Mapping</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Map the required column to input fields.</h5>
+        <accordion [isAnimated]="true" class="accord-section">
+            <accordion-group [isOpen]="true">
+                <button
+                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                    accordion-heading type="button">
+                    <h6 class="accor-name w-100 text-left hk-sec-title">FIELD MAPPING</h6>
+                </button>
+                <div class="cg-role">
+                    <div class="w-100 mt-20">
+                        <div class="table-wrap">
+                            <div>
+                                <div class="row mt-20">
+                                    <div class="col-md-8">
+                                        <div class="table-responsive mnh-200p">
+                                            <table id="datable_1"
+                                                class="table theme-table role-map-table field-map w-100 display border-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>COLUMN NAME</th>
+                                                        <th>SYSTEM FIELDS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="selected">
+                                                        <td>First Name</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Last Name</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Contact Number</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Product Name</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email Address</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Date of Birth</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Field 1</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Field 2</td>
+                                                        <td>
+                                                            <div class="form-label-group">
+                                                                <ng-select2 #select formControlName="default_value"
+                                                                    [data]="defaultValue" [options]="options">
+                                                                </ng-select2>
+                                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody *ngIf="false">
+                                                    <tr style="text-align: center;">
+                                                        <td colspan="2">No Record Found</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div *ngIf="false" class="d-flex justify-content-center">
+                                            <div class="spinner-border theme-color" role="status">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="mb-20">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" [routerLink]="['/role']"
+                        class="button btn btn-success previous border-0">Cancel</a>
+                    <a href="javascript:void(0)" [routerLink]="['/role']"
+                        class="button btn btn-success previous">Back</a>
+                    <a href="javascript:void(0)" [routerLink]="['/role']" class="button btn btn-success">Next</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,579 @@
+<div *ngIf="false" class="side-menu-fixed">
+    <div class="scrollbar side-menu-bg">
+        <ul *ngIf="!router.url.includes('/account-settings')" class="nav navbar-nav side-menu" id="sidebarnav">
+            <!-- menu item Dashboard-->
+            <li>
+                <a href="javascript:void(0)">
+                    <!-- <i class="ti-layout-grid2-alt"></i> -->
+                    <i>
+            <svg id="Group_506" data-name="Group 506" xmlns="http://www.w3.org/2000/svg" width="17.126" height="17.126"
+              viewBox="0 0 17.126 17.126">
+              <path id="Path_10" data-name="Path 10" class="cls-1"
+                d="M6.6,0H1.249A1.25,1.25,0,0,0,0,1.249V4.46A1.25,1.25,0,0,0,1.249,5.709H6.6A1.25,1.25,0,0,0,7.849,4.46V1.249A1.25,1.25,0,0,0,6.6,0Zm0,0" />
+              <path id="Path_11" data-name="Path 11" class="cls-1"
+                d="M6.6,213.332H1.249A1.25,1.25,0,0,0,0,214.581v7.493a1.25,1.25,0,0,0,1.249,1.249H6.6a1.25,1.25,0,0,0,1.249-1.249v-7.493A1.25,1.25,0,0,0,6.6,213.332Zm0,0"
+                transform="translate(0 -206.196)" />
+              <path id="Path_12" data-name="Path 12" class="cls-1"
+                d="M283.933,341.332h-5.352a1.25,1.25,0,0,0-1.249,1.249v3.211a1.25,1.25,0,0,0,1.249,1.249h5.352a1.25,1.25,0,0,0,1.249-1.249v-3.211A1.25,1.25,0,0,0,283.933,341.332Zm0,0"
+                transform="translate(-268.056 -329.915)" />
+              <path id="Path_13" data-name="Path 13" class="cls-1"
+                d="M283.933,0h-5.352a1.25,1.25,0,0,0-1.249,1.249V8.741a1.25,1.25,0,0,0,1.249,1.249h5.352a1.25,1.25,0,0,0,1.249-1.249V1.249A1.25,1.25,0,0,0,283.933,0Zm0,0"
+                transform="translate(-268.056)" />
+            </svg>
+          </i>
+                    <span class="right-nav-text">Dashboard</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="javascript:void(0)"><i class="ti-id-badge"></i><span class="right-nav-text">Accounts</span> </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="ti-dropbox-alt"></i><span class="right-nav-text">Money Collected</span> </a>
+            </li> -->
+            <li [class.active]="router.url.includes('commission')">
+                <a href="javascript:void(0)" routerLinkActive="active">
+                    <!-- <i class="ti-layout-sidebar-2"></i><span class="right-nav-text"></span> -->
+                    <i>
+            <svg id="sale_2_" data-name="sale (2)" xmlns="http://www.w3.org/2000/svg" width="18.71" height="19.405"
+              viewBox="0 0 18.71 19.405">
+              <g id="Group_35" data-name="Group 35" transform="translate(0.09)">
+                <g id="Group_34" data-name="Group 34" transform="translate(0)">
+                  <path id="Path_28" data-name="Path 28" class="cls-1"
+                    d="M28.081,9.952a.569.569,0,0,1,0-.5L28.8,7.969a1.685,1.685,0,0,0-.727-2.237l-1.456-.772a.569.569,0,0,1-.3-.407L26.042,2.93a1.685,1.685,0,0,0-1.9-1.383l-1.632.231a.569.569,0,0,1-.478-.155L20.845.477a1.684,1.684,0,0,0-2.352,0L17.308,1.623a.569.569,0,0,1-.478.155L15.2,1.547A1.684,1.684,0,0,0,13.3,2.93l-.285,1.623a.569.569,0,0,1-.3.407l-1.456.772a1.685,1.685,0,0,0-.727,2.237l.724,1.481a.569.569,0,0,1,0,.5l-.724,1.481a1.685,1.685,0,0,0,.727,2.237l1.456.772a.569.569,0,0,1,.3.407l.285,1.623a1.684,1.684,0,0,0,1.661,1.4,1.731,1.731,0,0,0,.242-.017l1.632-.231a.569.569,0,0,1,.478.155l1.184,1.146a1.684,1.684,0,0,0,2.352,0l1.184-1.146a.569.569,0,0,1,.478-.155l1.632.231a1.684,1.684,0,0,0,1.9-1.383l.285-1.623a.569.569,0,0,1,.3-.407l1.456-.772a1.685,1.685,0,0,0,.727-2.237ZM17.43,4.664a2.052,2.052,0,1,1-2.052,2.052A2.054,2.054,0,0,1,17.43,4.664ZM16.371,13.79A.56.56,0,0,1,15.58,13l7.386-7.386a.56.56,0,0,1,.791.791Zm5.536.948a2.052,2.052,0,1,1,2.052-2.052A2.054,2.054,0,0,1,21.907,14.737Z"
+                    transform="translate(-10.359 0.002)" />
+                </g>
+              </g>
+              <g id="Group_39" data-name="Group 39" transform="translate(0 5.759)">
+                <g id="Group_38" data-name="Group 38">
+                  <path id="Path_30" data-name="Path 30" class="cls-1"
+                    d="M173.266,152.646a.933.933,0,1,0,.933.933A.934.934,0,0,0,173.266,152.646Z"
+                    transform="translate(-172.333 -152.646)" />
+                </g>
+              </g>
+            </svg>
+          </i>
+                    <span class="right-nav-text">Commission</span>
+                    <i class="fa fa-caret-down mr-0 ml-auto"></i>
+                </a>
+                <ul #toggleCommission class="list-unstyled pl-0" [class.collapse]="!router.url.includes('commission')" attr.data-parent="#sidebarnav">
+                    <!-- <li [routerLink]="['/user']" routerLinkActive="active"> <a href="javascript:void(0)">User</a> </li> -->
+                    <li [routerLink]="['/commission/detail']" routerLinkActive="active"> <a href="javascript:void(0)">Commission
+              Structure</a> </li>
+                    <!-- <li [routerLink]="['/commission/assign']" routerLinkActive="active"> <a href="javascript:void(0)">Single Target Setting</a> </li> -->
+                    <li [routerLink]="['/commission/assign-target']" routerLinkActive="active"> <a href="javascript:void(0)">Target Setting</a> </li>
+                    <li [routerLink]="['/commission/list']" routerLinkActive="active"> <a href="javascript:void(0)">Target
+              List</a> </li>
+                    <!-- <li> <a href="javascript:void(0)">Commission Calculation</a> </li> -->
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="javascript:void(0)"><i class="ti-wallet"></i><span class="right-nav-text">Payment</span> </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="ti-alarm-clock"></i><span class="right-nav-text">Reminders</span> </a>
+            </li> -->
+            <!-- <li [routerLink]="['/user']" routerLinkActive="active">
+                <a href="javascript:void(0)"><i class="ti-user"></i><span class="right-nav-text">User</span> </a>
+            </li> -->
+            <li [class.active]="router.url.includes('/user') || router.url.includes('/role')">
+                <a href="javascript:void(0)" routerLinkActive="active" attr.data-toggle="collapse" attr.data-target="#authentication">
+                    <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17.371" height="20.821" viewBox="0 0 17.371 20.821">
+              <g id="user_1_" data-name="user (1)" transform="translate(0 0)">
+                <path id="Path_90643" data-name="Path 90643" class="cls-1"
+                  d="M92.047,10.03A4.852,4.852,0,0,0,95.592,8.56a4.852,4.852,0,0,0,1.469-3.546,4.853,4.853,0,0,0-1.469-3.546,5.014,5.014,0,0,0-7.091,0,4.852,4.852,0,0,0-1.469,3.545A4.852,4.852,0,0,0,88.5,8.561,4.853,4.853,0,0,0,92.047,10.03Zm0,0"
+                  transform="translate(-83.493 0)" />
+                <path id="Path_90644" data-name="Path 90644" class="cls-1"
+                  d="M17.328,253.269a12.386,12.386,0,0,0-.169-1.316,10.366,10.366,0,0,0-.324-1.323,6.532,6.532,0,0,0-.544-1.234,4.655,4.655,0,0,0-.82-1.069,3.615,3.615,0,0,0-1.178-.74,4.071,4.071,0,0,0-1.5-.272,1.526,1.526,0,0,0-.815.346c-.244.159-.53.344-.849.547a4.865,4.865,0,0,1-1.1.484,4.265,4.265,0,0,1-2.687,0,4.853,4.853,0,0,1-1.1-.484c-.316-.2-.6-.386-.85-.548a1.524,1.524,0,0,0-.815-.346,4.065,4.065,0,0,0-1.5.272,3.613,3.613,0,0,0-1.178.74,4.656,4.656,0,0,0-.82,1.068,6.545,6.545,0,0,0-.544,1.234,10.39,10.39,0,0,0-.323,1.323,12.343,12.343,0,0,0-.169,1.316c-.028.4-.042.812-.042,1.229a3.457,3.457,0,0,0,1.027,2.616,3.7,3.7,0,0,0,2.646.965H13.7a3.7,3.7,0,0,0,2.646-.965,3.456,3.456,0,0,0,1.027-2.616c0-.42-.014-.833-.042-1.23Zm0,0"
+                  transform="translate(0 -237.259)" />
+              </g>
+            </svg>
+
+          </i>
+                    <span class="right-nav-text">User and Permission</span>
+                    <i class="fa fa-caret-down mr-0 ml-auto"></i>
+                </a>
+                <ul id="authentication" #toggleUser class="list-unstyled pl-0" [class.collapse]="!router.url.includes('user') && !router.url.includes('/role') && !router.url.includes('/grade')" attr.data-parent="#sidebarnav">
+                    <li [routerLink]="['/user']" routerLinkActive="active"> <a href="javascript:void(0)">User</a> </li>
+                    <!-- <li [routerLink]="['/user/user-teams']" routerLinkActive="active"> <a href="javascript:void(0)">User Teams</a> </li> -->
+                    <li [routerLink]="['/grade']" routerLinkActive="active"> <a href="javascript:void(0)">Grades</a> </li>
+                    <li [routerLinkActive]="router.url.includes('/user')?'active': ''" [routerLink]="['/user/user-teams']"> <a href="javascript:void(0)">User Teams</a> </li>
+                    <li [routerLinkActive]="router.url !== '/role/system' && router.url.includes('/role')?'active': ''" [routerLink]="['/role']"> <a href="javascript:void(0)">Roles and Permission</a> </li>
+                    <!-- <li> <a href="javascript:void(0)">Groups</a> </li> -->
+                    <li [routerLink]="['/role/system']" [routerLinkActive]="router.url === '/role/system'?'active': ''"> <a href="javascript:void(0)">Employee Title-Role Mapping</a> </li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="javascript:void(0)"><i class="ti-user"></i><span class="right-nav-text">Collection Agents</span> </a>
+            </li> -->
+            <li [class.active]="router.url.includes('settings/change-logo')">
+                <a href="javascript:void(0)" routerLinkActive="active" attr.data-toggle="collapse" attr.data-target="#integrations">
+                    <i>
+            <svg id="settings_5_" data-name="settings (5)" xmlns="http://www.w3.org/2000/svg" width="18.385"
+              height="18.601" viewBox="0 0 18.385 18.601">
+              <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-1" cx="1.09" cy="1.09" r="1.09"
+                transform="translate(8.103 8.211)" />
+              <path id="Path_35" data-name="Path 35" class="cls-1"
+                d="M124.941,129.882A4.941,4.941,0,1,0,120,124.941,4.947,4.947,0,0,0,124.941,129.882Zm0-7.121a2.18,2.18,0,1,1-2.18,2.18A2.182,2.182,0,0,1,124.941,122.761Z"
+                transform="translate(-115.748 -115.64)" />
+              <path id="Path_36" data-name="Path 36" class="cls-1"
+                d="M20.375,9.3c0-.178-.006-.358-.018-.537l1-.915-.058-.3a9.386,9.386,0,0,0-.715-2.2l-.129-.276L19.109,4.92a8.271,8.271,0,0,0-.632-.869l.271-1.328-.223-.208a9.386,9.386,0,0,0-1.872-1.36l-.267-.147-1.177.667a8.178,8.178,0,0,0-1.024-.333L13.624.109l-.3-.038a9.384,9.384,0,0,0-2.314,0l-.3.038-.56,1.232a8.186,8.186,0,0,0-1.024.333L7.943,1.007l-.267.147A9.385,9.385,0,0,0,5.8,2.514l-.223.208.271,1.328a8.255,8.255,0,0,0-.632.869l-1.346.152-.129.276a9.382,9.382,0,0,0-.715,2.2l-.058.3,1,.915c-.012.18-.018.359-.018.537s.006.358.018.537l-1,.915.058.3a9.383,9.383,0,0,0,.715,2.2l.129.276,1.346.152a8.26,8.26,0,0,0,.632.869l-.271,1.328.223.208a9.386,9.386,0,0,0,1.872,1.36l.267.147,1.177-.667a8.182,8.182,0,0,0,1.024.333l.56,1.232.3.038a9.379,9.379,0,0,0,2.314,0l.3-.038.56-1.232a8.182,8.182,0,0,0,1.024-.333l1.177.667.267-.147a9.385,9.385,0,0,0,1.872-1.36l.223-.208-.271-1.328a8.266,8.266,0,0,0,.632-.869l1.346-.152.129-.276a9.387,9.387,0,0,0,.715-2.2l.058-.3-1-.915c.012-.18.018-.359.018-.537ZM6.134,9.3a6.031,6.031,0,1,1,6.031,6.031A6.038,6.038,0,0,1,6.134,9.3Z"
+                transform="translate(-2.972 0)" />
+            </svg>
+          </i>
+                    <span class="right-nav-text">Settings</span>
+                    <i class="fa fa-caret-down mr-0 ml-auto"></i>
+                </a>
+                <ul id="integrations" #toggleIntegration class="list-unstyled pl-0" [class.collapse]="!router.url.includes('settings/change-logo')" attr.data-parent="#sidebarnav">
+                    <li [routerLink]="['/settings/change-logo']" routerLinkActive="router.url === '/settings' ? active : ''"> <a href="javascript:void(0)">Change Logo</a> </li>
+                    <!-- <li [routerLink]="['/settings/integration']" routerLinkActive="router.url === '/settings/integration' ? active : ''"> <a href="javascript:void(0)">Integrations</a> </li> -->
+                </ul>
+            </li>
+
+            <!-- <li >
+              <a href="javascript:void(0)"  (click)="toggleCollapse(systemSettings)" routerLinkActive="active" attr.data-toggle="collapse" attr.data-target="#systemSettings">
+                  <i>
+                      <svg id="settings_5_" data-name="settings (5)" xmlns="http://www.w3.org/2000/svg" width="18.385" height="18.601" viewBox="0 0 18.385 18.601">
+                          <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-1" cx="1.09" cy="1.09" r="1.09" transform="translate(8.103 8.211)"/>
+                          <path id="Path_35" data-name="Path 35" class="cls-1" d="M124.941,129.882A4.941,4.941,0,1,0,120,124.941,4.947,4.947,0,0,0,124.941,129.882Zm0-7.121a2.18,2.18,0,1,1-2.18,2.18A2.182,2.182,0,0,1,124.941,122.761Z" transform="translate(-115.748 -115.64)"/>
+                          <path id="Path_36" data-name="Path 36" class="cls-1" d="M20.375,9.3c0-.178-.006-.358-.018-.537l1-.915-.058-.3a9.386,9.386,0,0,0-.715-2.2l-.129-.276L19.109,4.92a8.271,8.271,0,0,0-.632-.869l.271-1.328-.223-.208a9.386,9.386,0,0,0-1.872-1.36l-.267-.147-1.177.667a8.178,8.178,0,0,0-1.024-.333L13.624.109l-.3-.038a9.384,9.384,0,0,0-2.314,0l-.3.038-.56,1.232a8.186,8.186,0,0,0-1.024.333L7.943,1.007l-.267.147A9.385,9.385,0,0,0,5.8,2.514l-.223.208.271,1.328a8.255,8.255,0,0,0-.632.869l-1.346.152-.129.276a9.382,9.382,0,0,0-.715,2.2l-.058.3,1,.915c-.012.18-.018.359-.018.537s.006.358.018.537l-1,.915.058.3a9.383,9.383,0,0,0,.715,2.2l.129.276,1.346.152a8.26,8.26,0,0,0,.632.869l-.271,1.328.223.208a9.386,9.386,0,0,0,1.872,1.36l.267.147,1.177-.667a8.182,8.182,0,0,0,1.024.333l.56,1.232.3.038a9.379,9.379,0,0,0,2.314,0l.3-.038.56-1.232a8.182,8.182,0,0,0,1.024-.333l1.177.667.267-.147a9.385,9.385,0,0,0,1.872-1.36l.223-.208-.271-1.328a8.266,8.266,0,0,0,.632-.869l1.346-.152.129-.276a9.387,9.387,0,0,0,.715-2.2l.058-.3-1-.915c.012-.18.018-.359.018-.537ZM6.134,9.3a6.031,6.031,0,1,1,6.031,6.031A6.038,6.038,0,0,1,6.134,9.3Z" transform="translate(-2.972 0)"/>
+                        </svg> 
+                  </i>
+                  <span class="right-nav-text">System Settings</span>
+                  <i class="fa fa-caret-down mr-0 ml-auto"></i>
+              </a>
+              <ul id="systemSettings" #systemSettings class="list-unstyled pl-0" [class.collapse]="!router.url.includes('settings/change-logo')" attr.data-parent="#sidebarnav">
+                  <li  routerLinkActive="router.url === '/settings' ? active : ''"> <a href="javascript:void(0)">Fields</a> </li>
+                  
+              </ul>
+          </li> -->
+
+            <li [class.active]="router.url.includes('/settings/integration')">
+                <a href="javascript:void(0)" attr.data-toggle="collapse" attr.data-target="#toggleConfig">
+                    <i>
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px" y="0px" viewBox="0 0 376.846 376.846" style="enable-background:new 0 0 376.846 376.846;"
+              xml:space="preserve">
+              <g>
+                <path
+                  d="M364.966,372.743c2.382-2.39,4.316-4.324,4.316-4.324l4.316-4.324
+                            c2.382-2.398-1.691-13.453-9.104-24.695l-19.013-28.865c-7.413-11.242-19.127-21.565-26.174-23.044
+                            c-7.047-1.488-12.762-2.691-12.762-2.691l-57.298-57.274L228.389,248.4l57.25,57.282l2.707,12.762
+                            c1.488,7.039,11.819,18.769,23.061,26.174l28.881,19.037C351.529,371.06,362.584,375.133,364.966,372.743z" />
+                <path d="M13.608,74.197l85.139,85.139l10.632,10.608c0.244,0.26,0.48,0.398,0.715,0.642l14.062-14.071
+                            L23.728,56.086c-2.447-2.422-2.447-6.397,0-8.795c2.422-2.455,6.34-2.455,8.795,0l100.396,100.453l15.664-15.696L48.154,31.635
+                            c-2.455-2.43-2.455-6.365,0-8.795c2.422-2.422,6.365-2.422,8.763,0l100.477,100.477l14.038-14.087
+                            c-0.211-0.244-0.366-0.504-0.585-0.74l-11.161-11.177l-84.594-84.57c-16.972-17.005-44.52-16.981-61.485,0
+                            C-3.389,29.709-3.389,57.224,13.608,74.197z" />
+                <path d="M375.728,81.651c-1.024-13.428-12.892-16.038-22.41-6.519l-33.262,33.27
+                            c-7.722,7.779-20.378,7.755-28.125,0l-21.549-21.524c-7.803-7.844-7.779-20.46-0.024-28.247l34.392-34.359
+                            c9.527-9.519,7.112-21.817-6.259-23.41c-25.865-3.089-52.82,5.275-72.678,25.117c-15.127,15.152-23.573,34.473-25.361,54.258
+                            c-0.715,7.999-0.341,16.07,1.097,24.004L16.965,288.84c-9.746,9.754-15.127,22.703-15.127,36.497
+                            c0,13.762,5.381,26.694,15.103,36.432c20.11,20.102,52.819,20.102,72.962,0c0,0,132.683-132.666,186.413-186.461
+                            c8.446,1.154,16.997,1.073,25.41-0.26c17.769-2.78,34.847-10.925,48.56-24.613C369.152,131.568,377.614,106.296,375.728,81.651z
+                            M70.857,345.91c-10.551,10.494-27.523,10.494-38.042-0.024c-10.47-10.445-10.494-27.499,0.024-37.969
+                            c10.494-10.47,27.466-10.445,37.985,0C81.295,318.387,81.295,335.441,70.857,345.91z" />
+              </g>
+            </svg>
+
+          </i>
+                    <span class="right-nav-text">Configurations</span>
+                    <i class="fa fa-caret-down mr-0 ml-auto"></i>
+                </a>
+                <ul id="integrations" #toggleConfig class="list-unstyled pl-0" [class.collapse]="!router.url.includes('/settings/integration')" attr.data-parent="#sidebarnav">
+                    <li [routerLink]="['/settings/integration']" [routerLinkActive]="router.url === '/settings/integration' ? 'active' : ''"> <a href="javascript:void(0)">Third Party Integration</a> </li>
+                </ul>
+            </li>
+        </ul>
+        <ul *ngIf="router.url.includes('/account-settings')" class="nav navbar-nav side-menu" id="sidebarnav">
+            <!-- menu item Dashboard-->
+            <li [routerLink]="['/account-settings/security']" routerLinkActive="active">
+                <a href="javascript:void(0)">
+                    <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15.334" height="17.038" viewBox="0 0 15.334 17.038">
+              <g id="shield_3_" data-name="shield (3)" transform="translate(-25.12)">
+                <path id="Path_90649" data-name="Path 90649" class="svg-gray"
+                  d="M124.331,188a8.115,8.115,0,0,0,1.483-3.836l-4.56-1.3-4.56,1.3A8.114,8.114,0,0,0,118.176,188a8.224,8.224,0,0,0,3.078,2.6A8.223,8.223,0,0,0,124.331,188Z"
+                  transform="translate(-88.466 -176.667)" />
+                <path id="Path_90650" data-name="Path 90650" class="svg-gray"
+                  d="M119.734,91.419l4.614,1.312V90.615L119.734,89.3l-4.614,1.312v2.116Z"
+                  transform="translate(-86.947 -86.273)" />
+                <path id="Path_90651" data-name="Path 90651" class="svg-gray"
+                  d="M266.12,0V2.116l5.123,1.457V6.559a9.143,9.143,0,0,1-1.728,5.372,9.245,9.245,0,0,1-3.395,2.885v2.222a11.25,11.25,0,0,0,7.158-10.479V2.035Z"
+                  transform="translate(-232.824)" />
+                <path id="Path_90652" data-name="Path 90652" class="svg-gray"
+                  d="M32.278,14.816a9.244,9.244,0,0,1-3.395-2.885,9.143,9.143,0,0,1-1.728-5.372V3.573l5.123-1.457V0L25.12,2.036V6.559a11.25,11.25,0,0,0,7.158,10.479Z"
+                  transform="translate(0 0)" />
+              </g>
+            </svg>
+          </i>
+                    <span class="right-nav-text">Security</span> </a>
+            </li>
+            <!-- <li [routerLink]="['/account-settings/email']" routerLinkActive="active">
+                <a href="javascript:void(0)">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17.126" height="13.046" viewBox="0 0 17.126 13.046"> 
+                            <g id="mail_9_" data-name="mail (9)" transform="translate(0 -61)">
+                              <g id="Group_37417" data-name="Group 37417">
+                                <g id="Group_36012" data-name="Group 36012" transform="translate(0.859 61)">
+                                  <g id="Group_36011" data-name="Group 36011">
+                                    <path id="Path_90653" data-name="Path 90653" class="svg-gray" d="M40.481,61H26.366a1.488,1.488,0,0,0-.645.151L33.39,68.82l1.719-1.652h0l6.017-6.017A1.488,1.488,0,0,0,40.481,61Z" transform="translate(-25.721 -61)"/>
+                                  </g>
+                                </g>
+                                <g id="Group_36014" data-name="Group 36014" transform="translate(11.313 61.86)">
+                                  <g id="Group_36013" data-name="Group 36013" transform="translate(0 0)">
+                                    <path id="Path_90654" data-name="Path 90654" class="svg-gray" d="M343.875,86.728l-5.662,5.662,5.662,5.662a1.488,1.488,0,0,0,.151-.645V87.373A1.487,1.487,0,0,0,343.875,86.728Z" transform="translate(-338.213 -86.728)"/>
+                                  </g>
+                                </g>
+                                <g id="Group_36016" data-name="Group 36016" transform="translate(0 61.86)">
+                                  <g id="Group_36015" data-name="Group 36015" transform="translate(0 0)">
+                                    <path id="Path_90655" data-name="Path 90655" class="svg-gray" d="M.151,86.721A1.488,1.488,0,0,0,0,87.366V97.4a1.488,1.488,0,0,0,.151.645l5.662-5.662Z" transform="translate(0 -86.721)"/>
+                                  </g>
+                                </g>
+                                <g id="Group_36018" data-name="Group 36018" transform="translate(0.859 68.232)">
+                                  <g id="Group_36017" data-name="Group 36017" transform="translate(0 0)">
+                                    <path id="Path_90656" data-name="Path 90656" class="svg-gray" d="M35.457,277.211l-1.719,1.652a.5.5,0,0,1-.709,0l-1.652-1.652-5.662,5.662a1.488,1.488,0,0,0,.645.151H40.475a1.488,1.488,0,0,0,.645-.151Z" transform="translate(-25.714 -277.211)"/>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                          
+                    </i>
+                    <span class="right-nav-text">Email</span> </a>
+            </li>
+            <li [routerLink]="['/account-settings/preference']" routerLinkActive="active">
+                <a href="javascript:void(0)">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18.914" height="18.914" viewBox="0 0 18.914 18.914"> 
+                            <g id="gear_5_" data-name="gear (5)" transform="translate(-0.465 0)">
+                              <path id="Path_90657" data-name="Path 90657" class="svg-gray" d="M171.369,125.189a1.626,1.626,0,1,1-1.626-1.626A1.626,1.626,0,0,1,171.369,125.189Zm0,0" transform="translate(-159.821 -117.791)"/>
+                              <path id="Path_90658" data-name="Path 90658" class="svg-gray" d="M81.768,75.41a5.933,5.933,0,0,0-4.109,10.215V83.892a2.179,2.179,0,0,1,2.177-2.174.374.374,0,0,1,.3.153,2.026,2.026,0,0,0,3.265,0,.374.374,0,0,1,.3-.153,2.179,2.179,0,0,1,2.177,2.174v1.733A5.934,5.934,0,0,0,81.768,75.41Zm0,6.249a2.373,2.373,0,1,1,2.373-2.373A2.373,2.373,0,0,1,81.769,81.659Zm0,0" transform="translate(-71.846 -71.888)"/>
+                              <path id="Path_90659" data-name="Path 90659" class="svg-gray" d="M136.4,226.7a2.788,2.788,0,0,1-2.527.937,2.754,2.754,0,0,1-1.688-.937,1.43,1.43,0,0,0-1.255,1.416v2.342a5.934,5.934,0,0,0,6.726,0v-2.342A1.431,1.431,0,0,0,136.4,226.7Zm0,0" transform="translate(-124.371 -216.106)"/>
+                              <path id="Path_90660" data-name="Path 90660" class="svg-gray" d="M18.227,10.61a8.637,8.637,0,0,0-.069-2.672.373.373,0,0,1,.109-.337l.989-.949-.967-2.21-1.37.1a.374.374,0,0,1-.328-.151,7.7,7.7,0,0,0-1.925-1.834.374.374,0,0,1-.166-.322l.04-1.37L12.292,0l-.885,1.026a.374.374,0,0,1-.331.126A8.639,8.639,0,0,0,8.4,1.221a.373.373,0,0,1-.337-.109L7.118.123l-2.21.967.1,1.37a.374.374,0,0,1-.151.328A7.7,7.7,0,0,0,3.024,4.714.374.374,0,0,1,2.7,4.88l-1.37-.04L.465,7.087l1.026.885a.374.374,0,0,1,.126.331,8.642,8.642,0,0,0,.069,2.672.373.373,0,0,1-.109.337l-.989.949.967,2.21,1.37-.1a.374.374,0,0,1,.328.151,7.7,7.7,0,0,0,1.926,1.834.374.374,0,0,1,.166.322l-.04,1.37,2.247.867.885-1.026a.374.374,0,0,1,.331-.126,8.648,8.648,0,0,0,2.672-.069.373.373,0,0,1,.337.109l.949.989,2.21-.967-.1-1.37a.374.374,0,0,1,.151-.328A7.707,7.707,0,0,0,16.82,14.2a.372.372,0,0,1,.322-.166l1.37.04.867-2.247-1.026-.886a.374.374,0,0,1-.127-.331Zm-8.3,5.529A6.682,6.682,0,1,1,16.6,9.457,6.69,6.69,0,0,1,9.922,16.139Zm0,0"/>
+                            </g>
+                          </svg>
+                    </i>
+                    <span class="right-nav-text">Account Preferences</span> </a>
+            </li> -->
+        </ul>
+    </div>
+</div>
+
+<!-- Vertical Nav -->
+<nav class="hk-nav hk-nav-dark" id="myGroup">
+    <a href="javascript:void(0);" id="hk_nav_close" class="hk-nav-close">
+        <span class="feather-icon"><i
+        data-feather="x"></i></span>
+    </a>
+    <div class="nicescroll-bar">
+        <div class="navbar-nav-wrap">
+            <ul class="navbar-nav flex-column mt-50">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-toggle="collapse" data-target="#dash_drp" data-parent="#myGroup">
+                        <span class="sidebar-icon">
+              <svg id="speedometer" xmlns="http://www.w3.org/2000/svg" width="23.4" height="23.4" viewBox="0 0 23.4 23.4">
+                <g id="Group_2" data-name="Group 2">
+                  <g id="Group_1" data-name="Group 1">
+                    <path id="Path_1" data-name="Path 1" d="M19.973,3.427a11.7,11.7,0,0,0-16.546,0h0A11.624,11.624,0,0,0,0,11.7H0a11.6,11.6,0,0,0,2.34,7.02.686.686,0,0,0,.548.274H20.512a.685.685,0,0,0,.548-.274A11.6,11.6,0,0,0,23.4,11.7h0A11.624,11.624,0,0,0,19.973,3.427Zm.19,14.2H3.237a10.216,10.216,0,0,1-1.843-5.238h.76a.686.686,0,0,0,0-1.371h-.76A10.286,10.286,0,0,1,3.931,4.9l.534.534a.686.686,0,0,0,.969-.97L4.9,3.931a10.286,10.286,0,0,1,6.114-2.537v.76a.686.686,0,1,0,1.371,0v-.76A10.286,10.286,0,0,1,18.5,3.931l-.534.534a.686.686,0,1,0,.969.97l.534-.534a10.286,10.286,0,0,1,2.537,6.114h-.76a.686.686,0,0,0,0,1.371h.761A10.217,10.217,0,0,1,20.163,17.623Z" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_4" data-name="Group 4" transform="translate(6.609 22.029)">
+                  <g id="Group_3" data-name="Group 3">
+                    <path id="Path_2" data-name="Path 2" d="M154.1,482h-8.812a.686.686,0,0,0,0,1.371H154.1a.686.686,0,1,0,0-1.371Z" transform="translate(-144.6 -482)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_6" data-name="Group 6" transform="translate(8.812 7.202)">
+                  <g id="Group_5" data-name="Group 5">
+                    <path id="Path_3" data-name="Path 3" d="M199.985,157.777a.685.685,0,0,0-.969,0l-1.829,1.829a2.89,2.89,0,1,0,.969.969l1.829-1.829A.686.686,0,0,0,199.985,157.777Zm-4.3,5.815a1.517,1.517,0,1,1,1.517-1.517A1.519,1.519,0,0,1,195.687,163.591Z" transform="translate(-192.799 -157.576)" fill="#999"/>
+                  </g>
+                </g>
+              </svg>
+            </span>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-toggle="collapse" data-target="#dash_drp">
+                        <span class="sidebar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23.6" height="23.597" viewBox="0 0 23.6 23.597">
+                <g id="luggage" transform="translate(0 -0.028)">
+                  <path id="Path_26" data-name="Path 26" d="M18.991,149.574h-.6a4.608,4.608,0,0,1-4.226-2.765H10.157a4.73,4.73,0,0,1-3.3-1.362,1.978,1.978,0,0,1,0-2.806,4.731,4.731,0,0,1,3.3-1.362h4.009a4.608,4.608,0,0,1,4.226-2.765h.6a4.614,4.614,0,0,1,4.609,4.609v1.844A4.614,4.614,0,0,1,18.991,149.574Zm-8.834-6.452a2.874,2.874,0,0,0-2.007.828.134.134,0,0,0,0,.187,2.873,2.873,0,0,0,2.007.828h4.664a.922.922,0,0,1,.893.692,2.763,2.763,0,0,0,2.678,2.073h.6a2.768,2.768,0,0,0,2.765-2.765v-1.844a2.768,2.768,0,0,0-2.765-2.765h-.6a2.763,2.763,0,0,0-2.678,2.073.922.922,0,0,1-.893.692Zm3.624,6.452a.922.922,0,0,0-.922-.922H5.531a3.691,3.691,0,0,1-3.687-3.687v-6.406a3.691,3.691,0,0,1,3.687-3.687H18.067a3.7,3.7,0,0,1,3.345,2.134.922.922,0,0,0,1.672-.778,5.552,5.552,0,0,0-5.017-3.2H5.531A5.537,5.537,0,0,0,0,138.559v6.406A5.537,5.537,0,0,0,5.531,150.5h7.328A.922.922,0,0,0,13.781,149.574Z" transform="translate(0 -126.87)" fill="#999"/>
+                  <path id="Path_27" data-name="Path 27" d="M177.913,4.867a.922.922,0,0,1-.922-.922,2.074,2.074,0,0,0-4.148,0,.922.922,0,1,1-1.844,0,3.918,3.918,0,0,1,7.835,0A.922.922,0,0,1,177.913,4.867Zm4.427,11.153a1.152,1.152,0,1,0,1.152,1.152A1.152,1.152,0,0,0,182.34,16.021Z" transform="translate(-163.119)" fill="#999"/>
+                </g>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Accounts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-toggle="collapse" data-target="#dash_drp" data-parent="#myGroup">
+                        <span class="sidebar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26.5" height="26.195" viewBox="0 0 26.5 26.195">
+                <g id="money" transform="translate(0.25 -2.75)">
+                  <g id="Group_41" data-name="Group 41" transform="translate(15.232 15.858)">
+                    <g id="Group_40" data-name="Group 40">
+                      <path id="Path_33" data-name="Path 33" d="M302.087,259.865a.977.977,0,1,1,1.117-.967.508.508,0,0,0,1.016,0,2.02,2.02,0,0,0-1.625-1.925v-.264a.508.508,0,0,0-1.016,0v.264a2.02,2.02,0,0,0-1.625,1.925,2.064,2.064,0,0,0,2.133,1.983.977.977,0,1,1-1.117.967.508.508,0,1,0-1.016,0,2.02,2.02,0,0,0,1.625,1.925v.219a.508.508,0,0,0,1.016,0v-.219a2.02,2.02,0,0,0,1.625-1.925A2.064,2.064,0,0,0,302.087,259.865Z" transform="translate(-299.954 -256.201)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                  <g id="Group_43" data-name="Group 43" transform="translate(19.496 14.059)">
+                    <g id="Group_42" data-name="Group 42">
+                      <path id="Path_34" data-name="Path 34" d="M387.355,223.227a6.616,6.616,0,0,0-2.7-2.392.508.508,0,0,0-.44.915,5.591,5.591,0,0,1,2.518,7.657.508.508,0,1,0,.9.477,6.609,6.609,0,0,0-.272-6.658Z" transform="translate(-383.924 -220.785)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                  <g id="Group_45" data-name="Group 45" transform="translate(17.621 13.461)">
+                    <g id="Group_44" data-name="Group 44">
+                      <path id="Path_35" data-name="Path 35" d="M347.542,209h-.034a.508.508,0,0,0,0,1.016h.032a.508.508,0,0,0,0-1.016Z" transform="translate(-347 -209.001)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                  <g id="Group_47" data-name="Group 47" transform="translate(10.766 16.696)">
+                    <g id="Group_46" data-name="Group 46" transform="translate(0 0)">
+                      <path id="Path_36" data-name="Path 36" d="M216.187,281.115a5.591,5.591,0,0,1-2.518-7.657.508.508,0,1,0-.9-.477,6.6,6.6,0,0,0,2.975,9.05.508.508,0,1,0,.44-.915Z" transform="translate(-212.002 -272.711)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                  <g id="Group_49" data-name="Group 49" transform="translate(16.066 25.648)">
+                    <g id="Group_48" data-name="Group 48">
+                      <path id="Path_37" data-name="Path 37" d="M316.917,449h-.029a.508.508,0,0,0,0,1.016h.034a.508.508,0,0,0,0-1.016Z" transform="translate(-316.378 -448.999)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                  <g id="Group_51" data-name="Group 51" transform="translate(0 3)">
+                    <g id="Group_50" data-name="Group 50" transform="translate(0 0)">
+                      <path id="Path_38" data-name="Path 38" d="M19.673,11.743a2.331,2.331,0,0,0-.226-.415h1.322a2.336,2.336,0,1,0,0-4.672H16.7A2.334,2.334,0,0,0,14.777,3H2.336a2.336,2.336,0,0,0,0,4.672H6.4a2.329,2.329,0,0,0,0,2.641H5.078a2.335,2.335,0,0,0-1.452,4.164,2.332,2.332,0,0,0,0,3.656,2.332,2.332,0,0,0,0,3.656,2.335,2.335,0,0,0,1.452,4.164h5.985a8.631,8.631,0,1,0,8.61-14.21Zm1.1-4.071a1.32,1.32,0,1,1,0,2.641H8.328a1.32,1.32,0,1,1,0-2.641ZM2.336,6.656a1.32,1.32,0,0,1,0-2.641H14.777a1.32,1.32,0,1,1,0,2.641Zm2.742,4.672H17.519a1.32,1.32,0,0,1,.576.133c-.24-.02-.483-.031-.728-.031a8.606,8.606,0,0,0-6.109,2.539H5.078a1.32,1.32,0,1,1,0-2.641Zm0,3.656h5.312a8.608,8.608,0,0,0-1.305,2.641H5.078a1.32,1.32,0,1,1,0-2.641Zm0,3.656H8.852a8.64,8.64,0,0,0-.031,2.641H5.078a1.32,1.32,0,0,1,0-2.641Zm0,6.3a1.32,1.32,0,1,1,0-2.641h3.95a8.6,8.6,0,0,0,1.218,2.641ZM17.367,27.68a7.617,7.617,0,1,1,7.617-7.617A7.626,7.626,0,0,1,17.367,27.68Z" transform="translate(0 -3)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                </g>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Money Collected</span>
+                    </a>
+                </li>
+                <li class="nav-item" [class.active]="router.url.includes('/commission')">
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#commission_drp">
+                        <span class="sidebar-icon">
+              <svg id="discount" xmlns="http://www.w3.org/2000/svg" width="23.4" height="24.387" viewBox="0 0 23.4 24.387">
+                <g id="Group_8" data-name="Group 8" transform="translate(0 0)">
+                  <g id="Group_7" data-name="Group 7">
+                    <path id="Path_4" data-name="Path 4" d="M32.631,12.507a.715.715,0,0,1,0-.632l.91-1.861A2.117,2.117,0,0,0,32.627,7.2L30.8,6.233a.715.715,0,0,1-.371-.511l-.358-2.04a2.117,2.117,0,0,0-2.391-1.737l-2.051.29a.715.715,0,0,1-.6-.2L23.537.6a2.117,2.117,0,0,0-2.956,0L19.092,2.04a.715.715,0,0,1-.6.2l-2.051-.29A2.117,2.117,0,0,0,14.05,3.682l-.358,2.04a.715.715,0,0,1-.371.511L11.491,7.2a2.117,2.117,0,0,0-.913,2.811l.909,1.861a.715.715,0,0,1,0,.632l-.91,1.861a2.117,2.117,0,0,0,.913,2.811l1.829.971a.715.715,0,0,1,.371.511l.358,2.04a2.116,2.116,0,0,0,2.087,1.759,2.175,2.175,0,0,0,.3-.022l2.051-.29a.714.714,0,0,1,.6.2l1.488,1.44a2.117,2.117,0,0,0,2.956,0l1.489-1.44a.715.715,0,0,1,.6-.2l2.051.29A2.117,2.117,0,0,0,30.068,20.7l.358-2.04a.715.715,0,0,1,.371-.511l1.829-.971a2.117,2.117,0,0,0,.913-2.811Zm-.663,3.429-1.829.971a2.112,2.112,0,0,0-1.1,1.51l-.358,2.04a.716.716,0,0,1-.809.588l-2.051-.29a2.112,2.112,0,0,0-1.776.577l-1.489,1.44a.716.716,0,0,1-1,0l-1.488-1.44a2.11,2.11,0,0,0-1.473-.6,2.159,2.159,0,0,0-.3.021l-2.051.29a.716.716,0,0,1-.809-.588l-.358-2.04a2.112,2.112,0,0,0-1.1-1.51l-1.829-.971a.716.716,0,0,1-.309-.951l.91-1.861a2.112,2.112,0,0,0,0-1.867L11.841,9.4a.716.716,0,0,1,.309-.951l1.829-.971a2.112,2.112,0,0,0,1.1-1.51l.358-2.04a.716.716,0,0,1,.809-.588l2.051.29A2.112,2.112,0,0,0,20.07,3.05l1.489-1.44a.716.716,0,0,1,1,0l1.488,1.44a2.112,2.112,0,0,0,1.776.577l2.051-.29a.716.716,0,0,1,.809.588l.358,2.04a2.112,2.112,0,0,0,1.1,1.51l1.829.971a.716.716,0,0,1,.309.951l-.91,1.861a2.112,2.112,0,0,0,0,1.867l.91,1.861A.716.716,0,0,1,31.968,15.937Z" transform="translate(-10.359 0.002)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_10" data-name="Group 10" transform="translate(6.355 6.849)">
+                  <g id="Group_9" data-name="Group 9" transform="translate(0)">
+                    <path id="Path_5" data-name="Path 5" d="M154.275,144a.7.7,0,0,0-.995,0L144,153.28a.7.7,0,1,0,.995.995l9.283-9.283A.7.7,0,0,0,154.275,144Z" transform="translate(-143.792 -143.791)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_12" data-name="Group 12" transform="translate(6.308 5.864)">
+                  <g id="Group_11" data-name="Group 11">
+                    <path id="Path_6" data-name="Path 6" d="M145.381,123.116a2.579,2.579,0,1,0,2.579,2.579A2.582,2.582,0,0,0,145.381,123.116Zm0,3.751a1.172,1.172,0,1,1,1.172-1.172A1.173,1.173,0,0,1,145.381,126.867Z" transform="translate(-142.802 -123.116)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_14" data-name="Group 14" transform="translate(11.934 13.366)">
+                  <g id="Group_13" data-name="Group 13">
+                    <path id="Path_7" data-name="Path 7" d="M263.5,280.61a2.579,2.579,0,1,0,2.579,2.579A2.582,2.582,0,0,0,263.5,280.61Zm0,3.751a1.172,1.172,0,1,1,1.172-1.172A1.173,1.173,0,0,1,263.5,284.361Z" transform="translate(-260.922 -280.61)" fill="#999"/>
+                  </g>
+                </g>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Commission</span>
+                    </a>
+
+                    <ul id="commission_drp" data-parent="#myGroup" class="nav flex-column collapse collapse-level-1">
+                        <li class="nav-item">
+                            <ul class="nav flex-column">
+                                <li [routerLink]="['commission']" class="nav-item" *ngIf="privileges.privilegeHash['ccm.views.UsersList']['c'] || 
+                privileges.privilegeHash['ccm.views.UsersList']['m'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                  true}">
+                                    <!-- && router.url.includes('/approve-dashboard') -->
+                                    <a class="nav-link" href="javascript:void(0);">Commission Structure</a>
+                                </li>
+                                <li *ngIf="privileges.privilegeHash['ccm.views.ApproveMultipleCommissionCompensation']['c']" [routerLink]="['commission/approve-dashboard']" class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" href="javascript:void(0);">Approve Commission</a>
+                                </li>
+                                <li [routerLink]="['commission/my-commission']" class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" href="javascript:void(0);">My Commission</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active" [routerLink]="['commission/user-target']">
+                                    <a class="nav-link" href="javascript:void(0);">Target Setting</a>
+                                </li>
+                                <li [routerLink]="['commission/list']" class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" href="javascript:void(0);">View Target</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dash_drp">
+                        <span class="sidebar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24.512" height="21.146" viewBox="0 0 24.512 21.146">
+                <g id="money_1_" data-name="money (1)" transform="translate(0.25 -28.314)">
+                  <g id="Group_39" data-name="Group 39" transform="translate(0 28.588)">
+                    <g id="Group_38" data-name="Group 38" transform="translate(0 0)">
+                      <path id="Path_28" data-name="Path 28" d="M23.953,40.257h0L19.424,28.885a.471.471,0,0,0-.612-.263h0L.439,35.938a.461.461,0,0,0-.188.15A.466.466,0,0,0,0,36.5V48.739a.471.471,0,0,0,.471.471H20.248a.471.471,0,0,0,.471-.471V42.053l2.972-1.184A.471.471,0,0,0,23.953,40.257Zm-4.177,8.011H.942v-11.3H19.777ZM7.857,36.028l7.884-3.142a3.746,3.746,0,0,0,2.7,1.164l.786,1.978Zm12.862,5.013V36.5a.471.471,0,0,0-.471-.471H20.24l-1-2.506a.39.39,0,0,0-.039-.059.465.465,0,0,0-.492-.363,2.816,2.816,0,0,1-2.469-1.063.467.467,0,0,0-.6-.105.529.529,0,0,0-.066.012L5.947,35.774a.465.465,0,0,0-.259.251H2.765l15.959-6.354,4.181,10.5Z" transform="translate(0 -28.588)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                      <path id="Path_29" data-name="Path 29" d="M32.336,194.125a2.815,2.815,0,0,1,1.9,1.9.471.471,0,0,0,.451.336.431.431,0,0,0,.073-.011.439.439,0,0,0,.065.013h11.3a.406.406,0,0,0,.057-.012.438.438,0,0,0,.53-.322v0a2.815,2.815,0,0,1,1.9-1.9.465.465,0,0,0,.323-.518.474.474,0,0,0,.014-.07V189.77a.425.425,0,0,0-.014-.07.464.464,0,0,0-.323-.518,2.813,2.813,0,0,1-1.9-1.9.465.465,0,0,0-.522-.323.447.447,0,0,0-.066-.013h-11.3a.445.445,0,0,0-.07.014.465.465,0,0,0-.518.323,2.815,2.815,0,0,1-1.9,1.9.465.465,0,0,0-.323.518.475.475,0,0,0-.013.07v3.767a.435.435,0,0,0,.013.065A.466.466,0,0,0,32.336,194.125Zm.606-4.164a3.736,3.736,0,0,0,2.075-2.075H45.935a3.737,3.737,0,0,0,2.075,2.075v3.385a3.741,3.741,0,0,0-2.075,2.075H35.016a3.741,3.741,0,0,0-2.075-2.075Z" transform="translate(-30.117 -177.624)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                      <path id="Path_30" data-name="Path 30" d="M130.825,224.6A2.825,2.825,0,1,0,128,221.77,2.825,2.825,0,0,0,130.825,224.6Zm0-4.709a1.883,1.883,0,1,1-1.883,1.883A1.884,1.884,0,0,1,130.825,219.887Z" transform="translate(-120.466 -207.741)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                      <path id="Path_31" data-name="Path 31" d="M76.706,256.358a.706.706,0,1,0-.706-.706A.706.706,0,0,0,76.706,256.358Zm0-.942a.235.235,0,1,1-.235.235A.235.235,0,0,1,76.706,255.416Z" transform="translate(-71.527 -241.622)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                      <path id="Path_32" data-name="Path 32" d="M252.706,256.358a.706.706,0,1,0-.706-.706A.706.706,0,0,0,252.706,256.358Zm0-.942a.235.235,0,1,1-.235.235A.235.235,0,0,1,252.706,255.416Z" transform="translate(-237.168 -241.622)" fill="#999" stroke="#999" stroke-width="0.5"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              
+            </span>
+                        <span class="nav-link-text">Payment</span>
+                    </a>
+                </li>
+                <li class="nav-item" [class.active]="router.url.includes('client')">
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#app_drp" aria-expanded="true">
+                        <span class="sidebar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23.4" height="23.4" viewBox="0 0 23.4 23.4">
+                <g id="businessman" transform="translate(0)">
+                  <g id="Group_53" data-name="Group 53" transform="translate(0)">
+                    <g id="Group_52" data-name="Group 52">
+                      <path id="Path_44" data-name="Path 44" d="M348.756,423.523a.914.914,0,0,0-1.79.373.955.955,0,0,1-.194.8.929.929,0,0,1-.731.348h-4.127a.914.914,0,1,0,0,1.828h4.127a2.777,2.777,0,0,0,2.715-3.349Z" transform="translate(-325.415 -403.472)" fill="#999"/>
+                      <path id="Path_45" data-name="Path 45" d="M12.628,12.466a10.056,10.056,0,0,1,7.436,4.424.914.914,0,1,0,1.518-1.018,11.889,11.889,0,0,0-6.161-4.681,6.216,6.216,0,1,0-7.439,0A11.887,11.887,0,0,0,.06,20.051,2.777,2.777,0,0,0,2.774,23.4h3.99a.914.914,0,1,0,0-1.828H2.774a.929.929,0,0,1-.731-.348.955.955,0,0,1-.194-.8,10.1,10.1,0,0,1,8.829-7.947L8.934,20.416a.914.914,0,0,0,.246.843l1.828,1.828a.914.914,0,0,0,1.293,0l1.828-1.828a.914.914,0,0,0,.246-.842ZM7.313,6.216A4.388,4.388,0,1,1,11.918,10.6l-.218,0-.214,0A4.393,4.393,0,0,1,7.313,6.216Zm4.342,14.932-.828-.828.828-3.767.828,3.767Z" transform="translate(0)" fill="#999"/>
+                    </g>
+                  </g>
+                </g>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Client Management</span>
+                    </a>
+                    <ul id="app_drp" data-parent="#myGroup" class="nav flex-column collapse collapse-level-1">
+                        <li class="nav-item">
+                            <ul class="nav flex-column">
+                                <li class="nav-item" routerLinkActive="active" [routerLink]="['/client-dashboard']">
+                                    <a class="nav-link" href="javascript:void(0);">Client Dashboard</a>
+                                </li>
+                                <li [routerLink]="['/add-client']" class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" href="javascript:void(0);">Add Client Demographic</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" [class.active]="(router.url.includes('user') || router.url.includes('grade') || router.url.includes('role')) && !router.url.includes('user-target')">
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#user_drp" data-parent="#myGroup">
+                        <span class="sidebar-icon">
+              <svg id="user" xmlns="http://www.w3.org/2000/svg" width="23.4" height="23.4" viewBox="0 0 23.4 23.4">
+                <path id="Path_8" data-name="Path 8" d="M11.7,0A11.7,11.7,0,1,0,23.4,11.7,11.713,11.713,0,0,0,11.7,0Zm0,22.029A10.329,10.329,0,1,1,22.029,11.7,10.341,10.341,0,0,1,11.7,22.029Z" fill="#999"/>
+                <path id="Path_9" data-name="Path 9" d="M155.8,69.6a4.8,4.8,0,1,0-4.8-4.8A4.8,4.8,0,0,0,155.8,69.6Zm0-8.227a3.428,3.428,0,1,1-3.428,3.428A3.432,3.432,0,0,1,155.8,61.371Z" transform="translate(-144.099 -57.258)" fill="#999"/>
+                <path id="Path_10" data-name="Path 10" d="M95.982,301.62A4.8,4.8,0,0,0,92.387,300H84.16a4.8,4.8,0,0,0-3.594,1.62l-.325.367.243.426a8.96,8.96,0,0,0,15.581,0l.242-.426Zm-7.708,3.956a7.609,7.609,0,0,1-6.325-3.4,3.431,3.431,0,0,1,2.211-.809h8.227a3.431,3.431,0,0,1,2.211.809A7.609,7.609,0,0,1,88.274,305.576Z" transform="translate(-76.574 -286.289)" fill="#999"/>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Users &amp; Permissions</span>
+                    </a>
+                    <ul id="user_drp" data-parent="#myGroup" class="nav flex-column collapse collapse-level-1">
+                        <li class="nav-item">
+                            <ul class="nav flex-column">
+                                <li *ngIf="privileges.privilegeHash['uam.views.UsersList']['c'] || privileges.privilegeHash['uam.views.UsersList']['m']" class="nav-item" routerLinkActive="active" [routerLink]="['/user']">
+                                    <a class="nav-link" href="javascript:void(0);">Users</a>
+                                </li>
+                                <li [routerLink]="['/user/user-teams']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a class="nav-link" href="javascript:void(0);">User Teams</a>
+                                </li>
+                                <li [routerLink]="['/grade']" class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" href="javascript:void(0);">Grades</a>
+                                </li>
+                                <!-- <li [routerLink]="router.url.includes('/user')?'active': ''" [routerLink]="['/user/user-teams']"> <a href="javascript:void(0)">User Teams</a> </li> -->
+                                <li [routerLink]="['/role']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a class="nav-link" href="javascript:void(0);">Roles and Permissions</a>
+                                </li>
+                                <li [routerLink]="['/role/system']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a class="nav-link" href="javascript:void(0);">Title Role Mapping</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-toggle="collapse" data-target="#dash_drp" data-parent="#myGroup">
+                        <span class="sidebar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23.4" height="20.566" viewBox="0 0 23.4 20.566">
+              <g id="live-chat" transform="translate(0 -31.007)">
+                <path id="Path_39" data-name="Path 39" d="M21.343,36.491H19.93a8.918,8.918,0,0,0-16.455,0H2.057A2.059,2.059,0,0,0,0,38.548V41.29a2.059,2.059,0,0,0,2.057,2.057H4.865l-.294-.9a7.558,7.558,0,1,1,7.139,5.012,2.057,2.057,0,1,0,2.046,2.057V48.59a8.947,8.947,0,0,0,6.17-5.244h1.417A2.059,2.059,0,0,0,23.4,41.29V38.548a2.059,2.059,0,0,0-2.057-2.057ZM3.019,41.975H2.057a.686.686,0,0,1-.686-.686V38.548a.686.686,0,0,1,.686-.686h.971q-.037.154-.068.31A9.047,9.047,0,0,0,3.019,41.975Zm9.366,7.541a.686.686,0,0,1-1.371,0,.693.693,0,0,1,.7-.686q.338,0,.673-.026Zm9.643-8.227a.686.686,0,0,1-.686.686h-.971a8.978,8.978,0,0,0,.123-3.52q-.048-.3-.118-.594h.967a.686.686,0,0,1,.686.686Z" fill="#999"/>
+                <path id="Path_40" data-name="Path 40" d="M181,210.993h1.371v1.371H181Z" transform="translate(-172.728 -171.76)" fill="#999"/>
+                <path id="Path_41" data-name="Path 41" d="M241,210.993h1.371v1.371H241Z" transform="translate(-229.986 -171.76)" fill="#999"/>
+                <path id="Path_42" data-name="Path 42" d="M301,210.993h1.371v1.371H301Z" transform="translate(-287.243 -171.76)" fill="#999"/>
+                <path id="Path_43" data-name="Path 43" d="M121,101.962v1.371h6.17a6.17,6.17,0,1,0-4.852-2.359A1.363,1.363,0,0,1,121,101.962Zm6.17-9.6a4.8,4.8,0,1,1,0,9.6h-3.794a2.73,2.73,0,0,0,.355-1.118l.027-.294-.195-.221a4.8,4.8,0,0,1,3.607-7.964Z" transform="translate(-115.47 -57.244)" fill="#999"/>
+              </g>
+            </svg>
+            </span>
+                        <span class="nav-link-text">Collection Agents</span>
+                    </a>
+                </li>
+                <li class="nav-item" [class.active]="router.url.includes('settings/change-logo')">
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#settings_drp">
+                        <span class="sidebar-icon">
+              <svg id="levels" xmlns="http://www.w3.org/2000/svg" width="23.067" height="20.923" viewBox="0 0 23.067 20.923">
+                <g id="Group_20" data-name="Group 20">
+                  <g id="Group_19" data-name="Group 19">
+                    <path id="Path_13" data-name="Path 13" d="M3.891,26.822V23.79H2.539v3.032H0v5.284H2.539V44.713H3.891V32.105H6.429V26.822Zm1.187,3.932H1.352V28.173H5.078Z" transform="translate(0 -23.79)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_22" data-name="Group 22" transform="translate(8.318)">
+                  <g id="Group_21" data-name="Group 21">
+                    <path id="Path_14" data-name="Path 14" d="M188.531,33.122V23.79h-1.352v9.332H184.64v5.284h2.539v6.307h1.352V38.406h2.539V33.122Zm1.188,3.933h-3.727V34.474h3.727Z" transform="translate(-184.64 -23.79)" fill="#999"/>
+                  </g>
+                </g>
+                <g id="Group_24" data-name="Group 24" transform="translate(16.637)">
+                  <g id="Group_23" data-name="Group 23">
+                    <path id="Path_15" data-name="Path 15" d="M373.18,26.822V23.79h-1.352v3.032H369.29v5.284h2.539V44.713h1.352V32.105h2.539V26.822Zm1.188,3.932h-3.726V28.173h3.726Z" transform="translate(-369.29 -23.79)" fill="#999"/>
+                  </g>
+                </g>
+              </svg> 
+            </span>
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                    <ul id="settings_drp" data-parent="#myGroup" class="nav flex-column collapse collapse-level-1">
+                        <li class="nav-item">
+                            <ul class="nav flex-column">
+                                <li class="nav-item" routerLinkActive="active" [routerLink]="['/settings/change-logo']">
+                                    <a class="nav-link" href="javascript:void(0);">Change Logo</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" [class.active]="router.url.includes('/custom-fields') || router.url.includes('/field-mapping') || router.url.includes('/account-importer')">
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#custom_fields_drp">
+                        <span class="sidebar-icon">
+              <img src="assets/images/icons/system-tool.svg" class="w-30p">
+            </span>
+                        <span class="nav-link-text">System Tools</span>
+                    </a>
+                    <ul id="custom_fields_drp" data-parent="#myGroup" class="nav flex-column collapse collapse-level-1">
+                        <li class="nav-item">
+                            <ul class="nav flex-column">
+                                <li class="nav-item" routerLinkActive="active" [routerLink]="['/custom-fields/dashboard']">
+                                    <a class="nav-link" href="javascript:void(0);">Custom Fields</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active" [routerLink]="['/system-fields/dashboard']">
+                                    <a class="nav-link" href="javascript:void(0);">System Fields</a>
+                                </li>
+                                <li class="nav-item" [class.active]="router.url.includes('account-importer')">
+                                    <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#file_mapping">File Mapping</a>
+                                    <ul id="file_mapping" class="nav flex-column collapse collapse-level-1">
+                                        <li class="nav-item">
+                                            <ul class="nav flex-column">
+                                                <li *ngIf="privileges.privilegeHash['afm.views.DeleteFieldMapping']['g']" class="nav-item pl-3" routerLinkActive="active" [routerLink]="['/field-mapping']">
+                                                    <a class="nav-link" href="javascript:void(0);">File Field Mapping</a>
+                                                </li>
+                                                <li class="nav-item pl-3" routerLinkActive="active" [routerLink]="['/account-importer']">
+                                                    <a class="nav-link" href="javascript:void(0);">Account Importer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
+<!-- /Vertical Nav -->

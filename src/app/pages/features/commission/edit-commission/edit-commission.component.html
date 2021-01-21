@@ -1,0 +1,726 @@
+<div class="container-fluid container-wrapper" [style.pointer-events]="isEdit === 'view' ? 'none' : 'all'">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Commission and Compensation</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Edit Commission</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="card-title mb-4">Commission & Compensation</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="row mx-0 w-100 my-4">
+                                    <div class="col-md-8 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Employee Name:</span><span class="gray-color"> {{userDetails.first_name + " " + userDetails.last_name}}</span></div>
+                                            <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Employee Type:</span><span class="gray-color"> {{userDetails.employee_type__name}}</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Department: </span><span class="gray-color"> {{userDetails.department__name}}</span></div>
+                                            <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Branch Location:</span><span class="gray-color"> {{userDetails.branch_location__address}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form [formGroup]="currencyForm" class="col-md-12">
+                                    <div >
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <div class="input-group form-group">
+                                                    <label for="inputState">Currency*</label>
+                                                    <span class="wrapper-select">
+                                                        <select class="form-control" formControlName="currency_code" aria-label="Text input with segmented dropdown button" placeholder="Select Currency">
+                                                            <option *ngFor="let item of currencyCodesList" [value]="item">{{item}}</option>
+                                                        </select>
+                                                    </span>
+                                                    <!-- <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="" placeholder="Select Currency">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" x-placement="bottom-start">
+                                                            <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                                                            <div role="separator" class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="javascript:void(0)">Separated link</a>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-label-group slash-field">
+                                                    <img src="assets/images/slash.png" class="ing-fluid">
+                                                    <input type="text" formControlName="salaryOne" (blur)="calculateSalary('y')" (keyup)="disableField()" class="form-control" id="formGroupExampleInput" placeholder="Gross Salary (Yearly)">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-auto d-flex align-items-center p-0">
+                                                /
+                                            </div> -->
+                                            <div class="col-md-3">
+                                                <div class="input-group form-group">
+                                                    <label for="formGroupExampleInput">Gross Salary (Monthly)*</label>
+                                                    <input type="text" formControlName="salaryTwo" (blur)="calculateSalary('m')" (keyup)="disableField()" class="form-control" id="formGroupExampleInput" placeholder="Gross Salary (Monthly)">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </form>
+                               
+
+                                <hr class="hr-gray mx-3 my-3">
+                                <div class="col-md-12 mb-4">
+                                    <h4 class="my-4 gray-04-color font-weight-bold">Commission Type</h4>
+                                    <div class="custom-radio custom-control-inline mr-5 pr-5 my-2">
+                                        <div class="form-check">
+                                            <input [(ngModel)]="commissionType" class="form-check-input" type="radio" name="salary" id="salary" value="salary">
+                                            <label class="form-check-label" for="gridRadio11">Salary Based</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-radio custom-control-inline mr-md-5 my-2">
+                                        <div class="form-check">
+                                            <input [(ngModel)]="commissionType" class="form-check-input" type="radio" name="target" id="target" value="target">
+                                            <label class="form-check-label" for="gridRadios22">Target Based</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)"
+                                            (click)="FetchCommissionCompensationHistory(historyModal)"
+                                            class="text-purpal">
+                                            <span class="d-flex align-items-center">
+                                                View History
+                                                <span *ngIf="loader" class="spinner-border float-right w-25p h-25p ml-10" role="status"
+                                                aria-hidden="true"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <hr class="hr-gray mx-3 my-3">
+                                
+                                <div class="col-md-12 mb-4" *ngIf="commissionType === 'salary'"> 
+                                    <h4 class="my-4 gray-04-color font-weight-bold">Break Even</h4>
+                                    <div class="custom-radio custom-control-inline mr-5 pr-5 w-15 my-3">
+                                        <div class="form-check">
+                                            <input [disabled]="!currencyForm.valid && switchBreakEvenView === ''" [(ngModel)]="breakEvenCheck" (change)="switchView('fs')" class="form-check-input" type="radio" name="gridRadios" id="gridRadios11" value="fs">
+                                            <label class="form-check-label" for="gridRadio11">Flat</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-radio custom-control-inline mr-md-5 my-3">
+                                        <div class="form-check">
+                                            <input [disabled]="!currencyForm.valid && switchBreakEvenView === ''" [(ngModel)]="breakEvenCheck" (change)="switchView('ts')" class="form-check-input" type="radio" name="gridRadios" id="gridRadios22" value="ts">
+                                            <label class="form-check-label" for="gridRadios22">Tier Based</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 
+                                <div class="col-md-12 mb-4" *ngIf="commissionType === 'target'">
+                                    <h4 class="my-4 gray-04-color font-weight-bold">Break Even</h4>
+                                    <div class="custom-radio custom-control-inline mr-5 pr-5 w-20 my-3">
+                                        <div class="form-check">
+                                            <input [disabled]="!currencyForm.valid && switchBreakEvenView === ''" [(ngModel)]="breakEvenCheck" (change)="switchView('ft')" class="form-check-input" type="radio" name="gridRadios1" id="gridRadios111" value="ft">
+                                            <label class="form-check-label" for="gridRadio11">Tier-rate Flat Commission</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-radio custom-control-inline mr-md-5 w-20 my-3">
+                                        <div class="form-check">
+                                            <input [disabled]="!currencyForm.valid && switchBreakEvenView === ''" [(ngModel)]="breakEvenCheck" (change)="switchView('vt')" class="form-check-input" type="radio" name="gridRadios1" id="gridRadios221" value="vt">
+                                            <label class="form-check-label" for="gridRadios22">Tier-rate Variable Commission</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- flat base -->
+                                <form [formGroup]="breakEvenPoint" class="w-100">
+                                    
+                                    <div class="flat w-100" *ngIf="switchBreakEvenView === 'fs'">
+                                        <div class="row mx-0 mb-4 d-flex align-items-end">
+                                            <div class="col-md-4">
+                                                <div class="input-group form-group mb-0">
+                                                    <label for="inputState">Break Even Times*</label>
+                                                    <input type="text" formControlName="break_even_times" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Enter Break Even Time">
+                                                    <div class="input-group-append">
+                                                        <!-- <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group form-group mb-0">
+                                                    <label for="inputState">Commission(%)*</label>
+                                                    <input type="text" formControlName="commission_rate" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Enter Commission">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button style="margin-top: 2rem;" [disabled]="breakEvenList.length > 0" type="button" (click)="addBreakEvenPoint(breakEvenPoint.value)" class="button w-130 mr-3">
+                                                    Save
+                                                    
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-0 w-100 mb-4 mt-5">
+                                            <div class="col-md-8 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Salary:</span><span class="gray-color"> {{currencyForm.controls.base_salary.value}}</span></div>
+                                                    <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Break Even Times:</span><span class="gray-color"> {{breakEvenPoint.controls.break_even_times.value}}</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 pb-4"><span class="gray-04-color">Break Even Amount:</span><span class="gray-color"> {{calculateAmount()}}</span></div>
+                                                    <div class="col-md-6 col-sm-12 pb-4 "><span class="gray-04-color">Commission(%):</span><span class="gray-color"> {{breakEvenPoint.controls.commission_rate.value}}</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                              
+                                 <!-- tier-base -->
+                                 
+                                    <div class="tier-base w-100" *ngIf="switchBreakEvenView === 'ts'">
+                                        <form [formGroup]="breakEvenPoint">
+                                            <div class="w-100 row mx-0 d-flex align-items-center">
+                                                <div class="col-md-4">
+                                                    <div class="input-group form-group">
+                                                        <label for="inputState">Commission(%)*</label>
+                                                        <input type="text" class="form-control" formControlName="commission_rate" aria-label="Text input with segmented dropdown button" placeholder="Enter Commission">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="w-100 row mx-0 d-flex align-items-center">
+                                                    <div class="col-md-12 my-3">
+                                                        <p>Link Break Even Times & MTD Base Target</p>
+                                                    </div>
+                                                    <div class="col-md-4 mt-4">
+                                                        <div class="input-group form-group">
+                                                            <label for="inputState">Break Even Times*</label>
+                                                            <input type="text" formControlName="break_even_times" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Enter Break Even Time">
+                                                            <!-- <div class="input-group-append">
+                                                                <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                                </button>
+                                                               
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mt-4">
+                                                        <div class="input-group form-group">
+                                                            <label>MTD Base Target*</label>
+                                                            <input type="text" formControlName="mtd_base_target" class="form-control" placeholder="MTD Base Target">
+                                                            <!-- <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mt-4">
+                                                        <button type="button" (click)="edit === true ? updateBreakEvenPoint(breakEvenPoint.getRawValue()) : addBreakEvenPoint(breakEvenPoint.getRawValue())" class="button w-130 mr-3 mt-2">
+                                                            <span>
+                                                                {{edit === true ? 'Update' : 'Add'}}
+                                                                
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </form>
+                                        
+                                        <div class="row mx-0">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive mt-20 mnh-200p" style="height: 30vh;overflow-y: auto;">
+                                                    <table class="table center-aligned-table">
+                                                        <thead>
+                                                            <tr class="text-dark">
+                                                                <th>Break Even Times </th>
+                                                                <th>MTD Base Target</th>
+                                                                <th class="w-10">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of breakEvenList; let i = index">
+                                                                <td>{{item.break_even_times}}</td>
+                                                                <td>{{item.mtd_base_target}}</td>
+                                                                <td>
+                                                                    <div class="d-flex table-actions">
+                                                                        <a href="javascript:void(0)" (click)="viewEdit(item)"> 
+                                                                            <i>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                                    <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                                </svg>
+                                                                                
+                                                                            </i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0)" (click)="openDeleteModal(deleteUser,item)"> 
+                                                                            <i>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                                    <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                                    <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                                    <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                                    <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                                    <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                                    </g>
+                                                                                </svg>
+                                                                                
+                                                                            </i>
+                                                                        </a> 
+                                                                    </div>  
+                                                            </tr>
+    
+                                                            <tr *ngIf="breakEvenList.length === 0" class="text-center">
+                                                               <td colspan="3">No Record Found</td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+                                <!-- flat commission based -->
+                                    
+                                <div class="flat w-100" *ngIf="switchBreakEvenView === 'ft' || switchBreakEvenView === 'vt'">
+                                    <form [formGroup]="breakEvenPoint">
+                                        <div class="row mx-0 mb-20 d-flex align-items-end">
+                                            <div class="col-md-4">
+                                                <div class="input-group form-group mb-0">
+                                                    <label for="inputState">Break Even(%)*</label>
+                                                    <input type="text" formControlName="break_even_times" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Enter Break Even Percentage">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" >
+                                                <div class="input-group form-group mb-0">
+                                                    <label for="inputState">{{switchBreakEvenView === 'ft' ? 'Commission Amount*' : switchBreakEvenView === 'vt' ? 'Commission(%)*' : ''}}</label>
+                                                    <input type="text" formControlName="commission_rate" class="form-control" aria-label="Text input with segmented dropdown button" [placeholder]="switchBreakEvenView === 'ft' ? 'Enter Commission Amount' : switchBreakEvenView === 'vt' ? 'Enter Commission Percentage*' : ''">
+                                                </div>
+                                            </div>
+    
+                                            <!-- <div class="col-md-4" *ngIf="switchBreakEvenView === 'vt'">
+                                                <div class="input-group form-group">
+                                                    <label for="inputState">Commission Percentage*</label>
+                                                    <input type="text" formControlName="commission_rate" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Enter Commission Percentage">
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-4">
+                                                <!-- <button style="margin-top: 2rem;" type="button" (click)="addBreakEvenPoint(breakEvenPoint.value)" [style.pointer-events]="(loader) ? 'none' : 'auto'" class="button w-130 mr-3">
+                                                    Save
+                                                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                </button> -->
+                                                <button style="margin-top: 2rem;" type="button" (click)="edit === true ? updateBreakEvenPoint(breakEvenPoint.getRawValue()) : addBreakEvenPoint(breakEvenPoint.getRawValue())" class="button w-130 mr-3 mt-2">
+                                                    <span>
+                                                        {{edit === true ? 'Update' : 'Add'}}
+                                                        
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                   
+
+                                    <!-- *ngIf="switchBreakEvenView === 'ft'" -->
+                                    <div class="row mx-0" *ngIf="switchBreakEvenView === 'ft'">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive mt-20 mnh-200p" style="height: 30vh;overflow-y: auto;">
+                                                <table class="table center-aligned-table">
+                                                    <thead>
+                                                        <tr class="text-dark">
+                                                            <th>Break Even(%)</th>
+                                                            <th>Commission Amount</th>
+                                                            <th class="w-10">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of breakEvenList; let i = index">
+                                                            <td>{{item.break_even_times}}</td>
+                                                            <td>{{item.commission_rate}}</td>
+                                                            <td>
+                                                                <div class="d-flex table-actions">
+                                                                    <a href="javascript:void(0)" (click)="viewEdit(item)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                                <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="openDeleteModal(deleteUser,item)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                                <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                                <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                                <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                                <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                                <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a> 
+                                                                </div> 
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr *ngIf="breakEvenList.length === 0" class="text-center">
+                                                           <td colspan="3">No Record Found</td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mx-0" *ngIf="switchBreakEvenView === 'vt'">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive mt-20 mnh-200p" style="height: 30vh;overflow-y: auto;">
+                                                <table class="table center-aligned-table">
+                                                    <thead>
+                                                        <tr class="text-dark">
+                                                            <th>Break Even Percentage</th>
+                                                            <th>Commission Percentage</th>
+                                                            <th class="w-10">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of breakEvenList; let i = index">
+                                                            <td>{{item.break_even_times}}</td>
+                                                            <td>{{item.commission_rate}}</td>
+                                                            <td>
+                                                                <div class="d-flex table-actions">
+                                                                    <a href="javascript:void(0)" (click)="viewEdit(item)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                                <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="openDeleteModal(deleteUser,item)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                                <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                                <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                                <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                                <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                                <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a> 
+                                                                </div> 
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr *ngIf="breakEvenList.length === 0" class="text-center">
+                                                           <td colspan="3">No Record Found</td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <hr class="mb-20">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-success loader-btn mr-3" (click)="updateCommission()" [disabled]="breakEvenList.length === 0">
+                                            <span>Update
+                                            <span *ngIf="loader" class="spinner-border ml-3" role="status" aria-hidden="true"></span>
+                                            </span>
+                                        </button>
+                                        <!-- <a class="button" href="javascript:void(0)">Update</a> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+
+        </div>
+    </div>
+</div>
+ 
+
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- user delete confirmation -->
+<ng-template #deleteUser class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bb-none">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+            </button>
+        </div>
+        <div class="modal-body p-4 text-center">
+            <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                <span class="text-white">
+                    <i class="fa fa-trash-o highlight-icon" aria-hidden="true"></i>
+                </span>
+            </div>
+            <p class="mb-4">Are you sure you want to delete this record</p>
+            <div class="center-text">
+                <!-- <button type="button" (click)="deleteUser()" class="button">Delete</button> -->
+                <button type="button btn-danger loader-btn" [disabled]="deleteLoader" (click)="deleteBreakEvenPoint()" class="button">
+                    Delete
+                    <span *ngIf="deleteLoader" class="spinner-border ml-3" role="status" aria-hidden="true"></span>
+                </button>
+                
+            </div>
+            <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+        </div>
+    </div>
+</div>
+</ng-template>
+<!-- end of user delete confirmation -->
+
+<!-- view history modal -->
+<ng-template #historyModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-xl unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">History of Commission</h4>
+            </div>
+            <div class="modal-body p-0 comment-content position-relative">
+                <div class="table-responsive mnh-200p">
+                <table id="datable_1" class="table theme-table commission-setting-history-table w-100 display pb-30">
+                    <thead>
+                        <tr>
+                            <th>COMMISSION TYPE</th>
+                            <th>BREAK EVEN</th>
+                            <th></th>
+                            <th>FROM DATE</th>
+                            <th>TO DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let history of commissionHistory">
+
+                            <tr *ngIf="history.data.break_even_type === 'FS'">
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)*</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'TS'">
+                                <td>Salary Based</td>
+                                <td>Tier Based</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">
+                                                    {{history?.data?.child_break_even_points[0]?.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">MTD Base Target</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                        *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.mtd_base_target}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'FT'">
+                                <td>Target Based</td>
+                                <td>Tier-rate Flat Commission</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even(%)</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission Amount</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <tr *ngIf="history.data.break_even_type === 'VT'">
+                                <td>Target Based</td>
+                                <td>Tier-rate Variable Commission</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even(%)</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between"
+                                            *ngFor="let child of history.data.child_break_even_points">
+                                            <div>
+                                                <div class="be-value">{{child.break_even_times}}</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">{{child.commission_rate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{history.created_at | date: 'shortDate'}}</td>
+                                <td>{{history.updated_at | date: 'shortDate'}}</td>
+                            </tr>
+                            <!-- <tr *ngIf="history.data.break_even_type === 'FS'">
+                                <td>Salary Based</td>
+                                <td>Tier Based</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr> -->
+                            <tr *ngIf="commissionHistory.length === 0" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr> 
+                        </ng-container> 
+                        <tr *ngIf="loadMoreHistory" class="text-center">
+                            <td colspan="8">
+                                <p class="p-5 font-16 text-purpal cursor-pointer" (click)="FetchCommissionCompensationHistory('more')">
+                                    Load More History
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody> 
+                </table>
+                </div>
+                <div *ngIf="loader" class="table-loader absolute">
+                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pb-0 pr-0">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-success btn-lg previous" (click)="closeModal()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- view history modal end -->

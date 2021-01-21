@@ -1,0 +1,88 @@
+<!-- Main Content -->
+<div class="hk-pg-wrapper" *ngIf="!store.isSuccess">
+    <!-- Container -->
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item" [routerLink]="['/client-dashboard']"><a
+                        href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Client Demographics</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add Client Demographics</h1>
+        </div>
+        <div class="left-nav">
+
+            <div class="left-tabs">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a [routerLink]="['/add-client/client-info']" [routerLinkActiveOptions]="{exact:true}"
+                        [routerLinkActive]="['active']" #link1="routerLinkActive" class="nav-link ">Client Info
+                        <span class="step-number"
+                            [class]="(store.clientInfo.valid === true && link1.isActive === false) ? 'checked' : ''">1
+                        </span>
+                    </a>
+                    <a [routerLink]="['/add-client/client-details']" [routerLinkActiveOptions]="{exact:true}"
+                        class="nav-link" #link2="routerLinkActive" [routerLinkActive]="['active']">Client Details
+                        <span class="step-number "
+                            [class]="store.clientDetailsForm.valid === true && link2.isActive === false ? 'checked' : ''">2</span>
+                        <!-- add checked class if step is completed -->
+                    </a>
+                    <a [routerLink]="['/add-client/custom-fields']" [routerLinkActiveOptions]="{exact:true}"
+                        class="nav-link" #link3="routerLinkActive" [routerLinkActive]="['active']"
+                        *ngIf="store.customFieldScreen">Custom Fields
+                        <span class="step-number"
+                            [class]="store.customFields.valid === true && link3.isActive === false && store.isCustomField === true ? 'checked' : ''">
+                            3</span>
+                    </a>
+                    <a [routerLink]="['/add-client/custom-fields-demo']" [routerLinkActiveOptions]="{exact:true}"
+                        class="nav-link" #link7="routerLinkActive" [routerLinkActive]="['active']"
+                        *ngIf="store.customFieldDemoScreen">Custom Fields Demo
+                        <span class="step-number"
+                            [class]="link7.isActive === false && store.isCustomDemoField === true ? 'checked' : ''">
+                            4</span>
+                    </a>
+                    <a [routerLink]="['/add-client/comments']" [routerLinkActiveOptions]="{exact:true}" class="nav-link"
+                        #link4="routerLinkActive" [routerLinkActive]="['active']">Comments
+                        <span class="step-number"
+                            [class]="store.commentsForm.valid === true && link4.isActive === false && store.isComments === true ? 'checked' : ''">5</span>
+                    </a>
+                    <a [routerLink]="['/add-client/documents']" [routerLinkActiveOptions]="{exact:true}"
+                        class="nav-link" #link5="routerLinkActive" [routerLinkActive]="['active']">Documents
+                        <span class="step-number"
+                            [class]="store.documentsForm.valid === true && link5.isActive === false && store.isDocuments === true ? 'checked' : ''">6</span>
+                    </a>
+                    <a [routerLink]="['/add-client/portal-settings']" [routerLinkActiveOptions]="{exact:true}"
+                        class="nav-link" #link6="routerLinkActive" [routerLinkActive]="['active']">Client Portal
+                        Settings
+                        <span class="step-number"
+                            [class]="store.portalSettings.valid === true && link6.isActive === false ? 'checked' : ''">7</span>
+                    </a>
+                </div>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <!-- /Container -->
+</div>
+<section class="hk-sec-wrapper shadow-xl rounded-30" *ngIf="store.isSuccess">
+    <div class="text-center mt-60 mb-40 no-comment no-comment--congrats">
+        <img src="assets/images/congrats.png" />
+        <h1 class="lead mt-30">Congratulations.</h1>
+        <p>You have successfully added new client in Portal.</p>
+        <div>
+            <span>{{store.clientInfo.controls.client_number.value}}</span>
+            <h2>{{store.clientInfo.controls.company_name.value}}</h2>
+        </div>
+        <div class="text-center mt-50">
+            <!-- <button type="button" class="btn btn-default btn-lg previous">Review Client Details</button> -->
+            <button type="button" class="btn btn-success btn-lg" routerLink="/client-dashboard">Go to Client
+                Dashboard</button>
+        </div>
+    </div>
+</section>
+<!-- /Main Content -->
+

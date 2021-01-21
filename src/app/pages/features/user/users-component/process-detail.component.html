@@ -1,0 +1,259 @@
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Dashboard</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title mb-0">Process Details</h5>
+                                </div>
+                                <div class="col-md-3 col-sm-4 pr-0 pl-0">
+                                    <div class="input-group form-group d-flex align-items-center justify-content-end">
+                                        <label class="gray-color mr-2 mt-2">Show</label>
+                                        <span class="wrapper-select w-50">
+                                            <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="10">
+                                                <option>10</option>
+                                                <option>20</option>
+                                            </select>
+                                        </span>
+                                        <label class="gray-color ml-2 mt-2">Entries</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-inline pull-md-right">
+                                        <div class="input-group mr-3 mb-3 mb-md-0 w-50">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text bg-transparent br-none"><i class="ti-search gray-color "></i></div>
+                                            </div>
+                                            <input type="text" class="form-control bl-none pl-1" id="inlineFormInputGroupUsername2" placeholder="Search">
+                                        </div>
+                                        <a href="javascript:void(0)" [routerLink]="['/user/add']" class="button w-130">Create <i class="fa fa-plus ml-2"></i></a>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive mnh-200p">
+                                        <table class="table center-aligned-table process-detail-table">
+                                            <thead>
+                                                <tr class="text-dark"> 
+                                                    <th>Export File</th>
+                                                    <th>Date & Time</th>
+                                                    <th>Export Option</th>
+                                                    <th>Format</th>
+                                                    <th>Export Status</th>
+                                                    <th>Action</th>  
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <tr > 
+                                                    <td>TeraNet Active Inventory File</td>
+                                                    <td>01/07/2020</td>
+                                                    <td>Schedule Export</td>
+                                                    <td>CSV</td>
+                                                    <td class="text-red">Pending</td>
+                                                    <td>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-control-play text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-control-pause text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-pencil text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="fa fa-trash-o p-2"></i></a>
+                                                        <a href="javascript:void(0)"> <i class="fa fa-eye p-2"></i></a>
+                                                    </td> 
+                                                </tr>
+                                                <tr > 
+                                                    <td>TeraNet Active Inventory File</td>
+                                                    <td>01/07/2020</td>
+                                                    <td>Schedule Export</td>
+                                                    <td>CSV</td>
+                                                    <td class="text-green">Success</td>
+                                                    <td>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-control-play text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-control-pause text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)"> <i class="ti-pencil text-sea-green p-2"></i></a>
+                                                        <a class="pr-3" href="javascript:void(0)" (click)="openDeleteUser(deleteUser)"> <i class="fa fa-trash-o p-2"></i></a>
+                                                        <a href="javascript:void(0)"> <i class="fa fa-eye p-2"></i></a>
+                                                    </td> 
+                                                </tr>
+                                                <tr *ngIf="userList.length === 0" style="text-align: center;">
+                                                    <td colspan="6">No Record Found</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="userLoader" class="d-flex justify-content-center">
+                                        <div class="spinner-border theme-color" role="status">
+                                          <span class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex align-items-center mt-2">
+                                <div class="col-md-6 col-sm-12">
+                                    <p class="tbldata-info">Showing {{pageConfig.page > 1 ? ((userList.length * pageConfig.page) - 10) : pageConfig.page}} to {{userList.length * pageConfig.page}} of {{paginationConfig.count}} Entries</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <nav class="pull-md-right mt-3 mt-md-0" aria-label="Page navigation example">
+                                        <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageConfig.size" [totalItems]="paginationConfig.count" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                            lastText="&raquo;">
+                                        </pagination>
+                                        <!-- <ul class="pagination mt-3 mt-md-0">
+                                            <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">01</a></li>
+                                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">02</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">03</a></li>
+                                            <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                            </li>
+                                        </ul> -->
+                                    </nav>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+
+            <!-- model for users download start-->
+            <div bsModal #usersDownload="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="usersDownload.hide()">
+                            <span aria-hidden="true"><i class="ti-close"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-5">
+                            <div class="input-group form-group">
+                                <label for="inputState">File Format</label>
+                                <span class="wrapper-select">
+                                    <select [(ngModel)]="downloadType" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select file format">
+                                        <option value="xlsx">.xls</option>
+                                        <option value="csv">.csv</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="pull-right">
+                                <button type="button" (click)="downloadFile()" class="button w-130">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- model for users download end-->
+
+            <!-- model for user Activate start-->
+            <ng-template #userActivate class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true"><i class="ti-close"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4 text-center">
+                            <div class="icon-box theme-bg rounded-circle mx-auto mb-4">
+                                <span class="text-white">
+                                    <i class="ti-unlock highlight-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <p class="mb-4">Are you sure you want to activate <span class="font-weight-bold d-block">{{userData.first_name}} {{userData.last_name}}</span></p>
+                            <div class="center-text">
+                                <button type="button" *ngIf="!activateLoader" (click)="activateUser(userData.id)" class="button">Yes, I'm Sure</button>
+                                <button type="button" *ngIf="activateLoader" class="button">Activating 
+                                    <span class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </ng-template>
+            <!-- model for user Activate end-->
+
+            <!-- model for user Deactivate start-->
+            <ng-template #userDeactivate class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true"><i class="ti-close"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4 text-center">
+                            <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                                <span class="text-white">
+                                    <i class="ti-lock highlight-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <p class="mb-4">Are you sure you want to deactivate <span class="font-weight-bold d-block">{{userData.first_name}} {{userData.last_name}}</span></p>
+                            <div class="center-text">
+                                <button type="button" *ngIf="!deactivateLoader" (click)="deactivateUser(userData.id)" class="button">Yes, I'm Sure</button>
+                                <button type="button" *ngIf="deactivateLoader"  class="button">Deactivating
+                                    <span class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- model for user Deactivate end-->
+
+            <!-- user delete confirmation -->
+            <ng-template #deleteUser class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true"><i class="ti-close"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4 text-center">
+                            <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                                <span class="text-white">
+                                    <i class="fa fa-trash-o highlight-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <p class="mb-4">Are you sure you want to delete <span class="font-weight-bold d-block">{{userData.first_name}} {{userData.last_name}}</span></p>
+                            <div class="center-text">
+                                <!-- <button type="button" (click)="deleteUser()" class="button">Delete</button> -->
+                                <button type="button" (click)="deleteUserMethod()" class="btn btn-success loader-btn">
+                                    <span>
+                                        Delete
+                                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                    </span>
+                                </button>
+                                
+                            </div>
+                            <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- end of user delete confirmation -->
+        </div>
+    </div>
+</div>
+ 

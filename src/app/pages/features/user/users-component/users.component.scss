@@ -1,0 +1,21 @@
+
+.content-wrapper{
+
+    table{
+
+        th, td{
+            .form-check{
+
+                .form-check-input{
+                    margin-left: 0;
+                }
+                
+                position: relative;
+                display: flex;
+                width: 100%;
+            }
+            
+        }
+    }
+
+}

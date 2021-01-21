@@ -1,0 +1,115 @@
+<div class="hk-pg-wrapper">
+    <div class="container-fluid">
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/field-mapping']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Edit Field Mapping</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">File Field Mapping</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please upload the required file.</h5>
+        <!-- novalidate form  -->
+        <form [formGroup]="store.fieldMappingForm">
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">FILE INFORMATION</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-20">
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <ng-select2 class="labelDown" [class.hasValue]="store?.fieldMappingForm?.controls?.client_demographic_id?.value !== '' && store?.fieldMappingForm?.controls?.client_demographic_id?.value !== null"  formControlName="client_demographic_id"
+                                                    [data]="clientList" [options]="options"
+                                                    (valueChanged)="onSelect($event)">
+                                                </ng-select2>
+                                                <label class="selectHolder" for="">Client Name *</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" *ngIf="store.fieldMappingForm.controls.client_demographic_id.value">
+                                            <div class="form-label-group">
+                                                <tag-input class="tag-input-wl labelDown" [class.hasValue]="store?.fieldMappingForm?.controls?.product_list?.value !== '' && store?.fieldMappingForm?.controls?.product_list?.value !== null" formControlName="product_list" [maxItems]='5'
+                                                    [onlyFromAutocomplete]="true" [addOnBlur]="true" name="userTag">
+                                                    <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                                        [autocompleteItems]="items" [identifyBy]="'id'"
+                                                        [displayBy]="'name'">
+                                                    </tag-input-dropdown>
+                                                </tag-input>
+                                                <!-- <label class="selectHolder" for="">Product</label> -->
+                                                <label class="selectHolder" for="">Product</label>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <input formControlName="file_name" type="text" class="form-control"
+                                                    id="formGroupExampleInput1" placeholder="File Name">
+                                                <label for="formGroupExampleInput1">File Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" class="btn btn-success btn-lg previous border-0"
+                    [routerLink]="['/field-mapping']">
+                    Cancel
+                </button>
+                <!-- '/field-mapping/edit-field-mapping', store.fieldMappingForm.value.id -->
+                <button type="button" class="btn btn-success btn-lg previous" [routerLink]="['/field-mapping/edit-field-mapping/'+store.id]">
+                    Back
+                </button>
+                <button [disabled]="loader || !store.fieldMappingForm.valid" (click)="updateFieldMapping()" type="button" class="btn btn-success loader-btn btn-lg">
+                    <span>
+                        Update Mapping
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+<ng-template #fileUpdated  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/xls.png" class="img-fluid mb-20">
+        <h2 class="modal-title">File Updated</h2>
+        <p class="modal-title text-secondary font-21">You've successfully updated file to client</p>
+        <p class="modal-title client-name">
+            {{clientName}}
+        </p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="goToDashboard()">
+                <span>
+                    Go to Dashboard
+                </span>
+                </button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>

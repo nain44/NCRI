@@ -1,0 +1,41 @@
+.modal-dialog.uploadFile{
+    .modal-content{
+        background: none;
+        border: none;
+        .modal-dialog{
+            width: 100%;
+            background: #fff;
+            border-radius: 5px;
+        }
+    }
+}
+
+.modal.show{
+    .modal-dialog{
+        background: none;
+        .modal-content{
+            background: none !important;
+            border: none;
+            .modal-dialog{ 
+                &.unlock{
+                    min-width: 40rem;
+                }
+                &.modal-dialog-centered{
+                    height: 100vh;
+                    .modal-content{
+                        background: #fff !important;
+                        border-radius: 5px;
+                        padding: 1rem;
+                    }
+                }
+            }
+        } 
+    }
+    &.modal-bg-white{
+        .modal-dialog{
+            .modal-content{
+                background: #fff !important;
+            }
+        }
+    }
+} 

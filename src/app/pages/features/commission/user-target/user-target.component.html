@@ -1,0 +1,1194 @@
+<div class="hk-pg-wrapper" *ngIf="target === 'set'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">TARGET DATE RANGE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-20">
+                                        <div class="col-4">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <div class="position-relative">
+                                                    <img src="assets/images/calendar.png" class="img-fluid">
+                                                    <input type="text" autocomplete="off"
+                                                        [(ngModel)]="targetDate.startDate"
+                                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                                                        class="form-control" placeholder="Start Date *" bsDatepicker
+                                                        (bsValueChange)="onValueChange($event)">
+                                                    <label for="">Start Date *</label>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.date_of_joining.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.date_of_joining.errors.required && userForm.controls.date_of_joining.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">
+                                                        Please Provide joining date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <div class="position-relative">
+                                                    <img src="assets/images/calendar.png" class="img-fluid">
+                                                    <input type="text" autocomplete="off"
+                                                        [(ngModel)]="targetDate.endDate"
+                                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                                                        class="form-control" placeholder="End Date *" bsDatepicker>
+                                                    <label for="">End Date *</label>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.date_of_joining.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.date_of_joining.errors.required && userForm.controls.date_of_joining.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">
+                                                        Please Provide joining date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> -->
+                <button type="button" [disabled]="mainLoader" class="btn btn-success loader-btn btn-lg" (click)="nextStep()">
+                    <span>
+                        Next
+                        <span *ngIf="mainLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!-- first screen -->
+<div class="hk-pg-wrapper"  *ngIf="target === 'one'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN TARGET</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-20">
+                                        <div class="col">
+                                            <div class="field-view d-flex align-items-center">
+                                                <div class="custom-radio custom-control-inline Atarget"
+                                                    *ngFor="let country of countryList;let i = index">
+                                                    <div class="form-check">
+                                                        <input [(ngModel)]="selectedCountry" class="form-check-input" name="c-radio" type="radio"
+                                                            [id]="i" [value]="country"
+                                                            [ngClass]="{'active show': selectedCountry === country}"
+                                                            (click)="changeCountry(country)">
+                                                        <label class="form-check-label"
+                                                            [for]="i">{{country}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="text-center">
+                                                <p class="text-dark-80">Date Range</p>
+                                                <h6 class="font-semi-bold">{{targetDate.startDate | date : 'dd MMM'}} -
+                                                    {{targetDate.endDate | date : 'dd MMM'}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4"> 
+                                        <div class="col-md-4 d-none">
+                                            <div class="form-group">
+                                                <label>Target Amount</label>
+                                                <input type="number"
+                                                    class="form-control target-amount" 
+                                                    [(ngModel)]="targetAmount"
+                                                    (blur)="amountChanged()"
+                                                    placeholder="Target Amount">
+                                                    <!-- [name]="'one'+indexOne" -->
+                                            </div> 
+                                        </div>
+
+                                        <div class="col-4"> 
+                                            <div class="form-label-group">
+                                                <input type="number"
+                                                [disabled]="treeData[0]?.already_created"
+                                                 [(ngModel)]="targetAmount" (blur)="amountChanged()" class="form-control"
+                                                    id="formGroupExampleInput" placeholder="Target Amount">
+                                                <label for="">Target Amount</label>
+                                                 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-center"> 
+                                            <button type="button" class="btn btn-success btn-border loader-btn btn-lg" (click)="changeAmount(true)">
+                                                <span>Divide Equally</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> 
+                                            <div class="row">
+                                                <div class="col-md-8 set-commssion pb-4">
+                                                    <div class="row version-flow">
+                                                        <ul class="tree">
+                                                            <li class="tree-first nested">
+                                                                <ul #main class="collapsed in">
+                                                                    <li [class]="one.children.length > 0 ? 'nested' : ''"
+                                                                        *ngFor="let one of treeData;let indexOne = index">
+                                                                        <i *ngIf="one.children.length > 0"
+                                                                            class="indicator"
+                                                                            (click)="toggleView(firstPanel, $event)"></i>
+                                                                        <div class="row">
+                                                                            <div class="col-auto">
+                                                                                <div class="form-group">
+                                                                                    <div class="tree-heading">
+                                                                                        <span>{{one.employee_type__name}}</span>
+                                                                                        <h4>{{one.first_name + ' ' + one.last_name}}</h4> 
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <input type="number"
+                                                                                        class="form-control target-amount"
+                                                                                        [name]="'one'+indexOne"
+                                                                                        [(ngModel)]="targetAmount"
+                                                                                        (blur)="amountChanged()"
+                                                                                        placeholder="Target Amount">
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div *ngIf="indexOne === 0"
+                                                                                class="col-md-4 d-flex align-items-center">
+                                                                                <button class="button float-right"
+                                                                                    type="button"
+                                                                                    (click)="changeAmount(true)">Divide
+                                                                                    Equally </button>
+                                                                            </div> -->
+                                                                        </div>
+                                                                        <ul #firstPanel>
+                                                                            <li [class]="two.children.length > 0 ? 'nested' : ''"
+                                                                                *ngFor="let two of one.children; let indexTwo = index">
+                                                                                <i *ngIf="two.children.length > 0"
+                                                                                    class="indicator"
+                                                                                    (click)="toggleView(secondPanel, $event)"></i>
+                                                                                <div class="row">
+                                                                                    <div class="col-auto">
+                                                                                        <div class="form-group">
+                                                                                            <div class="tree-heading">
+                                                                                                <span>{{two.employee_type__name}}</span>
+                                                                                                <h4>{{two.first_name + ' ' + two.last_name}}</h4> 
+                                                                                            </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+
+                                                                                            <input type="number"
+                                                                                                [disabled]="two.already_created"
+                                                                                                class="form-control target-amount"
+                                                                                                [(ngModel)]="two.amount"
+                                                                                                (blur)="amountChanged()"
+                                                                                                [name]="'two'+indexTwo+one.id"
+                                                                                                placeholder="Target Amount">
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #secondPanel>
+                                                                                    <li [class]="three.children.length > 0 ? 'nested' : ''"
+                                                                                        *ngFor="let three of two.children;let indexThree = index">
+                                                                                        <i *ngIf="three.children.length > 0"
+                                                                                            class="indicator"
+                                                                                            (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                        <div class="row">
+                                                                                            <div class="col-auto">
+                                                                                                <div class="form-group">
+                                                                                                    <div class="tree-heading">
+                                                                                                        <span>{{three.employee_type__name}}</span>
+                                                                                                        <h4>{{three.first_name + ' ' + three.last_name}}</h4> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group"> 
+                                                                                                    <input
+                                                                                                        type="number"
+                                                                                                        [disabled]="three.already_created"
+                                                                                                        class="form-control target-amount"
+                                                                                                        [(ngModel)]="three.amount"
+                                                                                                        (blur)="amountChanged()"
+                                                                                                        [name]="'three'+indexThree+two.id"
+                                                                                                        placeholder="Target Amount">
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <ul #thirdPanel>
+                                                                                            <li
+                                                                                                *ngFor="let four of three.children;let indexFour = index">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-auto">
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="tree-heading">
+                                                                                                                <span>{{four.employee_type__name}}</span>
+                                                                                                                <h4>{{four.first_name + ' ' + four.last_name}}</h4> 
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="form-group"> 
+                                                                                                            <input
+                                                                                                                type="number"
+                                                                                                                [disabled]="four.already_created"
+                                                                                                                class="form-control target-amount"
+                                                                                                                [(ngModel)]="four.amount"
+                                                                                                                (blur)="amountChanged()"
+                                                                                                                [name]="'four'+indexFour+three.id"
+                                                                                                                placeholder="Target Amount">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul>
+
+                                                                            </li>
+                                                                        </ul>
+
+                                                                    </li>
+                                                                </ul>
+
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 align-self-center">
+                                                    <div class="row my-4">
+                                                        <div class="col-md-12 text-center">
+                                                            <div class="pb-2 text-center mb-50">
+                                                                <h6>Assigned Amount</h6>
+                                                                <h1 class="text-purpal">
+                                                                    ${{assignedTotalAmount}}
+                                                                </h1>
+                                                            </div>
+                                                            <div class="pb-2 text-center">
+                                                                <h6>Remaining  Amount</h6>
+                                                                <h1 class="text-theme-green">
+                                                                    ${{amountLeft}}
+                                                                </h1>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> --> 
+                <!-- <button type="button" class="btn btn-success loader-btn btn-lg previous">
+                    <span>Previous</span>
+                </button>  -->
+                <button [disabled]="nextLoader || loader" (click)="target = 'set'" type="button" class="btn btn-success loader-btn btn-lg previous">
+                    <span>
+                        Previous
+                    </span>
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-success loader-btn btn-lg" [disabled]="nextLoader || loader"
+                (click)="addTarget(true)">
+                    <span>
+                        Finish
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-success loader-btn btn-lg" [disabled]="nextLoader || loader"
+                (click)="nextScreen(2)">
+                    <span>
+                        Save & Next
+                        <span *ngIf="nextLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div>
+ 
+<!-- screen two -->
+<div class="hk-pg-wrapper" *ngIf="target === 'two'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true"> 
+                            <div class="row" accordion-heading>
+                                <div class="col">
+                                    <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                     type="button">
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN TARGET</h6>
+                                    </button>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-center">
+                                        <p class="text-dark-80">Date Range</p>
+                                        <h6>{{targetDate.startDate | date : 'MMM d'}} -
+                                            {{targetDate.endDate | date : 'MMM d'}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cg-role">
+                                <div class="w-100 mt-20"> 
+                                    <div class="row">
+                                        <div class="col-12"> 
+                                            <div class="row">
+                                                <div class="col-md-10 pb-4">
+                                                    <div class="row version-flow">
+                                                        <div class="col-auto p-0" *ngIf="branchList.length > 0">
+                                                            <div class="having-left-nav">
+                                                                <div class="navigation-holder">
+                                                                    <ul class="nav flex-column">
+                                                                        <li class="nav-item" *ngFor="let branch of branchList">
+                                                                            <a class="nav-link"
+                                                                            [ngClass]="{'active': selectedBranch === branch}"
+                                                                            (click)="changeBranch(branch)">
+                                                                            {{branch}}
+                                                                        </a>
+                                                                        </li>
+                                                                        <!-- <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/client-details']">St. Catharines</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/transactions']">Montreal</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/comments']">Vaughan</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/comments']">Alberta</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/comments']">New Brunswick</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/comments']">Nova Scotia</a>
+                                                                        </li> -->
+                                                                    </ul>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col set-commssion">
+                                                            <ul class="tree">
+                                                                <li class="tree-first nested">
+                                                                    <ul #main class="collapsed in" [class]="treeData.length > 1 ? 'roots' : ''">
+                                                                        <li [class]="one.children.length > 0 ? 'nested' : ''"
+                                                                            *ngFor="let one of treeData;let indexOne = index">
+                                                                            <i *ngIf="one.children.length > 0" class="indicator"
+                                                                                (click)="toggleView(firstPanel, $event)"></i>
+                                                                            <div class="row"> 
+                                                                                <div class="col-auto">
+                                                                                    <div class="form-group">
+                                                                                        <div class="tree-heading">
+                                                                                            <span>{{one.employee_type__name}}</span>
+                                                                                            <h4>{{one.first_name + ' ' + one.last_name}}</h4> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="form-group"> 
+                                                                                        <input type="number" class="form-control target-amount"
+                                                                                        [disabled]="one.already_created" [name]="'one'+indexOne"
+                                                                                            [(ngModel)]="one.amount"
+                                                                                            (blur)="amountChanged()"
+                                                                                            placeholder="Target Amount">
+                                                                                    </div> 
+                                                                                </div> 
+                                                                                <div *ngIf="indexOne === 0"
+                                                                                    class="col-md-4 d-flex align-items-center">
+                                                                                    <button class="btn btn-success loader-btn btn-lg" type="button"
+                                                                                        (click)="changeAmount(true)">Divide Equally
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul #firstPanel>
+                                                                                <li [class]="two.children.length > 0 ? 'nested' : ''"
+                                                                                    *ngFor="let two of one.children; let indexTwo = index">
+                                                                                    <i *ngIf="two.children.length > 0"
+                                                                                        class="indicator"
+                                                                                        (click)="toggleView(secondPanel, $event)"></i>
+                                                                                    <div class="row"> 
+                                                                                        <div class="col-auto">
+                                                                                            <div class="form-group">
+                                                                                                <div class="tree-heading">
+                                                                                                    <span>{{two.employee_type__name}}</span>
+                                                                                                    <h4>{{two.first_name + ' ' + two.last_name}}</h4> 
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="col-md-4">
+                                                                                            <div class="form-group"> 
+                                                                                                <input type="number"
+                                                                                                [disabled]="two.already_created"
+                                                                                                    class="form-control target-amount"
+                                                                                                    [(ngModel)]="two.amount"
+                                                                                                    (blur)="testfunction(one)"
+                                                                                                    [name]="'two'+indexTwo+one.id"
+                                                                                                    placeholder="Target Amount">
+                                                                                            </div>
+            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <ul #secondPanel>
+                                                                                        <li [class]="three.children.length > 0 ? 'nested' : ''"
+                                                                                            *ngFor="let three of two.children;let indexThree = index">
+                                                                                            <i *ngIf="three.children.length > 0"
+                                                                                                class="indicator"
+                                                                                                (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                            <div class="row"> 
+                                                                                                <div class="col-auto">
+                                                                                                    <div class="form-group">
+                                                                                                        <div class="tree-heading">
+                                                                                                            <span>{{three.employee_type__name}}</span>
+                                                                                                            <h4>{{three.first_name + ' ' + three.last_name}}</h4> 
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-4">
+                                                                                                    <div class="form-group"> 
+                                                                                                        <input type="number"
+                                                                                                            class="form-control target-amount"
+                                                                                                            [disabled]="three.already_created"
+                                                                                                            [(ngModel)]="three.amount"
+                                                                                                            (blur)="testfunction(two)"
+                                                                                                            [name]="'three'+indexThree+two.id"
+                                                                                                            placeholder="Target Amount">
+                                                                                                    </div> 
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <ul #thirdPanel>
+                                                                                                <li
+                                                                                                    *ngFor="let four of three.children;let indexFour = index">
+            
+                                                                                                    <div class="row"> 
+                                                                                                        <div class="col-auto">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="tree-heading">
+                                                                                                                    <span>{{four.employee_type__name}}</span>
+                                                                                                                    <h4>{{four.first_name + ' ' + four.last_name}}</h4> 
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-4">
+                                                                                                            <div class="form-group">
+            
+                                                                                                                <input type="number"
+                                                                                                                    class="form-control target-amount"
+                                                                                                                    [(ngModel)]="four.amount"
+                                                                                                                    [disabled]="four.already_created"
+                                                                                                                    (blur)="testfunction(three)"
+                                                                                                                    [name]="'four'+indexFour+three.id"
+                                                                                                                    placeholder="Target Amount">
+                                                                                                            </div>
+            
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            </ul>
+            
+                                                                                        </li>
+                                                                                    </ul>
+            
+                                                                                </li>
+                                                                            </ul>
+            
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 align-self-center">
+                                                    <div class="row my-4">
+                                                        <div class="col-md-12 text-center">
+                                                            <div class="pb-2 text-center mb-50">
+                                                                <h6>Assigned Amount</h6>
+                                                                <h1 class="text-purpal">
+                                                                    ${{targetAmount}}
+                                                                </h1>
+                                                            </div>
+                                                            <div class="pb-2 text-center">
+                                                                <h6>Remaining  Amount</h6>
+                                                                <h1 class="text-theme-green">
+                                                                    ${{amountLeft}}
+                                                                </h1>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> --> 
+                <!-- <button type="button" class="btn btn-success loader-btn btn-lg previous">
+                    <span>Previous</span>
+                </button>  -->
+                <button *ngIf="currentUserGrade === 0" (click)="previousTree(1)" type="button" class="btn btn-success loader-btn btn-lg previous" [disabled]="
+                nextLoader || loader || previousLoader
+                ">
+                    <span>
+                        Previous
+                        <span *ngIf="previousLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-success loader-btn btn-lg" [disabled]="nextLoader || loader || previousLoader"
+                (click)="addTarget(true)">
+                    <span>
+                        Finish
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-success loader-btn btn-lg" [disabled]="nextLoader || loader || previousLoader"
+                (click)="nextScreen(3)">
+                    <span>
+                        Save & Next
+                        <span *ngIf="nextLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div> 
+
+<!-- three new -->
+<div class="hk-pg-wrapper" *ngIf="target === 'three'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true"> 
+                            <div class="row" accordion-heading>
+                                <div class="col">
+                                    <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                     type="button">
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN TARGET</h6>
+                                    </button>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-center">
+                                        <p class="text-dark-80">Date Range</p>
+                                        <h6>{{targetDate.startDate | date : 'MMM d'}} -
+                                            {{targetDate.endDate | date : 'MMM d'}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cg-role">
+                                <div class="w-100 mt-20"> 
+                                    <div class="row">
+                                        <div class="col-12"> 
+                                            <div class="row">
+                                                <div class="col-md-10 pb-4 set-commssion">
+                                                    <div class="row version-flow"> 
+                                                        <ul class="tree">
+                                                            <li class="tree-first nested"> 
+                                                                <ul #main class="collapsed in" [class]="treeData.length > 1 ? 'roots' : ''">
+                                                                    <li [class]="one.children.length > 0 ? 'nested' : ''"
+                                                                        *ngFor="let one of treeData;let indexOne = index">
+                                                                        <i *ngIf="one.children.length > 0" class="indicator"
+                                                                            (click)="toggleView(firstPanel, $event)"></i>
+                                                                        <div class="row"> 
+                                                                            <div class="col-auto">
+                                                                                <div class="form-group">
+                                                                                    <div class="tree-heading">
+                                                                                        <span>{{one.employee_type__name}}</span>
+                                                                                        <h4>{{one.first_name + ' ' + one.last_name}}</h4> 
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group"> 
+                                                                                    <input type="number" class="form-control target-amount"
+                                                                                    [disabled]="one.already_created" [name]="'one'+indexOne"
+                                                                                        [(ngModel)]="one.amount"
+                                                                                        (blur)="amountChanged()"
+                                                                                        placeholder="Target Amount">
+                                                                                </div> 
+                                                                            </div>
+                                                                            <div *ngIf="indexOne === 0"
+                                                                                class="col-md-4 d-flex align-items-center">
+                                                                                <button class="btn btn-success loader-btn btn-lg" type="button"
+                                                                                    (click)="changeAmount(true)">Divide Equally
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul #firstPanel>
+                                                                            <li [class]="two.children.length > 0 ? 'nested' : ''"
+                                                                                *ngFor="let two of one.children; let indexTwo = index">
+                                                                                <i *ngIf="two.children.length > 0"
+                                                                                    class="indicator"
+                                                                                    (click)="toggleView(secondPanel, $event)"></i>
+                                                                                <div class="row"> 
+                                                                                    <div class="col-auto">
+                                                                                        <div class="form-group">
+                                                                                            <div class="tree-heading">
+                                                                                                <span>{{two.employee_type__name}}</span>
+                                                                                                <h4>{{two.first_name + ' ' + two.last_name}}</h4> 
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group"> 
+                                                                                            <input type="number"
+                                                                                                class="form-control target-amount"
+                                                                                                [disabled]="two.already_created"
+                                                                                                [(ngModel)]="two.amount"
+                                                                                                (blur)="testfunction(one)"
+                                                                                                [name]="'two'+indexTwo+one.id"
+                                                                                                placeholder="Target Amount">
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #secondPanel>
+                                                                                    <li [class]="three.children.length > 0 ? 'nested' : ''"
+                                                                                        *ngFor="let three of two.children;let indexThree = index">
+                                                                                        <i *ngIf="three.children.length > 0"
+                                                                                            class="indicator"
+                                                                                            (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                        <div class="row"> 
+                                                                                            <div class="col-auto">
+                                                                                                <div class="form-group">
+                                                                                                    <div class="tree-heading">
+                                                                                                        <span>{{three.employee_type__name}}</span>
+                                                                                                        <h4>{{three.first_name + ' ' + three.last_name}}</h4> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group"> 
+                                                                                                    <input type="number"
+                                                                                                        class="form-control target-amount"
+                                                                                                        [(ngModel)]="three.amount"
+                                                                                                        [disabled]="three.already_created"
+                                                                                                        (blur)="testfunction(two)"
+                                                                                                        [name]="'three'+indexThree+two.id"
+                                                                                                        placeholder="Target Amount">
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <ul #thirdPanel>
+                                                                                            <li
+                                                                                                *ngFor="let four of three.children;let indexFour = index"> 
+                                                                                                <div class="row"> 
+                                                                                                    <div class="col-auto">
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="tree-heading">
+                                                                                                                <span>{{four.employee_type__name}}</span>
+                                                                                                                <h4>{{four.first_name + ' ' + four.last_name}}</h4> 
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="form-group"> 
+                                                                                                            <input type="number"
+                                                                                                                class="form-control target-amount"
+                                                                                                                [(ngModel)]="four.amount"
+                                                                                                                [disabled]="four.already_created"
+                                                                                                                (blur)="testfunction(three)"
+                                                                                                                [name]="'four'+indexFour+three.id"
+                                                                                                                placeholder="Target Amount">
+                                                                                                        </div> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                        </ul>
+                                                    
+                                                                                    </li>
+                                                                                </ul>
+                                                    
+                                                                            </li>
+                                                                        </ul>
+                                                    
+                                                                    </li>
+                                                                </ul>
+                                                    
+                                                            </li>
+                                                        </ul>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 align-self-center">
+                                                    <div class="row my-4">
+                                                        <div class="col-md-12 text-center">
+                                                            <div class="pb-2 text-center mb-50">
+                                                                <h6>Assigned Amount</h6>
+                                                                <h1 class="text-purpal">
+                                                                    ${{targetAmount}}
+                                                                </h1>
+                                                            </div>
+                                                            <div class="pb-2 text-center">
+                                                                <h6>Remaining  Amount</h6>
+                                                                <h1 class="text-theme-green">
+                                                                    ${{amountLeft}}
+                                                                </h1>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> --> 
+                <!-- <button type="button" class="btn btn-success loader-btn btn-lg previous">
+                    <span>Previous</span>
+                </button>  -->
+                <button *ngIf="currentUserGrade >= 0 && currentUserGrade <= 3" (click)="previousTree(2)" class="btn btn-success loader-btn previous" [disabled]="loader || previousLoader" type="button">
+                    <span>
+                        Previous
+                        <span *ngIf="previousLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success loader-btn" [disabled]="loader || previousLoader" type="button" (click)="addTarget(true)">
+                    <span>
+                        Finish
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div> 
+
+<!-- view three -->
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                        <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                            <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)"
+                                    class="gray-color">User</a></li>
+                            <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Assign Target</h5>
+                            <div class="tab-content"> 
+                                <div class="row">
+                                    <div class="col-md-6 pl-5">
+                                        <div class="row version-flow">
+                                            <!-- <div class="col-md-6 version-flow__item">
+                                                <div class="form-group">
+
+                                                    <label >{{'Level ' + currentUserGrade}}</label>
+                                                    <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 d-flex align-items-center">
+                                                <a class="button float-right" href="javascript:void(0)" (click)="changeAmount(true)">Divide Equally </a>
+                                            </div> -->
+                                            <!-- <div class="col-md-12 nested" *ngFor="let row of treeData;let i = index">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label >{{'Level ' + row.grade + '.' + (i + 1)}}</label>
+                                                            <input type="text" class="form-control" readonly [value]="row.first_name + ' ' + row.last_name + ' ' + '('+row.employee_type__name+')'" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Target Amount</label>
+                                                            <input  type="number" class="form-control" name="amount1" [(ngModel)]="row.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <ul class="tree">
+                                                <li class="tree-first nested">
+                                                    <!-- <i class="indicator" (click)="toggleView(main, $event)"></i>
+                                                    <div class="row">
+                                                        <div [class]="currentUserGrade === 0 ? 'col-md-4' : 'col-md-8'">
+                                                            <div class="form-group">
+                                                                <label >{{'Level ' + currentUserGrade}}</label>
+                                                                <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4" *ngIf="currentUserGrade === 0">
+                                                            <div class="form-group">
+                                                                
+                                                                <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 d-flex align-items-center">
+                                                            <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                        </div>
+
+                                                    </div> -->
+                                                    <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                    <ul #main class="collapsed in">
+                                                        <li [class]="one.children.length > 0 ? 'nested' : ''"
+                                                            *ngFor="let one of treeData;let indexOne = index">
+                                                            <i *ngIf="one.children.length > 0" class="indicator"
+                                                                (click)="toggleView(firstPanel, $event)"></i>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label>{{'Level ' + one.grade + '.' + (indexOne + 1)}}</label>
+                                                                        <input type="text" class="form-control"
+                                                                            readonly
+                                                                            [value]="one.first_name + ' ' + one.last_name + ' ' + '('+one.employee_type__name+')'">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+
+                                                                        <input type="number" class="form-control"
+                                                                            readonly [name]="'one'+indexOne"
+                                                                            [(ngModel)]="one.amount"
+                                                                            (blur)="amountChanged()"
+                                                                            placeholder="Target Amount">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div *ngIf="indexOne === 0"
+                                                                    class="col-md-4 d-flex align-items-center">
+                                                                    <button class="button float-right" type="button"
+                                                                        (click)="changeAmount(true)">Divide Equally
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <ul #firstPanel>
+                                                                <li [class]="two.children.length > 0 ? 'nested' : ''"
+                                                                    *ngFor="let two of one.children; let indexTwo = index">
+                                                                    <i *ngIf="two.children.length > 0"
+                                                                        class="indicator"
+                                                                        (click)="toggleView(secondPanel, $event)"></i>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label>{{'Level ' + two.grade + '.' + (indexTwo + 1)}}</label>
+                                                                                <input type="text"
+                                                                                    class="form-control" disabled
+                                                                                    [value]="two.first_name + ' ' + two.last_name + ' ' + '('+two.employee_type__name+')'">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+
+                                                                                <input type="number"
+                                                                                    class="form-control"
+                                                                                    [(ngModel)]="two.amount"
+                                                                                    (blur)="testfunction(one)"
+                                                                                    [name]="'two'+indexTwo+one.id"
+                                                                                    placeholder="Target Amount">
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <ul #secondPanel>
+                                                                        <li [class]="three.children.length > 0 ? 'nested' : ''"
+                                                                            *ngFor="let three of two.children;let indexThree = index">
+                                                                            <i *ngIf="three.children.length > 0"
+                                                                                class="indicator"
+                                                                                (click)="toggleView(thirdPanel, $event)"></i>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="form-group">
+                                                                                        <label>{{'Level ' + three.grade + '.' + (indexThree + 1)}}</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            disabled
+                                                                                            [value]="three.first_name + ' ' + three.last_name + ' ' + '('+three.employee_type__name+')'">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="form-group">
+
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            [(ngModel)]="three.amount"
+                                                                                            (blur)="testfunction(two)"
+                                                                                            [name]="'three'+indexThree+two.id"
+                                                                                            placeholder="Target Amount">
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul #thirdPanel>
+                                                                                <li
+                                                                                    *ngFor="let four of three.children;let indexFour = index">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <div class="form-group">
+                                                                                                <label>{{'Level ' + four.grade + '.' + (indexFour + 1)}}</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    disabled
+                                                                                                    [value]="four.first_name + ' ' + four.last_name + ' ' + '('+four.employee_type__name+')'">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <div class="form-group">
+
+                                                                                                <input type="number"
+                                                                                                    class="form-control"
+                                                                                                    [(ngModel)]="four.amount"
+                                                                                                    (blur)="testfunction(three)"
+                                                                                                    [name]="'four'+indexFour+three.id"
+                                                                                                    placeholder="Target Amount">
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </li>
+                                                                    </ul>
+
+                                                                </li>
+                                                            </ul>
+
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4 ml-auto">
+                                            <div class="pb-2 text-left"><span
+                                                    class="gray-04-color">Date:</span><span class="gray-color">
+                                                    {{targetDate.startDate | date : 'MMM d'}} -
+                                                    {{targetDate.endDate | date : 'MMM d'}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Target
+                                                    Amount:</span><span class="gray-color"> ${{targetAmount}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4 ml-auto">
+                                            <p class="text-danger text-left">* For our system </p>
+                                            <p class="text-danger text-left">Level 5 = Team Member</p>
+                                        </div> -->
+                                        <div class="text-center pt-5">
+                                            <img src="/assets/images/assign.png" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-md-10">
+                                        <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target
+                                                Amount:</span><span class="gray-color"> ${{targetAmount}}</span>
+                                        </div>
+                                        <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target
+                                                Amount:</span><span class="gray-color"> ${{amountLeft}}</span></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="pull-right">
+                                            <button class="btn btn-success loader-btn" [disabled]="loader"
+                                                type="button" (click)="addTarget(true)">
+                                                <span>
+                                                    Finish
+                                                    <span *ngIf="loader" class="spinner-border float-right"
+                                                        role="status" aria-hidden="true"></span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #amount class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none p-0">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true"><i class="ti-close cursor-pointer"></i></span> 
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <ul class="mb-20 text-black" style="list-style-type: none;color: black;">
+                    <li class="font-16">
+                        <!-- The amount you have entered exceeds your target limit. Please check your target amount and try again. -->
+                        {{amountError}}
+
+                    </li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success loader-btn btn-lg">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;color: black;">
+                    <li class="font-16" *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success loader-btn btn-lg">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template> 

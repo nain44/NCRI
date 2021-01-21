@@ -1,0 +1,136 @@
+
+<div class="hk-pg-wrapper">
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a [routerLink]="['/client-dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Update Profile</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Summary</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Update Profile</h1> 
+        </div>
+    </div> 
+<section class="hk-sec-wrapper shadow-xl rounded-30">  
+    <h5 class="hk-sec-title hk-sec-title--all">Update preferences of your profile.</h5> 
+
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Update Profile</h6>
+                        </button>
+                        <div class="cg-role">
+                            <div class="w-100 mt-20 mb-70"> 
+                                <div class="row no-gutters">  
+                                    <div class="col-md-2">
+                                        <div class="file-view profile w-auto mb-4 mt-30">
+                                            <img class="img-fluid d-none" src="assets/images/upload-logo.png" (click)="fileAvatar.click()" alt="">  
+                                            <img class="img-fluid user" [src]="profileImage"  (click)="fileAvatar.click()" alt="" >  
+                                            
+                                            <!-- <img class="img-fluid user" [src]="profileImage" alt="">  
+                                            <img *ngIf="!imageLoader" class="img-fluid user-edit" (click)="file.click()" src="/assets/images/profile-edit.png" alt=""> 
+                                            <span *ngIf="imageLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                            
+                                             --> 
+                                             <input #fileAvatar class="d-none" type="file" (change)="onChange($event)" accept="image/x-png,image/gif,image/jpeg">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input type="text" [(ngModel)]="userDetails.first_name" class="form-control" placeholder="First Name" >
+                                                    <label for="">First Name*</label> 
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input type="text" [(ngModel)]="userDetails.last_name" class="form-control" placeholder="Last Name" >
+                                                    <label for="">Last Name*</label> 
+                                                </div> 
+                                            </div> 
+                                            <div class="w-100"></div>
+                                            <div class="col-12 mt-30 mb-20">
+                                                <p class="font-16 text-dark-80">
+                                                    You can not update below fields. Please <a href="javascript:void(0)" class="text-purpal">contact</a> your administration if any changes required.
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-label-group custom-calender"> 
+                                                    <input type="text" [(ngModel)]="userDetails.date_of_joining" placeholder="Datepicker"
+                                                        class="form-control" bsDatepicker disabled>
+                                                    <label for="">Date of Joining</label>
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input disabled type="text" [(ngModel)]="userDetails.email" class="form-control" placeholder="Last Name" >
+                                                    <label for="">Email</label> 
+                                                </div> 
+                                            </div> 
+                                            <div class="w-100"></div>
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input disabled type="text" [(ngModel)]="userDetails.username" class="form-control" placeholder="Username" >
+                                                    <label for="">Username</label> 
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input disabled type="text" [(ngModel)]="userDetails.cell_number" class="form-control" placeholder="Cell Number" >
+                                                    <label for="">Cell Number</label> 
+                                                </div> 
+                                            </div>  
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>   
+                        </div>
+                    </accordion-group> 
+                </accordion>
+            </div>
+        </div>
+        
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-30">  
+            <h6 *ngIf="responseText.length > 0 && responseText[0].list" class="hk-sec-title">{{responseText[0].list}}</h6>
+            <button type="button" (click)="updateProfile()" [disabled]="userDetails.first_name === '' || userDetails.last_name === ''"
+                [style.pointer-events]="(userDetails.first_name === '' || userDetails.last_name === '') ? 'none' : 'auto'" class="btn btn-success loader-btn btn-lg mr-3">
+                <span>
+                    Update Profile
+                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+</section>  
+</div>
+
+
+
+ 
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

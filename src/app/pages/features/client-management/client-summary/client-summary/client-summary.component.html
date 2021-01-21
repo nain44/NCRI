@@ -1,0 +1,683 @@
+<div class="hk-sec-wrapper">
+    <div class="top">
+        <span class="badge badge-blue">{{demographic?.client_number}}</span>
+        <span class="lead light text-muted ml-15">{{demographic?.short_name}}</span>
+        <div class="row">
+            <div class="col-9">
+                <div class="row ">
+                    <div class="col-6">
+                        <h2>{{demographic?.company_name}}</h2>
+                        <div class="lead text-muted">
+                            {{demographic?.business_type__name}} <span *ngIf="demographic?.is_master_client">
+                                - Master
+                                Client
+                            </span>
+                        </div>
+
+                        <div class="mt-30">
+                            <div class="d-flex align-items-center text-dark-80 font-16 mb-5">
+                                <img src="assets/images/place.png" class="text-secondary mr-10" alt="">
+                                <!-- 1015 Saint-Catherine St W, Montreal, Quebec H3B 1H3, Canada -->
+                                <span>{{demographic?.address_line_1}} {{demographic?.address_line_2}}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-dark-80 font-16 mb-5" data-toggle="tooltip"
+                                data-placement="top" title="Phone">
+                                <img src="assets/images/phone.png" class="text-secondary mr-10" alt="">
+                                <span>{{demographic?.phone_number}}</span>
+                            </div>
+                            <!-- <div class="d-flex align-items-center text-dark-80 font-16 mb-5" data-toggle="tooltip"
+                                data-placement="top" title="Cell">
+                                <img src="assets/images/phone.png" class="text-secondary mr-10" alt="">
+                                <span>{{demographic?.cell_number}}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-dark-80 font-16 mb-5" data-toggle="tooltip"
+                                data-placement="top" title="Fax">
+                                <img src="assets/images/phone.png" class="text-secondary mr-10" alt="">
+                                <span>{{demographic?.fax}}</span>
+                            </div> -->
+                            <div class="d-flex align-items-center text-dark-80 font-16 mb-5">
+                                <img src="assets/images/email.png" class="text-secondary mr-10" alt="">
+                                <span>{{demographic?.email_address}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="text-secondary">Product</div>
+                                <div class="text-dark-80 text-medium">{{demographic?.product}}</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="text-secondary">Tier</div>
+                                <div class="text-dark-80 text-medium">{{demographic?.tier}}</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="text-secondary">Region/Portfolio</div>
+                                <div class="text-dark-80 text-medium">{{demographic?.region_or_portfolio}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel mt-30 info-widgets">
+                    <div class="panel-body bg-light rounded-10 mb-20">
+                        <div class="row no-gutters">
+                            <div class="col border-right pa-30">
+                                <h6 class="hk-sec-title text-uppercase">Generic Information</h6>
+                                <div class="row mb-5">
+                                    <div class="col text-secondary">Last Updated at</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.updated_at | date: 'short'}}
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col text-secondary">Client Industry</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.client_industry__name}}
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col text-secondary">Corresponding Language</div>
+                                    <div class="col text-dark-80 text-medium">
+                                        {{demographic?.correspondence_language__name}}
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col text-secondary">Start Date</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.start_date}}</div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col text-secondary">Client Remittance Type</div>
+                                    <div class="col text-dark-80 text-medium">
+                                        {{demographic?.client_remittance_type__name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col pl-30 pa-30">
+                                <h6 class="hk-sec-title text-uppercase">Financial Settings</h6>
+                                <div class="row mb-5">
+                                    <div class="col-md-8 text-secondary">Hold Debtor Cheque for </div>
+                                    <div class="col text-dark-80 text-medium">
+                                        {{demographic?.hold_debtor_cheques_for_days_num}} Days</div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-8 text-secondary">Default Settlement</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.default_settlement}}%</div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-8 text-secondary">Return Merchandise Rate</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.return_merchandise_rate}}%
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-8 text-secondary">Interest Rate to Charge</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.interest_rate_to_change}}%
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-8 text-secondary">Interest Rate Cycle Type</div>
+                                    <div class="col text-dark-80 text-medium">{{demographic?.interest_rate_cycle_type__name}}
+                                        <!-- <a href="javascript:void(0)" class="theme-green float-right font-14">More Financial Details</a> -->
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-30 mb-40">
+                        <a href="javascript:void(0);" class="theme-green font-16"
+                            [routerLink]="['/client-management/' + token + '/client-details']"
+                            routerLinkActive="router-link-active">View More about Client</a>
+
+
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <accordion [isAnimated]="true" class="accord-section">
+                                <accordion-group [isOpen]="true">
+                                    <button
+                                        class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                        accordion-heading type="button"> 
+                                        <h6 class="accor-name w-100 text-left hk-sec-title">Transactions</h6>
+                                    </button>
+                                    <div class="cg-role">   
+                                        <!-- <div class="float-right small">
+                                            <span class="text-secondary">Date Range: </span><span class="text-dark-80 text-medium">02
+                                                Jan 20 - 21 Feb 20</span> <span class="icon dripicons-calendar text-secondary"></span>
+                                        </div> -->
+                                        <div class="row comment-filter justify-content-end"> 
+                                            <div class="col-auto d-flex align-items-end">
+                                                <div class="d-flex align-items-end justify-content-end">
+                                                    <span class="label">Date Range</span>
+                                                    <div class="form-label-group custom-calender date-range mb-0">
+                                                        <img src="assets/images/calendar.png" class="img-fluid w-10">
+                                                        <input type="text" placeholder="Daterangepicker" class="form-control p-0 h-auto"
+                                                            bsDaterangepicker (bsValueChange)="filterByDate($event)"
+                                                            [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="table-wrap table-responsive mnh-200p">
+                                            <table class="table table-striped theme-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Description</th>
+                                                        <th>Amount</th>
+                                                        <th>Batch/Bank</th>
+                                                        <th>User</th>
+                                                        <th>Mode</th>
+                                                        <th>Trx. id</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let transaction of transactionList">
+                                                        <td>{{transaction?.updated_at}}</td>
+                                                        <td>{{transaction?.description}}</td>
+                                                        <td>${{transaction?.amount}}</td>
+                                                        <td>{{transaction?.batch_or_bank}}</td>
+                                                        <td>{{transaction?.user__first_name}} {{transaction?.user__last_name}}</td>
+                                                        <td>{{transaction?.transaction_mode}}</td>
+                                                        <td>{{transaction?.transaction_id}}</td>
+                                                    </tr>
+                                                    <tr *ngIf="transactionList.length === 0" class="text-center">
+                                                        <td colspan="7">No Record Available</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-link"
+                                                [routerLink]="['/client-management/' + token + '/transactions']"
+                                                routerLinkActive="router-link-active">View All Transactions</button>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Download
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        (click)="downloadClientDemographicTransactionsList('csv')">CSV</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        (click)="downloadClientDemographicTransactionsList('xlsx')">XLSX</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </accordion-group> 
+                            </accordion>
+                            <accordion [isAnimated]="true" class="accord-section">
+                                <accordion-group [isOpen]="true">
+                                    <button
+                                        class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                        accordion-heading type="button"> 
+                                        <h6 class="accor-name w-100 text-left hk-sec-title">COMMENTS</h6>
+                                    </button>
+                                    <div class="cg-role"> 
+                                        <div class="row comment-filter justify-content-between">
+                                            <div class="col-auto d-flex align-items-end">
+                                                <div class="d-flex align-items-end">
+                                                    <span class="label">Show Comments of</span>
+                                                    <div class="form-label-group w-auto mb-0">
+                                                        <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                            [(ngModel)]="commentsOf" name="Business Type" (change)=onSelectType()>
+                                                            <option value="all">All</option>
+                                                            <option *ngFor="let type of employeeTypeList" [value]="type.user__employee_type_id">{{type.user__employee_type__name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto d-flex align-items-end">
+                                                <div class="d-flex align-items-end justify-content-end">
+                                                    <span class="label">Date Range</span>
+                                                    <div class="form-label-group custom-calender date-range mb-0">
+                                                        <img src="assets/images/calendar.png" class="img-fluid w-10">
+                                                        <input type="text" placeholder="Daterangepicker" class="form-control"
+                                                            bsDaterangepicker (bsValueChange)="commentFilterByDate($event)"
+                                                            [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row comment-filter justify-content-between mt-0">
+                                            <div class="col-12 col-md-7 d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="label">Users</span>
+                                                    <div class="form-label-group w-auto mb-0">
+                                                        <!-- (onAdd)=onUserTagAdd($event) (onRemove)=onUserTagRemove($event) -->
+                                                        <tag-input [(ngModel)]="selectedUsers" [maxItems]='5' [onlyFromAutocomplete]="true"
+                                                        (onBlur)=onUserTagAdd($event)
+                                                            [disable]="commentsOf === 'all'">
+                                                            <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="items"
+                                                                [identifyBy]="'user_id'" [displayBy]="'user__first_name'">
+                                                            </tag-input-dropdown>
+                                                        </tag-input>
+                                                        <!-- <tag-input [(ngModel)]='items' [ngModelOptions]="{standalone: true}"></tag-input> -->
+                                                        <!-- <ng-select2 [(ngModel)]="items" [data]="items"
+                                                                                        [placeholder]="'Please select a fruit...'">
+                                                                                    </ng-select2> -->
+                                                        <!-- <input [(ngModel)]="selectedUser" [typeahead]="items" [isAnimated]="true"
+                                                                                    class="form-control" [typeaheadMinLength]="0" name="filterUser"
+                                                                                    typeaheadOptionField="first_name"> -->
+                                                        <!-- <form [formGroup]="filterForm">
+                                                                                        <input formControlName="selectedUsers"
+                                                                                               [typeahead]="items"
+                                                                                               [typeaheadOptionsLimit]="7"
+                                                                                               [typeaheadMinLength]="0"
+                                                                                               placeholder="Typeahead inside a form"
+                                                                                               class="form-control">
+                                                                                      </form> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5 d-flex align-items-end justify-content-end">
+                                                <!-- <div class="d-flex align-items-end justify-content-end">
+                                                    <div class="form-label-group w-auto mb-0 mr-20">
+                                                        <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                            name="Business Type">
+                                                            <option>Filter Option One</option>
+                                                            <option>10</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-label-group w-auto mb-0 mr-20">
+                                                        <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                            name="Business Type">
+                                                            <option>Filter Option Two</option>
+                                                            <option>10</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-label-group w-auto mb-0">
+                                                        <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                            name="Business Type">
+                                                            <option>Filter Option Three</option>
+                                                            <option>10</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive mnh-200p">
+                                        <table class="table comment-table comment-table--management">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Comments</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Time</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- add class active in tr in case of selected -->
+                                                <tr *ngFor="let comment of commentList">
+                                                    <td>
+                                                        <img (click)="toggleClientDemographicCommentBookmark(comment.id)"
+                                                            *ngIf="!comment.is_bookmarked" src="assets/images/star.svg"
+                                                            class="img-fluid cursor-pointer">
+                                                        <img (click)="toggleClientDemographicCommentBookmark(comment.id)"
+                                                            *ngIf="comment.is_bookmarked" src="assets/images/star-filled.svg"
+                                                            class="img-fluid cursor-pointer">
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="user-img-name text-uppercase">
+                                                                {{comment.user__first_name.substring(0, 1) + comment.user__last_name.substring(0, 1)}}
+                                                            </div>
+                                                            <!-- <img [src]="comment.user__avatar_url" class="img-fluid user-img mr-10"
+                                                                *ngIf="comment.user__avatar_url"> -->
+                                                                {{comment.user__first_name + ' ' + comment.user__last_name}}
+                                                        </div>
+                                                    </td>
+                                                    <td>{{comment.comment_text}}</td>
+                                                    <td>{{comment.updated_at | date: 'mediumDate'}}</td>
+                                                    <td>{{comment.updated_at | date: 'shortTime'}}</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center cursor-pointer" *ngIf="comment.document_url">
+                                                            <a [href]="comment.document_url" target="_blank">
+                                                                <img src="assets/images/attachments.png"
+                                                                    class="img-fluid mr-10">
+                                                            </a> JPG
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-link"
+                                                [routerLink]="['/client-management/' + token + '/comments']"
+                                                routerLinkActive="router-link-active">View All Comments</button>
+                                            <button type="button" class="btn btn-success" (click)="openModal(addComments)">Add New
+                                                Comment</button>
+                                        </div>  
+                                    </div>
+                                </accordion-group> 
+                            </accordion>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-12">
+                        <accordion [isAnimated]="true" class="accord-section accord-section--gray"  *ngIf="informationList">
+                            <accordion-group [isOpen]="true">
+                                <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                    accordion-heading type="button"> 
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">Primary Contact</h6>
+                                </button> 
+                                <div class="cg-role">   
+                                    <div class="panel info-widgets mt-20">
+                                        <div class="panel-body">
+                                            <!--   -->
+                                            <ng-container>
+                                                <!-- *ngFor="let info of informationList" --> 
+                                                <img src="assets/images/edit.png" (click)="openModalEditWidget(primaryContact)"
+                                class="edit-widget cursor-pointer" alt="">
+                                                <h5 class="text-medium">{{informationList?.full_name}}</h5>
+                                                <div class="text-muted light font-16">{{informationList?.contact_title}}</div>
+                                                <div class="mt-10"></div>
+                                                <div class="text-dark-80 d-flex align-items-center">
+                                                    <img src="assets/images/phone.png" class="text-secondary mr-10" alt="">
+                                                    <span class="font-16">{{informationList?.phone_number}}</span>
+                                                </div>
+                                                <div class="text-dark-80 d-flex align-items-center">
+                                                    <img src="assets/images/email.png" class="text-secondary mr-10" alt="">
+                                                    <span class="font-16">{{informationList?.email_address}}</span>
+                                                </div>
+                                                <div class="mt-30"></div>
+                    
+                                                <div class="text-right">
+                                                    <a href="javascript:void(0)" (click)="openModalEditWidget(primaryContact)"
+                                                        class="theme-green">View More Contacts</a>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </accordion-group> 
+                        </accordion>
+                        <accordion [isAnimated]="true" class="accord-section accord-section--gray">
+                            <accordion-group [isOpen]="true">
+                                <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                    accordion-heading type="button"> 
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">Client System Information</h6>
+                                </button>
+                                <div class="cg-role"> 
+                                    <div class="panel info-widgets mt-20">
+                                        <div class="panel-body"> 
+                                            <div class="row mb-5">
+                                                <div class="col text-secondary">Home Branch</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.home_branch__name}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Client Type</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.client_type__name}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Currency</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.currency_code}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Collector</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{(demographic?.collector__first_name ? demographic?.collector__first_name : '')  + " " + (demographic?.collector__last_name ? demographic?.collector__last_name : '')}}
+                                                </div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Client Status</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.client_status__name}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Client Group</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.client_group__name}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Master</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.master_client__company_name}}</div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </accordion-group> 
+                        </accordion>
+                        <accordion [isAnimated]="true" class="accord-section accord-section--gray">
+                            <accordion-group [isOpen]="true">
+                                <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                    accordion-heading type="button"> 
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">Custom Fields</h6>
+                                </button>
+                                <div class="cg-role">   
+                                    <div class="panel info-widgets mt-20">
+                                        <div class="panel-body rounded-10 mb-10"> 
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">ACE No.</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.ace_number}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">PSC No.</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.pcs_number}}</div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Date for Custom Field</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.date_for_custom_field}}
+                                                </div>
+                                            </div>
+                                            <div class="row mb-5">
+                                                <div class="col-7 text-secondary">Select Custom Field</div>
+                                                <div class="col text-right text-dark-80 text-medium font-semibold">
+                                                    {{demographic?.custom_field__field_label}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </accordion-group> 
+                        </accordion>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+<!-- primary contact start -->
+<ng-template #primaryContact class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Update Contact</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                <div class="row mb-30">
+
+                    <div class="col-4" *ngFor="let form of primaryContactForm.controls.contact_information_list['controls']; 
+                        let first = first; let last = last; let i = index;" [style.display]="!form.controls.is_deleted.value ? 'block' : 'none'">
+                        <form [formGroup]="form" >
+                            <div class="col-12 p-0">
+                                <div class="custom-control custom-checkbox mb-20">
+                                    <input type="checkbox" class="custom-control-input" (change)="selectIsPrimary(i)"
+                                        formControlName="is_primary_contact" [id]="i">
+                                    <label class="custom-control-label" [for]="i">Primary Contact</label>
+                                </div>
+                                <i class="fa fa-times-circle text-danger cursor-pointer pi-del" (click)="deletePrimaryContact(i)"></i>
+                            </div> 
+                            <div class="form-label-group">
+                                <input type="text" class="form-control" placeholder="Short Name"
+                                    formControlName="contact_title">
+                                <label for="">Contact Title *</label>
+                                <div class="w-100" *ngIf="form.controls.contact_title.status=='INVALID'">
+                                    <div *ngIf="form.controls.contact_title.errors.required && form.controls.contact_title.touched"
+                                        class="invalid-feedback"
+                                        [style.display]="form.controls.contact_title.status=='INVALID' ? 'block' : 'none'">
+                                        Required</div>
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" class="form-control" placeholder="Short Name"
+                                    formControlName="full_name">
+                                <label for="">Full Name *</label>
+                                <div class="w-100" *ngIf="form.controls.full_name.status=='INVALID'">
+                                    <div *ngIf="form.controls.full_name.errors.required && form.controls.full_name.touched"
+                                        class="invalid-feedback"
+                                        [style.display]="form.controls.full_name.status=='INVALID' ? 'block' : 'none'">
+                                        Required</div>
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" class="form-control" placeholder="Short Name"
+                                    formControlName="email_address">
+                                <label for="">Email Address *</label>
+                                <div class="w-100" *ngIf="form.controls.email_address.status=='INVALID'">
+                                    <div *ngIf="form.controls.email_address.errors.required && form.controls.email_address.touched"
+                                        class="invalid-feedback"
+                                        [style.display]="form.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                        Required</div>
+                                    <div *ngIf="form.controls.email_address.errors.email" class="invalid-feedback"
+                                        [style.display]="form.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                        Enter a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                <select class="form-control selectDropdown" name="Business Type"
+                                    formControlName="country_code">
+                                    <option *ngFor="let data of CountryCodeDropdownList" [value]="data.code">
+                                        ({{data.dial_code}}) {{data.name}}
+                                    </option>
+                                </select>
+                                <label class="selectHolder" for="">Country Code *</label>
+                                <div class="w-100" *ngIf="form.controls.country_code.status=='INVALID'">
+                                    <div *ngIf="form.controls.country_code.errors.required && form.controls.country_code.touched"
+                                        class="invalid-feedback"
+                                        [style.display]="form.controls.country_code.status=='INVALID' ? 'block' : 'none'">
+                                        Required</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-label-group mb-0">
+                                        <input type="text" class="form-control" placeholder="Short Name"
+                                            formControlName="phone_number">
+                                        <label for="">Cell/Phone No. *</label>
+                                        <div class="w-100" *ngIf="form.controls.phone_number.status=='INVALID'">
+                                            <div *ngIf="form.controls.phone_number.errors.required && form.controls.phone_number.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="form.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                            <div *ngIf="form.controls.phone_number.errors.pattern"
+                                                class="invalid-feedback"
+                                                [style.display]="form.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                Cell/Phone no must contain 10 digits</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group mb-0">
+                                        <input type="text" class="form-control input-label initail-label"
+                                            placeholder="Short Name" formControlName="phone_number_ext">
+                                        <label for="">Ext.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-md-4">
+                        <button (click)="addContactForm()" class="more-contact">Add Another Contact Information</button>
+                    </div>
+                </div>
+                <div class="modal-footer pb-0 pr-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous" [disabled]="editLoader"
+                            data-dismiss="modal" (click)="modalRef.hide()">Close</button>
+                        <button type="button" (click)="updatePrimaryContact(primaryContactForm.value)"
+                            [disabled]="!primaryContactForm.valid || editLoader" class="btn btn-success btn-lg loader-btn"
+                            data-dismiss="modal">
+                            Update Primary Contact
+                            <span *ngIf="editLoader" class="spinner-border float-right" role="status"
+                                aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- primary contact end -->
+
+<!-- add comment -->
+<ng-template #addComments class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Add Comment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mb-30">
+                    <form [formGroup]="addCommentForm">
+                        <div class="form-label-group mb-40">
+                            <input formControlName="comment_text" type="text" class="form-control"
+                                placeholder="Short Name" required>
+                            <label for="">Type your comment here...</label>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <input type="file" class="d-none" #fileUpload (change)=uploadDocument(fileUpload) accept=".csv,.xlsx,.pdf">
+                                <button type="button" class="btn btn-success btn-border loader-btn btn-lg" (click)="fileUpload.click()"
+                                    [disabled]="fileLoader">
+                                    <span>
+                                        Attach Documents
+                                        <span *ngIf="fileLoader" class="spinner-border float-right" role="status"
+                                            aria-hidden="true"></span>
+                                    </span>
+                                </button> 
+                            </div>
+                            <div class="col-md-auto">
+                                <span class="text-light-50 small font-12"><em>Maximum size should be 2MB.</em></span>
+                            </div>
+                            <div class="col-12" *ngIf="fileUploadError">
+                                <div>
+                                    <span class="small text-danger">{{fileErrorText}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-auto" *ngIf="addCommentForm.value.document_url">
+                                <span class="text-light-50 small">File uploaded</span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-default btn-lg previous" data-dismiss="modal"
+                        (click)="closeModal()">Cancel</button>
+                    <button type="button" class="btn btn-success btn-lg"
+                        [disabled]="!addCommentForm.valid || addCommentLoader"
+                        (click)="AddClientDemographicComment()">Save
+                        Comment
+                        <span *ngIf="addCommentLoader" class="spinner-border float-right" role="status"
+                            aria-hidden="true"></span></button>
+                    <!-- (click)="addComment()" -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- add comment -->

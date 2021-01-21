@@ -1,0 +1,247 @@
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li [routerLink]="['/user']" class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User and Permission</a></li>
+                        <!-- <li [routerLink]="['/role']" class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Roles and Permission</a></li> -->
+                        <li class="breadcrumb-item active gray-04-color">Employee Title-Role Mapping</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body mh-77">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="card-title mb-4">Employee Title-Role Mapping</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 p-0">
+                                    <div class="table-responsive table-responsive mnh-200p">
+                                        <table class="table center-aligned-table mapping-table user-roles">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee Title</th>
+                                                    <th>Department</th>
+                                                    <th class="w--50"></th>
+                                                    <th>User Roles</th>
+                                                    <!-- <th class="w-10">Action</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="!requestLoader" [style.pointer-events]="blockUI === true ? 'none' : 'all'">
+                                                    <tr *ngFor="let role of employeeTypeList" class="text-center">
+                                                        <td>
+                                                            <div class="form-group mb-0">
+                                                                <input type="text" class="form-control" disabled placeholder="Employee Type" [(ngModel)]="role.name" >
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group form-group d-flex align-items-center mb-0">
+                                                                <span class="wrapper-select w-100">
+                                                                    <select [(ngModel)]="role.selectedDepartment" (change)="addRole(role)" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Management">
+                                                                        <option *ngFor="let dep of departmentList" [value]="dep.id">{{dep.name}}</option>
+                                                                    </select>
+                                                                </span>
+                                                                <!-- <label class="gray-color ml-5 mt-2"><i class="ti-angle-double-right gray-04-color"></i></label> -->
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <img src="assets/images/arrows.png" alt="">
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group form-group mb-0" >
+                                                                 <!-- <span class="wrapper-select">
+                                                                    <select type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Auditor, Operations Director, Network Engineer">
+                                                                        <option>Auditor</option>
+                                                                        <option>Operations Director</option>
+
+                                                                    </select>
+
+                                                                </span> -->
+                                                                <ngx-bootstrap-multiselect (ngModelChange)="addRole(role)" [options]="rolesList" [(ngModel)]="role.selectedRoles" class="multi-select" [texts]="myTexts" [settings]="mySettings" ></ngx-bootstrap-multiselect>
+                                                            </div>
+                                                        </td>
+                                                        <!-- <td class="text-left">
+                                                            <button type="button" class="button w-auto" (click)="addRole(role)">
+                                                                <span>
+                                                                    Save
+                                                                    <span *ngIf="role.loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                                </span>
+                                                            </button>
+                                                        </td> -->
+                                                    </tr>
+
+                                                    <tr class="text-center" *ngIf="employeeTypeList.length === 0">
+                                                        <td colspan="3">No Record Available</td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="requestLoader" class="d-flex justify-content-center">
+                                        <div class="spinner-border theme-color" role="status">
+                                          <span class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-4">
+                                    <hr class="mb-20">
+                                    <div class="pull-right">
+                                        <a href="javascript:void(0)" [routerLink]="['/role']" class="button w-130">Done</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- role mapping -->
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>  
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/role']">Roles</a></li>
+                <li class="breadcrumb-item active">Title Role Mapping</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Title Role Mapping</h1> 
+        </div>
+    </div>  
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about Title Role Mapping </h5>
+        <accordion [isAnimated]="true" class="accord-section">
+            <accordion-group [isOpen]="true">
+                <button
+                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                    accordion-heading type="button"> 
+                    <h6 class="accor-name w-100 text-left hk-sec-title">EMPLOYEE TITLE ROLE MAPPING</h6>
+                </button>
+                <div class="cg-role">    
+                    <div class="w-100 mt-20"> 
+                        <div class="table-wrap"> 
+                            <div>
+                                <div class="table-responsive mnh-200p">
+                            <table *ngIf="!requestLoader" [style.pointer-events]="blockUI === true ? 'none' : 'all'"
+                             id="datable_1" class="table theme-table role-map-table w-100 display pb-30">
+                                <thead>
+                                    <tr> 
+                                        <th>EMPLOYEE TITLE</th>
+                                        <th>DEPARTMENTS</th> 
+                                        <th>USER ROLES</th> 
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                                    <tr *ngFor="let employee of employeeTypeList"> 
+                                        <td>{{employee.name}}</td>
+                                        <td>
+                                            <!-- <ng-select2 [data]="exampleData"></ng-select2> -->
+                                            <div class="form-label-group"> 
+                                                <select class="form-control selectDropdown" 
+                                                (change)="addRole(employee)" [(ngModel)]="employee.selectedDepartment">
+                                                    <option *ngFor="let department of departmentList" 
+                                                    [value]='department.id'>
+                                                        {{department.name}}
+                                                    </option>
+                                                </select> 
+                                                <label class="selectHolder" for="">Select Department</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-label-group">
+                                                <!-- <select class="form-control selectDropdown">
+                                                    <option *ngFor="let role of rolesList" [value]='role.id'>
+                                                        {{role.name}}
+                                                      </option>
+                                                </select>  -->
+                                                <ngx-bootstrap-multiselect (ngModelChange)="addRole(employee)" 
+                                                [options]="rolesList" [(ngModel)]="employee.selectedRoles" 
+                                                class="multi-select" [texts]="myTexts" [settings]="mySettings" >
+                                                </ngx-bootstrap-multiselect>
+                                                <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                            </div>
+                                        </td>    
+                                    </tr> 
+                                </tbody>  
+                                <tbody *ngIf="false">
+                                    <tr style="text-align: center;">
+                                        <td colspan="3">No Record Found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                                </div>
+                            <div *ngIf="requestLoader" class="d-flex justify-content-center">
+                                <div class="spinner-border theme-color" role="status">
+                                  <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            </div> 
+                            <div class="col-md-12 mt-4">
+                                <hr class="mb-20">
+                                <div class="pull-right">
+                                    <a href="javascript:void(0)" [routerLink]="['/role']" class="button btn btn-success w-130">Save Changes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group> 
+        </accordion>
+        
+    </section> 
+</div> 
+<!-- role mapping end -->
+
+<!-- <ng-template #errorModal>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Alert</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <ul style="list-style-type: none;">
+          <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="button" (click)="modalRef.hide()">Close</button>
+            </div>
+        </div>
+    </div>
+  </ng-template> -->
+
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

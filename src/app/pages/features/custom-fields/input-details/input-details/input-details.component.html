@@ -1,0 +1,154 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/custom-fields']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Add Custom Field</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add New Field</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please enter details of input text field.</h5>
+
+
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button">
+                            <h6 class="accor-name w-100 text-left hk-sec-title">FIELD TYPE DETAILS</h6>
+                        </button>
+                        <form [formGroup]="store.customFieldForm">
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-40">
+                                        <div class="col-4">
+                                            <div class="col-md-12 p-0">
+                                                <div class="form-label-group">
+                                                    <input type="text" class="form-control" id="formGroupExampleInput"
+                                                        formControlName="field_label" placeholder="Input Text Label">
+                                                    <label for="">Input Text Label</label>
+                                                    <div class="w-100"
+                                                        *ngIf="store.customFieldForm.controls.field_label.status=='INVALID'">
+                                                        <div *ngIf="store.customFieldForm.controls.field_label.errors.required && store.customFieldForm.controls.field_label.touched"
+                                                            class="invalid-feedback"
+                                                            [style.display]="store.customFieldForm.controls.field_label.status=='INVALID' ? 'block' : 'none'">
+                                                            Please provide input label.</div>
+                                                    </div>
+                                                    <!-- <div [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback"
+                                                            style="display: block;">{{gradeAvailable}}</div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 p-0">
+                                                <div class="form-label-group">
+                                                    <input formControlName="description" type="text"
+                                                        class="form-control" id="description" placeholder="Description">
+                                                    <label for="description">Description</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 p-0">
+                                                <div class="form-label-group">
+                                                    <input type="text" formControlName="character_limit"
+                                                        class="form-control" id="character_limit"
+                                                        placeholder="Number of Characters (Optional)">
+                                                    <label for="character_limit">Number of Characters (Optional)</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 p-0">
+                                                <div class="form-label-group">
+                                                    <input [type]="store.customFieldForm.value.field_type === 'N' ? 'number' : 'text'" formControlName="default_value"
+                                                        class="form-control" id="default_value"
+                                                        placeholder="Default Value (Optional)" >
+                                                    <label for="default_value">Default Value (Optional)</label>
+                                                    
+                                                    <div class="w-100"
+                                                        *ngIf="store.customFieldForm.controls.default_value.status=='INVALID'">
+                                                        <div *ngIf="store.customFieldForm.controls.default_value.touched"
+                                                            class="invalid-feedback"
+                                                            [style.display]="store.customFieldForm.controls.default_value.status=='INVALID' ? 'block' : 'none'">
+                                                            Please provide valid default value.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="col-md-12 p-0">
+                                                <div class="form-label-group m-0">
+                                                    <div class="d-flex custom-fields-type-item align-items-center">
+                                                        <div class="item-field w-100">
+                                                            <div class="form-label-group m-0"> 
+                                                                <ng-select2 class="labelDown" [class.hasValue]="store?.customFieldForm?.controls?.field_type?.value !== '' && store?.customFieldForm?.controls?.field_type?.value !== null" [data]="exampleData" [options]="options"
+                                                                    (valueChanged)="valueChanged($event)"
+                                                                    formControlName="field_type"></ng-select2>
+                                                                    <label class="selectHolder">Input Type</label>
+                                                                    <!-- (valueChanged)="valueChanged($event)" --> 
+                                                                </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="col-md-12 set-commssion p-0">
+                                                <h6><b>Preview</b></h6>
+                                                <div class="form-label-group m-0">
+                                                    <input type="text" class="form-control bg-transparent preview-field"
+                                                        id="preview" placeholder="Input Text Label" disabled>
+                                                    <label class="pt-1" for="preview">{{
+                                                        store.customFieldForm.controls.field_label.value ?
+                                                        store.customFieldForm.controls.field_label.value : ""
+                                                    }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 mb-20 mt-20">
+                                            <div class="custom-control custom-checkbox">
+                                                <input formControlName="is_mandatory" type="checkbox"
+                                                    class="custom-control-input" id="Mandatory">
+                                                <label class="custom-control-label font-semi-bold"
+                                                    for="Mandatory">Mandatory Input Field</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-20 mt-20">
+                                            <div class="custom-control custom-checkbox">
+                                                <input formControlName="is_searchable" type="checkbox"
+                                                    class="custom-control-input" id="is_searchable">
+                                                <label class="custom-control-label font-semi-bold"
+                                                    for="is_searchable">Searchable Input Field</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-40">
+            <button type="button" [routerLink]="['/custom-fields']"
+                class="btn btn-success btn-lg previous border-0">Cancel</button>
+            <!-- <button [routerLink]="['/custom-fields/select-type']" type="button"
+                class="btn btn-success btn-lg previous"  [routerLink]="['/custom-fields/input-details']">Back</button> -->
+            <button [disabled]="!store.customFieldForm.valid" [routerLink]="['/custom-fields/assign-input-details']"
+                type="button" class="btn btn-success btn-lg ">Next</button>
+        </div>
+
+
+    </section>
+</div>

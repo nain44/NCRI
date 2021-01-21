@@ -1,0 +1,214 @@
+<div class="hk-pg-wrapper">
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a [routerLink]="['/user']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Account Preferences</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Summary</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Account Preferences</h1> 
+        </div>
+    </div> 
+<section class="hk-sec-wrapper shadow-xl rounded-30">  
+    <h5 class="hk-sec-title hk-sec-title--all">Update preferences of your account.</h5> 
+
+    <div >
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">PREFERENCES</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="w-100 mt-20 mb-70"> 
+                                <div class="row no-gutters">   
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-12 mt-30 mb-20">
+                                                <p class="font-16 text-dark-80">
+                                                    <span class="font-semi-bold">Language & Region</span>
+                                                    <span class="text-light-50 font-13 d-block">
+                                                        Change to your language and time zone will be reflected across Confluence, Jira and<br>
+                    Directory. Update your language and time zone for other products from your Product Settings
+                                                    </span>
+                                                </p>
+                                            </div>  
+                                            <div class="w-100"></div>
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <select class="form-control selectDropdown ng-dirty"
+                                                    [(ngModel)]="language_id" name="Business Type">
+                                                         <option *ngFor="let language of languageList" 
+                                                         [value]="language.id">{{language.name}}</option>
+                                                    </select>
+                                                    <label class="selectHolder" for="">Language</label> 
+                                                </div>
+                                            </div> 
+                                            <div class="w-100"></div>
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <select class="form-control selectDropdown ng-dirty" [(ngModel)]="date_format" name="Business Type">
+                                                         <option>MM - DD - YYYY</option>
+                                                    </select>
+                                                    <label class="selectHolder" for="">Date Format</label> 
+                                                </div>
+                                            </div> 
+                                            <div class="w-100"></div>
+                                            <div class="col-md-6"> 
+                                                <div class="custom-control custom-checkbox mb-20 mt-30">
+                                                    <input type="checkbox" class="custom-control-input" [(ngModel)]="scheduled_holidays" id="2fact">
+                                                    <label class="custom-control-label two-factor" for="2fact">
+                                                        <b>Scheduled Holidays</b>
+                                                        <span class="d-block text-light-50 font-14">Add your duration of holidays.</span>
+                                                    </label>
+                                                </div>
+                                            </div> 
+                                            <div class="w-100"></div> 
+                                            <div *ngIf="scheduled_holidays" class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-label-group custom-calender">
+                                                            <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                            <img src="assets/images/calendar.png" class="img-fluid">
+                                                            <input type="text" [(ngModel)]="start_date" placeholder="Datepicker"
+                                                                class="form-control" bsDatepicker>
+                                                            <label for="">Start Date</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group custom-calender">
+                                                            <img src="assets/images/calendar.png" class="img-fluid">
+                                                            <input type="text" [(ngModel)]="end_date" placeholder="Datepicker"
+                                                                class="form-control" bsDatepicker>
+                                                            <label for="">End Date</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+            </div>
+        </div>
+        
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-30">  
+            <button type="button" class="btn btn-success btn-lg loader-btn" [disabled]="loader" (click)="UpdateAccountPreferences()">
+                <span>
+                    Update Preferences 
+                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+</section>  
+</div>
+<div class="snack-bar" *ngIf="global.customFieldAddTeaser">
+    <i class="fa fa-close"></i>
+    <div class="snack-bar__content">
+        <h4>Preferences Updated</h4>
+        <p>Preference: New Preferences are updated. You can continue your work now.</p>
+        <span>{{Time | date: 'shortTime'}}</span>
+    </div>
+</div>
+
+
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Account Settings</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Preferences</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-4 mb-md-5">Account Preference</h5>
+                            <div class="px-md-5">
+                                <div class="row upload-file d-flex align-items-center justify-content-center">
+                                    <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+                                        <img src="../../../../../assets/images/acc-pref.png" class="img-fluid" alt="update Password">
+                                    </div>
+                                    <div class="col-md-6 py-md-5 mt-2">
+                                        <h5 class="card-title mb-0">Account Preference</h5>
+                                        <p class="mb-4">Control settings related to your account.</p>
+                                        <h6 class="sub-heading mb-3">Language & Region</h6>
+                                        <p class="mb-4">Change to your language and time zone will be reflected across Confluence, Jira and Directory. Update your language and time zone for other products from your <a href="javascript:void(0)">Product Settings</a></p>
+                                        <h6 class="sub-heading mb-3">Language</h6>
+                                        <p class="mb-4">English (US)</p>
+                                        <h6 class="sub-heading mb-3">Delete your account</h6>
+                                        <p class="mb-4">When you delete your account, you lose access to Atlassian account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
+                                        <p class="mb-4">This page is protected by reCAPTCHA and the Google <a href="javascript:void(0)">Privacy Policy</a> and <a href="javascript:void(0)">Terms of Service</a> apply.</p>
+                                        <div class="mt-5">
+                                            <!-- <button type="button">Update</button> -->
+                                            <button (click)="openModal(deactivateUser)" class="button mr-3" type="button">
+                                                Delete Account
+                                                <!-- <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span> -->
+                                            </button>
+                                            <div [style.color]="error === true ? '#FF0000' : '#7bb31a'" style="font-size: 100%;" class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+<!-- modal start -->
+<ng-template #deactivateUser class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                    <span class="text-white">
+                        <i class="fa fa-window-close-o highlight-icon" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <p class="mb-4">Are you sure you want to deactivate this account! </p>
+                <div class="center-text">
+                    <!-- <button type="button" (click)="deleteUser()" class="button">Delete</button> -->
+                    <button type="button" (click)="deactivateAccount()" class="button loader-btn">
+                        <span>
+                            Deactivate
+                            <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                        </span>
+                    </button>
+                    
+                </div>
+                <!-- <div class="invalid-feedback" style="display: block;" >{{responseText}}</div> -->
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- modal end -->

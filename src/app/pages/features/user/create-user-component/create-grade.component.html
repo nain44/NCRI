@@ -1,0 +1,202 @@
+ 
+<!-- add grade -->
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/grade']"><a href="javascript:void(0)" class="gray-color">Grades</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Create New Grade</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Create Grade</h5> 
+                            <div class="cg">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Grade Name</label>
+                                                <input type="text" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="Enter Grade Name" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Description</label>
+                                                <input type="text" class="form-control" formControlName="last_name" id="formGroupExampleInput" placeholder="Enter Description" required>
+                                                <div class="w-100" *ngIf="f.controls.last_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.last_name.errors.required && f.controls.last_name.touched" class="invalid-feedback" [style.display]="f.controls.last_name.status=='INVALID' ? 'block' : 'none'">Please provide last name.</div> 
+                                                 </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <accordion [isAnimated]="true">
+                                                <accordion-group heading="Roles" [isOpen]="accOpen">
+                                                  <div class="cg-role">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-12 col-md-3">
+                                                            <div class="form-inline pull-md-right w-100">
+                                                                <div class="input-group mr-3 mb-3 mb-md-0 w-100"> 
+                                                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search Role">
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="table-responsive mnh-200p">
+                                                                <table class="table center-aligned-table">
+                                                                    <thead>
+                                                                        <tr class="text-dark">
+                                                                            <th class=" d-flex align-items-center"> 
+                                                                            </th>
+                                                                            <th class="w-100">Roles</th> 
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="d-flex align-items-center">
+                                                                                <div class="form-check checkbox justify-content-center">
+                                                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                                                    <label class="form-check-label" for="exampleCheck1"></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="w-100">Admin</td> 
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="d-flex align-items-center">
+                                                                                <div class="form-check checkbox justify-content-center">
+                                                                                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                                                                    <label class="form-check-label" for="exampleCheck2"></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="w-100">Agent</td> 
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="d-flex align-items-center">
+                                                                                <div class="form-check checkbox justify-content-center">
+                                                                                    <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                                                                                    <label class="form-check-label" for="exampleCheck3"></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="w-100">Supervisor</td> 
+                                                                        </tr>
+                                                                        <tr style="text-align: center;" *ngIf="false">
+                                                                            <td colspan="6">No Record Found</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div *ngIf="userLoader" class="d-flex justify-content-center">
+                                                                <div class="spinner-border theme-color" role="status">
+                                                                  <span class="sr-only"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </accordion-group>
+                                                <accordion-group heading="Users" [isOpen]="accOpen">
+                                                    <div class="cg-role">
+                                                      <div class="row justify-content-end">
+                                                          <div class="col-12 col-md-3">
+                                                              <div class="form-inline pull-md-right w-100">
+                                                                  <div class="input-group mr-3 mb-3 mb-md-0 w-100"> 
+                                                                      <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search Users">
+                                                                  </div> 
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-md-12">
+                                                              <div class="table-responsive mnh-200p">
+                                                                  <table class="table center-aligned-table">
+                                                                      <thead>
+                                                                          <tr class="text-dark">
+                                                                              <th class=" d-flex align-items-center"> 
+                                                                              </th>
+                                                                              <th>Users</th> 
+                                                                              <th>Department</th> 
+                                                                          </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                          <tr>
+                                                                              <td class="d-flex align-items-center">
+                                                                                  <div class="form-check checkbox justify-content-center">
+                                                                                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                                                      <label class="form-check-label" for="exampleCheck1"></label>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td class="w-50">Betty Robert</td> 
+                                                                              <td class="w-50">Admin</td> 
+                                                                          </tr>
+                                                                          <tr>
+                                                                              <td class="d-flex align-items-center">
+                                                                                  <div class="form-check checkbox justify-content-center">
+                                                                                      <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                                                                      <label class="form-check-label" for="exampleCheck2"></label>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td class="w-50">Kim Michael</td> 
+                                                                              <td class="w-50">Account</td> 
+                                                                          </tr>
+                                                                          <tr>
+                                                                              <td class="d-flex align-items-center">
+                                                                                  <div class="form-check checkbox justify-content-center">
+                                                                                      <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                                                                                      <label class="form-check-label" for="exampleCheck3"></label>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td class="w-50">Mike David</td> 
+                                                                              <td class="w-50">Sales</td> 
+                                                                          </tr>
+                                                                          <tr style="text-align: center;" *ngIf="false">
+                                                                              <td colspan="6">No Record Found</td>
+                                                                          </tr>
+                                                                      </tbody>
+                                                                  </table>
+                                                              </div>
+                                                              <div *ngIf="userLoader" class="d-flex justify-content-center">
+                                                                  <div class="spinner-border theme-color" role="status">
+                                                                    <span class="sr-only"></span>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                  </accordion-group>
+                                              </accordion>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <a class="button float-right"  (click)="setTab('contact')" [style.pointer-events]="!employeeInformation.valid && param?.type !== 'view' ? 'none' : 'auto'" href="javascript:void(0)">Create </a>
+                                        </div>
+                                    </div>
+                                   </form> 
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end -->

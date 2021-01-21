@@ -1,0 +1,275 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Client Demographics</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">File Field Mapping</h1>
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please upload the required file.</h5>
+
+        <form>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">UPLOAD FILE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="row mt-20">
+                                    <div class="col-md-8 d-flex flex-column">
+                                        <p class="text-dark-80 mt-20 mb-10">Upload your documents</p>
+                                        <!-- (click)="fileUpload.click()"
+                                        (fileDropped)="onFileDropped($event)" -->
+                                        <div (fileDropped)="dropFile($event)" class="text-center" id="uploadDocuments" ncriDnd>
+                                            <div (click)="openFileUploader()">
+                                                <img src="assets/images/upload-documents.svg" width="60" class="mb-10" />
+                                                <p class="light">Drag and Drop your file here</p>
+                                            </div>
+                                            
+                                        </div>
+                                        <input type="file" accept=".csv,.xlsx" (change)="uploadedFile($event)" id="txtFile"
+                                                class="d-none">
+                                                
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                        <div class="text-center pt-50">
+                                            <img src="assets/images/danger.png" class="img-fluid" alt="">
+                                            <!-- <p (click)="
+                                            !store.fieldMappingForm.controls.file_url.valid ? '' : openFileDetailModal()
+                                            " class="cursor-pointer text-purpal font-16">Pre-Imported Checklist</p> -->
+                                            <p (click)="openFileDetailModal()" class="cursor-pointer text-purpal font-16">Pre-Imported Checklist</p>
+                                            <!-- <span *ngIf="store.fileLoader" class="spinner-border float-right" role="status"
+                                    aria-hidden="true"></span> -->
+                                        </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <!-- file upload loader -->
+                                    <!-- *ngIf="store.fileLoader" -->
+                                    <div class="w-100 position-relative" *ngIf="false"> 
+                                        <div class="table-loader mnh-100p">
+                                            <div class="d-flex p-4 justify-content-start align-items-center">
+                                                <div class="spinner-border theme-color" role="status">
+                                                    <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- file upload loader end -->
+                                    <div class="col-md-8" *ngIf="store.fileLoader">
+                                        <p class="text-light-50 mt-30 mb-10 font-16">Uploaded Documents</p>
+                                        <!-- *ngFor="let file of fileList;let i = index" -->
+                                        <div class="row align-items-start documents-upload" >
+                                            <div class="col-md-auto mb-10">
+                                                <img src="assets/images/doc-xls.svg" width="30" />
+                                                <!-- [src]="global.setExtension(doc.filename) === 'pdf' ? 'assets/images/doc-pdf.svg' : 'assets/images/doc-xls.svg'" -->
+                                            </div>
+                                            <div class="col-4 perHolder p-0" >
+                                                <div class="file">
+                                                    <div class="file__name">{{store.fileName}}</div>
+                                                    <div [ngStyle]="{'color': store.uploadComplete === 'Failed'  ? '#f83f37': ''}" class="textPer">{{store.uploadComplete}}</div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-animated" role="progressbar"
+                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                                         [ngStyle]="{'width': store.uploadComplete, 'background-color': fileUploadError ? '#f83f37': ''}"></div>
+                                                </div>
+                                                <!-- <p *ngIf="errorMessage" style="color: #f83f37;">{{errorMessage}}</p> -->
+                                                <div *ngIf="fileUploadError">
+                                                    <p  style="color: #f83f37;">Sorry, We are not able to upload file.</p>
+                                                    <p style="color: black;">We found errors in uploading the above file. Please take a look </p><a (click)="openFileUploadedErrorModal()" href="javascript:void(0)">what you have missed</a>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-auto">
+                                                <!-- (click)="deleteFile(i)" -->
+                                                <img (click)="deleteFile()" src="assets/images/trash-can.png" class="del-file" />
+                                            </div>
+                                            <!-- <div *ngIf="fileUploadError" class="col-md-auto cursor-pointer">
+                                                <a href="javascript:void(0)" (click)="errorMessage = !errorMessage">View Error Screen</a>
+                                            </div> -->
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30">
+                <div *ngIf="false">
+                    Values are not valid
+                </div>
+                <button type="button" class="btn btn-default btn-lg"
+                    [routerLink]="['/field-mapping']">Cancel</button>
+                <!-- (click)="nextPage()" [disabled]="!store.documentsForm.valid" -->
+                <button
+                (click)="openFileDetailModal()"
+                 [disabled]="!store.fieldMappingForm.controls.file_url.valid" type="button" class="btn btn-success btn-lg">Upload File</button>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+<ng-template #fileInfo  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="modal-body text-left p-0"> 
+        <h2 class="modal-title">Pre-Imported Checklist</h2>
+        <p class="modal-title text-secondary font-21">Before uploading file here. Please go through the 
+            pre-imported check list.</p>
+        <ul class="pre-import-list">
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2" 
+                    ></i>
+                    <div>
+                        <span>FILE TYPE:</span>
+                         Must be an Excel (.xls or .xlsx) OR Comma Separated Value (.csv) OR Fixed Width file.    
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2" ></i>
+                    <div>
+                        <span>EXCEL SHEET NAME:</span>
+                         With .xlsx or .xls files, the sheet name (located in the bottom left hand corner) must be spelled exactly as: “Sheet1” (without quotes). Only the sheet named Sheet1 can be imported. Files that are .csv are exempt from this step.
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="requiredFields">
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2" ></i>
+                    <div>
+                        <span>REQUIRED COLUMNS:</span>
+                         Your spreadsheet must contain columns that have data which corresponds with:
+                         {{requiredFields}} .
+                          If you forget to add these columns to your spreadsheet, you won’t be able to save your mapping.
+                    </div>
+                </div>
+            </li>
+            <!-- <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2" [class]="
+                    !store.fieldMappingForm.controls.file_url.valid ? 'unselect' : ''"></i>
+                    <div>
+                        For consumer accounts the debtor’s first and last name must be in two separate fields (E.x. “Debtor First Name” and “Debtor Last Name”). 
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2" [class]="
+                    !store.fieldMappingForm.controls.file_url.valid ? 'unselect' : ''"></i>
+                    <div>
+                        <span>ACCOUNT NUMBERS:</span>
+                         If you import an Account Number column, it MUST contain unique values for each account. If you do not have an Account Number column to map (or choose not to map it), an Account Number will be automatically generated for each account. (These auto-generated Account Numbers are formatted in a style unique to each client. To check or change the format, please go to Client Management> Clients) 6) CUSTOM FIELDS: You can first review a list of our stock fields by going to the Custom Field module. For any columns you wish to import that do not have a stock field they can be mapped to, you can create a custom field for it prior to import. 7) COLUMN HEADERS: Each column header in your spreadsheet must be unique. You cannot import a spreadsheet with duplicate headers. For example, multiple columns named “Phone” should be renamed with unique values such as “Phone 1” and “Phone 2”. 8) ONLY AFTER working carefully through this checklist, you are ready to map your file.
+                    </div>
+                </div>
+            </li>  -->
+        </ul>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button (click)="modalRef.hide()" type="button" class="btn btn-success btn-lg previous"  data-dismiss="modal"> 
+                    Cancel 
+                </button>
+                <button [disabled]="!store.fieldMappingForm.controls.file_url.valid" (click)="proceed()" type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                >
+                <span>
+                    Proceed
+                    <!-- <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span> -->
+                </span>
+                </button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #fileUploadErrorModal  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <div class="modal-body text-left p-0"> 
+        <h2 class="modal-title">Import Checklist</h2>
+        <p class="modal-title text-secondary font-21">
+            Please find the list of elements those are successfully completed
+            and also the error found in your file.
+        </p>
+        <ul class="pre-import-list">
+            <li>
+                <div class="d-flex">
+                    <i class="fa mr-2" 
+                    [style.color]="showFailed ? '#f83f37' : '#89C540'"
+                    [ngClass]="showFailed ? 'fa-times-circle' : 'fa-check-circle'"
+                    ></i>
+                    <div>
+                        <span>FILE TYPE</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa mr-2"
+                    [style.color]="showFailed ? '#f83f37' : '#89C540'"
+                    [ngClass]="showFailed ? 'fa-times-circle' : 'fa-check-circle'"
+                    ></i>
+                    <div>
+                        <span>EXCEL SHEET NAME</span>
+                    </div>
+                </div>
+            </li>
+            <li >
+                <div class="d-flex">
+                    <i class="fa mr-2"
+                    [style.color]="showFailed ? '#f83f37' : '#89C540'"
+                    [ngClass]="showFailed ? 'fa-times-circle' : 'fa-check-circle'"
+                    ></i>
+                    <div>
+                        <span>DUPLICATE COLUMNS</span>
+                    </div>
+                </div>
+            </li>
+           
+        </ul>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button (click)="modalRef.hide()" type="button" class="btn btn-success btn-lg previous"  data-dismiss="modal"> 
+                    Close 
+                </button>
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>

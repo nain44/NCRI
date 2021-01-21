@@ -1,0 +1,233 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/custom-fields']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Add Custom Field</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add New Field</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please assign the screens to your dropdown Field</h5>
+
+        <form [formGroup]="store.customFieldForm">
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-40">
+                                        <div class="col-md-8">
+                                            <div class="set-commssion p-3 mb-20">
+                                                <h4>
+                                                    {{
+                                                        store.customFieldForm.controls.field_label.value ?
+                                                        store.customFieldForm.controls.field_label.value : ""
+                                                    }}
+                                                </h4>
+                                                <p class="text-secondary my-2 font-14">
+                                                    {{
+                                                        store.customFieldForm.controls.description.value ?
+                                                        store.customFieldForm.controls.description.value : ""
+                                                    }}
+                                                </p>
+                                                <div>
+                                                    <div class="d-flex align-items-center c-calculate custom">
+                                                        <div class="text-dark-80">Dropdown Values:</div>
+                                                        <div>
+                                                            {{store.dropdownList.length}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center c-calculate custom">
+                                                        <div class="text-dark-80">Mandatory:</div>
+                                                        <div>
+                                                            {{
+                                                                store.customFieldForm.controls.is_mandatory.value ?
+                                                                (store.customFieldForm.controls.is_mandatory.value === true ? 'Yes' : 'No') : "No"
+                                                            }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="disable-toggle">
+                                                <label>Status</label>
+                                                <div class="toggle-wrap d-flex align-items-end disabled">
+                                                    <span class="disable">Disabled</span>
+                                                    <label class="switch mb-0">
+                                                        <input formControlName="is_enabled" type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <span class="enable">Enabled</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="col d-flex align-items-end mt-2 p-0">
+                                                <div class="form-group has-search filter-search w-100">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" #searchInput class="form-control"
+                                                        placeholder="Search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive mnh-200p">
+                                            <table id="datable_1"
+                                                class="table theme-table custom-input-table w-100 display pb-30 position-relative">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SCREEN NAME</th>
+                                                        <th>ASSIGN</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let screen of screens | search : searchValue;let i = index">
+                                                        <td><b>{{screen.label}}</b></td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" (change)="addField(i)"
+                                                                    [(ngModel)]="screen.assign"
+                                                                    [ngModelOptions]="{standalone: true}"
+                                                                    class="custom-control-input" [id]="i">
+                                                                <label class="custom-control-label" [for]="i"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)"
+                                                                (click)="fetchFieldsFromDB(i)">Preview & Adjust
+                                                                Position</a>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" [disabled]="loader" [routerLink]="['/custom-fields']"
+                    class="btn btn-success btn-lg previous border-0">Cancel</button>
+                <button type="button" [disabled]="loader" [routerLink]="['/custom-fields/dropdown-details']"
+                    class="btn btn-success btn-lg previous">Back</button>
+                <button type="button" [disabled]="!store.customFieldForm.valid || loader" (click)="addCustomField()"
+                    class="btn btn-success btn-lg loader-btn">
+                    <span>
+                        Save Field
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+
+<ng-template #preview class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Preview of Client Management - Custom Fields</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+
+                <!-- permission -->
+                <div class="cg-role">
+                    <div class="w-100 mt-20">
+                        <div class="row">
+                            <div class="col-12">
+                                <accordion [isAnimated]="true" class="accord-section">
+                                    <accordion-group [isOpen]="true">
+                                        <button
+                                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                            accordion-heading type="button">
+                                            <h6 class="accor-name w-100 text-left hk-sec-title">CUSTOM FIELDS</h6>
+                                        </button>
+                                        <div class="cg-role">
+                                            <div class="w-100 mt-20">
+                                                <div class="row mt-20" dragula="fields"
+                                                    [(dragulaModel)]="selectedScreen.form">
+                                                    <div *ngFor="let field of selectedScreen.form"
+                                                        class="col-md-6 cursor-pointer">
+                                                        <div class="dash-border px-3 mb-10">
+                                                            <div class="form-label-group mb-10">
+                                                                <input type="text" [placeholder]="field.display_name" class="form-control" disabled readonly>
+                                                                <label for="">{{field.display_name}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer pb-0 pr-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous" data-dismiss="modal"
+                            (click)="modalRef.hide()">Close</button>
+                        <button type="button" (click)="saveOrientation()" class="btn btn-success btn-lg loader-btn "
+                            data-dismiss="modal">
+                            <span>
+                                Save Screen Orientation
+                                <span *ngIf="false" class="spinner-border float-right" role="status"
+                                    aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #load class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 comment-content">
+                <div class="modal-body text-center">
+                    <img src="assets/images/load.png" class="img-fluid mb-20 load-img">
+                    <h2 class="modal-title">We are adding the Custom Field</h2>
+                    <p class="modal-title text-secondary font-21">After successful saving, we'll take you to the dashboard.</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

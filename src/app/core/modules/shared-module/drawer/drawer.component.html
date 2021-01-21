@@ -1,0 +1,45 @@
+
+<div class="theme-customizer ncri-drawer">
+    <a class="theme-customizer-close" (click)="closeDrawer()" href="javascript: void(0)"><i class="ti-close theme-color"></i></a>
+    <div class="theme-customizer-content p-3">
+        <h4 class="mt-2 gray-04-color">Theme Customizer</h4>
+        <hr class="hr-gray my-4 w-auto">
+        <h5 class="mt-1 text-bold-500">Theme Layout</h5>
+        <div class="theme-layout">
+            <div class="custom-radio custom-control-inline mr-md-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" (change)="changeLayout($event)" checked="true" id="Light" value="light" name="theme" >
+                    <label class="form-check-label" for="Light">Light</label>
+                </div>
+            </div>
+            <div class="custom-radio custom-control-inline mr-md-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" (change)="changeLayout($event)" id="gridRadios21" value="dark" name="theme">
+                    <label class="form-check-label" for="gridRadios21">Dark</label>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-gray my-4 w-auto">
+        <h5 class="mt-1 text-bold-500">Primary Color</h5>
+        <div class="form-group">
+            <div class="btn-group btn-theme" role="group">
+                <button type="button" (click)="getcolourPrimery($event)" class="btn theme-bg" value="7BB31A" data-sidebar="menu-light"></button>
+                <button type="button" (click)="getcolourPrimery($event)" class="btn primary-bg" value="5A8DEE" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourPrimery($event)" class="btn danger-bg" value="FF0000" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourPrimery($event)" class="btn info-bg" value="00CFDD" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourPrimery($event)" class="btn bg-warning" value="ffc107 " data-sidebar="menu-dark"></button>
+            </div>
+        </div>
+        <hr class="hr-gray my-4 w-auto">
+        <h5 class="mt-1 text-bold-500">Secondary Color</h5>
+        <div class="form-group">
+            <div class="btn-group btn-theme" role="group">
+                <button type="button" (click)="getcolourSecondary($event)" value="394C62" class="btn secondary-bg" data-sidebar="menu-light"></button>
+                <button type="button" (click)="getcolourSecondary($event)" value="5A8DEE" class="btn primary-bg" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourSecondary($event)" value="FF0000" class="btn danger-bg" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourSecondary($event)" value="00CFDD" class="btn info-bg" data-sidebar="menu-dark"></button>
+                <button type="button" (click)="getcolourSecondary($event)" value="ffc107" class="btn bg-warning" data-sidebar="menu-dark"></button>
+            </div>
+        </div>
+    </div>
+</div>

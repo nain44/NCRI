@@ -1,0 +1,53 @@
+
+<!-- Main Content -->
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a [routerLink]="['/client-dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Client Management</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Summary</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Client Management</h1>
+            <div class="d-flex align-items-end">
+                <div class="form-label-group mb-0 mr-10">
+                    <input formControlName="commentText" type="text" class="form-control input-label ng-valid bg-transparent"
+                        placeholder="Client No." value="">
+                    <label for="">Client No.</label>
+                </div>
+                <button type="button" class="btn btn-success btn-border btn-lg px-3">
+                    <i class="fa fa-search font-20"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="having-left-nav">
+            <div class="navigation-holder">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/client-summary']">Client Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/client-details']">Client Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/transactions']">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/client-management/'+id+'/comments']">Comments</a>
+                    </li>
+                </ul>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>
+<!-- /Container -->

@@ -1,0 +1,254 @@
+  
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <!-- <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User</a></li> -->
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User and Permission</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Grades</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <div class="row">
+                                <div class="col-auto">
+                                    <h5 class="card-title mb-0">Grades</h5>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-inline pull-md-right cws">
+                                                <div class="input-group mr-3 mb-3 mb-md-0">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text bg-transparent br-none p-0"><i class="ti-search gray-color "></i></div>
+                                                    </div>
+                                                    <input type="text" class="form-control bl-none pl-1" id="inlineFormInputGroupUsername2" placeholder="Search...">
+                                                </div>
+                                                <a href="javascript:void(0)" [routerLink]="['/grade/create-grade']" class="button w-130">Create <i class="fa fa-plus ml-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end mx-0 mt-md-5 mt-4">
+                                        <!-- <div class="col-auto pl-0">
+                                            <div class="form-group">
+                                                <a href="javascript: void(0)" class="button">Download All</a>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-auto pl-0">
+                                            <div class="input-group form-group d-flex align-items-center page-select-dropdown">
+                                                <span class="wrapper-select">
+                                                    <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="10">
+                                                        <option>All</option>
+                                                        <option>None</option>
+                                                    </select>
+                                                </span> 
+                                            </div>
+                                        </div>
+                                        <div class="col-auto pr-0 pl-0">
+                                            <div class="input-group form-group d-flex align-items-center page-number-dropdown">
+                                                <label class="gray-color mt-2 mr-3">Show</label>
+                                                <span class="wrapper-select">
+                                                    <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="10">
+                                                        <option>10</option>
+                                                        <option>20</option>
+                                                    </select>
+                                                </span>
+                                                <label class="gray-color ml-3 mt-2">Entries</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row justify-content-end mx-0 mt-md-5 mt-4"> 
+                                <div class="col-md-3 col-sm-4 pr-0 pl-0">
+                                    <div class="input-group form-group d-flex align-items-center">
+                                        <span class="wrapper-select w-75">
+                                            <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="10">
+                                                <option>Select branch</option>
+                                                <option>None</option>
+                                            </select>
+                                        </span>
+                                        <label class="gray-color ml-3 mt-2">Show</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-4 pr-0 pl-0">
+                                    <div class="input-group form-group d-flex align-items-center">
+                                        <span class="wrapper-select w-75">
+                                            <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="10">
+                                                <option>10</option>
+                                                <option>20</option>
+                                            </select>
+                                        </span>
+                                        <label class="gray-color ml-3 mt-2">Entries</label>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive mnh-200p">
+                                        <table class="table center-aligned-table table--grade">
+                                            <thead>
+                                                <tr class="text-dark"> 
+                                                    <th>Grade Name</th>
+                                                    <!-- <th>Roles</th>  -->
+                                                    <th>Description</th>
+                                                    <th>Action</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let grade of gradesList"> 
+                                                    <td>{{grade.name}}</td>
+                                                    <!-- <td>Admin, Agent, Supervisor</td>  -->
+                                                    <td>{{grade.description}}</td>
+                                                    <td>
+                                                        <div class="d-flex table-actions">
+                                                            <a href="javascript:void(0)" (click)="redirectToEdit(grade)"> 
+                                                                <i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                        <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                    </svg>
+                                                                    
+                                                                </i>
+                                                            </a>
+                                                            <a href="javascript:void(0)" (click)="openDeleteModal(deleteGrade,grade)"> 
+                                                                <i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                        <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                        <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                        <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                        <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                        <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                    
+                                                                </i>
+                                                            </a>
+
+                                                            <a href="javascript:void(0)" (click)="redirectToView(grade)"> 
+                                                                <i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21.039" height="13.409" viewBox="0 0 21.039 13.409"> 
+                                                                        <g id="view-action" data-name="eye (1)" transform="translate(0 -92.835)">
+                                                                        <g id="Group_35877" data-name="Group 35877" transform="translate(0 92.835)">
+                                                                            <g id="Group_35876" data-name="Group 35876" transform="translate(0 0)">
+                                                                            <path id="Path_90630" data-name="Path 90630" class="cls-1" d="M20.905,99.13c-.188-.257-4.666-6.3-10.386-6.3S.321,98.873.134,99.13a.694.694,0,0,0,0,.819c.188.257,4.666,6.3,10.386,6.3s10.2-6.038,10.386-6.3A.693.693,0,0,0,20.905,99.13Zm-10.386,5.727c-4.213,0-7.862-4.008-8.942-5.318,1.079-1.311,4.72-5.317,8.942-5.317s7.862,4.007,8.942,5.318C18.383,100.851,14.741,104.857,10.519,104.857Z" transform="translate(0 -92.835)"/>
+                                                                            </g>
+                                                                        </g>
+                                                                        <g id="Group_35879" data-name="Group 35879" transform="translate(6.358 95.378)">
+                                                                            <g id="Group_35878" data-name="Group 35878" transform="translate(0 0)">
+                                                                            <path id="Path_90631" data-name="Path 90631" class="cls-1" d="M158.884,154.725a4.162,4.162,0,1,0,4.162,4.162A4.166,4.166,0,0,0,158.884,154.725Zm0,6.936a2.774,2.774,0,1,1,2.774-2.774A2.777,2.777,0,0,1,158.884,161.661Z" transform="translate(-154.722 -154.725)"/>
+                                                                            </g>
+                                                                        </g>
+                                                                        </g>
+                                                                    </svg>
+                                                                </i>
+                                                            </a>
+                                                        </div> 
+                                                    </td> 
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngIf="gradesList.length === 0 && !dataLoader">
+                                                <tr style="text-align: center;">
+                                                    <td colspan="3">No Record Found</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="dataLoader" class="d-flex justify-content-center">
+                                        <div class="spinner-border theme-color" role="status">
+                                          <span class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row d-flex align-items-center mt-2">
+                                <div class="col-md-6 col-sm-12">
+                                    <p class="tbldata-info">Showing {{pageConfig.page > 1 ? ((gradesList.length * pageConfig.page) - 10) : pageConfig.page}} to {{gradesList.length * pageConfig.page}} of {{pageConfig.count}} Entries</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <nav class="pull-md-right mt-3 mt-md-0" aria-label="Page navigation example">
+                                        <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageConfig.size" [totalItems]="pageConfig.count" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                            lastText="&raquo;">
+                                        </pagination>
+                                        
+                                    </nav>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+
+            <!-- model for users download start-->
+            <!-- <div bsModal #usersDownload="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="usersDownload.hide()">
+                            <span aria-hidden="true"><i class="ti-close"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-5">
+                            <div class="input-group form-group">
+                                <label for="inputState">File Format</label>
+                                <span class="wrapper-select">
+                                    <select [(ngModel)]="downloadType" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select file format">
+                                        <option value="xlsx">.xls</option>
+                                        <option value="csv">.csv</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="pull-right">
+                                <button type="button" (click)="downloadFile()" class="button w-130">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- model for users download end-->
+
+            <!-- user delete confirmation -->
+            <ng-template #deleteGrade class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-dialog-centered unlock">
+                    <div class="modal-content">
+                        <div class="modal-header bb-none">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true"><i class="ti-close cursor-pointer"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4 text-center">
+                            <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                                <span class="text-white">
+                                    <i class="fa fa-trash-o highlight-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <p class="mb-4">Are you sure you want<br> to delete grade <span class="font-weight-bold">{{selectedOBJ.name}}</span></p>
+                            <div class="center-text">
+                                <button type="button" [disabled]="loader" (click)="deleteUserGrade()" class="btn btn-success loader-btn">
+                                    <span> 
+                                        Delete
+                                        <span *ngIf="loader" class="spinner-border" role="status" aria-hidden="true"></span>
+                                    </span>
+                                </button>
+                                
+                            </div>
+                            <div class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- end of user delete confirmation -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,833 @@
+<div class="container-fluid container-wrapper" *ngIf="false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Commission and Compensation</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Target List</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- <ul>
+                <li id="mainTree"></li>
+            </ul> -->
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <!-- <h5 class="card-title mb-3">Target List</h5> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title mb-0">Target List</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-inline pull-md-right"> 
+                                        <div class="btn-group" >
+                                            <label class="btn active" [routerLink]="['/commission/list']" btnRadio="Left"
+                                                     tabindex="0" role="button">
+                                                <i class="fa fa-bars"></i>
+                                            </label>
+                                            <label class="btn" [routerLink]="['/commission/map']" btnRadio="Middle"
+                                                     tabindex="0" role="button">
+                                                    <i class="fa fa-map-marker"></i>
+                                            </label> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4">
+                                <div class="col-md-12 col-sm-12 pb-2 text-right"><span class="gray-04-color">Date:</span><span class="gray-color"> 
+                                    <!-- Jun 01 - June 31 -->
+                                    {{startDate | date : 'MMM dd'}} - {{endDate | date : 'MMM dd'}} 
+                                </span></div>
+                                <div class="col-md-12 col-sm-12 pb-2 text-right"><span class="gray-04-color">Target Amount:</span><span class="gray-color"> $50,000.00</span></div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-12 col-md-10">
+                                    <ul class="nav nav-tabs" role="tablist"> 
+                                        <li class="nav-item" *ngFor="let country of countryList">
+                                            <a class="nav-link" [ngClass]="{'active show': selectedCountry === country}" (click)="changeCountry(country)">{{country}}</a>
+                                        </li>
+                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}"  >USA</a>
+                                        </li>
+                                        <li class="nav-item" (click)="setTab('access')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" >Pakistan</a>
+                                        </li>  -->
+                                    </ul>
+                                </div>
+                                <!-- <div class="col-12 col-md-2 text-right align-self-center pl-4">
+                                    <div class="col-12 text-left">
+                                        <span class="gray-04-color">Date:</span><span class="gray-color"> 
+                                        {{startDate | date : 'MMM dd'}} - {{endDate | date : 'MMM dd'}}
+                                        </span>
+                                    </div>
+                                </div> -->
+                            </div> 
+                            
+                                <div class="tab-pane fade active show">
+                                   <form  novalidate> 
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs at-tabs" role="tablist"> 
+                                                        <li class="nav-item" *ngFor="let branch of branchList">
+                                                            <a class="nav-link" [ngClass]="{'active show': selectedBranch === branch}" (click)="changeBranch(branch)">
+                                                                {{branch}}
+                                                            </a>
+                                                        </li>
+                                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}" id="tab2" data-toggle="tab" href="javascript:void(0)" role="tab" aria-controls="profile" aria-selected="false">St. Catharines</a>
+                                                        </li>
+                                                        <li class="nav-item" (click)="setTab('access')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" id="portfolio-tab" href="javascript:void(0)" data-toggle="tab" role="tab" aria-controls="portfolio" aria-selected="false">Montreal</a>
+                                                        </li>  -->
+                                                    </ul>
+                                                </div> 
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-10 pl-5">
+                                            <div class="row" >
+                                                <div class="col-md-11 main-label">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group"> 
+                                                                <label class="font-weight-bold">User Name</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 pl-0">
+                                                            <div class="form-group">  
+                                                                <label class="font-weight-bold">User Role</label> 
+                                                            </div> 
+                                                        </div> 
+                                                        <div class="col-md-3 pl-0">
+                                                            <div class="form-group"> 
+                                                                <label class="font-weight-bold">Target</label> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+                                                <ul class="tree tree--list-view">
+                                                    <li class="tree-first nested" id="mainTree"> 
+                                                    
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-11">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"> 
+                                                                            <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">  
+                                                                            <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                        </div> 
+                                                                    </div> 
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group"> 
+                                                                            <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                        </div> 
+                                                                    </div> 
+                                                                </div>
+                                                            </div> 
+                                                        </div> -->
+                                                        <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                    
+                                                </li>
+                                                    </ul>
+
+                                                    
+                                            </div>
+                                            
+                                            <div class="row version-flow d-none">
+                                                <div class="col-12 version-flow__inner">
+                                                    <div class="row">
+                                                        <div class="col-md-6 version-flow__inner__item">
+                                                            <div class="form-group">
+                                                                <label >Level 0</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 d-flex align-items-center">
+                                                            <!-- (click)="setTab('contact')" for <a> -->
+                                                            <a class="button float-right"   href="javascript:void(0)">Divide Equally </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- level 1 -->
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 -->
+                                                        <div class="col-md-12 nested">
+                                                            <div class="row version-flow">
+                                                                <div class="col-12 version-flow__inner">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 version-flow__inner__item">
+                                                                            <div class="form-group">
+                                                                                <label >Level 0</label>
+                                                                                <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label >Target Amount</label>
+                                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <!-- level 3 -->
+                                                                <div class="col-md-12 nested">
+                                                                    <div class="row version-flow">
+                                                                        <div class="col-12 version-flow__inner">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                                    <div class="form-group">
+                                                                                        <label >Level 0</label>
+                                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label >Target Amount</label>
+                                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> 
+                                                                    </div>
+                                                                </div>
+                                                                <!-- level 3 end -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 end --> 
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>  -->
+                                                <!-- level 1 end -->
+                                                <!-- <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.2</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.2 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.3</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.3 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.4</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.4 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="col-md-4 ml-auto">
+                                                <p class="text-danger text-left">* For our system</p>
+                                                <p class="text-danger text-left">Level 2 = Sr. VP</p> 
+                                                <p class="text-danger text-left">Level 3= Manager</p> 
+                                                <p class="text-danger text-left">Level 4= Supervisor</p>  
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <!-- <div class="row my-4">
+                                        <div class="col-md-10">
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{remainingAmount}}</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right"> 
+                                                <button class="button w-130" [disabled]="loader" type="button" (click)="addTarget()">
+                                                    Save
+                                                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div> 
+                                    </div>  -->
+                                   </form>
+                                </div>
+                                <div *ngIf="userLoader" class="table-loader absolute">
+                                    <div class="d-flex p-4 justify-content-center align-items-center h-100p">
+                                        <div class="spinner-border theme-color" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div  class="d-flex justify-content-center" *ngIf="!userLoader && treeList.length === 0">
+                                    <p>No Record Found</p>
+                                </div>
+                                <!-- <div *ngIf="tab === 'contact'" class="tab-pane fade" [ngClass]="{'active show': tab === 'contact'}" id="tab2" role="tabpanel" aria-labelledby="tab2"> 
+                                </div>
+                                <div *ngIf="tab === 'access'" class="tab-pane fade" [ngClass]="{'active show': tab === 'access'}" id="tab3" role="tabpanel" aria-labelledby="tab3"></div>  -->
+                            
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+<div class="hk-pg-wrapper" *ngIf="target === 'assign'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">View Target</h1>
+        </div>
+    </div>
+    <section class="rounded-30">  
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true"> 
+                            <div class="row" accordion-heading>
+                                <!-- <div class="col">
+                                    <button
+                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                     type="button">
+                                    <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN TARGET</h6>
+                                    </button>
+                                </div> -->
+                                <!-- <div class="col-auto">
+                                    <div class="col d-flex align-items-end justify-content-end">
+                                        <div class="d-flex align-items-end justify-content-end">
+                                            <span class="label text-gray">Date Range</span>
+                                                <div class="form-label-group custom-calender date-range mb-0">
+                                                <img src="assets/images/calendar.png" class="img-fluid">
+                                                <input type="text" placeholder="Daterangepicker" class="form-control" bsDaterangepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            
+                            <div class="cg-role">
+                                <div class="w-100">  
+                                    <div class="row comment-filter justify-content-between mb-30 mt-0">
+                                        <div class="col-12 col-md-7 d-flex align-items-start flex-column">
+                                            <div class="d-flex align-items-center mb-10">
+                                                <span class="label">Branches</span>
+                                                <div class="form-label-group w-auto mb-0">
+                                                    <!-- (onAdd)=onUserTagAdd($event) (onRemove)=onUserTagRemove($event) (onBlur)=onUserTagAdd($event)-->
+                                                    <tag-input (onAdd)=changeBranch($event)
+                                                    (onRemove)=changeBranch($event) [(ngModel)]="selectedBranch" [maxItems]='5' [onlyFromAutocomplete]="true">
+                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="branchList"
+                                                        >
+                                                        </tag-input-dropdown>
+                                                    </tag-input>
+                                                    <!-- <tag-input [ngModel]="branchList" [ngModelOptions]="{standalone: true}"></tag-input>    -->
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center" *ngIf="false">
+                                                <span class="label">Departments/Teams</span>
+                                                <div class="form-label-group w-auto mb-0">
+                                                    <!-- (onAdd)=onUserTagAdd($event) (onRemove)=onUserTagRemove($event) -->
+                                                    <!-- <tag-input [(ngModel)]="selectedUsers" [maxItems]='5' [onlyFromAutocomplete]="true"
+                                                    (onBlur)=onUserTagAdd($event)
+                                                        [disable]="commentsOf === 'all'">
+                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="items"
+                                                            [identifyBy]="'user_id'" [displayBy]="'user__first_name'">
+                                                        </tag-input-dropdown>
+                                                    </tag-input> -->
+                                                    <!-- <tag-input [(ngModel)]='items' [ngModelOptions]="{standalone: true}"></tag-input>    -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-5 d-flex align-items-end justify-content-end">
+                                            <div class="d-flex align-items-end justify-content-end">
+                                                <div class="form-label-group w-auto mb-0 mr-20">
+                                                    <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                        name="Business Type">
+                                                        <option>Filter Option One</option>
+                                                        <option>10</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-label-group w-auto mb-0 mr-20">
+                                                    <select class="form-control selectDropdown w-auto p-0 h-auto"
+                                                        name="Business Type">
+                                                        <option>Filter Option Two</option>
+                                                        <option>10</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-label-group w-auto mb-0 col-md-7">
+                                                    <div class="d-flex align-items-end justify-content-end">
+                                                        <span class="label">Date Range</span>
+                                                        <div class="form-label-group custom-calender date-range mb-0">
+                                                            <img src="assets/images/calendar.png" class="img-fluid">
+                                                            <input type="text" placeholder="Daterangepicker"
+                                                                class="form-control" bsDaterangepicker [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }"
+                                                                [(ngModel)]="dateRange"
+                                                                (bsValueChange)="onValueChange($event)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row"> 
+                                        <div class="col-12 pb-4">
+                                            <!-- userLoader -->
+                                            <div *ngIf="userLoader" class="table-loader absolute">
+                                                <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                                    <div class="spinner-border theme-color" role="status">
+                                                        <span class="sr-only"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row version-flow version-flow--table-view"> 
+                                                <div class="col-12 set-commssion border-0 py-0">
+                                                    <ul class="tree">
+                                                        <li class="tree-first nested">
+                                                            <ul class="collapsed in">
+                                                                <li> 
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="form-group">
+                                                                                <div class="tree-heading"> 
+                                                                                    <h4 class="text-gray">USERS</h4> 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex p-0 filed">
+                                                                            <div>
+                                                                                <div class="form-group">
+                                                                                    <div class="tree-heading"> 
+                                                                                        <h4 class="text-gray">USER ROLES</h4> 
+                                                                                    </div>
+                                                                                </div> 
+                                                                            </div> 
+                                                                            <div>
+                                                                                <div class="form-group">
+                                                                                    <div class="tree-heading"> 
+                                                                                        <h4 class="text-gray text-right">TARGET</h4> 
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> 
+                                                                    </div> 
+                                                                </li> 
+                                                            </ul> 
+                                                        </li>
+                                                    </ul> 
+                                                </div>
+                                                <div class="col-12 set-commssion"> 
+                                                    <ul class="tree">
+                                                        <li class="tree-first nested">
+                                                            <ul #main class="collapsed in">
+                                                                <li *ngIf="loaderText" class="text-center">{{loaderText}}</li> 
+
+                                                                 
+                                                                <li *ngFor="let hierarchy of treeList">
+                                                                    <i class="indicator nested" #iconOne
+                                                                        (click)="toggleView(iconOne)"></i>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="form-group">
+                                                                                <div class="tree-heading">
+                                                                                    <h4>{{hierarchy?.first_name}}
+                                                                                        {{hierarchy?.last_name}}</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex p-0 filed">
+                                                                            <div>
+                                                                                <div class="form-group">
+                                                                                    <input type="text"
+                                                                                        class="form-control target-amount"
+                                                                                        [value]="hierarchy?.employee_type__name"
+                                                                                        disabled>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div
+                                                                                    class="form-group d-flex align-items-center justify-content-center">
+                                                                                    <input type="text"
+                                                                                        class="form-control target-amount text-center w-auto"
+                                                                                        [value]="hierarchy?.target_amount" disabled>
+                                                                                    <!-- <img src="assets/images/information.png"
+                                                                                        alt=""> -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- <div>
+                                                                                <div class="form-group text-right">
+                                                                                    <button
+                                                                                        class="btn btn-success">Approve</button>
+                                                                                </div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <ul
+                                                                        [ngClass]="{'d-none': iconOne.classList.contains('inactive')}">
+                                                                        <li *ngFor="let hierarchy2 of hierarchy?.children">
+                                                                            <i class="indicator nested" #iconTwo
+                                                                                (click)="toggleView(iconTwo)"></i>
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <div class="form-group">
+                                                                                        <div class="tree-heading">
+                                                                                            <h4>{{hierarchy2?.first_name}}
+                                                                                                {{hierarchy2?.last_name}}
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="d-flex p-0 filed">
+                                                                                    <div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="text"
+                                                                                                class="form-control target-amount"
+                                                                                                [value]="hierarchy?.employee_type__name"
+                                                                                                disabled>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div
+                                                                                            class="form-group d-flex align-items-center justify-content-center">
+                                                                                            <input type="text"
+                                                                                                class="form-control target-amount text-center w-auto"
+                                                                                                [value]="hierarchy?.target_amount" disabled>
+                                                                                            <!-- <img src="assets/images/information.png"
+                                                                                                alt=""> -->
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- <div>
+                                                                                        <div class="form-group text-right">
+                                                                                            <button
+                                                                                                class="btn btn-success">Approve</button>
+                                                                                        </div>
+                                                                                    </div> -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul
+                                                                                [ngClass]="{'d-none': iconTwo.classList.contains('inactive')}">
+                                                                                <li
+                                                                                    *ngFor="let hierarchy3 of hierarchy2?.children">
+                                                                                    <i class="indicator nested" #iconThree
+                                                                                        (click)="toggleView(iconThree)"></i>
+                                                                                    <div
+                                                                                        class="d-flex justify-content-between">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+                                                                                            <div class="form-group">
+                                                                                                <div class="tree-heading">
+                                                                                                    <h4>{{hierarchy3?.first_name}}
+                                                                                                        {{hierarchy3?.last_name}}
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="d-flex p-0 filed">
+                                                                                            <div>
+                                                                                                <div class="form-group">
+                                                                                                    <input type="text"
+                                                                                                        class="form-control target-amount"
+                                                                                                        [value]="hierarchy?.employee_type__name"
+                                                                                                        disabled>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div>
+                                                                                                <div
+                                                                                                    class="form-group d-flex align-items-center justify-content-center">
+                                                                                                    <input type="text"
+                                                                                                        class="form-control target-amount text-center w-auto"
+                                                                                                        [value]="hierarchy?.target_amount" disabled>
+                                                                                                    <!-- <img src="assets/images/information.png"
+                                                                                                        alt=""> -->
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <!-- <div>
+                                                                                                <div
+                                                                                                    class="form-group text-right">
+                                                                                                    <button
+                                                                                                        class="btn btn-success">Approve</button>
+                                                                                                </div>
+                                                                                            </div> -->
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <ul
+                                                                                        [ngClass]="{'d-none': iconThree.classList.contains('inactive')}">
+                                                                                        <li
+                                                                                            *ngFor="let hierarchy4 of hierarchy3?.children">
+                                                                                            <i class="indicator nested"
+                                                                                                #iconFour
+                                                                                                (click)="toggleView(iconFour)"></i>
+                                                                                            <div
+                                                                                                class="d-flex justify-content-between">
+                                                                                                <div
+                                                                                                    class="d-flex align-items-center">
+                                                                                                    <div class="form-group">
+                                                                                                        <div
+                                                                                                            class="tree-heading">
+                                                                                                            <h4>{{hierarchy4?.first_name}}
+                                                                                                                {{hierarchy4?.last_name}}
+                                                                                                            </h4>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="d-flex p-0 filed">
+                                                                                                    <div>
+                                                                                                        <div
+                                                                                                            class="form-group">
+                                                                                                            <input
+                                                                                                                type="text"
+                                                                                                                class="form-control target-amount"
+                                                                                                                [value]="hierarchy?.employee_type__name"
+                                                                                                                disabled>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <div
+                                                                                                            class="form-group d-flex align-items-center justify-content-center">
+                                                                                                            <input
+                                                                                                                type="text"
+                                                                                                                class="form-control target-amount text-center w-auto"
+                                                                                                                [value]="hierarchy?.target_amount"
+                                                                                                                disabled>
+                                                                                                            <!-- <img src="assets/images/information.png"
+                                                                                                                alt=""> -->
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <!-- <div>
+                                                                                                        <div
+                                                                                                            class="form-group text-right">
+                                                                                                            <button
+                                                                                                                class="btn btn-success">Approve</button>
+                                                                                                        </div>
+                                                                                                    </div> -->
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <ul
+                                                                                                [ngClass]="{'d-none': iconFour.classList.contains('inactive')}">
+                                                                                                <li
+                                                                                                    *ngFor="let hierarchy5 of hierarchy4?.children">
+                                                                                                    <div
+                                                                                                        class="d-flex justify-content-between">
+                                                                                                        <div
+                                                                                                            class="d-flex align-items-center">
+                                                                                                            <div
+                                                                                                                class="form-group">
+                                                                                                                <div
+                                                                                                                    class="tree-heading">
+                                                                                                                    <h4>
+                                                                                                                        {{hierarchy5?.first_name}}
+                                                                                                                        {{hierarchy5?.last_name}}
+                                                                                                                    </h4>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="d-flex p-0 filed">
+                                                                                                            <div>
+                                                                                                                <div
+                                                                                                                    class="form-group">
+                                                                                                                    <input
+                                                                                                                        type="text"
+                                                                                                                        class="form-control target-amount"
+                                                                                                                        [value]="hierarchy?.employee_type__name"
+                                                                                                                        disabled>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <div
+                                                                                                                    class="form-group d-flex align-items-center justify-content-center">
+                                                                                                                    <input
+                                                                                                                        type="text"
+                                                                                                                        class="form-control target-amount text-center w-auto"
+                                                                                                                        [value]="hierarchy?.target_amount"
+                                                                                                                        disabled>
+                                                                                                                    <!-- <img src="assets/images/information.png"
+                                                                                                                        alt=""> -->
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <!-- <div>
+                                                                                                                <div
+                                                                                                                    class="form-group text-right">
+                                                                                                                    <button
+                                                                                                                        class="btn btn-success">Approve</button>
+                                                                                                                </div>
+                                                                                                            </div> -->
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul>
+    
+                                                                                </li>
+                                                                            </ul>
+    
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div> 
+        </div>
+
+    </section>
+</div>
+
+
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

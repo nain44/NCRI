@@ -1,0 +1,297 @@
+
+<div class="container-fluid container-wrapper" *ngIf="fileExported === false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">Configurations</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Integration</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-5">Upload File</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-5">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="1" type="radio" [(ngModel)]="type" id="api" value="api">
+                                                    <label class="form-check-label" for="api">API</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="2" type="radio" [(ngModel)]="type" id="ftp" value="ftp">
+                                                    <label class="form-check-label" for="ftp">FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12 mb-5" *ngIf="type === 'ftp'">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="3" type="radio" [(ngModel)]="subType" id="a" value="a">
+                                                    <label class="form-check-label" for="a">Pre Configured FTP</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="4" type="radio" [(ngModel)]="subType" id="m" value="m">
+                                                    <label class="form-check-label" for="m">Manually Configured FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                   <form [formGroup]="integration">
+                                    <div class="row" *ngIf="type === 'api'"> 
+                                      
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Select API</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" #apiDropdown (change)="selectAPI(apiDropdown.value)" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Equifax API">
+                                                        <option value="0">Select</option>
+                                                        <option *ngFor="let api of apiList" [value]="api.id">
+                                                            {{api.api_client_id}}
+                                                        </option>
+                                                        
+                                                    </select>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">APIs Client ID</label>
+                                                <input type="text" class="form-control" formControlName="api_client_id" id="formGroupExampleInput" placeholder="APIs Client ID" >
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Secret Keys</label>
+                                                <input type="password" class="form-control" formControlName="api_secret_key"  id="formGroupExampleInput" value="Secret Keys" >
+                                               
+                                            </div>
+                                        </div>  
+                                    </div>
+
+                                    <div class="row" *ngIf="type === 'ftp' && subType === 'a'">
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Select Pre Configured FTP</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" class="form-control"  aria-label="Text input with segmented dropdown button" placeholder="Select  Pre Configured FTP">
+                                                        <option value="0">Select</option>
+                                                      <option *ngFor="let ftp of ftpList" [value]="ftp.id">
+                                                        {{ftp.ftp_server_username}}
+                                                      </option>
+                                                    </select>
+                                                </span>
+                                                   
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                    <div class="row" *ngIf="type === 'ftp' && subType === 'm'">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Username</label>
+                                                <input type="text" class="form-control" formControlName="ftp_server_username"  id="formGroupExampleInput" placeholder="FTP Server Username" >
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Password</label>
+                                                <input type="password" class="form-control" formControlName="ftp_server_password"  id="formGroupExampleInput" placeholder="FTP Server Password" >
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Host</label>
+                                                <input type="text" class="form-control" formControlName="ftp_server_host"  id="formGroupExampleInput" placeholder="FTP Server Host" >
+                                              
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Path Location</label>
+                                                <input type="url" class="form-control" formControlName="ftp_server_path_location"  id="formGroupExampleInput" placeholder="C:\Test\Batch_File\" >
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-12">
+                                            <hr class="mb-20">
+                                            <div class="row justify-content-end">
+                                                <div class="col-auto align-self-end">
+                                                    <a tooltip="Coming Soon" style="cursor: default;" class="button float-right w-100"  href="javascript:void(0)">Schedule Export </a> 
+                                                </div> 
+                                                <div class="col-auto align-self-end"> 
+                                                    <button class="btn btn-success loader-btn float-right w-100" type="button" [disabled]="loader" (click)="addPortalName()">
+                                                        <span>
+                                                            Export Now 
+                                                            <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper" *ngIf="fileExported === true"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Export Status</h5> 
+                            <div class="tab-content">
+                                <div class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form  novalidate>
+                                    <div class="row my-4">
+                                        <div class="col-12 pb-2 text-left"><span class="gray-color">Exporting Date & Time : </span><span class="gray-04-color">{{exportDate | date : 'short'}}</span></div> 
+                                    </div> 
+
+                                    <!-- <div class="row pb-main">
+                                        <div class="col-12 pb-2 text-left">
+                                            <h6 class="gray-04-color mb-0"><b>Exporting In Progress</b></h6>
+                                            <p class="gray-04-color">100% 5 Seconds Left</p>
+                                        </div> 
+                                        <div class="col-12">
+                                          <div class="mb-2">
+                                            <progressbar class="progressBar" type="success" [value]="100"></progressbar>
+                                          </div>
+                                        </div> 
+                                    </div> -->
+                                    <!-- success -->
+                                    <br>
+                                    <div class="row pb-main done">
+                                        <div class="col-12">
+                                            <h6 class="mb-0">File Export Successfully!</h6> 
+                                        </div>   
+                                    </div>
+                                    <!-- success -->
+
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- user Export modal -->
+<ng-template #Export class="" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-5">
+                <div class="modal-content-wrapper">
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Notification Email</label>
+                                <input type="email" class="form-control"  id="formGroupExampleInput" placeholder="Enter Notification Email" >
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group form-group">
+                                <label for="formGroupExampleInput" class="w-100">Next Run </label>
+                                <input type="text" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                </div>
+                                  
+                            </div> 
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group form-group">
+                                <label for="formGroupExampleInput" class="w-100">Export Description</label>
+                                <textarea type="text" class="form-control" rows="5" placeholder="Enter Export Description" bsDatepicker></textarea>
+                                
+                            </div> 
+                        </div>
+                    </div>
+                </div> 
+                
+                <div class="col-md-12 d-flex justify-content-between align-items-center">
+                    <div class="form-check checkbox">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Delete Previous Exports</label>
+                    </div>
+                    <div class="center-text"> 
+                        <button type="button" class="button">
+                            Save
+                            <!-- <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span> -->
+                        </button> 
+                    </div>
+                </div>
+                <div class="invalid-feedback" style="display: block;" >
+                    <!-- {{responseText}} -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- end of Export modal -->
+
+<!-- error modal -->
+ 
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+<div class="modal-dialog modal-dialog-centered unlock">
+    <div class="modal-content">
+        <div class="modal-body p-0 text-center">
+            <img src="assets/images/error.png" class="img-fluid mb-20">
+            <ul class="mb-20" style="list-style-type: none;" *ngIf="responseText.length > 0">
+                <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+            </ul>
+            <div class="center-text">
+                <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-template>

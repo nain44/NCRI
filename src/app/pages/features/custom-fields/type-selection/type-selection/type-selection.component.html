@@ -1,0 +1,103 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/custom-fields']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Custom Field Type</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add New Field</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please select your input field.</h5>
+
+        <form novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">FIELD TYPE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-40">
+                                        <div class="col-md-8 d-flex mb-20">
+                                            <div class="roles-list custom-fields-type " (click)="selectType('input')"
+                                                [class]="store.customFieldForm.controls.field_type.value === 'input' ? 'done' : ''">
+                                                <i class="fa fa-check-circle"></i>
+                                                <div class="custom-pagination mt-0">
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-md-8">
+                                                            <div
+                                                                class="d-flex custom-fields-type-item align-items-center">
+                                                                <div class="item-field">
+                                                                    <div class="form-label-group m-0">
+                                                                        <input type="text" class="form-control"
+                                                                            id="formGroupExampleInput"
+                                                                            placeholder="Enter text here" disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-labels">
+                                                                    <h4>Text Input Field</h4>
+                                                                    <p>Input text field with limited characters.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 d-flex mb-20">
+                                            <div class="roles-list custom-fields-type" (click)="selectType('dropdown')"
+                                                [class]="store.customFieldForm.controls.field_type.value === 'dropdown' ? 'done' : ''">
+                                                <i class="fa fa-check-circle"></i>
+                                                <div class="custom-pagination mt-0">
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-md-8">
+                                                            <div
+                                                                class="d-flex custom-fields-type-item align-items-center">
+                                                                <div class="item-field">
+                                                                    <div class="form-label-group m-0">
+                                                                        <input type="text" class="form-control"
+                                                                            id="formGroupExampleInput"
+                                                                            placeholder="Select Value" disabled>
+                                                                        <i class="fa fa-caret-down drop-angle"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-labels">
+                                                                    <h4>Dropdown Input Field</h4>
+                                                                    <p>Dropdown list to select single value.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" class="btn btn-success btn-lg previous">Cancel</button>
+                <button (click)="redirectToPage()" type="button" class="btn btn-success btn-lg ">Next</button>
+            </div>
+        </form>
+
+    </section>
+</div>

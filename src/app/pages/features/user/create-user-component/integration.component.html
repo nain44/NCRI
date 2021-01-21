@@ -1,0 +1,562 @@
+
+<div class="container-fluid container-wrapper" > 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Upload File</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">API</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Select API</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" class="form-control" formControlName="user_role_id" aria-label="Text input with segmented dropdown button" placeholder="Equifax API">
+                                                        <option>Equifax API</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
+                                                </span>
+                                                   <div class="w-100" *ngIf="f.controls.user_role_id.status=='INVALID'">
+                                                        <div *ngIf="f.controls.user_role_id.errors.required && f.controls.user_role_id.touched" class="invalid-feedback" [style.display]="f.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">Please select role.</div>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">APIs Client ID</label>
+                                                <input type="text" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="APIs Client ID" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.minlength && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must be at least 1 character.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.maxlength && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must be at most 26 characters.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.pattern && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must have a-z & A-Z  characters.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Secret Keys</label>
+                                                <input type="password" class="form-control" formControlName="first_name" id="formGroupExampleInput" value="Secret Keys" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.minlength && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must be at least 1 character.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.maxlength && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must be at most 26 characters.</div>
+                                                    <div *ngIf="f.controls.first_name.errors.pattern && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">First name must have a-z & A-Z  characters.</div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-12 botton-fixed-btn">
+                                            <div class="row justify-content-end">
+                                                <div class="col-auto align-self-end">
+                                                    <a class="button float-right w-100"  (click)="setTab('contact')" href="javascript:void(0)">Schedule Export </a> 
+                                                </div> 
+                                                <div class="col-auto align-self-end"> 
+                                                    <a class="button float-right w-100" (click)="setTab('contact')" href="javascript:void(0)">Export Now </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper" > 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Upload File</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">API</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">Pre Configured FTP</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">Manually Configured FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Select  Pre Configured FTP</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" class="form-control" formControlName="user_role_id" aria-label="Text input with segmented dropdown button" placeholder="Select  Pre Configured FTP">
+                                                        <option>Select  Pre Configured FTP</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
+                                                </span>
+                                                   <div class="w-100" *ngIf="f.controls.user_role_id.status=='INVALID'">
+                                                        <div *ngIf="f.controls.user_role_id.errors.required && f.controls.user_role_id.touched" class="invalid-feedback" [style.display]="f.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">Please select role.</div>
+                                                   </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-12 botton-fixed-btn">
+                                            <div class="row justify-content-end">
+                                                <div class="col-auto align-self-end">
+                                                    <a class="button float-right w-100"  (click)="setTab('contact')" href="javascript:void(0)">Schedule Export </a> 
+                                                </div> 
+                                                <div class="col-auto align-self-end"> 
+                                                    <a class="button float-right w-100" (click)="setTab('contact')" href="javascript:void(0)">Export Now </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper" > 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Upload File</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">API</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">Pre Configured FTP</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">Manually Configured FTP</label>
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Username</label>
+                                                <input type="text" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="FTP Server Username" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Password</label>
+                                                <input type="password" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="FTP Server Password" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Host</label>
+                                                <input type="text" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="FTP Server Host" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">FTP Server Path Location</label>
+                                                <input type="url" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="C:\Test\Batch_File\" >
+                                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-12 botton-fixed-btn">
+                                            <div class="row justify-content-end">
+                                                <div class="col-auto align-self-end">
+                                                    <a class="button float-right w-100"  (click)="openExport(Export)" href="javascript:void(0)">Schedule Export </a> 
+                                                </div> 
+                                                <div class="col-auto align-self-end"> 
+                                                    <a class="button float-right w-100" (click)="setTab('contact')" href="javascript:void(0)">Export Now </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Export Status</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row my-4">
+                                        <div class="col-12 pb-2 text-left"><span class="gray-color">Exporting Date & Time : </span><span class="gray-04-color">10/07/2020 12:15 AM</span></div> 
+                                    </div> 
+
+                                    <div class="row pb-main">
+                                        <div class="col-12 pb-2 text-left">
+                                            <h6 class="gray-04-color mb-0"><b>Exporting In Progress</b></h6>
+                                            <p class="gray-04-color">80% 5 Seconds Left</p>
+                                        </div> 
+                                        <div class="col-12">
+                                          <div class="mb-2">
+                                            <progressbar class="progressBar" type="success" [value]="80"></progressbar>
+                                          </div>
+                                        </div> 
+                                    </div>
+                                    <!-- success -->
+                                    <br>
+                                    <div class="row pb-main done">
+                                        <div class="col-12">
+                                            <h6 class="mb-0">File Export Successfully!</h6> 
+                                        </div>   
+                                    </div>
+                                    <!-- success -->
+
+
+
+                                    <div class="row"> 
+                                        <div class="col-12 botton-fixed-btn">
+                                            <div class="row justify-content-end">
+                                                <div class="col-auto align-self-end">
+                                                    <a class="button float-right w-100"  (click)="openExport(Export)" href="javascript:void(0)">Schedule Export </a> 
+                                                </div> 
+                                                <div class="col-auto align-self-end"> 
+                                                    <a class="button float-right w-100" (click)="setTab('contact')" href="javascript:void(0)">Export Now </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Search Report -->
+<div class="container-fluid container-wrapper" *ngIf="false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body mh-77">  
+                            <h5 class="card-title mb-3">Search Report</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">Basic Search</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">Advanced Search</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">Start Date</label>
+                                                <input type="text" formControlName="date_of_joining" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">End Date </label>
+                                                <input type="text" formControlName="termination_date" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" id="formGroupExampleInput" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Client</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" class="form-control" formControlName="user_role_id" aria-label="Text input with segmented dropdown button" placeholder="Select Client">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
+                                                </span>
+                                                   <div class="w-100" *ngIf="f.controls.user_role_id.status=='INVALID'">
+                                                        <div *ngIf="f.controls.user_role_id.errors.required && f.controls.user_role_id.touched" class="invalid-feedback" [style.display]="f.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">Please select role.</div>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="inputState">Product</label>
+                                                <span class="wrapper-select">
+                                                    <select type="text" class="form-control" formControlName="user_role_id" aria-label="Text input with segmented dropdown button" placeholder="Select Product">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
+                                                </span>
+                                                   <div class="w-100" *ngIf="f.controls.user_role_id.status=='INVALID'">
+                                                        <div *ngIf="f.controls.user_role_id.errors.required && f.controls.user_role_id.touched" class="invalid-feedback" [style.display]="f.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">Please select role.</div>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" formControlName="access_type" (change)="onAccessType($event)" id="gridRadios11" value="laptop">
+                                                    <label class="form-check-label" for="gridRadios11">All Cases</label>
+                                                </div>
+                                            </div>
+                                            <div class="custom-radio custom-control-inline mr-md-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"  formControlName="access_type" (change)="onAccessType($event)" id="gridRadios21" value="desktop">
+                                                    <label class="form-check-label" for="gridRadios21">Assigned to me</label>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-md-1 align-self-end">
+                                            <a class="button float-right w-100"  (click)="setTab('contact')" [style.pointer-events]="!employeeInformation.valid && param?.type !== 'view' ? 'none' : 'auto'" href="javascript:void(0)">Search </a>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Report end -->
+
+<!-- user Export modal -->
+<ng-template #Export class="" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-5">
+                <div class="modal-content-wrapper">
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Notification Email</label>
+                                <input type="email" class="form-control" formControlName="first_name" id="formGroupExampleInput" placeholder="Enter Notification Email" >
+                                <div class="w-100" *ngIf="f.controls.first_name.status=='INVALID'">
+                                    <div *ngIf="f.controls.first_name.errors.required && f.controls.first_name.touched" class="invalid-feedback" [style.display]="f.controls.first_name.status=='INVALID' ? 'block' : 'none'">Please provide First Name.</div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group form-group">
+                                <label for="formGroupExampleInput" class="w-100">Next Run </label>
+                                <input type="text" formControlName="date_of_joining" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                </div>
+                                    <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                    </div>
+                            </div> 
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group form-group">
+                                <label for="formGroupExampleInput" class="w-100">Export Description</label>
+                                <textarea type="text" class="form-control" rows="5" placeholder="Enter Export Description" bsDatepicker></textarea>
+                                
+                            </div> 
+                        </div>
+                    </div>
+                </div> 
+                
+                <div class="col-md-12 d-flex justify-content-between align-items-center">
+                    <div class="form-check checkbox">
+                        <input type="checkbox" formControlName="use_client_percentage" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Delete Previous Exports</label>
+                    </div>
+                    <div class="center-text"> 
+                        <button type="button" class="button">
+                            Save
+                            <!-- <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span> -->
+                        </button> 
+                    </div>
+                </div>
+                <div class="invalid-feedback" style="display: block;" >
+                    <!-- {{responseText}} -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- end of Export modal -->

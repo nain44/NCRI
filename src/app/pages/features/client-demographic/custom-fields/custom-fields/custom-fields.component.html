@@ -1,0 +1,68 @@
+<section class="hk-sec-wrapper shadow-xl rounded-30">
+    <h5 class="hk-sec-title hk-sec-title--all">Please add the custom field below.</h5>
+
+    <form [formGroup]="store.customFields">
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button">
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Custom Fields</h6>
+                        </button>
+                        <div class="cg-role">
+                            <div class="row mt-20">
+                                <!-- *ngFor="let field of store.customFields.controls; let i=index" -->
+                                <ng-container *ngFor="let field of store.customFieldList[0]?.form_json?.form">
+                                    <div class="col-4" *ngIf="field.input_type !== 'dropdown'">
+                                        <div class="form-label-group">
+                                            <input #input [value]="field.default_value ? field.default_value : ''"  
+                                            [type]="field.input_type === 'N' ? 'number' : 'text'"
+                                                class="form-control input-label" placeholder="Short Name"
+                                                [required]="field.required">
+                                            <label for="">{{field.display_name}} {{field.is_mandatory ?  '*' : ''}}</label>
+                                            <!-- <div class="w-100" *ngIf="store.customFieldForm.controls.default_value.status=='INVALID'">
+                                                <div *ngIf="store.customFieldForm.controls.default_value.touched" class="invalid-feedback"
+                                                    [style.display]="store.customFieldForm.controls.default_value.status=='INVALID' ? 'block' : 'none'">
+                                                    Please provide valid default value.</div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-4" *ngIf="field.input_type === 'dropdown'"> 
+
+                                        <div class="form-label-group m-0">
+                                            <div class="d-flex custom-fields-type-item align-items-center">
+                                                <div class="item-field w-100">
+                                                    <div class="form-label-group m-0">
+                                                        <ng-select2 
+                                                        [placeholder]="field.display_name + field.required ?  '*' : ''"
+                                                        [data]="field.options" [options]="options">
+                                                        </ng-select2>
+                                                        <label for="" class="up">{{field.display_name}} {{field.is_mandatory ?  '*' : ''}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+        <hr class="mt-80" />
+        <div class="text-right">
+            <button type="button" class="btn btn-default btn-lg previous"
+                [routerLink]="['/add-client/client-details']">Previous</button>
+            <!-- [disabled]="!store.customFields.valid" -->
+            <button type="button" (click)="formData()" [disabled]="!store.customFields.valid"
+                class="btn btn-success btn-lg" [routerLink]="[store.customFieldDemoScreen ? '/add-client/custom-fields-demo' : '/add-client/comments']">Next: {{store.customFieldDemoScreen ? 'Custom Field Demo' : 'Comments'}}</button>
+        </div>
+    </form>
+
+</section>

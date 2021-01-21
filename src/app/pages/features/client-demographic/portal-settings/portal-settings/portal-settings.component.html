@@ -1,0 +1,550 @@
+<section class="hk-sec-wrapper shadow-xl rounded-30">
+    <h5 class="hk-sec-title hk-sec-title--all">Please arrange the settings as per client needs. </h5>
+
+    <form [formGroup]="store.portalSettings">
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Group</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input maxlength="30" type="text" formControlName="group_name" class="form-control input-label"
+                                            placeholder="Short Name">
+                                        <label for="">Group Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button [class]="!store.portalSettings.controls.group_name.value ? 'btn-border' : ''" [disabled]="
+                                    !store.portalSettings.controls.group_name.value
+                                    " type="button" (click)="isEdit === true ? updateGroup() : addGroup()"
+                                        class="btn btn-success btn-lg w-100">
+                
+                                        {{isEdit === true ? 'Update Group' : 'Add Group'}}
+                                    </button>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-6">
+                                    <div class="small text-light-50 mb-10"><em>List of already added groups</em></div>
+                                    <div class="added-group rounded-10 mb-10"
+                                        *ngFor="let group of store.portalSettings.controls.group_list.value;let i = index">
+                                        <div class="row no-gutters">
+                                            <div class="col-8">
+                                                <div class="custom-control custom-checkbox mt-5">
+                                                    <!-- <input type="checkbox" class="custom-control-input" id="is_checked"
+                                                        [(ngModel)]="group.is_checked" [ngModelOptions]="{standalone: true}"> -->
+                                                    <label class="custom-control-label" for="is_checked">{{group.name}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-right d-flex align-items-center justify-content-end">
+                                                <img src="assets/dist/img/edit.svg" class="cursor-pointer" (click)="editGroup(group)"
+                                                    height="20" class="mr-10" />
+                                                <img src="assets/dist/img/trash-can.svg" class="cursor-pointer" height="20"
+                                                    (click)="deleteGroup(i)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="bg-light-10 p-2 rounded-10">
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <div class="custom-control custom-checkbox mt-5">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                                    <label class="custom-control-label" for="customCheck6">Sales</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <img src="dist/img/edit.svg" height="20" class="mr-10" />
+                                                <img src="dist/img/trash-can.svg" height="20" />
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Client Portal Settings</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="client_portal_id">
+                                            <!-- <option>Laptop</option> -->
+                                            <option *ngFor="let data of clientPortalDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Portal View</label>
+                                        <div class="w-100" *ngIf="store.portalSettings.controls.client_portal_id.status=='INVALID'">
+                                            <div *ngIf="store.portalSettings.controls.client_portal_id.errors.required && store.portalSettings.controls.client_portal_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.portalSettings.controls.client_portal_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="client_portal_controller"
+                                            formControlName="client_portal_controller">
+                                        <label class="custom-control-label" for="client_portal_controller">
+                                            Client Portal Controller</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Username and Password</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input maxlength="16" type="text" class="form-control" formControlName="username" placeholder="Short Name">
+                                        <label for="">Username</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input maxlength="16" type="password" class="form-control" formControlName="password" placeholder="Short Name">
+                                        <label for="">Password</label>
+                                        <div class="w-100" *ngIf="store.portalSettings.controls.password.status=='INVALID'">
+                                            <div *ngIf="store.portalSettings.controls.password.errors.required && store.portalSettings.controls.password.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.portalSettings.controls.password.status=='INVALID' ? 'block' : 'none'">Please
+                                                provide password.</div>
+                                            <div *ngIf="store.portalSettings.controls.password.errors.pattern && store.portalSettings.controls.password.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.portalSettings.controls.password.status=='INVALID' ? 'block' : 'none'">Please
+                                                valid Password. must contain one capital, one small letter, one digit, one special
+                                                character and Minimum 8 characters</div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <button
+                                    [class]="!store.portalSettings.controls.username.value || !store.portalSettings.controls.password.value ? 
+                                    'btn-border' : ''"
+                                    [disabled]="!store.portalSettings.controls.username.value || !store.portalSettings.controls.password.value || !store.portalSettings.controls.password.valid"
+                                     type="button" class="btn btn-success btn-lg" (click)="addUser()">Add User</button>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-8">
+                                    <div class="small text-light-50 mb-10">List of already added users</div>
+                                    <div class="added-group p-2 rounded-10 mb-10"
+                                        *ngFor="let user of store.portalSettings.controls.user_list.value; let i = index">
+                                        <div class="row no-gutters">
+                                            <div class="col-6 d-flex align-items-center">
+                                                <div class="text-dark-100">{{user.username}}</div>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <div class="text-dark-100">{{user.password}}</div>
+                                            </div>
+                                            <div class="col-2 text-right d-flex align-items-center justify-content-end">
+                                                <img src="assets/dist/img/trash-can.svg" height="20" class="cursor-pointer" (click)="deleteUser(i)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Permissions</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_edit_collection_status"
+                                            formControlName="p_edit_collection_status">
+                                        <label class="custom-control-label" for="p_edit_collection_status">Edit Collection
+                                            Status</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_reminder"
+                                            formControlName="p_reminder">
+                                        <label class="custom-control-label" for="p_reminder">Reminder</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_add_accounts_manually"
+                                            formControlName="p_add_accounts_manually">
+                                        <label class="custom-control-label" for="p_add_accounts_manually">Add Accounts Manually</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_upload_documents"
+                                            formControlName="p_upload_documents">
+                                        <label class="custom-control-label" for="p_upload_documents">Upload Documents</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_upload_bulk_account_files"
+                                            formControlName="p_upload_bulk_account_files">
+                                        <label class="custom-control-label" for="p_upload_bulk_account_files">Upload Bulk Account Files</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="p_search_for_accounts"
+                                            formControlName="p_search_for_accounts">
+                                        <label class="custom-control-label" for="p_search_for_accounts">Search for Accounts</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Show Reports</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_accounts_report"
+                                            formControlName="sr_accounts_report">
+                                        <label class="custom-control-label" for="sr_accounts_report">Accounts Report</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_client_statement_without_adjustments"
+                                            formControlName="sr_client_statement_without_adjustments">
+                                        <label class="custom-control-label" for="sr_client_statement_without_adjustments">Client Statement without
+                                            Adjustments</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_client_statement_report_no_interest"
+                                            formControlName="sr_client_statement_report_no_interest">
+                                        <label class="custom-control-label" for="sr_client_statement_report_no_interest">Client Statement Report - No
+                                            Interest</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_client_statement_with_adjustments"
+                                            formControlName="sr_client_statement_with_adjustments">
+                                        <label class="custom-control-label" for="sr_client_statement_with_adjustments">Client Statement With
+                                            Adjustments</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_payments_with_client_disb"
+                                            formControlName="sr_payments_with_client_disb">
+                                        <label class="custom-control-label" for="sr_payments_with_client_disb">Payments w/ Client Disb.</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_payments_with_notes"
+                                            formControlName="sr_payments_with_notes">
+                                        <label class="custom-control-label" for="sr_payments_with_notes">Payments with Notes</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_portfolio_dashboard_report"
+                                            formControlName="sr_portfolio_dashboard_report">
+                                        <label class="custom-control-label" for="sr_portfolio_dashboard_report">Portfolio Dashboard Report</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_portfolio_liquidation"
+                                            formControlName="sr_portfolio_liquidation">
+                                        <label class="custom-control-label" for="sr_portfolio_liquidation">Portfolio Liquidation</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_status_report"
+                                            formControlName="sr_status_report">
+                                        <label class="custom-control-label" for="sr_status_report">Status Report</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_status_report_all_notes"
+                                            formControlName="sr_status_report_all_notes">
+                                        <label class="custom-control-label" for="sr_status_report_all_notes">Status Report (All Notes)</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="sr_status_report_2"
+                                            formControlName="sr_status_report_2">
+                                        <label class="custom-control-label" for="sr_status_report_2">Status Report 2</label>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Required Documents</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input maxlength="30" type="text" class="form-control input-label" placeholder="Short Name"
+                                            formControlName="document_name">
+                                        <label for="">Documents Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button
+                                    [class]="!store.portalSettings.controls.document_name.value ? 'btn-border' : ''"
+                                    [disabled]="!store.portalSettings.controls.document_name.value"
+                                     type="button" class="btn btn-success btn-lg w-100" (click)="addDocument()">Add
+                                        Document</button>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-6">
+                                    <div class="small text-light-50 mb-10">List of already added document names</div>
+                                    <div class="added-group rounded-10 mb-10"
+                                        *ngFor="let document of store.portalSettings.controls.required_document_list.value; let i = index">
+                                        <div class="row align-items-center">
+                                            <div class="col-6 d-flex align-items-center">
+                                                <div class="text-dark-100">{{document.name}}</div>
+                                            </div>
+                                            <div class="col-6 text-right d-flex align-items-center justify-content-end">
+                                                <img src="assets/dist/img/trash-can.svg" class="cursor-pointer" height="20"
+                                                    (click)="deleteDocument(i)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Required Fields</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="row mt-20">
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_first_name"
+                                            formControlName="rf_first_name">
+                                        <label class="custom-control-label" for="rf_first_name">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_middle_name"
+                                            formControlName="rf_middle_name">
+                                        <label class="custom-control-label" for="rf_middle_name">Middle Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_last_name"
+                                            formControlName="rf_last_name">
+                                        <label class="custom-control-label" for="rf_last_name">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_aka" formControlName="rf_aka">
+                                        <label class="custom-control-label" for="rf_aka">A.K.A</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_company_name"
+                                            formControlName="rf_company_name">
+                                        <label class="custom-control-label" for="rf_company_name">Company Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_contact_title"
+                                            formControlName="rf_contact_title">
+                                        <label class="custom-control-label" for="rf_contact_title">Contact Title</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_contact_name"
+                                            formControlName="rf_contact_name">
+                                        <label class="custom-control-label" for="rf_contact_name">Contact Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_address"
+                                            formControlName="rf_address">
+                                        <label class="custom-control-label" for="rf_address">Addresss</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_city"
+                                            formControlName="rf_city">
+                                        <label class="custom-control-label" for="rf_city">City</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_state_or_province"
+                                            formControlName="rf_state_or_province">
+                                        <label class="custom-control-label" for="rf_state_or_province">State/Province</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_zip_code"
+                                            formControlName="rf_zip_code">
+                                        <label class="custom-control-label" for="rf_zip_code">Zip Code</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_cell"
+                                            formControlName="rf_cell">
+                                        <label class="custom-control-label" for="rf_cell">Cell</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_phone"
+                                            formControlName="rf_phone">
+                                        <label class="custom-control-label" for="rf_phone">Phone</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_fax"
+                                            formControlName="rf_fax">
+                                        <label class="custom-control-label" for="rf_fax">Fax</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_ssn"
+                                            formControlName="rf_ssn">
+                                        <label class="custom-control-label" for="rf_ssn">SSN</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_date_of_birth"
+                                            formControlName="rf_date_of_birth">
+                                        <label class="custom-control-label" for="rf_date_of_birth">Date of Birth</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_email_address"
+                                            formControlName="rf_email_address">
+                                        <label class="custom-control-label" for="rf_email_address">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" class="custom-control-input" id="rf_notes"
+                                            formControlName="rf_notes">
+                                        <label class="custom-control-label" for="rf_notes">Notes</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+            </div>
+        </div> 
+        <hr class="mt-50" />
+        <div class="text-right mt-20">
+            <button type="button" class="btn btn-default btn-lg previous    "
+                [routerLink]="['/add-client/documents']">Previous</button>
+            <!-- [disabled]="!store.portalSettings.valid" -->
+            <button type="button" [disabled]="!store.portalSettings.valid" (click)="submitForm()" [disabled]="loader"
+                class="btn btn-success btn-lg loader-btn">
+                <span>
+                    Save Client
+                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+            </button>
+        </div>
+    </form>
+
+</section>
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="error-list mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of errorList">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text text-right">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success btn-lg">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

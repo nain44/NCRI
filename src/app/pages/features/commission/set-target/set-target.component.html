@@ -1,0 +1,1103 @@
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Comission Dashboard</h1>
+        </div>
+    </div>
+    <div class="">
+        <div class="hk-sec-wrapper">
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-center flex-column">
+                            <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                <span class="mr-10">Show</span>
+                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                                <span class="ml-10">of 17</span>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" class="form-control" #searchInput id="inlineFormInputGroupUsername2"
+                                    placeholder="Search">
+                            </div>
+                            <div class="btn-group theme-dropdown" dropdown>
+                                <button id="button-basic" dropdownToggle type="button"
+                                    class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+                                    Download Users <span class="caret"></span>
+                                </button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                    aria-labelledby="button-basic">
+                                    <li role="menuitem"><a class="dropdown-item" href="#">All</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="table-responsive mnh-200p">
+                    <table id="datable_1"
+                        class="table theme-table user-dashboard user-dashboard--commission  w-100 display pb-30">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </th>
+                                <th>EMPLOYEE NAME</th>
+                                <th>USER EMAIL</th>
+                                <th>EMPLOYEE TYPE</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="1">
+                                        <label class="custom-control-label" for="1"></label>
+                                    </div>
+                                </td>
+                                <td class="cursor-pointer">
+                                    <div class="d-flex align-items-center text-capitalize">
+                                        <div class="user-img-name">
+                                            UK
+                                        </div>
+                                        <!-- <img src="assets/images/add-comment.png" class="img-fluid user-img mr-10"> -->
+                                        Umair Khan
+                                    </div>
+                                </td>
+                                <td>umair.khan.86@hotmail.com</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>umair.khan.86@hotmail.com</span>
+                                        <span class="status ml-10 approval">
+                                            APPROVAL PENDING
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div> 
+                                            <img src="assets/images/edit.png" class="cursor-pointer mr-10" alt="">
+                                        </div>
+                                        <div class="comment"
+                                            data-count="3">
+                                            <img src="assets/images/comment.png" class="cursor-pointer mr-10" alt=""> 
+                                        </div> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="false" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div *ngIf="false" class="d-flex justify-content-center">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-center flex-column">
+                            <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                <span class="mr-10">Show</span>
+                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                                <span class="ml-10">of 17</span>
+                            </div>
+                        </div>
+                        <!-- <div class="col d-flex align-items-end justify-content-end">  
+                            <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="pageConfig.size"></pagination>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commissionr</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Edit Commission</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <div class="mb-30">
+            <h2>Waheed Imran</h2>
+            <div class="lead text-muted">Collection Supervisor</div>
+            <p class="text-dark-80">Department - Branch Location Pakistan</p>
+        </div>
+        <form novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">SALARY INFORMATION</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-20">
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <select class="form-control selectDropdown" required>
+                                                    <option>CAD</option>
+                                                </select>
+                                                <label class="selectHolder" for="">Currency*</label>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.user_role_id.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.user_role_id.errors.required && userForm.controls.user_role_id.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">
+                                                        Please select role.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <select class="form-control selectDropdown" required>
+                                                    <option>Gross Salary (Yearly)*</option>
+                                                </select>
+                                                <label class="selectHolder" for="">Gross Salary (Yearly)*</label>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.branch_location_id.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.branch_location_id.errors.required && userForm.controls.branch_location_id.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">
+                                                        Please provide branch location.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4"> 
+                                            <div class="form-label-group">
+                                                <input type="text" formControlName="logout_inactivity_minutes" class="form-control"
+                                                    id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                                <label for="">Gross Salary (Monthly)*</label>
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">COMMISSION TYPE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                        <div class="row mt-20 mb-20">
+                                            <div class="col">
+                                                <div class="form-inline toggle-radio">
+                                                    <div class="btn-group" btnRadioGroup [(ngModel)]="radioModel">
+                                                    <label class="btn btn-success" btnRadio="Left">Salary Based</label>
+                                                    <label class="btn btn-success" btnRadio="Middle">Target Based</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto d-flex align-items-center">
+                                                <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="d-flex align-items-center comment-content commission-history">
+                                                    <div class="user-img-name">WI</div>
+                                                    <div class="commission-history__name">
+                                                        <span>Waheed Imran</span>Posted a comments on commission type at 21 Jan 20 at 3:30PM
+                                                        <p>" We need to change the commission with this agent type.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="set-commssion">
+                                            <div class="row mb-10">
+                                                <div class="col-md-12 d-flex">
+                                                    <div class="field-view d-flex justify-content-center align-items-center">
+                                                        <div class="custom-radio custom-control-inline">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="c-radio" type="radio" id="gridRadios11" value="laptop">
+                                                                <label class="form-check-label" for="gridRadios11">Flat</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-radio custom-control-inline">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="c-radio" type="radio" id="gridRadios11" value="laptop">
+                                                                <label class="form-check-label" for="gridRadios11">Tier Based</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-12"> 
+                                                    <div class="toggle-wrap d-flex align-items-center">
+                                                        <label class="switch switch--commission m-0">
+                                                            <input type="checkbox">
+                                                            <span class="slider round">
+                                                                <i class="fa fa-usd"></i>
+                                                                <i class="fa fa-percent"></i>
+                                                            </span> 
+                                                        </label>
+                                                        <span class="font-16 text-dark-80 font-weight-bold ml-10">Tier-rate Variable Commission</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- flat -->
+                                            <div class="row d-flex align-items-center" *ngIf="false">
+                                                <div class="col-md-8 d-flex align-items-center">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5"> 
+                                                            <div class="form-label-group">
+                                                                <select class="form-control selectDropdown bg-none" required>
+                                                                    <option>asdads</option>
+                                                                </select>
+                                                                <label class="selectHolder" for="">Break Even Times*</label>
+                                                                <!-- <div class="w-100" *ngIf="userForm.controls.user_role_id.status=='INVALID'">
+                                                                    <div *ngIf="userForm.controls.user_role_id.errors.required && userForm.controls.user_role_id.touched"
+                                                                        class="invalid-feedback"
+                                                                        [style.display]="userForm.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">
+                                                                        Please select role.</div>
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group commission">
+                                                                <img src="assets/images/percent.png" class="img-fluid">
+                                                                <input type="number" class="form-control bg-none" placeholder="Short Name"
+                                                                    formControlName="default_commission">
+                                                                <label for="">Commission*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" class="btn btn-success btn-lg">
+                                                                Calculate
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-15">
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Salary</div>
+                                                            <div>300</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Break Even Amount:</div>
+                                                            <div>300</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Break Even Times:</div>
+                                                            <div>300</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Commission(%)</div>
+                                                            <div>300</div>
+                                                        </div>  
+                                                    </div>
+                                                </div> 
+                                                <div class="col-12">
+                                                    <div class="col-md-7 mt-20">
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title">COMMISSION TYPE</h6>
+                                                        <div class="d-flex align-items-center calculated-commission">
+                                                            <div>
+                                                                <div>Break Even Times: <b>20</b></div>
+                                                            </div>
+                                                            <div>
+                                                                <div>Break Even Times: <b>20%</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- flat end -->
+                                            <!-- Tier Based -->
+                                            <div class="row mt-20">
+                                                <div class="col-md-8 d-flex align-items-center">
+                                                    <div class="row w-100"> 
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group commission">
+                                                                <img src="assets/images/percent.png" class="img-fluid">
+                                                                <input type="number" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Commission*</label> 
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+                                                <div class="w-100"></div>
+                                                <div class="col-md-8">
+                                                    <div class="w-100 mt-20 mb-30"> 
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title text-dark-80">Current Tier Based Plan</h6>
+                                                        <div class="table-wrap p-4 dash-border pt-0"> 
+                                                            <div>
+                                                                <div class="table-responsive mnh-200p">
+                                                            <table class="table theme-table role-map-table role-map-table--tiredbase w-100 display">
+                                                                <thead>
+                                                                    <tr> 
+                                                                        <th>Break Even Times*</th>
+                                                                        <th>MTD Base Target*  </th>  
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>  
+                                                                    <tr> 
+                                                                        <td>3</td>     
+                                                                        <td>15,000</td>     
+                                                                    </tr> 
+                                                                    <tr> 
+                                                                        <td>3</td>     
+                                                                        <td>15,000</td>     
+                                                                    </tr> 
+                                                                    <tr> 
+                                                                        <td>3</td>     
+                                                                        <td>15,000</td>     
+                                                                    </tr> 
+                                                                </tbody>  
+                                                                <tbody *ngIf="false">
+                                                                    <tr style="text-align: center;">
+                                                                        <td colspan="3">No Record Found</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                            <div *ngIf="false" class="d-flex justify-content-center">
+                                                                <div class="spinner-border theme-color" role="status">
+                                                                  <span class="sr-only"></span>
+                                                                </div>
+                                                            </div>
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                    <div class="calculated-commission pb-10">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group "> 
+                                                                <input type="text" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Break Even Times*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group">  
+                                                                <input type="text" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">MTD Base Target*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" class="btn btn-success btn-lg w-100">
+                                                                Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Tier Based end --> 
+                                        </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" class="btn btn-success loader-btn btn-lg">
+                    <span>
+                        Submit Request for Approval
+                        <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<!-- edit flow -->
+<div class="hk-pg-wrapper" *ngIf="true">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Edit Commission</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-30">
+                    <h2>Waheed Imran</h2>
+                    <div class="lead text-muted">Collection Supervisor</div>
+                    <p class="text-dark-80">Department - Branch Location Pakistan</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="set-commssion p-3 mb-20">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Salary</div>
+                            <div>300</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Break Even Amount:</div>
+                            <div>300</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Break Even Times:</div>
+                            <div>300</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Commission(%)</div>
+                            <div>300</div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center" *ngIf="true">
+                <div class="commission-edit-tabs"> 
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(0)">Salary<br>Flat</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(1)">Salary<br>Tier</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(2)">Target<br>Commission Amount</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="selectTab(3)">Target<br>Commission % age</button>
+                 </div> 
+            </div>
+        </div> 
+        <form novalidate class="mt-20">
+            <div class="row">
+                <div class="col-12"> 
+                    <tabset #staticTabs class="commission-edit-tabs-content">
+                        <tab heading="Salary Flat" >
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Salary Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Flat</span></p> 
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-grid stats-grid--cEdit">
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div>  
+                                </div>
+
+
+                                <div class="row set-commssion p-4"> 
+                                    <div class="col-md-4"> 
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Salary Tier" >
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Salary Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Flat</span></p> 
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-grid stats-grid--cEdit" *ngIf="false"> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div> 
+                                    <div>
+                                        <p>Salary</p>
+                                        <h1>3,000</h1>
+                                    </div>  
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even Percentage</div> 
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Commission Percentage</div> 
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="row set-commssion p-4"> 
+                                    <div class="col-md-4"> 
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Target Commission Amount" >
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Salary Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Flat</span></p> 
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                    </div>
+                                </div>
+                                 
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even Percentage</div> 
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Commission Percentage</div> 
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="row set-commssion p-4"> 
+                                    <div class="col-md-4"> 
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                        <tab heading="Target Commission % age" >
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <h6 class="edit-title">
+                                    <span>SALARY BASED</span>
+                                </h6>
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div>
+                                        <p class="text-gray font-16">Commission Type:<span class="text-dark-80">Salary Based</span></p>
+                                        <p class="text-gray font-16">Break Even:<span class="text-dark-80">Flat</span></p> 
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                    </div>
+                                </div>
+                                 
+                                <div class="row">
+                                    <div class="col-md-5 commission-setting-history view-percent">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Break Even Percentage</div> 
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <div class="be-time">Commission Percentage</div> 
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">30%</div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div> 
+                                                    <div class="be-value">15.98%</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="row set-commssion p-4"> 
+                                    <div class="col-md-4"> 
+                                        <label class="font-16 text-dark-80"><b>Comment:</b></label>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control bg-transparent"
+                                                id="formGroupExampleInput" placeholder="Gross Salary (Monthly)*">
+                                            <label for="">Comments if you are requesting to submit again</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                    </tabset> 
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" class="btn btn-success loader-btn btn-lg previous">
+                    <span>
+                        Request for Update
+                        <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success loader-btn btn-lg">
+                    <span>
+                        Approve Commission
+                        <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+<!-- edit flow end -->
+
+<!-- view history modal --> 
+<ng-template #historyModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-xl unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">History of Commission</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                <div class="table-responsive mnh-200p">
+                <table id="datable_1"
+                        class="table theme-table commission-setting-history-table w-100 display pb-30">
+                        <thead>
+                            <tr> 
+                                <th>COMMISSION TYPE</th>
+                                <th>BREAK EVEN</th>
+                                <th></th>
+                                <th>FROM DATE</th>
+                                <th>TO DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>  
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history"> 
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)*</div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr>
+                            <tr>  
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history"> 
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">60,000</div>
+                                            </div> 
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr>
+                            <tr *ngIf="false" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+            <div class="modal-footer pb-0 pr-0">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-success btn-lg previous" (click)="modalRef.hide()" data-dismiss="modal"
+                    >Close</button>  
+                </div> 
+            </div> 
+        </div>
+    </div>
+</ng-template> 
+<!-- view history modal end -->
+
+
+
+<div class="container-fluid container-wrapper" *ngIf="false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Commission and Compensation</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Set Target</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Set Target</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form  novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">Start Date</label>
+                                                <input type="text" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <!-- <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div> -->
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">End Date </label>
+                                                <input type="text"  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" id="formGroupExampleInput" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-11 text-center">
+                                            <img src="/assets/images/target.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-1 align-self-end">
+                                            <a class="button float-right"  >Next </a>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper" *ngIf="false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Set Target</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">Start Date</label>
+                                                <input type="text" formControlName="date_of_joining" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">End Date </label>
+                                                <input type="text" formControlName="termination_date" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" id="formGroupExampleInput" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Target Amount</label>
+                                                <input type="text" formControlName="Amount" class="form-control" id="formGroupExampleInput" placeholder="Enter Target Amount">
+                                                <div class="w-100" *ngIf="g.controls.cell_number.status=='INVALID'">
+                                                    <div *ngIf="g.controls.cell_number.errors.minlength && g.controls.cell_number.touched" class="invalid-feedback" [style.display]="g.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Target number must be at least 1 character.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-11 text-center">
+                                            <img src="/assets/images/target1.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-1 align-self-end">
+                                            <a class="button float-right"  (click)="setTab('contact')" [style.pointer-events]="!employeeInformation.valid && param?.type !== 'view' ? 'none' : 'auto'" href="javascript:void(0)">Next </a>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div> 

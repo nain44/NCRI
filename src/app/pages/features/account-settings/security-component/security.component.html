@@ -1,0 +1,210 @@
+
+<div class="hk-pg-wrapper">
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a [routerLink]="['/user']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Change Password</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Summary</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Change Password</h1> 
+        </div>
+    </div> 
+<section class="hk-sec-wrapper shadow-xl rounded-30">  
+    <h5 class="hk-sec-title hk-sec-title--all">Change your current password.</h5> 
+
+    <form [formGroup]="changePassword" novalidate>
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">PASSWORD</h6>
+                        </button>
+                        <div class="cg-role">   
+                            <div class="w-100 mt-20 mb-70"> 
+                                <div class="row no-gutters">  
+                                    <div class="col-md-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="password" class="form-control" placeholder="Current Password *" id="formGroupExampleInput" formControlName="old_password" required>
+                                                    <label for="">Current Password *</label> 
+                                                </div>
+                                            </div> 
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input (keyup)="matchRegex()"  type="password" class="form-control" id="formGroupExampleInput" formControlName="new_password" placeholder="New Password" >
+                                                    <label for="">Enter New Password*</label> 
+                                                    <div class="w-100" *ngIf="f.controls.new_password.status=='INVALID'">
+                                                        <div *ngIf="f.controls.new_password.errors.pattern && f.controls.new_password.touched" class="invalid-feedback" [style.display]="f.controls.new_password.status=='INVALID' ? 'block' : 'none'">Invalid password.</div> 
+                                                    </div>
+                                                    <span class="text-light-50 d-none">Password must be 8 character long, contain (one capital, one small, one number, one special character)</span>
+                                                </div> 
+                                            </div> 
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input (keyup)="matchPassword()"  type="password" class="form-control" formControlName="confirm_password" placeholder="Confirm Password">
+                                                    <label for="">Confirm Password*</label>  
+                                                    <div class="w-100" *ngIf="matchPasswordCheck">
+                                                        <div class="invalid-feedback" style="display: block;">Password does not match.</div> 
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="col-12"> 
+                                                <div class="custom-control custom-checkbox mb-20 mt-30">
+                                                    <input type="checkbox" class="custom-control-input" formControlName="mfa_enabled" id="2fact">
+                                                    <label class="custom-control-label two-factor" for="2fact">
+                                                        <b>Two-step verification</b>
+                                                        <span class="d-block text-light-50 font-14">Keep your account extra secure with a second login step.</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-4 offset-md-1">
+                                        <div class="pass-validation mt-40">
+                                            <h4>Password must contain the following :</h4>
+                                            <ul> 
+                                                <li [class]="regexchecks.capital === true ? 'active' : ''">One capital letter</li>
+                                                <li [class]="regexchecks.small === true ? 'active' : ''">One small letter</li>
+                                                <li [class]="regexchecks.special === true ? 'active' : ''">One special character</li>
+                                                <li [class]="regexchecks.no === true ? 'active' : ''">One numeric digit</li>
+                                                <li [class]="regexchecks.length === true ? 'active' : ''">Minimum 8 characters</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                </accordion>
+            </div>
+        </div>
+        
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-30"> 
+            <button [style.pointer-events]="(!changePassword.valid || matchPasswordCheck) ? 'none' : 'auto'" *ngIf="!loader2" class="btn btn-success btn-lg mr-3" (click)="updatePassword(changePassword.value)" type="button">Update</button>
+            <button style="pointer-events: none;" *ngIf="loader2" class="btn btn-success btn-lg mr-3" type="button">
+                Update
+                <span class="spinner-border float-right" role="status" aria-hidden="true"></span>
+            </button>
+        </div>
+    </form>
+
+</section>  
+</div>
+
+
+<!-- old code -->
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Account Settings</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Security</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <form [formGroup]="changePassword" novalidate>
+            <div class="row">   
+                <div class="col-md-12">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-4 mb-md-5">Security</h5>
+                            <div class="px-md-5">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
+                                        <img src="assets/images/update-pass.png" class="img-fluid" alt="update Password">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="card-title mb-4">Update Password</h5>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput">Enter Old Password*</label>
+                                            <input  type="password" class="form-control" id="formGroupExampleInput" formControlName="old_password" placeholder="Old Password" >
+                                            <!-- <div class="w-100" *ngIf="f.controls.old_password.status=='INVALID'">
+                                                <div *ngIf="f.controls.old_password.errors.required && f.controls.old_password.touched" class="invalid-feedback" [style.display]="f.controls.old_password.status=='INVALID' ? 'block' : 'none'">Please provide old password.</div>
+                                                <div *ngIf="f.controls.old_password.errors.minlength && f.controls.old_password.touched" class="invalid-feedback" [style.display]="f.controls.old_password.status=='INVALID' ? 'block' : 'none'">Old password must be at least 1 character.</div>
+                                            </div> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput">Enter New Password*</label>
+                                            <input (keyup)="checkPassword()"  type="password" class="form-control" id="formGroupExampleInput" formControlName="new_password" placeholder="New Password" >
+                                            <div class="w-100" *ngIf="f.controls.new_password.status=='INVALID'">
+                                                <div *ngIf="f.controls.new_password.errors.pattern && f.controls.new_password.touched" class="invalid-feedback" [style.display]="f.controls.new_password.status=='INVALID' ? 'block' : 'none'">Invalid password.</div>
+                                                
+                                            </div>
+                                            <span class="gray-color">Password must be 8 character long, contain (one capital, one small, one number, one special character)</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Confirm Password*</label>
+                                            <input (keyup)="matchPassword()"  type="password" class="form-control" formControlName="confirm_password" placeholder="Confirm Password" >
+                                            <div class="w-100" *ngIf="matchPasswordCheck">
+                                                <div class="invalid-feedback" style="display: block;">Password does not match.</div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="mt-md-5 mt-4">
+                                            <div class="form-inline">
+                                                <div class="mr-md-3 mr-0 mb-md-0 mb-3">
+                                                    <label class="w-auto mr-4 mb-1 jc-none">Two-step verification</label>
+                                                    <span class="gray-color">Keep your account extra secure with a second login step.</span>
+                                                </div>
+                                                <div class="pull-md-right ml-auto">
+                                                    <label class="switch w-auto">
+                                                        <input formControlName="mfa_enabled" type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-5">
+                                            <button [style.pointer-events]="(!changePassword.valid || matchPasswordCheck) ? 'none' : 'auto'" *ngIf="!loader2" class="button w-130 mr-3" (click)="updatePassword(changePassword.value)" type="button">Update</button>
+                                            <button style="pointer-events: none;" *ngIf="loader2" class="button w-130 mr-3" type="button">
+                                                Update
+                                                <span class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                            </button>
+                                            <!-- <button [routerLink]="['/user']" class="button button-border w-130" type="button">Cancel</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-- old code end -->
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;" style="color: black;">
+                    <li *ngFor="let error of errors">{{error}}</li>
+                    <!-- <li>{{errorMessage}}</li> -->
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

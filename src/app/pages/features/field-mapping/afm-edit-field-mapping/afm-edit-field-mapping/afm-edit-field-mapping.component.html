@@ -1,0 +1,151 @@
+<div class="hk-pg-wrapper">
+    <div class="container-fluid">
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/field-mapping']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Edit Field Mapping</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">File Field Mapping</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Map the required column to input fields.</h5>
+        <accordion [isAnimated]="true" class="accord-section">
+            <accordion-group [isOpen]="true">
+                <button
+                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                    accordion-heading type="button">
+                    <h6 class="accor-name w-100 text-left hk-sec-title">FIELD MAPPING</h6>
+                </button>
+                <div class="cg-role">
+                    <div class="w-100 mt-20">
+                        <div class="table-wrap"> 
+                            <div class="row">
+                                <div class="col-md-8 set-commssion">
+                                    <div class="row mt-20">
+                                        <div class="col-md-12 mt-20">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" [(ngModel)]="mappedFields"
+                                                        (ngModelChange)="filterData()"
+                                                            class="custom-control-input" id="Mandatory">
+                                                        <label class="custom-control-label font-semi-bold"
+                                                            for="Mandatory">Mapped Fields <span
+                                                                class="count-label ml-2">
+                                                                {{mappedCount}}
+                                                            </span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" [(ngModel)]="nonMappedFields"
+                                                        (ngModelChange)="filterData()"
+                                                            class="custom-control-input" id="n">
+                                                        <label class="custom-control-label font-semi-bold"
+                                                            for="n">Non-Mapped Fields <span
+                                                                class="count-label gray ml-2">
+                                                                {{nonMappedCount}}
+                                                            </span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="font-16 text-dark-80 text-right">Imported Fields: <b class="font-semi-bold">{{fmDetails?.field_mapping_json?.length}}</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col d-flex align-items-end mt-2 p-0">
+                                                <div class="form-group has-search filter-search w-100">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" [(ngModel)]="txtSearch" (keyup)="filterData()" #searchInput class="form-control bg-none"
+                                                        placeholder="Search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 pr-0">
+                                            <div class="table-responsive mnh-200p pre-import-list pr-15">
+                                                <table id="datable_1"
+                                                    class="table theme-table role-map-table field-map w-100 display mt-20 border-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>COLUMN NAME</th>
+                                                            <th>FIELDS</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr [class]="field.mapped_field ? 'selected' : ''"
+                                                            *ngFor="let field of store?.fieldMappingForm?.value.field_mapping_json;let index = index">
+                                                            <td>{{field?.field}}</td>
+                                                            <td>
+                                                                <div class="form-label-group">
+                                                                    <ng-select2
+                                                                    [allowClear]="true"
+                                                                    (valueChanged)="mapField($event,index)"
+                                                                     [(ngModel)]="field.mapped_field"
+                                                                        [data]="fieldsData" [options]="options" >
+                                                                    </ng-select2>
+                                                                    <!-- <label class="selectHolder" for="">Select User Roles</label> -->
+                                                                    <label [class.active]="field?.mapped_field" class="ngSelectLabel">Select Field</label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="shadow-none" *ngIf="(store?.fieldMappingForm?.value !== undefined) && (store?.fieldMappingForm?.value.field_mapping_json !== undefined) && !(store?.fieldMappingForm?.value.field_mapping_json?.length > 0)">
+                                                            <td colspan="2">
+                                                                <div class="text-center">
+                                                                    <i class="fa fa-list-ul font-50 text-gray"></i>
+                                                                    <p>List of fields will be here.</p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody> 
+                                                </table>
+                                            </div>
+                                            <div *ngIf="false" class="d-flex justify-content-center">
+                                                <div class="spinner-border theme-color" role="status">
+                                                    <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="isFieldsLeft">
+                                    <div class="upload-file-info upload-file-info--mapping">
+                                        <div class="align-items-start"> 
+                                            <img src="assets/images/i-icon.png" class="info-icon" >
+                                            <ul> 
+                                                <p>Mandatory Fields:</p>
+                                                <li>You cannot conitnue without selecting mandatory fields for</li>
+                                                <li>Coloumn: <b>{{leftFields.toString()}}</b></li> 
+                                            </ul>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="mb-20">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" [routerLink]="['/field-mapping']"
+                        class="button btn btn-success previous border-0">Cancel</a>
+                    <!-- <a href="javascript:void(0)" [routerLink]="['/role']"
+                        class="button btn btn-success previous">Back</a> -->
+                    <button 
+                    (click)="checkMandatoryFields()"
+                    [disabled]="!store.fieldMappingForm.controls.field_mapping_json.valid" href="javascript:void(0)"
+                        class="button btn btn-success">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

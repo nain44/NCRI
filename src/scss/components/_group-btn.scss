@@ -1,0 +1,24 @@
+.btn-group{
+    label{
+        &.btn{
+            background-color: #f6f6f6;
+            border: 0px;
+            border-radius: 0px;
+            padding: .8rem 1.2rem;
+            color: $gray-color;
+            &:focus,&:focus{
+                outline: none;
+                border: none;
+                box-shadow:none;
+            }
+            i{
+                font-size: 1.5rem;
+            }
+            &.active{
+                background-color: var(--theme-color);  
+                color: var(--white);
+            }
+        }
+    }
+}
+ 

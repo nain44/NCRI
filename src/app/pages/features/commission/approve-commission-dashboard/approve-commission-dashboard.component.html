@@ -1,0 +1,377 @@
+<div class="hk-pg-wrapper" *ngIf="true">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Approve Commission Dashboard</h1>
+        </div>
+    </div>
+    <section class="rounded-30">
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <div class="cg-role">
+                            <div class="w-100">
+                                <div class="row comment-filter justify-content-between mb-30 mt-0">
+                                    <div class="col-12 col-md-7 d-flex align-items-start flex-column">
+                                        <div class="d-flex align-items-end flex-column">
+                                            <h6 class="accor-name w-100 text-left font-21 font-semi-bold">{{branch}}</h6>
+                                            <span class="label d-block">Find the below earned commission by all team
+                                                members.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-5 d-flex align-items-end justify-content-end">
+                                        <div class="d-flex align-items-end justify-content-end">
+                                            <span class="label text-gray">Date Range</span>
+                                            <div class="form-label-group custom-calender date-range mb-0">
+                                                <img src="assets/images/calendar.png" class="img-fluid">
+                                                <input (bsValueChange)="CommissionCompensationListPerReportingUser()" [(ngModel)]="dateRange" type="text" placeholder="Daterangepicker" class="form-control"
+                                                    bsDaterangepicker
+                                                    [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12 pb-4">
+                                        <!-- userLoader -->
+                                        <div *ngIf="pageLoader" class="table-loader absolute">
+                                            <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                                <div class="spinner-border theme-color" role="status">
+                                                    <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row version-flow version-flow--table-view">
+                                            <div class="col-12 set-commssion border-0 py-0">
+                                                <ul class="tree">
+                                                    <li class="tree-first nested">
+                                                        <ul class="collapsed in">
+                                                            <li>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="form-group">
+                                                                            <div class="tree-heading">
+                                                                                <h4 class="text-gray">USERS</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex p-0 filed">
+                                                                        <div>
+                                                                            <div class="form-group">
+                                                                                <div class="tree-heading">
+                                                                                    <h4 class="text-gray">PRODUCTS</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="form-group">
+                                                                                <div class="tree-heading">
+                                                                                    <h4 class="text-gray text-center">
+                                                                                        EARNED COMMISSION</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 set-commssion border-0">
+                                                <ul class="tree">
+                                                    <li class="tree-first nested">
+                                                        <ul #main class="collapsed in">
+                                                            <div *ngIf="false" class="d-flex align-items-center justify-content-center table-loader">
+                                                                <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                                                    <div class="spinner-border theme-color" role="status">
+                                                                        <span class="sr-only"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <li *ngFor="let hierarchy of usersHierarchy">
+                                                                <i class="indicator nested" #iconOne
+                                                                    (click)="toggleView(iconOne)"></i>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="form-group">
+                                                                            <div class="tree-heading">
+                                                                                <h4>{{hierarchy?.first_name}}
+                                                                                    {{hierarchy?.last_name}}</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex p-0 filed">
+                                                                        <div>
+                                                                            <div class="form-group">
+                                                                                <input type="text"
+                                                                                    class="form-control target-amount"
+                                                                                    [value]="hierarchy.product"
+                                                                                    disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div
+                                                                                class="form-group d-flex align-items-center justify-content-center">
+                                                                                <input type="text"
+                                                                                    class="form-control target-amount text-center w-auto font-semi-bold"
+                                                                                    [value]="hierarchy.collector_commission"
+                                                                                    disabled>
+                                                                                <img src="assets/images/information.png"
+                                                                                    alt="">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="form-group text-right">
+                                                                                <button
+                                                                                    [ngClass]="{'approved': (hierarchy.cc_status === 'A' || hierarchy.cc_status === null)}"
+                                                                                    class="btn btn-success"
+                                                                                    [routerLink]="['/commission/approve-commission', hierarchy.cc_id]">{{(hierarchy.cc_status === 'A' || hierarchy.cc_status === null) ? 'Approved' : 'Approve'}}</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <ul
+                                                                    [ngClass]="{'d-none': iconOne.classList.contains('inactive')}">
+                                                                    <li *ngFor="let hierarchy2 of hierarchy?.children">
+                                                                        <i class="indicator nested" #iconTwo
+                                                                            (click)="toggleView(iconTwo)"></i>
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="form-group">
+                                                                                    <div class="tree-heading">
+                                                                                        <h4>{{hierarchy2?.first_name}}
+                                                                                            {{hierarchy2?.last_name}}
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex p-0 filed">
+                                                                                <div>
+                                                                                    <div class="form-group">
+                                                                                        <input type="text"
+                                                                                            class="form-control target-amount"
+                                                                                            [value]="hierarchy2.product"
+                                                                                            disabled>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <div
+                                                                                        class="form-group d-flex align-items-center justify-content-center">
+                                                                                        <input type="text"
+                                                                                            class="form-control target-amount text-center w-auto font-semi-bold"
+                                                                                            [value]="hierarchy2.collector_commission"
+                                                                                            disabled>
+                                                                                        <img src="assets/images/information.png"
+                                                                                            alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <div class="form-group text-right">
+                                                                                        <button
+                                                                                            [ngClass]="{'approved':(hierarchy2.cc_status === 'A' || hierarchy2.cc_status === null)}"
+                                                                                            class="btn btn-success"
+                                                                                            [routerLink]="['/commission/approve-commission', hierarchy2.cc_id]">{{(hierarchy2.cc_status === 'A' || hierarchy2.cc_status === null) ? 'Approved' : 'Approve'}}</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul
+                                                                            [ngClass]="{'d-none': iconTwo.classList.contains('inactive')}">
+                                                                            <li
+                                                                                *ngFor="let hierarchy3 of hierarchy2?.children">
+                                                                                <i class="indicator nested" #iconThree
+                                                                                    (click)="toggleView(iconThree)"></i>
+                                                                                <div
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <div
+                                                                                        class="d-flex align-items-center">
+                                                                                        <div class="form-group">
+                                                                                            <div class="tree-heading">
+                                                                                                <h4>{{hierarchy3?.first_name}}
+                                                                                                    {{hierarchy3?.last_name}}
+                                                                                                </h4>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="d-flex p-0 filed">
+                                                                                        <div>
+                                                                                            <div class="form-group">
+                                                                                                <input type="text"
+                                                                                                    class="form-control target-amount"
+                                                                                                    [value]="hierarchy3.product"
+                                                                                                    disabled>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <div
+                                                                                                class="form-group d-flex align-items-center justify-content-center">
+                                                                                                <input type="text"
+                                                                                                    class="form-control target-amount text-center w-auto font-semi-bold"
+                                                                                                    [value]="hierarchy3.collector_commission"
+                                                                                                    disabled>
+                                                                                                <img src="assets/images/information.png"
+                                                                                                    alt="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <div
+                                                                                                class="form-group text-right">
+                                                                                                <button
+                                                                                                [ngClass]="{'approved':(hierarchy3.cc_status === 'A' || hierarchy3.cc_status === null)}"
+                                                                                                    class="btn btn-success"
+                                                                                                    [routerLink]="['/commission/approve-commission', hierarchy3.cc_id]">{{(hierarchy3.cc_status === 'A' || hierarchy3.cc_status === null) ? 'Approved' : 'Approve'}}</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul
+                                                                                    [ngClass]="{'d-none': iconThree.classList.contains('inactive')}">
+                                                                                    <li
+                                                                                        *ngFor="let hierarchy4 of hierarchy3?.children">
+                                                                                        <i class="indicator nested"
+                                                                                            #iconFour
+                                                                                            (click)="toggleView(iconFour)"></i>
+                                                                                        <div
+                                                                                            class="d-flex justify-content-between">
+                                                                                            <div
+                                                                                                class="d-flex align-items-center">
+                                                                                                <div class="form-group">
+                                                                                                    <div
+                                                                                                        class="tree-heading">
+                                                                                                        <h4>{{hierarchy4?.first_name}}
+                                                                                                            {{hierarchy4?.last_name}}
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="d-flex p-0 filed">
+                                                                                                <div>
+                                                                                                    <div
+                                                                                                        class="form-group">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control target-amount"
+                                                                                                            [value]="hierarchy4.product"
+                                                                                                            disabled>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                    <div
+                                                                                                        class="form-group d-flex align-items-center justify-content-center">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control target-amount text-center w-auto font-semi-bold"
+                                                                                                            [value]="hierarchy4.collector_commission"
+                                                                                                            disabled>
+                                                                                                        <img src="assets/images/information.png"
+                                                                                                            alt="">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                    <div
+                                                                                                        class="form-group text-right">
+                                                                                                        <button
+                                                                                                        [ngClass]="{'approved':(hierarchy4.cc_status === 'A' || hierarchy4.cc_status === null)}"
+                                                                                                            class="btn btn-success"
+                                                                                                            [routerLink]="['/commission/approve-commission', hierarchy4.cc_id]">{{(hierarchy4.cc_status === 'A' || hierarchy.cc_status === null) ? 'Approved' : 'Approve'}}</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <ul
+                                                                                            [ngClass]="{'d-none': iconFour.classList.contains('inactive')}">
+                                                                                            <li
+                                                                                                *ngFor="let hierarchy5 of hierarchy4?.children">
+                                                                                                <div
+                                                                                                    class="d-flex justify-content-between">
+                                                                                                    <div
+                                                                                                        class="d-flex align-items-center">
+                                                                                                        <div
+                                                                                                            class="form-group">
+                                                                                                            <div
+                                                                                                                class="tree-heading">
+                                                                                                                <h4>
+                                                                                                                    {{hierarchy5?.first_name}}
+                                                                                                                    {{hierarchy5?.last_name}}
+                                                                                                                </h4>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="d-flex p-0 filed">
+                                                                                                        <div>
+                                                                                                            <div
+                                                                                                                class="form-group">
+                                                                                                                <input
+                                                                                                                    type="text"
+                                                                                                                    class="form-control target-amount"
+                                                                                                                    [value]="hierarchy5.product"
+                                                                                                                    disabled>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div>
+                                                                                                            <div
+                                                                                                                class="form-group d-flex align-items-center justify-content-center">
+                                                                                                                <input
+                                                                                                                    type="text"
+                                                                                                                    class="form-control target-amount text-center w-auto font-semi-bold"
+                                                                                                                    [value]="hierarchy5.collector_commission"
+                                                                                                                    disabled>
+                                                                                                                <img src="assets/images/information.png"
+                                                                                                                    alt="">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div>
+                                                                                                            <div
+                                                                                                                class="form-group text-right">
+                                                                                                                <button
+                                                                                                                [ngClass]="{'approved':(hierarchy5.cc_status === 'A' || hierarchy5.cc_status === null)}"
+                                                                                                                    class="btn btn-success"
+                                                                                                                    [routerLink]="['/commission/approve-commission', hierarchy5.cc_id]">{{(hierarchy5.cc_status === 'A' || hierarchy5.cc_status === null) ? 'Approved' : 'Approve'}}</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul>
+
+                                                                            </li>
+                                                                        </ul>
+
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+    </section>
+</div>

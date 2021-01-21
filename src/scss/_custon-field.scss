@@ -1,0 +1,28 @@
+span{
+    &.gray{
+        background: $gray-bg;
+        color: $gray-04-color;
+        padding: .2rem .5rem;
+    }
+}
+.field-view{
+    width: 100%;
+    min-height: 6rem;
+    border: 1px solid $gray-bg ;
+    padding: 3rem;
+}
+.option-list{
+    padding: 0;
+    list-style: none;
+    li{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        i{
+            color: $theme-color;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    }
+}

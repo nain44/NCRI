@@ -1,0 +1,182 @@
+ 
+<!-- add grade -->
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User and Permission</a></li>
+                        <li class="breadcrumb-item" [routerLink]="['/grade']"><a href="javascript:void(0)" class="gray-color">Grades</a></li>
+                        <li class="breadcrumb-item active gray-04-color">View Grade</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-5">Update Grade</h5> 
+                            <div class="cg">
+                                <form [formGroup]="gradeForm">
+                                    <div class="row" style="pointer-events: none;">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Grade Name</label>
+                                                <input (blur)="isGradeAvailable()" type="text" formControlName="name" class="form-control" placeholder="Enter Grade Name" >
+                                                <div class="w-100" *ngIf="gradeForm.controls.name.status=='INVALID'">
+                                                    <div *ngIf="gradeForm.controls.name.errors.required && gradeForm.controls.name.touched" class="invalid-feedback" [style.display]="gradeForm.controls.name.status=='INVALID' ? 'block' : 'none'">Please provide Grade Name.</div> 
+                                                </div>
+                                                <div [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback" style="display: block;" >{{gradeAvailable}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <input type="text" formControlName="description" class="form-control" placeholder="Enter Description" required>
+                                                <div class="w-100" *ngIf="gradeForm.controls.description.status=='INVALID'">
+                                                    <div *ngIf="gradeForm.controls.description.errors.required && gradeForm.controls.description.touched" class="invalid-feedback" [style.display]="gradeForm.controls.description.status=='INVALID' ? 'block' : 'none'">Please provide Grade Description.</div> 
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <accordion [isAnimated]="true">
+                                                <accordion-group [isOpen]="true">
+                                                    <button class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix" accordion-heading type="button">
+                                                        <div class="accor-name w-100 text-left font-weight-bold">Roles</div>  
+                                                    </button>
+                                                  <div class="cg-role"> 
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="table-responsive mnh-200p" style="height: 400px;overflow-y: auto;">
+                                                                <table class="table center-aligned-table">
+                                                                    <thead>
+                                                                        <tr class="text-dark">
+                                                                            <th class=" d-flex align-items-center"> 
+                                                                            </th>
+                                                                            <th class="w-100">Roles</th> 
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="pointer-events: none;">
+                                                                        <tr *ngFor="let role of roleList">
+                                                                            <td class="d-flex align-items-center">
+                                                                                <div class="form-check checkbox justify-content-center">
+                                                                                    <input [(ngModel)]="role.check" [ngModelOptions]="{standalone: true}" type="checkbox" class="form-check-input" [id]="role.id">
+                                                                                    <label class="form-check-label" [for]="role.id"></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="w-100">{{role.name}}</td> 
+                                                                        </tr>
+                                                                       
+                                                                        <tr style="text-align: center;" *ngIf="roleList.length === 0 && !roleLoader">
+                                                                            <td colspan="6">No Record Found</td>
+                                                                        </tr>
+                                                                        <tr class="text-center" *ngIf="roleLoader">
+                                                                            <td colspan="2">
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <div class="spinner-border theme-color" role="status">
+                                                                                  <span class="sr-only"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </accordion-group>
+                                                <accordion-group [isOpen]="true">
+                                                    <button class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix" accordion-heading type="button">
+                                                        <div class="accor-name w-100 text-left font-weight-bold">Users</div>  
+                                                    </button>
+                                                    <div class="cg-role"> 
+                                                      <div class="row">
+                                                          <div class="col-md-12">
+                                                              <div class="table-responsive mnh-200p" style="height: 400px;overflow-y: auto;">
+                                                                  <table class="table center-aligned-table">
+                                                                      <thead>
+                                                                          <tr class="text-dark">
+                                                                              <th class=" d-flex align-items-center"> 
+                                                                              </th>
+                                                                              <th>Users</th> 
+                                                                              <th>Department</th> 
+                                                                          </tr>
+                                                                      </thead>
+                                                                      <tbody style="pointer-events: none;">
+                                                                          <tr *ngFor="let user of userList">
+                                                                              <td class="d-flex align-items-center">
+                                                                                  <div class="form-check checkbox justify-content-center">
+                                                                                      <input [(ngModel)]="user.check" [ngModelOptions]="{standalone: true}" type="checkbox" class="form-check-input" [id]="user.id">
+                                                                                      <label class="form-check-label" [for]="user.id"></label>
+                                                                                  </div>
+                                                                              </td>
+                                                                              <td class="w-50">{{user.first_name + " " + user.last_name}}</td> 
+                                                                              <td class="w-50">{{user.department__name}}</td> 
+                                                                          </tr>
+                                                                       
+                                                                          <tr style="text-align: center;" *ngIf="userList.length === 0 && !userLoader">
+                                                                              <td colspan="6">No Record Found</td>
+                                                                          </tr>
+                                                                          <tr class="text-center" *ngIf="roleLoader">
+                                                                            <td colspan="3">
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <div class="spinner-border theme-color" role="status">
+                                                                                  <span class="sr-only"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                      </tbody>
+                                                                  </table>
+                                                              </div> 
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                  </accordion-group>
+                                              </accordion>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4" style="pointer-events: none;">
+                                        <div class="col-md-12">
+                                            <hr class="mb-20">
+                                            <button class="btn btn-success loader-btn float-right" [disabled]="!gradeForm.valid || gradeAvailable !== '' || loader" (click)="submitForm()"  type="button">
+                                                <span>Update 
+                                                <span *ngIf="loader" class="spinner-border mr-3" role="status" aria-hidden="true"></span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                   </form> 
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template> 

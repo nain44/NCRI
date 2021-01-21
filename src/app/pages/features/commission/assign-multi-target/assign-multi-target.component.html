@@ -1,0 +1,446 @@
+<div class="container-fluid container-wrapper" *ngIf="target === 'assign'"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Commission and Compensation</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Set Target</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- <ul>
+                <li id="mainTree"></li>
+            </ul> -->
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Assign Target</h5>
+                            <div class="row">
+                                <div class="col-12 col-md-10">
+                                    <ul class="nav nav-tabs" role="tablist"> 
+                                        <li class="nav-item" *ngFor="let country of countryList">
+                                            <a class="nav-link" [ngClass]="{'active show': selectedCountry === country}" (click)="changeCountry(country)">{{country}}</a>
+                                        </li>
+                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}"  >USA</a>
+                                        </li>
+                                        <li class="nav-item" (click)="setTab('access')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" >Pakistan</a>
+                                        </li>  -->
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-md-2 text-right align-self-center pl-4">
+                                    <div class="col-12 text-left">
+                                        <span class="gray-04-color">Date:</span><span class="gray-color"> 
+                                        {{targetDate.startDate | date : 'MMM d'}} - {{targetDate.endDate | date : 'MMM d'}}
+                                        </span>
+                                    </div>
+                                    <!-- <div class="col-12 text-left">
+                                        <span class="gray-04-color">Target Amount:</span><span class="gray-color"> $50,000.00</span>
+                                    </div>  -->
+                                </div>
+                            </div> 
+                            
+                                <div class="tab-pane fade active show">
+                                   <form  novalidate> 
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs at-tabs" role="tablist"> 
+                                                        <li class="nav-item" *ngFor="let branch of branchList">
+                                                            <a class="nav-link" [ngClass]="{'active show': selectedBranch === branch}" (click)="changeBranch(branch)">
+                                                                {{branch}}
+                                                            </a>
+                                                        </li>
+                                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}" id="tab2" data-toggle="tab" href="javascript:void(0)" role="tab" aria-controls="profile" aria-selected="false">St. Catharines</a>
+                                                        </li>
+                                                        <li class="nav-item" (click)="setTab('access')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" id="portfolio-tab" href="javascript:void(0)" data-toggle="tab" role="tab" aria-controls="portfolio" aria-selected="false">Montreal</a>
+                                                        </li>  -->
+                                                    </ul>
+                                                </div> 
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 pl-5">
+                                            <div class="row" >
+                                                <ul class="tree">
+                                                    <li class="tree-first nested" id="mainTree"> 
+                                                    
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label >Level 0</label>
+                                                                    <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label >Target Amount</label>
+                                                                    <input  type="text" class="form-control" id="targetAmount" [(ngModel)]="targetAmount" (ngModelChange)="modelChanged()" name="amount" placeholder="Target Amount" > 
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="col-md-4 d-flex align-items-center">
+                                                                <button class="button float-right" type="button"  (click)="changeAmount()">Divide Equally </button>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                    
+                                                </li>
+                                                    </ul>
+                                            </div>
+                                            <div class="row version-flow d-none">
+                                                <div class="col-12 version-flow__inner">
+                                                    <div class="row">
+                                                        <div class="col-md-6 version-flow__inner__item">
+                                                            <div class="form-group">
+                                                                <label >Level 0</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 d-flex align-items-center">
+                                                            <a class="button float-right"  (click)="setTab('contact')" href="javascript:void(0)">Divide Equally </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- level 1 -->
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 -->
+                                                        <div class="col-md-12 nested">
+                                                            <div class="row version-flow">
+                                                                <div class="col-12 version-flow__inner">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 version-flow__inner__item">
+                                                                            <div class="form-group">
+                                                                                <label >Level 0</label>
+                                                                                <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label >Target Amount</label>
+                                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <!-- level 3 -->
+                                                                <div class="col-md-12 nested">
+                                                                    <div class="row version-flow">
+                                                                        <div class="col-12 version-flow__inner">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                                    <div class="form-group">
+                                                                                        <label >Level 0</label>
+                                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label >Target Amount</label>
+                                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> 
+                                                                    </div>
+                                                                </div>
+                                                                <!-- level 3 end -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 end --> 
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" > 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>  -->
+                                                <!-- level 1 end -->
+                                                <!-- <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.1</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.1 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.2</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.2 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.3</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.3 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Level 1.4</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 1.4 (User Name)" > 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >Target Amount</label>
+                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" > 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="col-md-4 ml-auto">
+                                                <p class="text-danger text-left">* For our system</p>
+                                                <p class="text-danger text-left">Level 2 = Sr. VP</p> 
+                                                <p class="text-danger text-left">Level 3= Manager</p> 
+                                                <p class="text-danger text-left">Level 4= Supervisor</p>  
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-md-10">
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{remainingAmount}}</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right"> 
+                                                <button class="btn btn-success loader-btn" [disabled]="loader" type="button" (click)="addTarget()">
+                                                    <span>
+                                                        Save
+                                                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div> 
+                                    </div> 
+                                   </form>
+                                </div>
+                                <!-- <div *ngIf="tab === 'contact'" class="tab-pane fade" [ngClass]="{'active show': tab === 'contact'}" id="tab2" role="tabpanel" aria-labelledby="tab2"> 
+                                </div>
+                                <div *ngIf="tab === 'access'" class="tab-pane fade" [ngClass]="{'active show': tab === 'access'}" id="tab3" role="tabpanel" aria-labelledby="tab3"></div>  -->
+                            
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-wrapper" *ngIf="target === 'set'"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" ><a href="javascript:void(0)" class="gray-color">Commission</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Set Target</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Set Target</h5> 
+                            <div class="tab-content">
+                                <div  class="tab-pane fade active show" >
+                                   
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label >Start Date</label>
+                                                <input type="text" [(ngModel)]="targetDate.startDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker (bsValueChange)="onValueChange($event)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <!-- <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div> -->
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label >End Date </label>
+                                                <input type="text" [(ngModel)]="targetDate.endDate"  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-11 text-center">
+                                            <img src="/assets/images/target.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-1 align-self-end">
+                                            <button *ngIf="isDisabled" tooltip="No users to assign target" placement="top" type="button" class="button float-right">Next </button>
+                                            <button *ngIf="!isDisabled" type="button" class="button float-right"   (click)="nextStep()">Next </button>
+                                        </div>
+                                    </div>
+                                   
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #amount class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close cursor-pointer"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <!-- <div class="icon-box theme-bg rounded-circle mx-auto mb-4">
+                    <span class="text-white">
+                        <i class="ti-check highlight-icon" aria-hidden="true"></i>
+                    </span>
+                </div> -->
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li >The amount you have entered exceeds your target limit. Please check your target amount and try again.</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

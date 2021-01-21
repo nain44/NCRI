@@ -1,0 +1,215 @@
+// NOTE: This file contains helpers SCSS.
+
+/*Background colors*/
+ .theme-bg { 
+   background: var(--theme-color);
+}
+.danger-bg{
+    background: $danger;
+}
+.primary-bg{
+    background: $primary;
+}
+.info-bg{
+    background: $info;
+}
+.warning-bg{
+    background: $warning;
+}
+.secondary-bg{
+    background: $secondary;
+}
+ 
+/*text color*/
+.theme-color { 
+   color: var(--theme-color);
+}
+.themelight-bg { 
+    background: $theme-light;
+}
+.theme-light { 
+    color: $theme-light;
+}
+.danger-color { 
+    color: $danger;
+}
+
+
+.gray-color { 
+    color: $gray-color;
+}
+.gray-04-color { 
+   color: $gray-04-color;
+}
+
+
+
+/*Background colors*/
+.themeauth-bg { 
+    background: $themeauth-color;
+ }
+  
+ /*text color*/
+ .themeauth-color { 
+    color: $themeauth-color;
+ }
+
+ 
+.font-segoebold {
+    font-family: $font-segoebold;
+}
+.font-segoesemibold {
+    font-family: $font-segoesemibold;
+}
+
+.font-segoeregular {
+    font-family: $font-segoeregular;
+}
+
+.bg {
+    background-size:cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow:hidden;
+}
+.bg:before {
+    content: '';
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 0;
+}
+.no-overlay:before {
+    content: '';
+    background: rgba(0,0,0,0);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0; 
+    z-index: 0;
+}
+.bg-primary-overlay:before {
+    content: '';
+    @include hex-rgba(var(--theme-color), 0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 0;
+}
+
+
+/*Labels*/
+.label {
+    display: inline;
+    padding:  .2em .4em;
+    font-size: 75%;
+    font-weight: $font-regular;
+    line-height: 1;
+    color: var(--white);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+  
+
+
+.w-115{
+    width: 115px;
+}
+.w-130{
+    width: 130px;
+}
+.w-auto {
+    width: auto!important;
+}
+
+.bb-gray{
+    border-bottom: 1px solid #0000001A;
+}
+.hr-gray{
+    height:1px;
+    border-width:0;
+    width: 100%;
+    color:#0000001A;;
+    background-color:#0000001A;
+}
+.br-none{
+    border-right-style: none !important;
+}
+.bl-none{
+    border-left-style: none !important;
+}
+.bb-none{
+    border-bottom: none !important;
+}
+
+.jc-none{
+    justify-content: unset !important;
+}
+
+ 
+/*Font sizes*/
+.font-xs {
+  font-size: $font-xs;
+  line-height: $line-xs;
+}
+.font-xxl {
+	font-size: $font-xxl;
+	line-height: $line-xxl;
+}
+.f-30 {
+    font-size:  2.143rem;
+    line-height:  2.143rem;
+}
+.f-50 {
+    font-size:  3.571rem;
+    line-height:  3.571rem;
+}
+.f-70 {
+    font-size:  5.271rem;
+    line-height:  5.271rem;
+}
+.f-100 {
+    font-size:  7.125rem;
+    line-height:  7.125rem;
+}
+.f-150 {
+    font-size:  11.125rem;
+    line-height:  11.125rem;
+}
+.f-200 {
+    font-size:  14.125rem;
+    line-height:  14.125rem;
+}
+
+/*Font weights*/
+.font-light {
+	font-weight: $font-light;
+}
+.font-regular {
+	font-weight: $font-regular;
+}
+.font-medium {
+	font-weight: $font-medium;
+}
+.font-bold {
+	font-weight: $font-bold;
+}
+
+.nav-tabs-custom {
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+.flex-grow{
+    flex-grow: 1;
+  }

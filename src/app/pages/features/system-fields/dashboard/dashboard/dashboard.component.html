@@ -1,0 +1,142 @@
+<div class="hk-pg-wrapper" >
+    <!-- Container -->
+    <div>  
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/']">Dashboard</a></li>
+                <li class="breadcrumb-item active">System Fields Dashboard</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">System Fields Dashboard</h1>
+            <!-- <div class="float-right">
+                <button type="button" [routerLink]="['/user']" class="btn btn-success">Add New Custom Field</button>
+            </div> -->
+        </div>
+    </div>  
+    
+    <div class="">
+        <div class="hk-sec-wrapper"> 
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end flex-column"> 
+                            <div class="d-flex align-items-end justify-content-start w-100">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <select  [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>  
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end"> 
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" class="form-control" #searchInput [(ngModel)]="pageConfig.search_text" placeholder="Search">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative table-responsive mnh-200p">
+                <table id="datable_1" class="table theme-table user-dashboard custom-fileds w-100 display pb-30">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                    <label class="custom-control-label" for="customCheck5"></label>
+                                </div>
+                            </th>
+                            <th>FIELD NAME</th>
+                            <th>TYPE</th>
+                            <th>ASSIGNED SCREENS</th>
+                            <th>Last Updated</th>
+                            <th></th>  
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="true">
+                        <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
+                        <tr *ngFor="let field of systemFieldsList;let i = index">
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input"  [id]="i">
+                                    <label class="custom-control-label" [for]="i"></label>
+                                </div>
+                            </td>
+                            <td>{{field.field_label}}</td>
+                            <td>
+                                {{
+                                    field?.field_type ? 
+                                    (fieldTypeMap[field?.field_type] ? fieldTypeMap[field?.field_type] : 'N/A') :
+                                    'N/A'
+                                }}
+                            </td>
+                            <td>
+                                {{field?.assigned_screens_count ? field?.assigned_screens_count : ""}}
+                            </td>
+                            
+                            <td>
+                                <div class="d-flex align-items-start">
+                                    <span>
+                                        {{field?.updated_at ? (field?.updated_at | date: 'dd MMM yy') : 'N/A'}}
+                                    </span> 
+                                </div>
+                            </td>   
+                            <td>
+                                <div class="d-flex justify-content-end align-items-center">
+                                <img *ngIf="field.field_type === 'SLS' || field.field_type === 'SLM'"
+                                 [routerLink]="['/system-fields/edit-system-field/'+field.id]" src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                <!-- <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">  -->
+                                <!-- <img src="assets/images/view.png" class="img-fluid cursor-pointer mr-10" alt="">  -->
+                                </div>
+                            </td>  
+                        </tr>
+                        
+                        <tr *ngIf="systemFieldsList.length === 0 && !loader" >
+                            <td colspan="6" class="text-center">
+                                <p class="p-5 font-16">No data found</p>
+                            </td>
+                        </tr> 
+                    </tbody>   
+                </table> 
+                <div *ngIf="loader" class="table-loader absolute">
+                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div> 
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <select  [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select> 
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">  
+                        <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="pageConfig.size" [maxSize]="5" [rotate]="true"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> 

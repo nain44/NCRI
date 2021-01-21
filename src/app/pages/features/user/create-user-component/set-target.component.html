@@ -1,0 +1,141 @@
+<div class="container-fluid container-wrapper"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Set Target</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">Start Date</label>
+                                                <input type="text" formControlName="date_of_joining" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">End Date </label>
+                                                <input type="text" formControlName="termination_date" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" id="formGroupExampleInput" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-11 text-center">
+                                            <img src="/assets/images/target.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-1 align-self-end">
+                                            <a class="button float-right"  (click)="setTab('contact')" [style.pointer-events]="!employeeInformation.valid && param?.type !== 'view' ? 'none' : 'auto'" href="javascript:void(0)">Next </a>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-wrapper" *ngIf="false"> 
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-3">Set Target</h5> 
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'employee'" class="tab-pane fade" [ngClass]="{'active show': tab === 'employee'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                   <form [formGroup]="employeeInformation" novalidate>
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">Start Date</label>
+                                                <input type="text" formControlName="date_of_joining" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                    <div class="w-100" *ngIf="f.controls.date_of_joining.status=='INVALID'">
+                                                        <div *ngIf="f.controls.date_of_joining.errors.required && f.controls.date_of_joining.touched" class="invalid-feedback" [style.display]="f.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">Please Provide joining date.</div>
+                                                    </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label for="formGroupExampleInput">End Date </label>
+                                                <input type="text" formControlName="termination_date" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" id="formGroupExampleInput" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                                <div class="w-100" *ngIf="f.controls.termination_date.status=='INVALID'">
+                                                    <div *ngIf="f.controls.termination_date.errors.required && f.controls.termination_date.touched" class="invalid-feedback" [style.display]="f.controls.termination_date.status=='INVALID' ? 'block' : 'none'">Please provide termination date.</div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Target Amount</label>
+                                                <input type="text" formControlName="Amount" class="form-control" id="formGroupExampleInput" placeholder="Enter Target Amount">
+                                                <div class="w-100" *ngIf="g.controls.cell_number.status=='INVALID'">
+                                                    <div *ngIf="g.controls.cell_number.errors.minlength && g.controls.cell_number.touched" class="invalid-feedback" [style.display]="g.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Target number must be at least 1 character.</div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-11 text-center">
+                                            <img src="/assets/images/target1.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-1 align-self-end">
+                                            <a class="button float-right"  (click)="setTab('contact')" [style.pointer-events]="!employeeInformation.valid && param?.type !== 'view' ? 'none' : 'auto'" href="javascript:void(0)">Next </a>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

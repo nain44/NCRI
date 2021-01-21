@@ -1,0 +1,535 @@
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User and Permission</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Roles and Permission</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title mb-0">Roles</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-inline pull-md-right">
+                                        <a href="javascript:void(0)" [routerLink]="['/role/add']" class="button">New Role <i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item" (click)="setTab('customized')">
+                                    <a class="nav-link" [ngClass]="{'active show': tab === 'customized'}" id="tab2" data-toggle="tab" href="javascript:void(0)" role="tab" aria-controls="profile" aria-selected="false">Customized Roles</a>
+                                </li>
+                                <li class="nav-item" (click)="setTab('global')">
+                                    <a class="nav-link" [ngClass]="{'active show': tab === 'global'}" id="tab1" data-toggle="tab" href="javascript:void(0)"  role="tab" aria-controls="home" aria-selected="true">Global Roles</a>
+                                </li>
+                                
+                            </ul>
+                            <div class="tab-content">
+                                <div *ngIf="tab === 'global'" class="tab-pane fade" [ngClass]="{'active show': tab === 'global'}" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive position-relative mnh-200p">
+                                                <table class="table center-aligned-table">
+                                                    <thead>
+                                                        <tr class="text-dark">
+                                                            <th>Role</th>
+                                                            <th>User Count</th>
+                                                            <th class="w-20">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="!requestLoader">
+                                                        <tr *ngFor="let role of globalRoleList">
+                                                            <td>{{role.name}}</td>
+                                                            <td>{{role.user_count}}</td>
+                                                            <td>
+                                                                <div class="d-flex table-actions">
+                                                                    <a href="javascript:void(0)" (click)="navigateToCopy(role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.015" height="18.786" viewBox="0 0 16.015 18.786">
+                                                                                <defs>
+                                                                                  <style>
+                                                                                    #copy-files {
+                                                                                      fill: #69c7c8;
+                                                                                      stroke: #69c7c8;
+                                                                                      stroke-width: 0.3px;
+                                                                                    }
+                                                                                  </style>
+                                                                                </defs>
+                                                                                <g id="copy-files" transform="translate(-4.025 0.15)">
+                                                                                  <path id="Path_91570" data-name="Path 91570" class="cls-1" d="M19.885,5.974a.318.318,0,0,0-.017-.082c0-.011-.007-.022-.012-.033a.328.328,0,0,0-.064-.1h0L14.127.1a.324.324,0,0,0-.1-.065A.263.263,0,0,0,14,.022.331.331,0,0,0,13.913,0a.206.206,0,0,0-.021,0H10.15A2.216,2.216,0,0,0,7.936,2.214v.556H6.389A2.216,2.216,0,0,0,4.175,4.983V16.272a2.216,2.216,0,0,0,2.214,2.213h7.526a2.216,2.216,0,0,0,2.213-2.213v-.556h1.548A2.216,2.216,0,0,0,19.89,13.5V6C19.89,5.989,19.886,5.982,19.885,5.974ZM14.224,1.133l4.532,4.532H15.774a1.552,1.552,0,0,1-1.55-1.55V1.133Zm1.24,15.139a1.552,1.552,0,0,1-1.55,1.55H6.389a1.552,1.552,0,0,1-1.55-1.55V4.983a1.552,1.552,0,0,1,1.55-1.55H9.8V6.884A2.215,2.215,0,0,0,12.013,9.1h3.452v7.174ZM15,8.434H12.013a1.551,1.551,0,0,1-1.549-1.55V3.9Zm2.681,6.619H16.128V8.766c0-.008,0-.015,0-.022a.323.323,0,0,0-.016-.083c0-.011-.007-.022-.012-.033a.324.324,0,0,0-.064-.1h0L10.366,2.867a.334.334,0,0,0-.1-.065l-.029-.01a.314.314,0,0,0-.087-.018.205.205,0,0,0-.021,0H8.6V2.214a1.552,1.552,0,0,1,1.55-1.55H13.56V4.115a2.216,2.216,0,0,0,2.214,2.214h3.451V13.5A1.551,1.551,0,0,1,17.676,15.053Z"/>
+                                                                                </g>
+                                                                              </svg>
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="navigateToUpdate(role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                                <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="openModal(deleteRoleModal,role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                                <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                                <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                                <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                                <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                                <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a> 
+                                                                </div>
+                                                             </td>
+                                                        </tr>
+                                                        <tr *ngIf="globalRoleList.length === 0" class="text-center">
+                                                            <td colspan="3">No Record Available</td>
+                                                        </tr>
+                                                        <!-- <tr>
+                                                            <td>Admin</td>
+                                                            <td>02</td>
+                                                            <td class="text-center">
+                                                                <a class="pr-3" href="javascript:void(0)"> <i class="fa fa-files-o text-info"></i></a>
+                                                                <a class="pr-3" href="javascript:void(0)"> <i class="fa fa-pencil text-info"></i></a>
+                                                                <a href="javascript:void(0)"> <i class="fa fa-trash-o"></i></a>
+                                                            </td>
+                                                        </tr> -->
+                                                    </tbody> 
+                                                </table>
+                                                <div *ngIf="requestLoader" class="table-loader absolute">
+                                                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                                        <div class="spinner-border theme-color" role="status">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="tab === 'customized'" class="tab-pane fade" [ngClass]="{'active show': tab === 'customized'}" id="tab2" role="tabpanel" aria-labelledby="tab2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive position-relative mnh-200p">
+                                                <table class="table center-aligned-table">
+                                                    <thead>
+                                                        <tr class="text-dark">
+                                                            <th>Role</th>
+                                                            <th>User Count</th>
+                                                            <th class="w-20">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="!requestLoader">
+                                                        <tr *ngFor="let role of customizeRoleList">
+                                                            <td>{{role.name}}</td>
+                                                            <td>{{role.user_count}}</td>
+                                                            <td>
+                                                                <div class="d-flex table-actions">
+                                                                    <a href="javascript:void(0)" (click)="navigateToCopy(role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.015" height="18.786" viewBox="0 0 16.015 18.786">
+                                                                                <defs>
+                                                                                  <style>
+                                                                                    #copy-files {
+                                                                                      fill: #69c7c8;
+                                                                                      stroke: #69c7c8;
+                                                                                      stroke-width: 0.3px;
+                                                                                    }
+                                                                                  </style>
+                                                                                </defs>
+                                                                                <g id="copy-files" transform="translate(-4.025 0.15)">
+                                                                                  <path id="Path_91570" data-name="Path 91570" class="cls-1" d="M19.885,5.974a.318.318,0,0,0-.017-.082c0-.011-.007-.022-.012-.033a.328.328,0,0,0-.064-.1h0L14.127.1a.324.324,0,0,0-.1-.065A.263.263,0,0,0,14,.022.331.331,0,0,0,13.913,0a.206.206,0,0,0-.021,0H10.15A2.216,2.216,0,0,0,7.936,2.214v.556H6.389A2.216,2.216,0,0,0,4.175,4.983V16.272a2.216,2.216,0,0,0,2.214,2.213h7.526a2.216,2.216,0,0,0,2.213-2.213v-.556h1.548A2.216,2.216,0,0,0,19.89,13.5V6C19.89,5.989,19.886,5.982,19.885,5.974ZM14.224,1.133l4.532,4.532H15.774a1.552,1.552,0,0,1-1.55-1.55V1.133Zm1.24,15.139a1.552,1.552,0,0,1-1.55,1.55H6.389a1.552,1.552,0,0,1-1.55-1.55V4.983a1.552,1.552,0,0,1,1.55-1.55H9.8V6.884A2.215,2.215,0,0,0,12.013,9.1h3.452v7.174ZM15,8.434H12.013a1.551,1.551,0,0,1-1.549-1.55V3.9Zm2.681,6.619H16.128V8.766c0-.008,0-.015,0-.022a.323.323,0,0,0-.016-.083c0-.011-.007-.022-.012-.033a.324.324,0,0,0-.064-.1h0L10.366,2.867a.334.334,0,0,0-.1-.065l-.029-.01a.314.314,0,0,0-.087-.018.205.205,0,0,0-.021,0H8.6V2.214a1.552,1.552,0,0,1,1.55-1.55H13.56V4.115a2.216,2.216,0,0,0,2.214,2.214h3.451V13.5A1.551,1.551,0,0,1,17.676,15.053Z"/>
+                                                                                </g>
+                                                                              </svg>
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="navigateToUpdate(role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19.397" height="19.395" viewBox="0 0 19.397 19.395"> 
+                                                                                <path id="edit-action" data-name="Path 36496" class="cls-1" d="M18.141,1.283a4.278,4.278,0,0,0-6.055,0L.985,12.38a.555.555,0,0,0-.157.318L.006,18.791a.554.554,0,0,0,.157.467.565.565,0,0,0,.393.165.449.449,0,0,0,.074,0l3.67-.5a.559.559,0,0,0-.149-1.108l-2.943.4.574-4.249,4.472,4.472a.565.565,0,0,0,.393.165.547.547,0,0,0,.393-.165l11.1-11.1a4.276,4.276,0,0,0,0-6.055ZM12.3,2.647l1.864,1.864L4.035,14.641,2.171,12.777ZM6.652,17.253,4.829,15.431,14.959,5.3l1.823,1.823ZM17.558,6.326,13.1,1.866a3.168,3.168,0,0,1,4.459,4.459Z" transform="translate(0 -0.028)"/>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" (click)="openModal(deleteRoleModal,role)"> 
+                                                                        <i>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15.957" height="19.579" viewBox="0 0 15.957 19.579"> 
+                                                                                <g id="delete-action" data-name="delete (1)" transform="translate(0.109 0.1)">
+                                                                                <path id="Path_36488" data-name="Path 36488" class="cls-1" d="M222.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,222.852,154.7Zm0,0" transform="translate(-212.305 -147.682)"/>
+                                                                                <path id="Path_36489" data-name="Path 36489" class="cls-1" d="M104.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,104.852,154.7Zm0,0" transform="translate(-99.66 -147.682)"/>
+                                                                                <path id="Path_36490" data-name="Path 36490" class="cls-1" d="M1.286,5.768V16.95a2.5,2.5,0,0,0,.666,1.727,2.235,2.235,0,0,0,1.622.7H12.16a2.234,2.234,0,0,0,1.622-.7,2.5,2.5,0,0,0,.666-1.727V5.768A1.734,1.734,0,0,0,14,2.359H11.679V1.791A1.783,1.783,0,0,0,9.881,0H5.851a1.783,1.783,0,0,0-1.8,1.793v.567H1.731a1.734,1.734,0,0,0-.445,3.409ZM12.16,18.47H3.573a1.437,1.437,0,0,1-1.38-1.52V5.808H13.539V16.95A1.437,1.437,0,0,1,12.16,18.47ZM4.962,1.791a.874.874,0,0,1,.89-.885h4.03a.874.874,0,0,1,.89.885v.567H4.962ZM1.731,3.266H14A.817.817,0,0,1,14,4.9H1.731a.817.817,0,0,1,0-1.634Zm0,0" transform="translate(0.003 0.001)"/>
+                                                                                <path id="Path_36491" data-name="Path 36491" class="cls-1" d="M163.852,154.7a.454.454,0,0,0-.454.454v8.577a.454.454,0,0,0,.908,0v-8.577A.454.454,0,0,0,163.852,154.7Zm0,0" transform="translate(-155.983 -147.682)"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            
+                                                                        </i>
+                                                                    </a> 
+                                                                </div> 
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="customizeRoleList.length === 0" class="text-center">
+                                                            <td colspan="2">No Record Available</td>
+                                                        </tr>
+                                                        <!-- <tr>
+                                                            <td>Client User</td>
+                                                            <td class="text-center">
+                                                                <a class="pr-3" href="javascript:void(0)"> <i class="fa fa-files-o text-info"></i></a>
+                                                                <a class="pr-3" href="javascript:void(0)"> <i class="fa fa-pencil text-info"></i></a>
+                                                                <a href="javascript:void(0)"> <i class="fa fa-trash-o"></i></a>
+                                                            </td>
+                                                        </tr> -->
+                                                    </tbody> 
+                                                </table>
+                                                <div *ngIf="requestLoader" class="table-loader absolute">
+                                                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                                        <div class="spinner-border theme-color" role="status">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>  
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Users and Permissions</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Roles Dashboard</h1>
+            <div class="float-right mb-0">
+                <button type="button" [routerLink]="['/role/add']" class="btn btn-success">Add New Roles</button>
+            </div>
+        </div>
+    </div> 
+    <div class="">
+        <div class="hk-sec-wrapper"> 
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <!-- [(ngModel)]="selectedPageSize" (change)="changePageSize()" -->
+                                    <select [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select> 
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                    <!-- {{selectedPageSize.totalRecords}} -->
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end"> 
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <!-- [(ngModel)]="pageConfig.search_text" (blur)="searchUser()" -->
+                                <input type="text" [(ngModel)]="pageConfig.search_text" #searchInput class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative table-responsive mnh-200p">
+                <table id="datable_1" class="table theme-table user-dashboard w-100 display pb-30">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                    <label class="custom-control-label" for="customCheck5"></label>
+                                </div>
+                            </th>
+                            <th>ROLE</th>
+                            <th>USER ACCOUNT</th>
+                            <th class="w-15">ADDED BY</th> 
+                            <th></th> 
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="!requestLoader">  
+                        <tr *ngFor="let role of globalRoleList">
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input"  id=1>
+                                    <label class="custom-control-label" for=1></label>
+                                </div>
+                            </td> 
+                            <td
+                            class="cursor-pointer"  [routerLink]="['/role/update', role.id, role.name]"> 
+                            <!-- (click)="redirectToView(role)" -->
+                            <div class="d-flex align-items-center text-purpal"> 
+                                {{role.name}}
+                            </div>
+                            </td>
+                            <td class="text-dark">{{role.user_count}}</td>
+                            <td>
+                                {{role.added_by__first_name}} {{role.added_by__last_name}}
+                            </td>  
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" [routerLink]="['/role/update', role.id, role.name]" alt="">
+                                <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" (click)="openModal(deleteRoleModal,role)" alt=""> 
+                                </div>
+                            </td>  
+                        </tr> 
+                    </tbody>  
+                    <tbody *ngIf="globalRoleList.length === 0 && !requestLoader">
+                        <tr style="text-align: center;">
+                            <td colspan="5">No Record Found</td>
+                        </tr>
+                    </tbody> 
+                </table> 
+                <div *ngIf="requestLoader" class="table-loader absolute">
+                    <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                        <div class="spinner-border theme-color" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span> 
+                                    <!-- [(ngModel)]="selectedPageSize" (change)="changePageSize()" -->
+                                    <select [(ngModel)]="selectedPageSize" (change)="changePageSize()" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select> 
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                    <!-- {{selectedPageSize.totalRecords}} -->
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">  
+                            <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="pageConfig.size" [maxSize]="5" [rotate]="true"></pagination>
+                        </div>
+                        <!-- <div class="col d-flex align-items-end justify-content-end">  
+                        <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="pageConfig.size"></pagination>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> 
+
+<!-- role mapping -->
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div>  
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Users and Permissions</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Title Role Mapping</h1> 
+        </div>
+    </div>  
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User </h5>
+        <div class="hk-sec-wrapper">
+            <h6 class="hk-sec-title mb-30">EMPLOYEE TITLE ROLE MAPPING</h6>
+            <div class="table-wrap"> 
+                <div class="position-relative table-responsive mnh-200p">
+                <table id="datable_1" class="table theme-table role-map-table w-100 display pb-30">
+                    <thead>
+                        <tr> 
+                            <th>EMPLOYEE TITLE</th>
+                            <th>DEPARTMENTS</th> 
+                            <th>USER ROLES</th> 
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        <tr> 
+                            <td>Senior IT Manager</td>
+                            <td>
+                                <!-- <ng-select2 [data]="exampleData"></ng-select2> -->
+                                <div class="form-label-group"> 
+                                    <select class="form-control selectDropdown" formControlName="busienss_type_id">
+                                        <option> </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select Department</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-label-group">
+                                    <select class="form-control selectDropdown">
+                                        <option>  </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select User Roles</label>
+                                </div>
+                            </td>    
+                        </tr> 
+                        <tr> 
+                            <td>Senior IT Manager</td>
+                            <td>
+                                <div class="form-label-group"> 
+                                    <select class="form-control selectDropdown">
+                                        <option> </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select Department</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-label-group">
+                                    <select class="form-control selectDropdown">
+                                        <option>  </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select User Roles</label>
+                                </div>
+                            </td>    
+                        </tr> 
+                        <tr> 
+                            <td>Senior IT Manager</td>
+                            <td>
+                                <div class="form-label-group"> 
+                                    <select class="form-control selectDropdown">
+                                        <option> </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select Department</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-label-group">
+                                    <select class="form-control selectDropdown">
+                                        <option>  </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select User Roles</label>
+                                </div>
+                            </td>    
+                        </tr> 
+                        <tr> 
+                            <td>Senior IT Manager</td>
+                            <td>
+                                <div class="form-label-group"> 
+                                    <select class="form-control selectDropdown">
+                                        <option> </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select Department</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-label-group">
+                                    <select class="form-control selectDropdown">
+                                        <option>  </option>
+                                    </select> 
+                                    <label class="selectHolder" for="">Select User Roles</label>
+                                </div>
+                            </td>    
+                        </tr> 
+                    </tbody>  
+                    <tbody *ngIf="false">
+                        <tr style="text-align: center;">
+                            <td colspan="3">No Record Found</td>
+                        </tr>
+                    </tbody>
+                    <div *ngIf="false" class="table-loader absolute">
+                        <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                            <div class="spinner-border theme-color" role="status">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                </table> 
+                </div> 
+            </div>
+        </div>
+    </section> 
+</div> 
+<!-- role mapping end -->
+
+<!-- role delete confirmation -->
+<ng-template #deleteRoleModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <!-- <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                    <span class="text-white">
+                        <i class="fa fa-trash-o highlight-icon" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <p class="mb-4">Are you sure you want to delete <span class="font-weight-bold d-block">{{selectedRole.name}}</span></p> -->
+                <img src="assets/images/delete.png" class="img-fluid mb-20">
+                <h2 class="modal-title">Delete Role?</h2>
+                <p class="modal-title text-secondary font-21">Are you sure you want to delete this role?</p>
+                <p class="modal-title client-name">{{selectedRole.name}}</p>
+                <!-- <div class="center-text">
+                    
+                    <button type="button" (click)="deleteRole()" class="btn btn-success loader-btn">
+                        <span>
+                            Delete
+                            <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>     
+                        </span>
+                    </button>
+                    
+                </div> -->
+
+                <div class="modal-footer pb-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-danger btn-lg mr-15 loader-btn" (click)="deleteRole()">
+                            <span>
+                                Yes,delete role
+                                <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>  
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal"
+                            (click)="modalRef.hide()">Cancel</button>
+
+                    </div>
+                </div>
+                <div [style.color]="error === true ? '#FF0000' : '#7bb31a'" style="font-size: 100%;" class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- end of role delete confirmation -->

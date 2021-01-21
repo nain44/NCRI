@@ -1,0 +1,80 @@
+.pt-5{
+    padding-top: 5rem !important;
+}
+.mb-20{
+    margin-bottom: 2rem !important;
+}
+.mt--8{margin-top: -8rem !important;}
+.w--50{
+    width: 5rem !important;
+}
+.pointer-none{
+    pointer-events: none;
+    cursor: none;
+}
+.timepicker-period{
+    .timepicker-dial__item.timepicker-period__btn{ 
+        color: $gray-color;
+    }
+}
+.table-actions a.not-view{
+    cursor: not-allowed; 
+    svg{
+        cursor: not-allowed;
+        pointer-events: none;
+        #view-action{
+            fill:#c7c7c7;
+        }
+    }
+}
+// .mh-77{
+//     min-height: 77vh;
+//     max-height: 77vh;
+//     overflow-y: auto;
+// }
+.w-10{width: 10rem !important;}
+.login-logo{
+    max-width: 16.4rem;
+}
+.bottom-right{
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+.confi-tag{
+    background: $gray-bg;
+    padding: 0.1rem .5rem;
+    font-size: 1rem;
+    color: $gray-04-color;
+    font-weight: 700;
+  }
+.form-group{
+    margin-bottom: 2rem !important;
+    &.mb-0{
+        margin-bottom: 0px !important;
+    }
+}
+.invalid-feedback{
+    color: #ff0000;
+}
+.error-icon,.valid-icon{
+    position: absolute;
+    top: 50%;
+    right: -3rem;
+    transform: translateY(-50%);
+    font-size: 2rem;
+}
+.rotate{transform: rotate(180deg);}
+.breadcrumb-item + .breadcrumb-item::before{
+    content: "\e628";
+    font-family: 'themify';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1rem;
+}

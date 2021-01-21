@@ -1,0 +1,618 @@
+<section class="hk-sec-wrapper shadow-xl rounded-30">
+    <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about Client. </h5>
+
+    <form [formGroup]="store.clientInfo">
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Company Information</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" (change)="onAutoChange()" class="custom-control-input"
+                                            formControlName="auto_generate_account_codes" id="auto_generate_account_codes">
+                                        <label class="custom-control-label" for="auto_generate_account_codes">Auto Generated Code</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group" *ngIf="switchAutoGenerateField">
+                                        <input type="text" class="form-control" placeholder="Short Name" formControlName="client_number"
+                                            value="NCRI002153" required>
+                                        <label for="">Client No.</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.client_number.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.client_number.errors.required && store.clientInfo.controls.client_number.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.client_number.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                
+                                    </div>
+                                    <div class="row" [class]="!switchAutoGenerateField ? '' : 'd-none' ">
+                                        <div class="col-md-4">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" (blur)="checkClientNumber()"
+                                                    formControlName="year" placeholder="Year">
+                                                <label for="">YYYY</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" (blur)="checkClientNumber()"
+                                                    formControlName="characters" placeholder="characters">
+                                                <label for="">ABC</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" (blur)="checkClientNumber()"
+                                                    formControlName="prefix" placeholder="Number">
+                                                <label for="">0000</label>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="error" [style.color]="'#FF0000'" style="font-size: 100%;display: block;"
+                                            class="invalid-feedback">
+                                            Client no already exists
+                                        </div>
+                                    </div>
+                
+                                    <!-- <div class="form-label-group">
+                                            
+                                            <input type="text">
+                                            <input type="text">
+                                        </div> -->
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control" placeholder="Short Name" formControlName="short_name"
+                                            required>
+                                        <label for="">Short Name *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.short_name.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.short_name.errors.required && store.clientInfo.controls.short_name.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.short_name.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control" placeholder="Company Name"
+                                            formControlName="company_name" required>
+                                        <label for="">Company Name *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.company_name.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.company_name.errors.required && store.clientInfo.controls.company_name.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.company_name.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" formControlName="business_type_id">
+                                            <option *ngFor="let data of BusinessTypeDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Business Type *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.business_type_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.business_type_id.errors.required && store.clientInfo.controls.business_type_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.business_type_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Product"
+                                            formControlName="product">
+                                        <label for="">Product *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.product.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.product.errors.required && store.clientInfo.controls.product.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.product.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Short Name"
+                                            formControlName="tier">
+                                        <label for="">Tier</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.tier.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.tier.errors.required && store.clientInfo.controls.tier.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.tier.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Company Name"
+                                            formControlName="region_or_portfolio">
+                                        <label for="">Region/Portfolio</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.region_or_portfolio.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.region_or_portfolio.errors.required && store.clientInfo.controls.region_or_portfolio.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.region_or_portfolio.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Contact Information</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20"> 
+                                <div class="col-4"
+                                    *ngFor="let form of store.clientInfo.controls.contact_information_list['controls']; let first = first; let last = last; let i = index;">
+                                    <form [formGroup]="form">
+                                        <div class="col-12 p-0">
+                                            <div class="custom-control custom-checkbox mb-20">
+                                                <input type="checkbox" class="custom-control-input" (change)="selectIsPrimary(i)"
+                                                    formControlName="is_primary_contact" [id]="i + 'is_primary_contact'">
+                                                <label class="custom-control-label" [for]="i + 'is_primary_contact'">Primary Contact</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control" placeholder="Short Name"
+                                                formControlName="contact_title">
+                                            <label for="">Contact Title *</label>
+                                            <div class="w-100" *ngIf="form.controls.contact_title.status=='INVALID'">
+                                                <div *ngIf="form.controls.contact_title.errors.required && form.controls.contact_title.touched"
+                                                    class="invalid-feedback"
+                                                    [style.display]="form.controls.contact_title.status=='INVALID' ? 'block' : 'none'">
+                                                    Required</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control" placeholder="Short Name"
+                                                formControlName="full_name">
+                                            <label for="">Full Name *</label>
+                                            <div class="w-100" *ngIf="form.controls.full_name.status=='INVALID'">
+                                                <div *ngIf="form.controls.full_name.errors.required && form.controls.full_name.touched"
+                                                    class="invalid-feedback"
+                                                    [style.display]="form.controls.full_name.status=='INVALID' ? 'block' : 'none'">
+                                                    Required</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control" placeholder="Short Name"
+                                                formControlName="email_address">
+                                            <label for="">Email Address *</label>
+                                            <div class="w-100" *ngIf="form.controls.email_address.status=='INVALID'">
+                                                <div *ngIf="form.controls.email_address.errors.required && form.controls.email_address.touched"
+                                                    class="invalid-feedback"
+                                                    [style.display]="form.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                                    Required</div>
+                                                <div *ngIf="form.controls.email_address.errors.email" class="invalid-feedback"
+                                                    [style.display]="form.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                                    Enter a valid email address</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <select class="form-control selectDropdown" name="Business Type"
+                                                formControlName="country_code">
+                                                <option *ngFor="let data of CountryCodeDropdownList" [value]="data.code">
+                                                    ({{data.dial_code}}) {{data.name}}
+                                                </option>
+                                            </select>
+                                            <label class="selectHolder" for="">Country Code *</label>
+                                            <div class="w-100" *ngIf="form.controls.country_code.status=='INVALID'">
+                                                <div *ngIf="form.controls.country_code.errors.required && form.controls.country_code.touched"
+                                                    class="invalid-feedback"
+                                                    [style.display]="form.controls.country_code.status=='INVALID' ? 'block' : 'none'">
+                                                    Required</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-label-group mb-0">
+                                                    <input type="text" class="form-control" placeholder="Short Name"
+                                                        formControlName="phone_number">
+                                                    <label for="">Cell/Phone No. *</label>
+                                                    <div class="w-100" *ngIf="form.controls.phone_number.status=='INVALID'">
+                                                        <div *ngIf="form.controls.phone_number.errors.required && form.controls.phone_number.touched"
+                                                            class="invalid-feedback"
+                                                            [style.display]="form.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                            Required</div>
+                                                        <div *ngIf="form.controls.phone_number.errors.pattern" class="invalid-feedback"
+                                                            [style.display]="form.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                            Cell/Phone no must contain 10 digits</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-label-group mb-0">
+                                                    <input type="text" class="form-control input-label initail-label"
+                                                        placeholder="Short Name" formControlName="phone_number_ext">
+                                                    <label for="">Ext.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                
+                                </div>
+                                <div class="col-md-4" *ngIf="store.clientInfo.value.contact_information_list.length < 3">
+                                    <button (click)="addContactForm()" class="more-contact">Add Another Contact Information</button>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Address Details</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control" placeholder="Short Name"
+                                            formControlName="address_line_1">
+                                        <label for="">Address Line 1 *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.address_line_1.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.address_line_1.errors.required && store.clientInfo.controls.address_line_1.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.address_line_1.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Short Name"
+                                            formControlName="address_line_2">
+                                        <label for="">Address Line 2</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type" formControlName="country_id">
+                                            <option *ngFor="let data of CountryDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Country *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.country_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.country_id.errors.required && store.clientInfo.controls.country_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.country_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type" formControlName="province_id">
+                                            <option *ngFor="let data of ProvinceDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Province/State *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.province_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.province_id.errors.required && store.clientInfo.controls.province_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.province_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type" formControlName="city_id">
+                                            <option *ngFor="let data of CityDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">City *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.city_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.city_id.errors.required && store.clientInfo.controls.city_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.city_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Short Name"
+                                            formControlName="postal_code" required>
+                                        <label for="">Postal Code *</label>
+                                    </div>
+                                    <!-- <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" placeholder="Short Name"
+                                                    formControlName="zip_code_id">
+                                                <label for="">Zip Code ID</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" placeholder="Short Name"
+                                                    formControlName="zip_code">
+                                                <label for="">Zip Code</label>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control" placeholder="Short Name"
+                                                    formControlName="phone_number">
+                                                <label for="">Phone *</label>
+                                                <div class="w-100" *ngIf="store.clientInfo.controls.phone_number.status=='INVALID'">
+                                                    <div *ngIf="store.clientInfo.controls.phone_number.errors.required && store.clientInfo.controls.phone_number.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="store.clientInfo.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                        Required</div>
+                                                    <div *ngIf="store.clientInfo.controls.phone_number.errors.pattern"
+                                                        class="invalid-feedback"
+                                                        [style.display]="store.clientInfo.controls.phone_number.status=='INVALID' ? 'block' : 'none'">
+                                                        Cell/Phone no must contain 10 digits</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control input-label" placeholder="Short Name"
+                                                    formControlName="phone_number_ext">
+                                                <label for="">Ext.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control" placeholder="Short Name" formControlName="cell_number">
+                                        <label for="">Cell</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.cell_number.status=='INVALID'">
+                                            <!-- <div *ngIf="store.clientInfo.controls.cell_number.errors.required && store.clientInfo.controls.cell_number.touched" class="invalid-feedback"
+                                                 [style.display]="store.clientInfo.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Required</div> -->
+                                            <div *ngIf="store.clientInfo.controls.cell_number.errors.pattern" class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.cell_number.status=='INVALID' ? 'block' : 'none'">
+                                                Cell no must contain 10 digits</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control input-label" placeholder="Short Name"
+                                            formControlName="fax">
+                                        <label for="">Fax</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.fax.status=='INVALID'">
+                                            <!-- <div *ngIf="store.clientInfo.controls.fax.errors.required && store.clientInfo.controls.fax.touched" class="invalid-feedback"
+                                                 [style.display]="store.clientInfo.controls.fax.status=='INVALID' ? 'block' : 'none'">Required</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" class="form-control" placeholder="Short Name"
+                                            formControlName="email_address">
+                                        <label for="">Email Address *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.email_address.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.email_address.errors.required && store.clientInfo.controls.email_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                            <div *ngIf="store.clientInfo.controls.email_address.errors.email" class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.email_address.status=='INVALID' ? 'block' : 'none'">
+                                                Enter a valid email address</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Client System Information</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown valid-check" name="Business Type"
+                                            formControlName="home_branch_id">
+                                            <option *ngFor="let data of HomeBranchDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Home Branch *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.home_branch_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.home_branch_id.errors.required && store.clientInfo.controls.home_branch_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.home_branch_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="client_type_id">
+                                            <option *ngFor="let data of ClientTypeDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Type *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.client_type_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.client_type_id.errors.required && store.clientInfo.controls.client_type_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.client_type_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="currency_code">
+                                            <!-- <option></option> -->
+                                            <option *ngFor="let data of CurrencyCodeDropdownList" [value]="data.code">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Currency *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.currency_code.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.currency_code.errors.required && store.clientInfo.controls.currency_code.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.currency_code.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group commission">
+                                        <img src="assets/images/percent.png" class="img-fluid">
+                                        <input type="number" class="form-control " placeholder="Short Name"
+                                            formControlName="default_commission">
+                                        <label for="">Default Commission*</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.default_commission.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.default_commission.errors.required && store.clientInfo.controls.default_commission.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.default_commission.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="sales_representative_id">
+                                            <!-- <option></option> -->
+                                            <option *ngFor="let data of salesRepresentativeList" [value]="data.id">
+                                                {{data.first_name + ' ' + data.last_name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Sales Representative *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.sales_representative_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.sales_representative_id.errors.required && store.clientInfo.controls.sales_representative_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.sales_representative_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type" formControlName="collector_id">
+                                            <!-- <option></option> -->
+                                            <option *ngFor="let data of collectorList" [value]="data.id">
+                                                {{data.first_name + ' ' + data.last_name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Collector</label>
+                
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="client_status_id">
+                                            <option *ngFor="let data of ClientStatusDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Status *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.client_status_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.client_status_id.errors.required && store.clientInfo.controls.client_status_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.client_status_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" name="Business Type"
+                                            formControlName="client_group_id">
+                                            <option *ngFor="let data of ClientGroupDropdownList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Group *</label>
+                                        <div class="w-100" *ngIf="store.clientInfo.controls.client_group_id.status=='INVALID'">
+                                            <div *ngIf="store.clientInfo.controls.client_group_id.errors.required && store.clientInfo.controls.client_group_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="store.clientInfo.controls.client_group_id.status=='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4" [class]="showMasterClient ? '' : 'd-none'">
+                                    <div class="form-label-group slash-field slash-field--select ">
+                                        <img src="assets/images/slash.png" class="ing-fluid">
+                                        <select class="form-control selectDropdown ng-dirty" name="Business Type"
+                                            formControlName="master_client_id">
+                                            <!-- <option></option> -->
+                                            <option *ngFor="let data of masterClientList" [value]="data.id">
+                                                {{data.company_name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Select Master Client</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input type="checkbox" class="custom-control-input" id="is_master_client" (change)="toggleMasterClient()"
+                                            formControlName="is_master_client">
+                                        <label class="custom-control-label" for="is_master_client">Master Client</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input type="checkbox" class="custom-control-input" formControlName="restricted_access_client"
+                                            id="restricted_access_client">
+                                        <label class="custom-control-label" for="restricted_access_client">Restricted Access Client</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div> 
+        <hr class="mt-50" />
+        <div class="text-right">
+            <!-- <button type="button" class="btn btn-success btn-lg" [routerLink]="['/add-client/client-details']" routerLinkActive="router-link-active" >Next: Client Details</button> -->
+            <!-- [disabled]="!store.clientInfo.valid" -->
+            <button type="button" (click)="submitData()" [disabled]="!store.clientInfo.valid"
+                [routerLink]="['/add-client/client-details']" class="btn btn-success btn-lg">Next: Client
+                Details</button>
+        </div>
+    </form>
+
+</section>

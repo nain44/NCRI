@@ -1,0 +1,1260 @@
+
+<!-- new design --> 
+<div class="hk-pg-wrapper" *ngIf="target === 'set'">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li> 
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <form novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button"> 
+                                <h6 class="accor-name w-100 text-left hk-sec-title">TARGET DATE RANGE</h6>
+                            </button>
+                            <div class="cg-role">   
+                                <div class="w-100 mt-20"> 
+                                    <div class="row mt-20">
+                                        <div class="col-4">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <div class="position-relative">
+                                                    <img src="assets/images/calendar.png" class="img-fluid">
+                                                    <input type="text" autocomplete="off"
+                                                    [(ngModel)]="targetDate.startDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" placeholder="Start Date *" bsDatepicker (bsValueChange)="onValueChange($event)"> 
+                                                    <label for="">Start Date *</label>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.date_of_joining.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.date_of_joining.errors.required && userForm.controls.date_of_joining.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">
+                                                        Please Provide joining date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <div class="position-relative">
+                                                    <img src="assets/images/calendar.png" class="img-fluid">
+                                                    <input type="text" autocomplete="off"
+                                                    [(ngModel)]="targetDate.endDate"  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" placeholder="End Date *" bsDatepicker> 
+                                                    <label for="">End Date *</label>
+                                                </div>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.date_of_joining.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.date_of_joining.errors.required && userForm.controls.date_of_joining.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.date_of_joining.status=='INVALID' ? 'block' : 'none'">
+                                                        Please Provide joining date.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group> 
+                    </accordion> 
+                </div>
+            </div> 
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> -->
+                <button type="button" class="btn btn-success loader-btn btn-lg" (click)="nextStep()">
+                   <span>
+                    Next
+                    <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                   </span>
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div> 
+<!-- *ngIf="target === 'one'" -->
+<div class="hk-pg-wrapper" *ngIf="true">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li> 
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Set Target</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the details below to set target.</h5>
+
+        <form novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button"> 
+                                <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN TARGET</h6>
+                            </button>
+                            <div class="cg-role">   
+                                <div class="w-100 mt-20"> 
+                                    <div class="row mt-20">
+                                        <div class="col">  
+                                            <div class="field-view d-flex align-items-center">
+                                                <div class="custom-radio custom-control-inline" *ngFor="let country of countryList">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" name="c-radio" type="radio" id="gridRadios11" value="laptop" [ngClass]="{'active show': selectedCountry === country}" (click)="changeCountry(country)">
+                                                        <label class="form-check-label" for="gridRadios11">{{country}}</label>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>  
+                                        <div class="col-auto">
+                                            <div class="text-center">
+                                                <p class="text-dark-80">Date Range</p>
+                                                <h6>{{targetDate.startDate | date : 'MMM d'}} - {{targetDate.endDate | date : 'MMM d'}}</h6>
+                                            </div>
+                                        </div> 
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col-12">  
+                                            <form novalidate>
+                                            <!-- <div class="row">
+        
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label >Target Amount</label>
+                                                        <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                    </div>
+        
+                                                </div>
+                                                <div class="col-md-2 d-flex align-items-center">
+                                                    <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                </div>
+        
+                                            </div> -->
+                                            <div class="row">
+                                                <div class="col-md-8 set-commssion">
+                                                    <div class="row version-flow">
+                                                        <!-- <div class="col-md-6 version-flow__item">
+                                                            <div class="form-group">
+                                                                <label >{{'Level ' + currentUserGrade}}</label>
+                                                                <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                            </div>
+                                                        </div> -->
+                                                        <!-- <div class="col-md-12 nested" *ngFor="let row of treeData;let i = index">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >{{'Level ' + row.grade + '.' + (i + 1)}}</label>
+                                                                        <input type="text" class="form-control" readonly [value]="row.first_name + ' ' + row.last_name + ' ' + '('+row.employee_type__name+')'" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="formGroupExampleInput">Target Amount</label>
+                                                                        <input  type="number" class="form-control" name="amount1" [(ngModel)]="row.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <ul class="tree">
+                                                            <li class="tree-first nested">
+                                                                <!-- <i class="indicator" (click)="toggleView(main, $event)"></i>
+                                                                <div class="row">
+                                                                    <div [class]="currentUserGrade === 0 ? 'col-md-4' : 'col-md-8'">
+                                                                        <div class="form-group">
+                                                                            <label >{{'Level ' + currentUserGrade}}</label>
+                                                                            <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4" *ngIf="currentUserGrade === 0">
+                                                                        <div class="form-group">
+                                                                            <label >Target Amount</label>
+                                                                            <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                                        </div>
+        
+                                                                    </div>
+                                                                    <div class="col-md-4 d-flex align-items-center">
+                                                                        <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                                    </div>
+        
+                                                                </div> -->
+                                                                <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                                <ul #main class="collapsed in">
+                                                                    <li [class]="one.children.length > 0 ? 'nested' : ''" *ngFor="let one of treeData;let indexOne = index">
+                                                                        <i *ngIf="one.children.length > 0" class="indicator" (click)="toggleView(firstPanel, $event)"></i>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >{{'Level ' + one.grade}}</label>
+                                                                                    <input type="text" class="form-control" readonly [value]="one.first_name + ' ' + one.last_name + ' ' + '('+one.employee_type__name+')'" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >Target Amount</label>
+                                                                                    <!-- <input type="number" class="form-control" [name]="'one'+indexOne" [(ngModel)]="one.amount" (blur)="amountChanged()" placeholder="Target Amount" >  -->
+                                                                                    <input type="number" class="form-control" [name]="'one'+indexOne" [(ngModel)]="targetAmount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                                                </div>
+        
+                                                                            </div>
+                                                                            <div *ngIf="indexOne === 0" class="col-md-4 d-flex align-items-center">
+                                                                                <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul #firstPanel>
+                                                                            <li [class]="two.children.length > 0 ? 'nested' : ''" *ngFor="let two of one.children; let indexTwo = index">
+                                                                                <i *ngIf="two.children.length > 0" class="indicator" (click)="toggleView(secondPanel, $event)"></i>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >{{'Level ' + two.grade + '.' + (indexTwo + 1)}}</label>
+                                                                                            <input type="text" class="form-control" disabled [value]="two.first_name + ' ' + two.last_name + ' ' + '('+two.employee_type__name+')'" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >Target Amount</label>
+                                                                                            <input  type="number" class="form-control" [(ngModel)]="two.amount" (blur)="amountChanged()"  [name]="'two'+indexTwo+one.id" placeholder="Target Amount" >
+                                                                                        </div>
+        
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #secondPanel>
+                                                                                    <li [class]="three.children.length > 0 ? 'nested' : ''" *ngFor="let three of two.children;let indexThree = index">
+                                                                                        <i *ngIf="three.children.length > 0" class="indicator" (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >{{'Level ' + three.grade + '.' + (indexThree + 1)}}</label>
+                                                                                                    <input type="text" class="form-control" disabled [value]="three.first_name + ' ' + three.last_name + ' ' + '('+three.employee_type__name+')'" >
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >Target Amount</label>
+                                                                                                    <input  type="number" class="form-control" [(ngModel)]="three.amount" (blur)="amountChanged()" [name]="'three'+indexThree+two.id" placeholder="Target Amount" >
+                                                                                                </div>
+        
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <ul #thirdPanel>
+                                                                                            <li *ngFor="let four of three.children;let indexFour = index">
+        
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="form-group">
+                                                                                                            <label >{{'Level ' + four.grade + '.' + (indexFour + 1)}}</label>
+                                                                                                            <input type="text" class="form-control" disabled [value]="four.first_name + ' ' + four.last_name + ' ' + '('+four.employee_type__name+')'">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="form-group">
+                                                                                                            <label >Target Amount</label>
+                                                                                                            <input  type="number" class="form-control" [(ngModel)]="four.amount" (blur)="amountChanged()"  [name]="'four'+indexFour+three.id" placeholder="Target Amount">
+                                                                                                        </div>
+        
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                        </li>
+                                                                                        </ul>
+        
+                                                                                </li>
+                                                                                </ul>
+        
+                                                                        </li>
+                                                                        </ul>
+        
+                                                                </li>
+                                                                </ul>
+        
+                                                        </li>
+                                                            </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 align-self-center">
+                                                    <div class="text-center"> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row my-4 d-none">
+                                                <div class="col-md-8">
+                                                    <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                                    <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{amountLeft}}</span></div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-success loader-btn" [disabled]="nextLoader || loader" type="button" (click)="addTarget(true)">
+                                                            <span>
+                                                                Save
+                                                                <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-success loader-btn" [disabled]="nextLoader || loader" type="button" (click)="nextScreen(2)">
+                                                            <span>
+                                                                Next
+                                                                <span *ngIf="nextLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group> 
+                    </accordion> 
+                </div>
+            </div> 
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <!-- <button type="button" [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button> -->
+                <!-- <button type="button" 
+                    [style.pointer-events]="!userForm.valid ? 'none' : 'auto'"
+                    class="btn btn-success btn-lg d-none">Approve User</button> -->
+                <button type="button" class="btn btn-success loader-btn btn-lg" (click)="nextStep()">
+                   <span>
+                    Next
+                    <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                   </span>
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div> 
+<!-- end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid container-wrapper"  *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" ><a href="javascript:void(0)" class="gray-color">Commission</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Set Target</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Set Target</h5>
+                            <div class="tab-content">
+                                <div  class="tab-pane fade active show" >
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label >Start Date</label>
+                                                <input type="text" [(ngModel)]="targetDate.startDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"  class="form-control" placeholder="Select Date of Joining" bsDatepicker (bsValueChange)="onValueChange($event)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group form-group">
+                                                <label >End Date </label>
+                                                <input type="text" [(ngModel)]="targetDate.endDate"  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control" placeholder="Select Date of Termination" bsDatepicker>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar-o"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-5">
+                                        <div class="col-md-10 text-center">
+                                            <img src="/assets/images/target.png" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-2 align-self-end">
+                                            <!-- <button *ngIf="isDisabled" [tooltip]="toolTipMessage" placement="top" type="button" class="button float-right">Next </button> -->
+                                            <button type="button" [disabled]="mainLoader" class="button float-right"   (click)="nextStep()">
+                                                Next
+                                                <span *ngIf="mainLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                 </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- view one -->
+
+<div class="container-fluid container-wrapper" *ngIf="target === 'one'">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Assign Target</h5>
+                            <div class="row">
+                                <div class="col-12 col-md-10">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" *ngFor="let country of countryList">
+                                            <a class="nav-link" [ngClass]="{'active show': selectedCountry === country}" (click)="changeCountry(country)">{{country}}</a>
+                                        </li>
+                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}"  >USA</a>
+                                        </li>
+                                        <li class="nav-item" (click)="setTab('access')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" >Pakistan</a>
+                                        </li>  -->
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-md-2 text-right align-self-center">
+                                    <span class="gray-04-color">Date:</span><span class="gray-color"> {{targetDate.startDate | date : 'MMM d'}} - {{targetDate.endDate | date : 'MMM d'}}</span>
+                                </div>
+
+
+                            </div>
+
+
+                                   <form novalidate>
+                                    <!-- <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Target Amount</label>
+                                                <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-center">
+                                            <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                        </div>
+
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-md-6 pl-5">
+                                            <div class="row version-flow">
+                                                <!-- <div class="col-md-6 version-flow__item">
+                                                    <div class="form-group">
+                                                        <label >{{'Level ' + currentUserGrade}}</label>
+                                                        <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="col-md-12 nested" *ngFor="let row of treeData;let i = index">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >{{'Level ' + row.grade + '.' + (i + 1)}}</label>
+                                                                <input type="text" class="form-control" readonly [value]="row.first_name + ' ' + row.last_name + ' ' + '('+row.employee_type__name+')'" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="formGroupExampleInput">Target Amount</label>
+                                                                <input  type="number" class="form-control" name="amount1" [(ngModel)]="row.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <ul class="tree">
+                                                    <li class="tree-first nested">
+                                                        <!-- <i class="indicator" (click)="toggleView(main, $event)"></i>
+                                                        <div class="row">
+                                                            <div [class]="currentUserGrade === 0 ? 'col-md-4' : 'col-md-8'">
+                                                                <div class="form-group">
+                                                                    <label >{{'Level ' + currentUserGrade}}</label>
+                                                                    <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" *ngIf="currentUserGrade === 0">
+                                                                <div class="form-group">
+                                                                    <label >Target Amount</label>
+                                                                    <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 d-flex align-items-center">
+                                                                <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                            </div>
+
+                                                        </div> -->
+                                                        <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                        <ul #main class="collapsed in">
+                                                            <li [class]="one.children.length > 0 ? 'nested' : ''" *ngFor="let one of treeData;let indexOne = index">
+                                                                <i *ngIf="one.children.length > 0" class="indicator" (click)="toggleView(firstPanel, $event)"></i>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >{{'Level ' + one.grade}}</label>
+                                                                            <input type="text" class="form-control" readonly [value]="one.first_name + ' ' + one.last_name + ' ' + '('+one.employee_type__name+')'" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >Target Amount</label>
+                                                                            <!-- <input type="number" class="form-control" [name]="'one'+indexOne" [(ngModel)]="one.amount" (blur)="amountChanged()" placeholder="Target Amount" >  -->
+                                                                            <input type="number" class="form-control" [name]="'one'+indexOne" [(ngModel)]="targetAmount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div *ngIf="indexOne === 0" class="col-md-4 d-flex align-items-center">
+                                                                        <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                                    </div>
+                                                                </div>
+                                                                <ul #firstPanel>
+                                                                    <li [class]="two.children.length > 0 ? 'nested' : ''" *ngFor="let two of one.children; let indexTwo = index">
+                                                                        <i *ngIf="two.children.length > 0" class="indicator" (click)="toggleView(secondPanel, $event)"></i>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >{{'Level ' + two.grade + '.' + (indexTwo + 1)}}</label>
+                                                                                    <input type="text" class="form-control" disabled [value]="two.first_name + ' ' + two.last_name + ' ' + '('+two.employee_type__name+')'" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >Target Amount</label>
+                                                                                    <input  type="number" class="form-control" [(ngModel)]="two.amount" (blur)="amountChanged()"  [name]="'two'+indexTwo+one.id" placeholder="Target Amount" >
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul #secondPanel>
+                                                                            <li [class]="three.children.length > 0 ? 'nested' : ''" *ngFor="let three of two.children;let indexThree = index">
+                                                                                <i *ngIf="three.children.length > 0" class="indicator" (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >{{'Level ' + three.grade + '.' + (indexThree + 1)}}</label>
+                                                                                            <input type="text" class="form-control" disabled [value]="three.first_name + ' ' + three.last_name + ' ' + '('+three.employee_type__name+')'" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >Target Amount</label>
+                                                                                            <input  type="number" class="form-control" [(ngModel)]="three.amount" (blur)="amountChanged()" [name]="'three'+indexThree+two.id" placeholder="Target Amount" >
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #thirdPanel>
+                                                                                    <li *ngFor="let four of three.children;let indexFour = index">
+
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >{{'Level ' + four.grade + '.' + (indexFour + 1)}}</label>
+                                                                                                    <input type="text" class="form-control" disabled [value]="four.first_name + ' ' + four.last_name + ' ' + '('+four.employee_type__name+')'">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >Target Amount</label>
+                                                                                                    <input  type="number" class="form-control" [(ngModel)]="four.amount" (blur)="amountChanged()"  [name]="'four'+indexFour+three.id" placeholder="Target Amount">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </li>
+                                                                                </ul>
+
+                                                                        </li>
+                                                                        </ul>
+
+                                                                </li>
+                                                                </ul>
+
+                                                        </li>
+                                                        </ul>
+
+                                                </li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 align-self-center">
+                                            <div class="text-center">
+                                                <img src="/assets/images/target-map.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-md-8">
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{amountLeft}}</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right">
+                                                <button class="btn btn-success loader-btn" [disabled]="nextLoader || loader" type="button" (click)="addTarget(true)">
+                                                   <span>
+                                                       Save
+                                                       <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                   </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right">
+                                                <button class="btn btn-success loader-btn" [disabled]="nextLoader || loader" type="button" (click)="nextScreen(2)">
+                                                   <span>
+                                                       Next
+                                                       <span *ngIf="nextLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                   </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- view two -->
+<div class="container-fluid container-wrapper" *ngIf="target === 'two'">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Commission and Compensation</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Set Target</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- <ul>
+                <li id="mainTree"></li>
+            </ul> -->
+            <!-- main body -->
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Assign Target</h5>
+                            <div class="row">
+                                <div class="col-12 col-md-10">
+                                    <ul class="nav nav-tabs" role="tablist" *ngIf="currentUserGrade === 0 || currentUserGrade === 1">
+                                        <li class="nav-item" *ngFor="let country of countryList">
+                                            <a class="nav-link" [ngClass]="{'active show': selectedCountry === country}" (click)="changeCountry(country)">{{country}}</a>
+                                        </li>
+                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}"  >USA</a>
+                                        </li>
+                                        <li class="nav-item" (click)="setTab('access')">
+                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" >Pakistan</a>
+                                        </li>  -->
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-md-2 text-right align-self-center pl-4">
+                                    <div class="col-12 text-left">
+                                        <span class="gray-04-color">Date:</span><span class="gray-color">
+                                        {{targetDate.startDate | date : 'MMM d'}} - {{targetDate.endDate | date : 'MMM d'}}
+                                        </span>
+                                    </div>
+                                    <div class="col-12 text-left" *ngIf="currentUserGrade !== 0">
+                                        <span class="gray-04-color">Target Amount:</span><span class="gray-color">
+                                        ${{targetAmount}}
+                                        </span>
+                                    </div>
+                                    <!-- <div class="col-12 text-left">
+                                        <span class="gray-04-color">Target Amount:</span><span class="gray-color"> $50,000.00</span>
+                                    </div>  -->
+                                </div>
+                            </div>
+
+                                <div class="tab-pane fade active show">
+                                   <form  novalidate>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs at-tabs" role="tablist" *ngIf="currentUserGrade === 1 && branchList.length > 1">
+                                                        <li class="nav-item" *ngFor="let branch of branchList">
+                                                            <a class="nav-link" [ngClass]="{'active show': selectedBranch === branch}" (click)="changeBranch(branch)">
+                                                                {{branch}}
+                                                            </a>
+                                                        </li>
+                                                        <!-- <li class="nav-item" (click)="setTab('contact')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'contact'}" id="tab2" data-toggle="tab" href="javascript:void(0)" role="tab" aria-controls="profile" aria-selected="false">St. Catharines</a>
+                                                        </li>
+                                                        <li class="nav-item" (click)="setTab('access')">
+                                                            <a class="nav-link" [ngClass]="{'active show': tab === 'access'}" id="portfolio-tab" href="javascript:void(0)" data-toggle="tab" role="tab" aria-controls="portfolio" aria-selected="false">Montreal</a>
+                                                        </li>  -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 pl-5">
+                                            <div class="row" >
+                                                <ul class="tree">
+                                                    <li class="tree-first nested">
+                                                        <!-- <i class="indicator" (click)="toggleView(main, $event)"></i>
+                                                        <div class="row">
+                                                            <div [class]="currentUserGrade === 0 ? 'col-md-4' : 'col-md-8'">
+                                                                <div class="form-group">
+                                                                    <label >{{'Level ' + currentUserGrade}}</label>
+                                                                    <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" *ngIf="currentUserGrade === 0">
+                                                                <div class="form-group">
+                                                                    <label >Target Amount</label>
+                                                                    <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 d-flex align-items-center">
+                                                                <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                            </div>
+
+                                                        </div> -->
+                                                        <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                        <ul #main class="collapsed in">
+                                                            <li [class]="one.children.length > 0 ? 'nested' : ''" *ngFor="let one of treeData;let indexOne = index">
+                                                                <i *ngIf="one.children.length > 0" class="indicator" (click)="toggleView(firstPanel, $event)"></i>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >{{'Level ' + one.grade + '.' + (indexOne + 1)}}</label>
+                                                                            <input type="text" class="form-control" readonly [value]="one.first_name + ' ' + one.last_name + ' ' + '('+one.employee_type__name+')'" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >Target Amount</label>
+                                                                            <input type="number" class="form-control" disabled [name]="'one'+indexOne" [(ngModel)]="one.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div *ngIf="indexOne === 0" class="col-md-4 d-flex align-items-center">
+                                                                        <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                                    </div>
+                                                                </div>
+                                                                <ul #firstPanel>
+                                                                    <li [class]="two.children.length > 0 ? 'nested' : ''" *ngFor="let two of one.children; let indexTwo = index">
+                                                                        <i *ngIf="two.children.length > 0" class="indicator" (click)="toggleView(secondPanel, $event)"></i>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >{{'Level ' + two.grade + '.' + (indexTwo + 1)}}</label>
+                                                                                    <input type="text" class="form-control" disabled [value]="two.first_name + ' ' + two.last_name + ' ' + '('+two.employee_type__name+')'" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >Target Amount</label>
+                                                                                    <input  type="number" class="form-control" [(ngModel)]="two.amount" (blur)="testfunction(one)"  [name]="'two'+indexTwo+one.id" placeholder="Target Amount" >
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul #secondPanel>
+                                                                            <li [class]="three.children.length > 0 ? 'nested' : ''" *ngFor="let three of two.children;let indexThree = index">
+                                                                                <i *ngIf="three.children.length > 0" class="indicator" (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >{{'Level ' + three.grade + '.' + (indexThree + 1)}}</label>
+                                                                                            <input type="text" class="form-control" disabled [value]="three.first_name + ' ' + three.last_name + ' ' + '('+three.employee_type__name+')'" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >Target Amount</label>
+                                                                                            <input  type="number" class="form-control" [(ngModel)]="three.amount" (blur)="testfunction(two)" [name]="'three'+indexThree+two.id" placeholder="Target Amount" >
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #thirdPanel>
+                                                                                    <li *ngFor="let four of three.children;let indexFour = index">
+
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >{{'Level ' + four.grade + '.' + (indexFour + 1)}}</label>
+                                                                                                    <input type="text" class="form-control" disabled [value]="four.first_name + ' ' + four.last_name + ' ' + '('+four.employee_type__name+')'">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >Target Amount</label>
+                                                                                                    <input  type="number" class="form-control" [(ngModel)]="four.amount" (blur)="testfunction(three)"  [name]="'four'+indexFour+three.id" placeholder="Target Amount">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </li>
+                                                                                </ul>
+
+                                                                        </li>
+                                                                        </ul>
+
+                                                                </li>
+                                                                </ul>
+
+                                                        </li>
+                                                        </ul>
+
+                                                </li>
+                                                    </ul>
+                                            </div>
+                                            <div class="row version-flow d-none">
+                                                <div class="col-12 version-flow__inner">
+                                                    <div class="row">
+                                                        <div class="col-md-6 version-flow__inner__item">
+                                                            <div class="form-group">
+                                                                <label >Level 0</label>
+                                                                <input type="text" class="form-control pointer-none" value="Level 0" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 d-flex align-items-center">
+                                                            <a class="button float-right"  (click)="setTab('contact')" href="javascript:void(0)">Divide Equally </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- level 1 -->
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 -->
+                                                        <div class="col-md-12 nested">
+                                                            <div class="row version-flow">
+                                                                <div class="col-12 version-flow__inner">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 version-flow__inner__item">
+                                                                            <div class="form-group">
+                                                                                <label >Level 0</label>
+                                                                                <input type="text" class="form-control pointer-none" value="Level 0" >
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label >Target Amount</label>
+                                                                                <input type="text" class="form-control"   placeholder="Enter Target Amount" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- level 3 -->
+                                                                <div class="col-md-12 nested">
+                                                                    <div class="row version-flow">
+                                                                        <div class="col-12 version-flow__inner">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                                    <div class="form-group">
+                                                                                        <label >Level 0</label>
+                                                                                        <input type="text" class="form-control pointer-none" value="Level 0" >
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label >Target Amount</label>
+                                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" >
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- level 3 end -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- level 2 end -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 nested">
+                                                    <div class="row version-flow">
+                                                        <div class="col-12 version-flow__inner">
+                                                            <div class="row">
+                                                                <div class="col-md-6 version-flow__inner__item">
+                                                                    <div class="form-group">
+                                                                        <label >Level 0</label>
+                                                                        <input type="text" class="form-control pointer-none" value="Level 0" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label >Target Amount</label>
+                                                                        <input type="text" class="form-control"   placeholder="Enter Target Amount" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-md-8">
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Total Target Amount:</span><span class="gray-color"> ${{targetAmount ? targetAmount : 0}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount ? targetAmount - amountLeft : 0}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{amountLeft}}</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right">
+                                                <button class="button w-auto loader-btn" [disabled]="loader" type="button" (click)="addTarget()">
+                                                    Save
+                                                    <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right">
+                                                <button class="button w-130" [disabled]="nextLoader || loader" type="button" (click)="nextScreen(3)">
+                                                    Next
+                                                    <span *ngIf="nextLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- view three -->
+<div class="container-fluid container-wrapper" *ngIf="target === 'three'">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item" [routerLink]="['/user']"><a href="javascript:void(0)" class="gray-color">User</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Accounts</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+            <div class="row">
+                <div class="col-md-12 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Assign Target</h5>
+                            <div class="tab-content">
+                                <form  novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6 pl-5">
+                                            <div class="row version-flow">
+                                                <!-- <div class="col-md-6 version-flow__item">
+                                                    <div class="form-group">
+
+                                                        <label >{{'Level ' + currentUserGrade}}</label>
+                                                        <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 d-flex align-items-center">
+                                                    <a class="button float-right" href="javascript:void(0)" (click)="changeAmount(true)">Divide Equally </a>
+                                                </div> -->
+                                                <!-- <div class="col-md-12 nested" *ngFor="let row of treeData;let i = index">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label >{{'Level ' + row.grade + '.' + (i + 1)}}</label>
+                                                                <input type="text" class="form-control" readonly [value]="row.first_name + ' ' + row.last_name + ' ' + '('+row.employee_type__name+')'" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="formGroupExampleInput">Target Amount</label>
+                                                                <input  type="number" class="form-control" name="amount1" [(ngModel)]="row.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <ul class="tree">
+                                                    <li class="tree-first nested">
+                                                        <!-- <i class="indicator" (click)="toggleView(main, $event)"></i>
+                                                        <div class="row">
+                                                            <div [class]="currentUserGrade === 0 ? 'col-md-4' : 'col-md-8'">
+                                                                <div class="form-group">
+                                                                    <label >{{'Level ' + currentUserGrade}}</label>
+                                                                    <input type="text" class="form-control pointer-none" [value]="currentUserName" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" *ngIf="currentUserGrade === 0">
+                                                                <div class="form-group">
+                                                                    <label >Target Amount</label>
+                                                                    <input  type="text" class="form-control" [(ngModel)]="targetAmount" (blur)="changeAmount(false)" name="targetAmount" placeholder="Target Amount" >
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 d-flex align-items-center">
+                                                                <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                            </div>
+
+                                                        </div> -->
+                                                        <!-- <ul class="collapsed in" id=${'parent'+(i + 1)}></ul> -->
+                                                        <ul #main class="collapsed in">
+                                                            <li [class]="one.children.length > 0 ? 'nested' : ''" *ngFor="let one of treeData;let indexOne = index">
+                                                                <i *ngIf="one.children.length > 0" class="indicator" (click)="toggleView(firstPanel, $event)"></i>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >{{'Level ' + one.grade + '.' + (indexOne + 1)}}</label>
+                                                                            <input type="text" class="form-control" readonly [value]="one.first_name + ' ' + one.last_name + ' ' + '('+one.employee_type__name+')'" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label >Target Amount</label>
+                                                                            <input type="number" class="form-control" readonly [name]="'one'+indexOne" [(ngModel)]="one.amount" (blur)="amountChanged()" placeholder="Target Amount" >
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div *ngIf="indexOne === 0" class="col-md-4 d-flex align-items-center">
+                                                                        <button class="button float-right" type="button"  (click)="changeAmount(true)">Divide Equally </button>
+                                                                    </div>
+                                                                </div>
+                                                                <ul #firstPanel>
+                                                                    <li [class]="two.children.length > 0 ? 'nested' : ''" *ngFor="let two of one.children; let indexTwo = index">
+                                                                        <i *ngIf="two.children.length > 0" class="indicator" (click)="toggleView(secondPanel, $event)"></i>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >{{'Level ' + two.grade + '.' + (indexTwo + 1)}}</label>
+                                                                                    <input type="text" class="form-control" disabled [value]="two.first_name + ' ' + two.last_name + ' ' + '('+two.employee_type__name+')'" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label >Target Amount</label>
+                                                                                    <input  type="number" class="form-control" [(ngModel)]="two.amount" (blur)="testfunction(one)"  [name]="'two'+indexTwo+one.id" placeholder="Target Amount" >
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul #secondPanel>
+                                                                            <li [class]="three.children.length > 0 ? 'nested' : ''" *ngFor="let three of two.children;let indexThree = index">
+                                                                                <i *ngIf="three.children.length > 0" class="indicator" (click)="toggleView(thirdPanel, $event)"></i>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >{{'Level ' + three.grade + '.' + (indexThree + 1)}}</label>
+                                                                                            <input type="text" class="form-control" disabled [value]="three.first_name + ' ' + three.last_name + ' ' + '('+three.employee_type__name+')'" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <label >Target Amount</label>
+                                                                                            <input  type="number" class="form-control" [(ngModel)]="three.amount" (blur)="testfunction(two)" [name]="'three'+indexThree+two.id" placeholder="Target Amount" >
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul #thirdPanel>
+                                                                                    <li *ngFor="let four of three.children;let indexFour = index">
+
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >{{'Level ' + four.grade + '.' + (indexFour + 1)}}</label>
+                                                                                                    <input type="text" class="form-control" disabled [value]="four.first_name + ' ' + four.last_name + ' ' + '('+four.employee_type__name+')'">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-group">
+                                                                                                    <label >Target Amount</label>
+                                                                                                    <input  type="number" class="form-control" [(ngModel)]="four.amount" (blur)="testfunction(three)"  [name]="'four'+indexFour+three.id" placeholder="Target Amount">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </li>
+                                                                                </ul>
+
+                                                                        </li>
+                                                                        </ul>
+
+                                                                </li>
+                                                                </ul>
+
+                                                        </li>
+                                                        </ul>
+
+                                                </li>
+                                                    </ul>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-4 ml-auto">
+                                                <div class="pb-2 text-left"><span class="gray-04-color">Date:</span><span class="gray-color"> {{targetDate.startDate | date : 'MMM d'}} - {{targetDate.endDate | date : 'MMM d'}}</span></div>
+                                                <div class="pb-2 text-left"><span class="gray-04-color">Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                            </div>
+                                            <!-- <div class="col-md-4 ml-auto">
+                                                <p class="text-danger text-left">* For our system </p>
+                                                <p class="text-danger text-left">Level 5 = Team Member</p>
+                                            </div> -->
+                                            <div class="text-center pt-5">
+                                                <img src="/assets/images/assign.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-md-10">
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Assigned Target Amount:</span><span class="gray-color"> ${{targetAmount}}</span></div>
+                                            <div class="pb-2 text-left"><span class="gray-04-color">Remaining Target Amount:</span><span class="gray-color"> ${{amountLeft}}</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="pull-right">
+                                                <button class="btn btn-success loader-btn" [disabled]="loader" type="button" (click)="addTarget(true)">
+                                                    <span>
+                                                        Finish
+                                                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #amount class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="ti-close cursor-pointer"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li >
+                        <!-- The amount you have entered exceeds your target limit. Please check your target amount and try again. -->
+                        {{amountError}}
+
+                    </li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

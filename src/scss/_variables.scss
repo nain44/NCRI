@@ -1,0 +1,115 @@
+// NOTE: This file contains all the variables.
+
+$body 	  		: #fafafa;
+$theme-color	: #7BB31A;
+$theme-light	: #F1F7E7;
+$themeauth-color: #28507B;
+$white			: #ffffff;
+$black			: #000000;
+$lightest-gray  : #f6f7f8;
+$light-gray		: #626262;
+$dark-gray		: #323232;
+$sidebar-dark	: #282a39;
+$border-color   : #eeeeee;
+
+$gray-color     : #aaaaaa;
+$gray-04-color  : #464A53;
+$gray-bg        : #E2E2E2;   
+
+$primary  		:#5A8DEE; 
+$secondary 		:#394C62; 
+$success  		:#28a745; 
+$danger  		:#FF0000; 
+$warning  		:#FDAC41; 
+$info 	 		:#00CFDD; 
+$light  		:#f8f9fa; 
+$dark 	 		:#343a40; 
+$muted 	 		:#6c757d; 
+$sea-green 	 	:#69C7C8; 
+
+:root{
+    --theme-color	: #{$theme-color};
+    --white	: #{$white};
+    --themeauth-color: #{$themeauth-color};
+}
+
+.light-theme{
+    --theme-color	: #{$theme-color};
+    --white	: #{$white}; 
+}
+.dark-theme{
+    --theme-color	: #{$themeauth-color};
+    // --white	: #{$themeauth-color};
+}
+$font-xs		: 0.760rem; 
+$font-s 		: 0.800rem; 
+$font-base		: 1.6rem;	 
+$font-md 		: 1.143rem; 	
+$font-lg 		: 1.286rem; 
+$font-xl		: 1.571rem;  
+$font-xxl		: 1.714rem; 	
+$font-xxxl		: 1.858rem; 
+
+$line-xs		: 1rem;  			
+$line-s			: 1.143rem;
+$line-base		: 1.286rem;
+$line-md        : 1.571rem;
+$line-lg   		: 1.714rem;
+$line-xl		: 1.857rem;
+$line-xxl		: 2rem;
+$line-xxxl		: 2.14rem;
+
+$font-bold		: 700;
+$font-semibold	: 600;
+$font-medium 	: 500;
+$font-regular	: 400;
+$font-light		: 300;
+
+$font-segoebold	: segoe-bold;
+$font-segoesemibold	: segoe-semibold;
+$font-segoeregular : segoe-regular;
+
+$text-left		: left;
+$text-center	: center;
+$text-right		: right;
+
+
+
+.text-red{
+    color: $danger !important;
+}
+.text-green{
+    color: $success !important ;
+}
+.text-sea-green{
+    color: $sea-green !important;
+}
+
+$sizes: (
+    10: 10%,
+    15: 15%,
+    20: 20%,
+    25: 25%,
+    30: 30%,
+    35: 35%,
+    40: 40%,
+    45: 45%,
+    50: 50%,
+    55: 55%,
+    60: 60%,
+    65: 65%,
+    70: 70%,
+    75: 75%,
+    80: 80%,
+    90: 90%,
+    95: 95%,
+    100: 100%,
+    auto: auto 
+) !default;
+
+
+@each $key, $size in $sizes {
+    .w-#{$key}{
+        width: $size !important;
+    } 
+}

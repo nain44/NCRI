@@ -1,0 +1,316 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Users and Permissions</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add New Role</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User </h5>
+
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section accord-section--roles">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button">
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Role Name</h6>
+                        </button>
+                        <div class="cg-role">
+                            <div class="w-100 mt-20">
+                                <div class="row mt-20">
+                                    <div class="col-4">
+                                        <div class="form-label-group">
+                                            <input type="text" (blur)="checkRoleName()" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Enter Role Name"
+                                                [(ngModel)]="roleName">
+                                            <label for="">Role Name</label>
+                                            <div *ngIf="roleNameCheck" [style.color]="'#FF0000'"
+                                                style="font-size: 100%;" class="invalid-feedback"
+                                                style="display: block;">Role Name Already Exists</div>
+                                            <span>
+                                                <span *ngIf="loader" class="spinner-border mr-3" role="status"
+                                                    aria-hidden="true"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <accordion [isAnimated]="true">
+                                            <div class="roles-list black">
+                                            <accordion-group [isOpen]="true">
+                                                <button
+                                                    class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                                    accordion-heading type="button">
+                                                    <div class="accor-name w-100 text-left font-weight-bold">
+                                                        General Roles
+                                                        <span>Apply the basic role to all of the modules
+                                                            below</span>
+                                                    </div>
+                                                </button>
+                                                <div class="cg-role">
+                                                    <!-- <div class="row justify-content-end">
+                                                        <div class="col-12 col-md-4">
+                                                            <div class="form-inline pull-md-right w-100 mb-3">
+                                                                <div class="input-group mr-3 mb-3 mb-md-0 w-100"> 
+                                                                    <input type="text" class="form-control" placeholder="Search Role">
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="row mt-30">
+                                                        <div class="col-md-4">
+                                                            <div class="role-checkbox">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="View"
+                                                                        (change)="isGeneralSelect('VIEW', $event)">
+                                                                    <label class="custom-control-label"
+                                                                        for="View">View</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="role-checkbox">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="Update"
+                                                                        (change)="isGeneralSelect('UPDATE', $event)">
+                                                                    <label class="custom-control-label"
+                                                                        for="Update">Update</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-100"></div>
+                                                        <div class="col-md-4">
+                                                            <div class="role-checkbox">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="Add"
+                                                                        (change)="isGeneralSelect('ADD', $event)">
+                                                                    <label class="custom-control-label"
+                                                                        for="Add">Add</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="role-checkbox">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="Delete"
+                                                                        (change)="isGeneralSelect('DELETE', $event)">
+                                                                    <label class="custom-control-label"
+                                                                        for="Delete">Delete</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </accordion-group>
+                                            </div>
+
+
+                                            <ng-container *ngFor="let privilege of privilegesList; let i=index">
+
+                                                <div class="roles-list black" *ngIf="privilege?.maker?.length > 0 ||
+                                                    privilege?.checker?.length > 0 || privilege?.general?.length > 0">
+                                                <accordion-group [isOpen]="true">
+                                                    <button
+                                                        class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                                        accordion-heading type="button">
+                                                        <div class="accor-name w-100 text-left font-weight-bold">
+                                                            {{privilege?.module?.name}}
+                                                            <span>Apply the basic role to all of the modules
+                                                                below</span>
+                                                        </div>
+                                                    </button>
+                                                    <div class="cg-role">
+                                                        <div class="row mt-30">
+                                                            <div class="col-md-4">
+                                                                <div class="role-checkbox">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox"
+                                                                            [disabled]="privilege?.maker?.length === 0"
+                                                                            (change)="selectPrivilegeAll('maker', i, $event)"
+                                                                            class="custom-control-input"
+                                                                            [id]="'maker'  + i">
+                                                                        <label class="custom-control-label"
+                                                                            [for]="'maker'  + i">Maker</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="role-checkbox">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox"
+                                                                            [disabled]="privilege?.checker?.length === 0"
+                                                                            (change)="selectPrivilegeAll('checker', i, $event)"
+                                                                            class="custom-control-input"
+                                                                            [id]="'Checker'  + i">
+                                                                        <label class="custom-control-label"
+                                                                            [for]="'Checker'  + i">Checker</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 d-flex align-items-center">
+                                                                <p class="text-dark-80 font-16 cursor-pointer">General
+                                                                    Priveldges</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-30">
+                                                            <div class="col-md-4 px-30">
+                                                                <div class="custom-control custom-checkbox mb-20"
+                                                                    *ngFor="let item of privilege?.maker; let i=index;">
+                                                                    <!-- [(ngModel)]="item.check" -->
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        (change)="selectPrivilege(privilege?.maker[i])"
+                                                                        [(ngModel)]="privilege?.maker[i].check"
+                                                                        [id]="item.resource_code + 'maker'">
+                                                                    <label class="custom-control-label"
+                                                                        [for]="item.resource_code + 'maker'">{{item.title}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 px-30">
+                                                                <div class="custom-control custom-checkbox mb-20"
+                                                                    *ngFor="let item of privilege?.checker; let i=index">
+
+                                                                    <!-- [(ngModel)]="item.check" -->
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        (change)="selectPrivilege(privilege?.checker[i])"
+                                                                        [(ngModel)]="privilege?.checker[i].check"
+                                                                        [id]="item.resource_code + 'checker'">
+                                                                    <label class="custom-control-label"
+                                                                        [for]="item.resource_code + 'checker'">{{item.title}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 px-30">
+                                                                <div class="custom-control custom-checkbox mb-20"
+                                                                    *ngFor="let item of privilege?.general; let i=index">
+
+                                                                    <!-- [(ngModel)]="item.check" -->
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        (change)="selectPrivilege(privilege?.general[i].check)"
+                                                                        [(ngModel)]="privilege?.general[i].check"
+                                                                        [id]="item.resource_code + 'general'">
+                                                                    <label class="custom-control-label"
+                                                                        [for]="item.resource_code + 'general'">{{item.title}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 text-center"
+                                                                *ngIf="!requestLoader && privilegesList.length === 0">
+                                                                <p>No Record Available</p>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="requestLoader"
+                                                            class="d-flex justify-content-center">
+                                                            <div class="spinner-border theme-color" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </accordion-group>
+                                                </div>
+                                            </ng-container>
+                                        </accordion>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+
+        <!-- <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" [disabled]="!gradeForm.valid || gradeAvailable !== '' || loader" (click)="submitForm()"
+                    class="btn btn-success btn-lg previous d-none">Reject User</button>  
+            </div> -->
+        <hr class="mt-50">
+        <div class="col-md-12 mb-30">
+            <div class="text-right mt-30">
+
+                <button [disabled]="requestLoader || loader || roleName === '' || roleNameCheck" type="button"
+                    class="btn btn-success btn-lg loader-btn" (click)="AddSystemPrivilegesPerUserRole()">
+                    <span>Add New Role
+                        <span *ngIf="loader" class="spinner-border mr-3" role="status" aria-hidden="true"></span>
+                    </span></button>
+
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+<!-- <div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Home</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Dashboard</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">   
+                <div class="col-md-12">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-4 mb-md-5">Change Logo</h5>
+                            <div class="row mx-0">
+                                <accordion>
+                                    <accordion-group heading="Static Header">
+                                      This content is straight in the template.
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                  </accordion>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li class="text-black-50" *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="btn btn-success btn-lg">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

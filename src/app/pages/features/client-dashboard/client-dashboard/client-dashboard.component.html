@@ -1,0 +1,198 @@
+<!-- Main Content -->
+<ng-template #mainPanel>
+    <div class="hk-pg-wrapper" >
+        <!-- Container -->
+        <div class="container-fluid">
+    
+            <!-- Breadcrumbs -->
+            <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Client Demographics</li>
+                    <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+                </ol>
+            </nav>
+            <!-- /Breadcrumbs -->
+    
+            <div class="hk-pg-header">
+                <h1 class="hk-pg-title">Client Demographics</h1>
+                <div class="float-right mb-0">
+                    <button type="button" (click)="addClient()" class="btn btn-success">Add New Client</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="hk-sec-wrapper"> 
+                <div class="table-wrap">
+                    <div class="custom-pagination mt-0">
+                        <div class="row justify-content-between">
+                            <div class="col-auto d-flex align-items-end justify-content-end">
+                                <div class="d-flex align-items-end justify-content-end">
+                                    <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                        <span class="mr-10">Show</span> 
+                                        <select (change)="resetPageSize()" [(ngModel)]="paginationConfig.size" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                        </select> 
+                                        <span class="ml-10">of {{paginationConfig.totalRecords}}</span>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-end justify-content-end">
+                                <div class="form-group has-search filter-search mr-15">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                    <input type="text" #searchInput class="form-control" placeholder="Search">
+                                </div>
+                                <div class="btn-group theme-dropdown" dropdown>
+                                    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                            aria-controls="dropdown-basic">
+                                            Download Client <span class="caret"></span>
+                                    </button>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                                        role="menu" aria-labelledby="button-basic">
+                                      <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="downloadClientDemographicTransactionsList('csv')">CSV</a></li> 
+                                    </ul>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive position-relative mnh-200p"> 
+                    <table id="datable_1" class="table theme-table client-dashboard w-100 display pb-30 position-relative">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </th>
+                                <th>Client No.</th>
+                                <th>Client Name</th>
+                                <th>Product</th>
+                                <th>Tier</th>
+                                <th>Region/Portfolio</th>
+                                <th>Client Added</th>
+                                <th>Added By</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clientList">
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{'customCheck5' + client.id}}">
+                                        <label class="custom-control-label" for="{{'customCheck5' + client.id}}"></label>
+                                    </div>
+                                </td>
+                                <td>{{client?.client_number}}</td>
+                                <td [routerLink]="['/client-management', client.id]"
+                                class="cursor-pointer">{{client?.short_name}}</td>
+                                <td>{{client?.product}}</td>
+                                <td>{{client?.tier}}</td>
+                                <td>{{client?.region_or_portfolio}}</td>
+                                <td>{{client?.updated_at | date : 'short'}}</td>
+                                <td>{{client?.user__first_name}} {{client?.user__last_name}}</td>
+                                <td>
+                                    <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer" (click)="openModalDelete(modalDelete, client)" alt="">
+                                </td>
+                            </tr>
+                            <tr *ngIf="clientList.length === 0 && !loader" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                           
+                        </tbody> 
+                        
+                    </table>
+                    <div *ngIf="loader" class="table-loader absolute">
+                        <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                            <div class="spinner-border theme-color" role="status">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                
+                    <div class="custom-pagination">
+                        <div class="row justify-content-between">
+                            <div class="col-auto d-flex align-items-end justify-content-end">
+                                <div class="d-flex align-items-end justify-content-end">
+                                    <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                        <span class="mr-10">Show</span> 
+                                        <select (change)="resetPageSize()" [(ngModel)]="paginationConfig.size" class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                        </select> 
+                                        <span class="ml-10">of {{paginationConfig.totalRecords}}</span>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-end justify-content-end">
+                            <pagination [(totalItems)]="paginationConfig.totalRecords" (pageChanged)="pageChanged($event)" [(itemsPerPage)]="paginationConfig.size"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="no-data-table" *ngIf="clientList.length === 0 && !loader">
+                    <div class="text-center mt-60 mb-40 no-comment no-comment--congrats">
+                        <img src="assets/images/no-data.png" class="w-250p"/>  
+                        <h1 class="lead mt-30">No Data Available.</h1>
+                        <p>Client list will appear here.</p> 
+                    </div> 
+                </section>
+            </div>
+    
+        </div>
+    </div>
+</ng-template>
+
+<div class="hk-sec-wrapper shadow-xl rounded-30" *ngIf="isFirst && !isData; else mainPanel">
+    <div class="text-center mt-60 mb-40 no-comment">
+        <img src="assets/images/add-new-client.png" />
+        <h4 class="text-muted lead mt-30">Sorry, we didn't find any client</h4>
+        <p>You don't have added any client yet. Why not add it now!</p> 
+        <button type="button" routerLink="/add-client/client-info" class="btn btn-success btn-lg" data-toggle="modal"
+            data-target="#addComment">Add New Client</button>
+    </div> 
+</div>
+<!-- /Container -->
+
+<ng-template #modalDelete  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/delete.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Delete Client?</h2>
+        <p class="modal-title text-secondary font-21">Are you sure you want to delete this client?</p>
+        <p class="modal-title client-name">{{selectedClient?.short_name}}</p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20">
+                <button [disabled]="deleteLoader" type="button" class="btn btn-danger btn-lg loader-btn mr-15" (click)="deleteClientDemographic(selectedClient?.id);">
+                    <span>
+                        Yes,delete client
+                        <span *ngIf="deleteLoader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">Cancel</button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>
+ 

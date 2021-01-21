@@ -1,0 +1,35 @@
+
+@import "src/scss/plugins/bootstrap";
+@import "src/scss/plugins/weather-icons";
+@import "src/scss/plugins/themify-icons";
+@import "src/scss/plugins/font-awesome";
+
+@import "src/scss/variables";
+@import "src/scss/custom-class";
+@import "src/scss/mixins";
+@import "src/scss/helpers";
+@import "src/scss/typography";
+@import "src/scss/customfont";
+@import "src/scss/auth";
+@import "src/scss/custom-class";
+
+@import "src/scss/components/scroll-bar"; 
+@import "src/scss/components/button"; 
+@import "src/scss/components/multi-select";
+@import "src/scss/components/group-btn";
+@import "src/scss/components/accodions";
+@import "src/scss/components/table";
+@import "src/scss/components/tabs";
+@import "src/scss/components/modal";
+@import "src/scss/components/progress-bar";
+
+@import "src/scss/custon-field";
+@import "src/scss/sidebar";
+@import "src/scss/layout";
+@import "src/scss/responsive";  
+@import "src/scss/user";  
+@import "src/scss/target";  
+
+.modal-dialog .modal-content {
+    background: white !important;
+}

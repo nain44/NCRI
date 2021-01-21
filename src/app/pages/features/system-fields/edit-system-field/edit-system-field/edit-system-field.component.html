@@ -1,0 +1,508 @@
+<div class="hk-pg-wrapper" *ngIf="!showRecords">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)" [routerLink]="['/system-fields']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Edit System Field</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Change Reason</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Preview of youe input field.</h5>
+        <div class="row mt-20 mb-20">
+            <div class="col-md-8 d-flex mb-20"> 
+                <div class="roles-list custom-fields-type set-commssion border-0">
+                    <i class="fa fa-check-circle"></i>
+                    <div class="custom-pagination mt-0">
+                        <div class="row justify-content-between">
+                            <div class="col-md-8">
+                                <div class="d-flex custom-fields-type-item align-items-center">
+                                    <div class="item-field">
+                                        <div class="form-label-group m-0">
+                                            <input type="text" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Select Value" disabled>  
+                                                <i class="fa fa-caret-down drop-angle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="item-labels">
+                                        <h4>Dropdown Input Field</h4>
+                                        <p>Dropdown list to select single value.</p>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>  
+        </div>
+        <form novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button"> 
+                                <h6 class="accor-name w-100 text-left hk-sec-title">FIELD TYPE DETAILS</h6>
+                            </button>
+                            <div class="cg-role">   
+                                <div class="w-100 mt-20">  
+                                    <div class="row mt-20">
+                                        <div class="col-md-8">
+                                            <div class="row mt-20"> 
+                                                <div class="col-md-6 mt-10">
+                                                    <div class="form-label-group">
+                                                        <input readonly type="text" [value]="systemFieldDetails?.field_label ? systemFieldDetails?.field_label : ''" class="form-control"
+                                                            value="Location of Business">
+                                                        <label for="">Input Text Label</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-10">
+                                                    <div class="form-label-group">
+                                                        <input type="text" class="form-control"
+                                                            [value]="" readonly placeholder="Description">
+                                                        <label for="">Description</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="col-md-12 set-commssion p-0">
+                                                <h6><b>Select Type Preview</b></h6>
+                                                <div class="form-label-group m-0">
+                                                    <div class="d-flex custom-fields-type-item align-items-center">
+                                                       <div class="item-field w-100">
+                                                           <div class="form-label-group m-0"> 
+                                                               <ng-select2  
+                                                               [options]="options"  
+                                                               (valueChanged)="valueChanged($event)" 
+                                                               (ngModelChange)="modelChanged($event)"
+                                                                [placeholder]="systemFieldDetails?.field_label ? systemFieldDetails?.field_label : ''"
+                                                                [disabled]= true
+                                                               ></ng-select2>  
+                                                               <!-- [data]="['asda','asdasd']" -->
+                                                               <!-- [disabled]= true  -->
+                                                               <!-- <label for="">Input Text Label</label> -->
+                                                           </div>
+                                                       </div> 
+                                                   </div> 
+                                               </div>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="w-100"></div>
+                                        <div class="col-12">
+                                            <p class="text-dark-80 mt-20 mb-10 font-semi-bold font-16">Dropdown Values</p>
+                                        </div>
+                                        <div class="col-md-4 d-flex"> 
+                                            <div class="text-center p-3 border-0 w-100 cursor-default" id="uploadDocuments" ncriDnd > 
+                                                <!-- <div class="edit_dropdown_list">
+                                                    <textarea cols="5" rows="5" *ngIf="openEditView" (keyup.enter)="appendComma()" #customValues></textarea> 
+                                                    <i class="fa fa-pencil" (click)="openEdit()" *ngIf="!openEditView"></i> 
+                                                    <button type="button" class="btn btn-success" (click)="openEdit()" *ngIf="openEditView"> 
+                                                        save
+                                                    </button>
+                                                </div> -->
+                                                <ul class="sequence-list" *ngIf="!openEditView">
+                                                    <div >
+                                                        <a (click)="openAliasPage()" href="javascript:void(0)" class="sequence d-flex align-items-center justify-content-end">Change Sequence</a>
+                                                    </div>
+                                                    <ng-container *ngFor="let field of dropdownList;let first = first">
+                                                        <li *ngIf="!field.is_delete && field.is_active === true">
+                                                            {{field.name}} {{field.alias_array ? 
+                                                                field.alias_array.length > 0 ?
+                                                                ('('+field.alias_array.toString()+')') : ""
+                                                                : ""}}
+                                                            <!-- <div *ngIf="first">
+                                                                <a (click)="openAliasPage()" href="javascript:void(0)" class="sequence">Change Sequence</a>
+                                                            </div> -->
+                                                        </li>
+                                                    </ng-container>
+                                                   
+                                                </ul>  
+                                            </div>
+                                        </div>
+                                        <div class="col-auto p-0 d-flex justify-content-center align-items-center">
+                                            <p class="text-dark-80 mt-20 mb-10 or-dividor">OR</p>
+                                        </div>
+                                        <div class="col-md-4" ncriDnd
+                                        (fileDropped)="dropFile($event)"> 
+                                            <div  (click)="openFileUploader()" class="text-center" id="uploadDocuments" >
+                                                <img src="assets/images/upload-documents.svg" width="60" class="mb-10" />
+                                                <p class="light">Drag and Drop your file here</p>
+                                            </div>
+                                            <input type="file"  accept=".csv,.xlsx,.pdf" (change)="uploadedFile($event)" id="txtFile" class="d-none">
+                                        </div>
+                                        <div class="col-md-3 d-flex align-items-center"> 
+                                            <div class="upload-file-info">
+                                                <div class="align-items-start"> 
+                                                    <img src="assets/images/i-icon.png" class="info-icon" >
+                                                    <ul>
+                                                        <p>Uploading File:</p>
+                                                        <li>Only the first column of first worksheet/CSV the file would be picked for values* The values would append to existing values*</li>
+                                                        <li>If you want to upload all the values fresh, try deleting the existing values</li>
+                                                    </ul>
+                                                </div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col-8" *ngIf="fileList.length > 0">
+                                            <p class="text-light-50 mt-30 mb-10 font-16">Uploaded File</p>
+                                            <div class="row align-items-start documents-upload" *ngFor="let file of fileList;let i = index">
+                                                <div class="col-md-auto">
+                                                    <img src="assets/images/doc-xls.svg" width="30" />
+                                                </div>
+                                                <div class="col-4 perHolder p-0">
+                                                    <div class="file">
+                                                        <div class="file__name">{{file.name}}</div>
+                                                        <div class="textPer">100%</div>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-animated" role="progressbar" aria-valuenow="100"
+                                                            aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                                    </div>
+                        
+                                                </div>
+                                                <div class="col-md-auto d-flex align-items-start">
+                                                    <img (click)="deleteFile(i)" src="assets/images/trash-can.png" class="del-file" />
+                                                    <!-- <a href="javascript:void(0)" class="text-purpal font-16 ml-2 pt-2" (click)="openUploadRecode()">Preview File Values</a> -->
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col-4 mt-10 d-none">
+                                            <div class="form-label-group m-0">
+                                                <div class="d-flex custom-fields-type-item align-items-center">
+                                                   <div class="item-field w-100">
+                                                       <div class="form-label-group m-0"> 
+                                                           <ng-select2 
+                                                           [data]="[]"
+                                                           [disabled]= true
+                                                           [options]="options"  
+                                                           (valueChanged)="valueChanged($event)"
+                                                           ></ng-select2>  
+                                                           <label for="">Default Value (Optional)</label>
+                                                       </div>
+                                                   </div> 
+                                               </div> 
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-20 mt-20"> 
+                                            <div class="custom-control custom-checkbox">
+                                                <input
+                                                disabled
+                                                [checked]="systemFieldDetails?.field_status === 'M' ? true : false"
+                                                 type="checkbox" class="custom-control-input" id="Mandatory">
+                                                <label class="custom-control-label font-semi-bold" for="Mandatory">Mandatory Input Field</label>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="disable-toggle">
+                                                <label>Status</label> 
+                                                <div class="toggle-wrap d-flex align-items-end disabled"> 
+                                                    <span class="disable">Disabled</span>
+                                                    <label class="switch mb-0">
+                                                        <input disabled checked type="checkbox" >
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <span class="enable">Enabled</span>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </accordion-group> 
+                    </accordion>
+                    <accordion [isAnimated]="true" class="accord-section accord-section--gray">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button"> 
+                                <h6 class="accor-name w-100 text-left hk-sec-title">ASSIGN</h6>
+                            </button>
+                            <div class="cg-role">   
+                                <div class="w-100 mt-20">    
+                                    <div class="row">
+                                        <div class="col-md-8"> 
+                                            <div class="col d-flex align-items-end mt-2 p-0">
+                                                <div class="form-group has-search filter-search w-100">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" #searchInput class="form-control" placeholder="Search">
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"> 
+                                            <div class="table-responsive mnh-200p">
+                                            <table id="datable_1" class="table theme-table custom-input-table w-100 display pb-30 position-relative">
+                                                <thead>
+                                                    <tr> 
+                                                        <th>SCREEN NAME</th>
+                                                        <th>ASSIGN</th> 
+                                                        <th></th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><b>{{systemFieldDetails?.sreen_label}} - {{systemFieldDetails?.sub_sreen_label}}</b></td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input disabled type="checkbox" class="custom-control-input" checked id="customCheck5">
+                                                                <label class="custom-control-label" for="customCheck5"></label>
+                                                            </div>
+                                                        </td> 
+                                                        <td>
+                                                            <a href="javascript:void(0)" >Preview & Adjust Position</a>
+                                                        </td> 
+                                                    </tr>  
+                                                    
+                                                </tbody> 
+                                                
+                                            </table>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group> 
+                    </accordion>
+                </div>
+            </div>
+            
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40"> 
+                <button type="button" [routerLink]="['/system-fields']" class="btn btn-success btn-lg previous border-0">Cancel</button>
+                <button type="button" [disabled]="loader" (click)="updateSystemField()" class="btn btn-success btn-lg loader-btn">
+                    <span>
+                        Update System Field
+                        <span *ngIf="loader" class="spinner-border float-right" role="status"
+                                        aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+<ng-template #uploadRecord class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Uploaded Records</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                
+                    <!-- permission -->
+                    <div class="cg-role">  
+                        <div class="w-100 mt-20"> 
+                            <div class="table-responsive mnh-200p">
+                            <table id="datable_1" class="table theme-table upload-table w-100 display pb-30">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>FIELD VALUE</th>
+                                        <th>ALIAS</th>
+                                        <th>ENABLE/DISABLE</th> 
+                                    </tr>
+                                </thead>
+                                <tbody dragula="dropdown" [(dragulaModel)]="dropdownList">
+                                    <ng-container *ngFor="let row of dropdownList;let i = index">
+                                        <tr *ngIf="!row.is_delete" [class.in-active]="!row.is_active === true">
+                                            <td>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                                </div>
+                                            </td>
+                                            <td class="text-uppercase">{{row.name}}</td>
+                                            <td class="text-uppercase">
+                                                <input type="text" [(ngModel)]="row.alias_map" (keyup.enter)="appendCommaToAlias(row)">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-end align-items-center"> 
+                                                <img (click)="toggleVisibility(i)"
+                                                 [src]="
+                                                    row.is_active ? 'assets/images/visibility.png' : 'assets/images/visibility-none.png'
+                                                 " class="img-fluid cursor-pointer mr-10" alt=""> 
+                                                <img *ngIf="!row.isDefault" (click)="deleteDropdownValue(i)" src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt=""> 
+                                                </div>
+                                            </td>  
+                                        </tr>
+                                    </ng-container> 
+                                   
+                                    <tr *ngIf="dropdownList.length === 0" class="text-center">
+                                        <td colspan="8">
+                                            <p class="p-5 font-16">No data found</p>
+                                        </td>
+                                    </tr> 
+                                </tbody>   
+                            </table> 
+                            </div>
+                        </div> 
+                    </div>
+               
+                <div class="modal-footer pb-0 pr-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous"
+                            data-dismiss="modal" (click)="modalRef.hide()">Close</button>
+                        <button (click)="saveDropdownValues()" type="button" class="btn btn-success btn-lg loader-btn "
+                            data-dismiss="modal">
+                            <span>
+                                Save Dropdown Values
+                                <!-- <span *ngIf="false" class="spinner-border float-right" role="status"
+                                    aria-hidden="true"></span> -->
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #load class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content"> 
+            <div class="modal-body p-0 comment-content">
+                <div class="modal-body text-center">
+                    <img src="assets/images/load.png" class="img-fluid mb-20 load-img">
+                    <h2 class="modal-title">We are updating the System Field</h2>
+                    <p class="modal-title text-secondary font-21">After successful saving, we'll take you to the dashboard.</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div class="hk-pg-wrapper" *ngIf="showRecords">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Custom Fields Dashboard</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Preview Uploaded File</h1> 
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please enter the details of dropdown input field.</h5>
+
+        <section class="hk-sec-wrapper rounded-10">
+        <div class="row">
+            <div class="col-12 pr-0"> 
+                <div class="table-responsive mh-30 pr-30">
+                    <div *ngIf="aliasColumns.length < 5" class="addNewColumn" (click)="addNewColumn()">
+                        <p>Add<br>New Alias</p>
+                    </div>
+                    <table id="datable_1" class="table theme-table upload-table upload-table--system w-100 display pb-30">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>FIELD VALUE</th>
+                                <!-- add extra header according to current column in table -->
+                                <th *ngFor="let col of aliasColumns">
+                                    {{col}}
+                                </th>
+                                <!-- <th>ALIAS</th>
+                                <th>ALIAS 2</th>
+                                <th>ALIAS 3</th>
+                                <th>ALIAS 4</th>
+                                <th>ALIAS 5</th> -->
+                                <!-- end -->
+                                <th>ENABLE/DISABLE</th>
+                            </tr>
+                        </thead>
+                        <tbody dragula="dropdown" [(dragulaModel)]="dropdownList">
+                            <ng-container *ngFor="let row of dropdownList;let i = index">
+                                <tr *ngIf="!row.is_delete" [class.in-active]="row.is_active === false">
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        </div>
+                                    </td>
+                                    <td class="text-uppercase">
+                                        <!-- {{row.name}} -->
+                                        <input type="text" [readonly]="row.is_active === false" [(ngModel)]="row.name">
+
+                                    </td>
+                                    <!-- (keyup.enter)="appendCommaToAlias(row)" -->
+                                    <td *ngFor="let alias of row.alias_temp; let index = index" class="text-uppercase">
+                                        <input type="text" 
+                                        [readonly]="row.is_active === false" 
+                                        [(ngModel)]="alias.name" 
+                                        >
+                                    </td>
+                                    <!-- add extra column according to current column in table -->
+                                    <!-- <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td> -->
+                                    <!-- end -->
+                                    <td>
+                                        <div class="d-flex justify-content-end align-items-center"> 
+                                        <img (click)="toggleVisibility(i)"
+                                         [src]="
+                                            row.is_active ? 'assets/images/visibility.png' : 'assets/images/visibility-none.png'
+                                         " class="img-fluid cursor-pointer mr-10" alt=""> 
+                                        <img *ngIf="!row.isDefault" (click)="deleteDropdownValue(i)" src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt=""> 
+                                        </div>
+                                    </td>  
+                                </tr> 
+                            </ng-container> 
+                            <!-- extra row when add new column and add remove text according to column -->
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td *ngFor="let row of aliasColumns;let index = index">
+                                    <p (click)="removeAliasColumn(index)" class="text-purpal m-0 cursor-pointer">Remove</p>
+                                </td>
+                                <td></td>
+                            </tr>
+                           <!-- end -->
+                            <tr *ngIf="dropdownList.length === 0" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr> 
+                        </tbody>   
+                    </table>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-40">
+            <button (click)="cancelField()" class="btn btn-success btn-lg previous border-0">Cancel</button> 
+            <button (click)="saveDropdownValues()" type="button" class="btn btn-success btn-lg ">save</button>
+        </div>
+
+
+    </section>
+
+
+</div>

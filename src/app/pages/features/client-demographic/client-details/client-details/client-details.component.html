@@ -1,0 +1,529 @@
+<section class="hk-sec-wrapper shadow-xl rounded-30">
+    <h5 class="hk-sec-title hk-sec-title--all">Please fill the client details below. </h5>
+
+    <form [formGroup]="store.clientDetailsForm">
+        <div class="row">
+            <div class="col-12">
+                <accordion [isAnimated]="true" class="accord-section">
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Generic Information</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="client_industry_id" class="form-control selectDropdown"
+                                            name="Business Type">
+                                            <option *ngFor="let industry of client_industry_id" [value]="industry?.id">
+                                                {{industry?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Industry</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="correspondence_language_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                                            <option *ngFor="let language of correspondence_language_id" [value]="language?.id">
+                                                {{language?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Correspondence Language *</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <img src="assets/images/calendar.png" class="img-fluid">
+                                                <input type="text" formControlName="start_date" placeholder="Datepicker"
+                                                    class="form-control" bsDatepicker>
+                                                <label for="">Start Date *</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-label-group custom-calender">
+                                                <img src="assets/images/calendar.png" class="img-fluid">
+                                                <input type="text" formControlName="last_placement" placeholder="Datepicker"
+                                                    class="form-control" bsDatepicker>
+                                                <label for="">Last Placement</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="client_remittance_type_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                
+                                            <option [value]="remittance?.id" *ngFor="let remittance of client_remittance_type_id">
+                                                {{remittance?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Client Remittance Type *</label>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group>  
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Bank Details</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="bank_account_number" type="text" class="form-control"
+                                            placeholder="Short Name" >
+                                        <label for="">Bank Account No.</label>
+                                    </div>
+                                    <div class="w-100" *ngIf="store.clientDetailsForm.controls.bank_account_number.status=='INVALID'">
+                                        <div *ngIf="store.clientDetailsForm.controls.bank_account_number.errors.pattern"
+                                            class="invalid-feedback"
+                                            [style.display]="store.clientDetailsForm.controls.bank_account_number.status=='INVALID' ? 'block' : 'none'">
+                                            Minimum 9 digit account number required. i.e. 012345678</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="routing_number" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Routing No.</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="cheques_payable_to" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Cheques Payable to</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-checkbox mt-20">
+                                                <input formControlName="is_pst_exempt" type="checkbox" class="custom-control-input"
+                                                    id="is_pst_exempt">
+                                                <label class="custom-control-label" for="is_pst_exempt">PST Exempt</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-checkbox mt-20">
+                                                <input formControlName="is_gst_or_hst_exempt" type="checkbox"
+                                                    class="custom-control-input" id="is_gst_or_hst_exempt">
+                                                <label class="custom-control-label" for="is_gst_or_hst_exempt">GST/HST Exempt</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Invoice Options</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="invoice_format_code_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                                            <option [value]="code?.id" *ngFor="let code of invoice_format_code_id">{{code?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Invoice Format Code *</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="sort_by" class="form-control selectDropdown" name="Business Type">
+                                            <option [value]="by?.id" *ngFor="let by of sortBy">{{by?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Sort By</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="use_direct_invoicing" type="checkbox" class="custom-control-input"
+                                            id="use_direct_invoicing">
+                                        <label class="custom-control-label" for="use_direct_invoicing">Use Direct Invoicing</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="required_individual_debtor_invoices" type="checkbox"
+                                            class="custom-control-input" id="required_individual_debtor_invoices">
+                                        <label class="custom-control-label" for="required_individual_debtor_invoices">Required Individual Debtor
+                                            Invoices</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="show_outstanding_invoices" type="checkbox" class="custom-control-input"
+                                            id="show_outstanding_invoices">
+                                        <label class="custom-control-label" for="show_outstanding_invoices">Show Outstanding Invoices</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="show_client_payments" type="checkbox" class="custom-control-input"
+                                            id="show_client_payments">
+                                        <label class="custom-control-label" for="show_client_payments">Show Client Payments</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="show_acc_transactions" type="checkbox" class="custom-control-input"
+                                            id="show_acc_transactions">
+                                        <label class="custom-control-label" for="show_acc_transactions">Show ACC Transactions</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="contra_available_funds" type="checkbox" class="custom-control-input"
+                                            id="contra_available_funds">
+                                        <label class="custom-control-label" for="contra_available_funds">Contra Available Funds</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Financial Settings</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="hold_debtor_cheques_for_days_num" type="number" class="form-control"
+                                            placeholder="Short Name">
+                                        <label class="selectHolder" for="">Hold Debtor Cheques for (Days)</label>
+                                    </div>
+                                    <!-- <div class="w-100"
+                                        *ngIf="store.clientDetailsForm.controls.hold_debtor_cheques_for_days_num.status=='INVALID'">
+                                        <div *ngIf="store.clientDetailsForm.controls.hold_debtor_cheques_for_days_num.errors.required"
+                                            class="invalid-feedback"
+                                            [style.display]="store.clientDetailsForm.controls.hold_debtor_cheques_for_days_num.status=='INVALID'
+                                            && store.clientDetailsForm.controls.hold_debtor_cheques_for_days_num.touched ? 'block' : 'none'">
+                                            Enter valid number</div>
+                                    </div> -->
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group commission">
+                                        <img src="assets/images/percent.png" class="img-fluid">
+                                        <input formControlName="default_settlement" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Default Settlement</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="return_merchandise_rate" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Return Merchandise Rate *</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="toggle-wrap">
+                                        <!-- <div formControlName="return_merchandise_rate_type"
+                                            class="toggle toggle-light toggle-lg toggle-bg-green toggle2"></div>
+                                        <div class="toggle toggle-light toggle-lg toggle-bg-green toggle2"></div> -->
+                                        <label class="switch">
+                                            <input type="checkbox"  formControlName="return_merchandise_rate_type">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group commission">
+                                        <img src="assets/images/percent.png" class="img-fluid">
+                                        <input formControlName="interest_rate_to_change" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Interest Rate to Charge *</label>
+                                    </div>
+                                    <div class="w-100"
+                                        *ngIf="store.clientDetailsForm.controls.interest_rate_to_change.status=='INVALID'">
+                                        <div *ngIf="store.clientDetailsForm.controls.interest_rate_to_change.errors.pattern"
+                                            class="invalid-feedback" [style.display]="store.clientDetailsForm.controls.interest_rate_to_change.status
+                                            =='INVALID' ? 'block' : 'none'">
+                                            Enter valid percentage</div>
+                                        <div class="w-100"
+                                            *ngIf="store.clientDetailsForm.controls.interest_rate_to_change.status=='INVALID'">
+                                            <div *ngIf="store.clientDetailsForm.controls.interest_rate_to_change.errors.required &&
+                                            store.clientDetailsForm.controls.interest_rate_to_change.touched" class="invalid-feedback"
+                                                [style.display]="store.clientDetailsForm.controls.interest_rate_to_change.status
+                                                =='INVALID' ? 'block' : 'none'">
+                                                Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="interest_rate_cycle_type_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                                            <option [value]="rate?.id" *ngFor="let rate of interest_rate_cycle_type_id">{{rate?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Interest Rate Cycle Type *</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="on_principle_only" type="checkbox" class="custom-control-input"
+                                            id="on_principle_only">
+                                        <label class="custom-control-label" for="on_principle_only">On Principle Only</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="calculate_daily" type="checkbox" class="custom-control-input"
+                                            id="calculate_daily">
+                                        <label class="custom-control-label" for="calculate_daily">Calculate Daily</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="daily_debtor_trans" type="checkbox" class="custom-control-input"
+                                            id="daily_debtor_trans">
+                                        <label class="custom-control-label" for="daily_debtor_trans">Daily Debtors Trans</label>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Credit Bureau Reporting Settings</h6>
+                        </button>
+                        <div class="cg-role"> 
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="credit_bureau_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                                            <option [value]="to?.id" *ngFor="let to of credit_bureau_id">{{to?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Credit Bureau *</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input formControlName="report_to_credit_bureau" type="checkbox" class="custom-control-input"
+                                            id="report_to_credit_bureau" checked>
+                                        <label class="custom-control-label" for="report_to_credit_bureau">Report to Credit Bureau</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group custom-number"
+                                        *ngIf="store.clientDetailsForm.value.report_to_credit_bureau">
+                                        <input formControlName="report_to_credit_bureau_after_days_num" type="number"
+                                            class="form-control" placeholder="Short Name">
+                                        <label for="customCheck16s">Report to Credit Bureau After (Days)</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="no_credit_bureaus_on_debtors_allowed" type="checkbox"
+                                            class="custom-control-input" id="no_credit_bureaus_on_debtors_allowed">
+                                        <label class="custom-control-label" for="no_credit_bureaus_on_debtors_allowed">No Credit Bureaus on Debtors
+                                            Allowed</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="client_requires_acknowledgements" type="checkbox"
+                                            class="custom-control-input" id="client_requires_acknowledgements">
+                                        <label class="custom-control-label" for="client_requires_acknowledgements">Client Requires Acknowledgements</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="client_requires_payment_notices" type="checkbox"
+                                            class="custom-control-input" id="client_requires_payment_notices">
+                                        <label class="custom-control-label" for="client_requires_payment_notices">Client Requires Payment Notices</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-25">
+                                        <input formControlName="permission_form_received" type="checkbox" class="custom-control-input"
+                                            id="permission_form_received">
+                                        <label class="custom-control-label" for="permission_form_received">Permission Form Received</label>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </accordion-group>  
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Third Party Platform Details</h6>
+                        </button>
+                        <div class="cg-role"> 
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="third_party_platform_id" class="form-control selectDropdown"
+                                            name="Business Type" required>
+                                            <option [value]="platform?.id" *ngFor="let platform of third_party_platform_id">
+                                                {{platform?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Third Party Platform *</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="client_short_name" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Client Short Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="client_member_type" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Client Member Type</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="client_member_id" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Client Member ID</label>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Letter Program Sequence</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="final_demands_start_id" class="form-control selectDropdown"
+                                            name="Business Type">
+                                            <option [value]="demand?.id" *ngFor="let demand of final_demands_start_id">{{demand?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Final Demands - English</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="final_demands_end_id" class="form-control selectDropdown"
+                                            name="Business Type">
+                                            <option [value]="demand?.id" *ngFor="let demand of final_demands_end_id">{{demand?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Final Demands - French</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="due_days_num" class="form-control selectDropdown" name="Business Type">
+                                            <option [value]="day?.id" *ngFor="let day of due_days_num" [value]="day">{{day}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Due Days</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input formControlName="client_users_final_demands" type="checkbox" class="custom-control-input"
+                                            id="client_users_final_demands">
+                                        <label class="custom-control-label" for="client_users_final_demands">Client Users Final Demands</label>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                    <accordion-group [isOpen]="true">
+                        <button
+                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                            accordion-heading type="button"> 
+                            <h6 class="accor-name w-100 text-left hk-sec-title">Auto Close Letters</h6>
+                        </button>
+                        <div class="cg-role">  
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input formControlName="letter_sequence_for_listings" type="text" class="form-control"
+                                            placeholder="Short Name">
+                                        <label for="">Letter Sequence for Listings</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="letter_id" class="form-control selectDropdown" name="Business Type">
+                                            <option [value]="letter?.id" *ngFor="let letter of letter_id">{{letter?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Letter</label>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="letter_sequence_start_id" class="form-control selectDropdown"
+                                            name="Business Type">
+                                            <option [value]="letter?.id" *ngFor="let letter of letter_sequence_start_id">
+                                                {{letter?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Letter Sequence - English</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select formControlName="letter_sequence_end_id" class="form-control selectDropdown"
+                                            name="Business Type">
+                                            <option [value]="letter?.id" *ngFor="let letter of letter_sequence_end_id">{{letter?.name}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Letter Sequence - French</label>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </accordion-group> 
+                </accordion>
+            </div>
+        </div>    
+        <hr class="mt-80" />
+        <div class="text-right">
+            <button type="button" class="btn btn-default btn-lg previous"
+                [routerLink]="['/add-client/client-info']">Previous</button>
+            <button [disabled]="!store.clientDetailsForm.valid" type="button" class="btn btn-success btn-lg"
+                [routerLink]="[store.customFieldScreen ? '/add-client/custom-fields' : store.customFieldDemoScreen ? '/add-client/custom-fields-demo' : '/add-client/comments']"
+                routerLinkActive="router-link-active">Next:
+                {{store.customFieldScreen ? 'Custom Field' : store.customFieldDemoScreen ? 'Custom Field Demo' : 'Comments'}}</button>
+        </div>
+    </form>
+
+</section>

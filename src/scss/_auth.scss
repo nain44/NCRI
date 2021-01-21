@@ -1,0 +1,133 @@
+// NOTE: This file contains all auth page scss.
+
+.page-body-wrapper{
+	min-height: 100vh;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	padding: 0;
+	margin: 0;
+  
+	.login-half-bg {
+	  background: url(../assets/images/login-bg.png);
+	  background-size: cover;
+	  &.forgot-bg{
+		background: url(../assets/images/forgot-bg.png);
+		background-size: cover;
+	  }
+	  > div{
+		  padding-left: 10rem !important;
+		h2{
+			display: block;
+			font-size: var(--f-43);
+			margin-bottom: 2.8rem;
+			line-height: initial;
+		}
+		p{font-size: var(--f-20);}
+	  } 
+	}
+  
+	.auth-form{
+	.form-group{
+		label{
+			font-family: map-get($font-family,poppins-regular);
+		}
+	}
+	  .input-group{
+		  border: 1.5px solid #E2E2E2;
+			
+			.form-control{
+				border: none;
+				background: transparent;  
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+				color: #464A53;
+				font-size: var(--f-16);
+				font-family: map-get($font-family,poppins-regular);
+				&:focus{
+				box-shadow: unset;
+				border: none;
+				}
+				&::placeholder{
+					font-size: var(--f-16);
+				}
+			}
+  
+			.input-group-text{
+				border: none;
+				background: transparent;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+				padding: 0 0 0 1.5rem;
+				i{
+					color: #5D5D5D;
+					font-size: var(--f-18);
+				}
+			}
+
+			.pass-icon{ 
+				color: #5D5D5D;
+				font-size: var(--f-14); 
+				padding-right: 1rem;
+			}
+		}
+		
+		.input-group.is-valid{
+			border: 1.5px solid var(--theme-color);
+		}
+		.input-group.is-invalid{
+			border: 1.5px solid $danger;
+		}
+  
+	    .input-group:focus-within{
+			border: 1.5px solid $themeauth-color;
+			border-radius: 3px;
+	    }
+  
+		.auth-hdng{
+				font-size: var(--f-25);
+				margin-bottom: 1.4rem !important;
+				line-height: normal;
+		}
+		.auth-hdng-sm{
+			font-size: var(--f-18);
+		}
+	   .auth-info{
+			color: #8A8A8A;
+			font-size: var(--f-16);
+			font-family: map-get($font-family,poppins-regular );
+		}
+		
+		// auth checkbox button style
+		.form-check.checkbox {
+
+			input[type="checkbox"]:checked + label{
+
+				&::after{
+					background: $themeauth-color;
+				}
+			}
+		}
+
+		.alert-danger{
+			border: 1px solid $danger;
+			background-color: #FFEEEE;
+			color: $danger;
+			border-radius: 3px;
+			padding: 0.5rem 0.75rem;
+		}
+		.remember-forgot{
+			margin-top: 3rem;
+		}
+		.auth-form-btn{
+			font-size: var(--f-20);
+			padding:1rem 0 1.5rem;
+			line-height: initial; 
+			font-family: map-get($font-family,segoe-semibold);
+		}
+	}
+  
+}
+
+

@@ -1,0 +1,373 @@
+<div class="hk-sec-wrapper">
+    <div class="float-right">
+        <button type="button" class="btn btn-success" (click)="openModal(addComments)">Add New Comment</button>
+    </div>
+    <h2>Comments</h2>
+    <h4 class="lead text-light mt-5">{{demographic?.short_name}} <span *ngIf="demographic?.client_number" class="badge badge-primary">{{demographic?.client_number}}</span></h4>
+
+    <hr class="invisible" />
+
+
+    <div class="row">
+        <div class="col-12">
+            <accordion [isAnimated]="true" class="accord-section">
+                <accordion-group [isOpen]="true">
+                    <button
+                        class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                        accordion-heading type="button"> 
+                        <h6 class="accor-name w-100 text-left hk-sec-title">COMMENTS</h6>
+                    </button>
+                    <div class="cg-role">  
+                        <div class="w-100 mt-20"> 
+                            <form>
+                                <div class="row" *ngIf="false">
+                                    <!-- <div class="col-6">
+                                        <div class="">
+                                            <span class="text-secondary">Show Comments by</span>
+                                            <div class="dropdown d-inline">
+                                                <div class="text-dark-80 d-inline dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    All
+                                                </div>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button class="dropdown-item" type="button">Action</button>
+                                                    <button class="dropdown-item" type="button">Another action</button>
+                                                    <button class="dropdown-item" type="button">Something else here</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <form class="form-inline">
+                                                <div class="form-group">
+                                                    <label>Users</label>
+                                                    <select id="input_tags" class="form-control selectDropdown selectInline" multiple="multiple">
+                                                        <option selected="selected">Waheed Imran</option>
+                                                        <option>white</option>
+                                                        <option selected="selected">Ketan Joshi</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-12 text-right">
+                                        <div><span class="text-secondary">Date Range: </span>
+                                            <span class="text-dark-80 text-medium">02 Jan 20 - 21 Feb 20</span>
+                                            <span class="icon dripicons-calendar text-secondary"></span></div>
+                                        <div class="mt-20">
+                                            <div class="d-inline mr-20">
+                                                <span class="text-secondary">Filter Option</span>
+                                                <div class="dropdown d-inline">
+                                                    <div class="text-dark-80 d-inline dropdown-toggle" type="button" id="dropdownMenu2"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        One
+                                                    </div>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-inline mr-20">
+                                                <span class="text-secondary">Filter Option</span>
+                                                <div class="dropdown d-inline">
+                                                    <div class="text-dark-80 d-inline dropdown-toggle" type="button" id="dropdownMenu2"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Two
+                                                    </div>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-inline">
+                                                <span class="text-secondary">Filter Option</span>
+                                                <div class="dropdown d-inline">
+                                                    <div class="text-dark-80 d-inline dropdown-toggle" type="button" id="dropdownMenu2"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Three
+                                                    </div>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row comment-filter justify-content-between">
+                                    <div class="col-auto d-flex align-items-end">
+                                        <div class="d-flex align-items-end">
+                                            <span class="label">Show Comments of</span>
+                                            <div class="form-label-group w-auto mb-0">
+                                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type"
+                                                    [(ngModel)]="commentsOf" (change)=onSelectType()>
+                                                    <option value="all">All</option>
+                                                    <option *ngFor="let type of employeeTypeList" [value]="type.user__employee_type_id">{{type.user__employee_type__name}}</option>
+                                                </select>
+                                                
+                                                <!-- <ngx-bootstrap-multiselect (ngModelChange)="onSelectType()" 
+                                                [options]="employeeTypeList" [(ngModel)]="commentsOf" 
+                                                class="multi-select" [texts]="myTexts" [settings]="mySettings" >
+                                                </ngx-bootstrap-multiselect> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto d-flex align-items-end">
+                                        <div class="d-flex align-items-end justify-content-end">
+                                            <span class="label">Date Range</span>
+                                            <div class="form-label-group custom-calender date-range mb-0">
+                                                <img src="assets/images/calendar.png" class="img-fluid w-15">
+                                                <input type="text" placeholder="Daterangepicker" class="form-control" bsDaterangepicker
+                                                    (bsValueChange)="filterByDate($event)" [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row comment-filter justify-content-between mt-0">
+                                    <div class="col-12 col-md-7 d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <span class="label">Users</span>
+                                            <div class="form-label-group w-auto mb-0">
+                                                <tag-input [(ngModel)]="selectedUsers" [maxItems]='5' [onlyFromAutocomplete]="true" [addOnBlur]="true" name="userTag"
+                                                    (onBlur)=onUserTagAdd($event)
+                                                    [disable]="commentsOf === 'all'">
+                                                    <tag-input-dropdown [showDropdownIfEmpty]="true"  [autocompleteItems]="items"
+                                                        [identifyBy]="'user_id'" [displayBy]="'user__first_name'">
+                                                    </tag-input-dropdown>
+                                                </tag-input>
+                                                <!-- <tag-input [(ngModel)]='items' [ngModelOptions]="{standalone: true}"></tag-input> -->
+                                                <!-- <ng-select2 [(ngModel)]="items" [data]="items"
+                                                                                [placeholder]="'Please select a fruit...'">
+                                                                            </ng-select2> -->
+                                                <!-- <input [(ngModel)]="selectedUser" [typeahead]="items" [isAnimated]="true"
+                                                                            class="form-control" [typeaheadMinLength]="0" name="filterUser"
+                                                                            typeaheadOptionField="first_name"> -->
+                                                <!-- <form [formGroup]="filterForm">
+                                                                                <input formControlName="selectedUsers"
+                                                                                       [typeahead]="items"
+                                                                                       [typeaheadOptionsLimit]="7"
+                                                                                       [typeaheadMinLength]="0"
+                                                                                       placeholder="Typeahead inside a form"
+                                                                                       class="form-control">
+                                                                              </form> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-5 d-flex align-items-end justify-content-end">
+                                        <div class="d-flex align-items-end justify-content-end">
+                                            <div class="form-label-group w-auto mb-0 mr-20">
+                                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                                    <option>Filter Option One</option>
+                                                    <option>10</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-label-group w-auto mb-0 mr-20">
+                                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                                    <option>Filter Option Two</option>
+                                                    <option>10</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-label-group w-auto mb-0">
+                                                <select class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                                    <option>Filter Option Three</option>
+                                                    <option>10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive position-relative mnh-200p">
+                            <table class="table comment-table position-relative">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>User</th>
+                                        <th>Comments</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let comment of commentList" class="cursor-pointer">
+                                        <td>
+                                            <img (click)="toggleClientDemographicCommentBookmark(comment.id)" *ngIf="!comment.is_bookmarked"
+                                                src="assets/images/star.svg" class="img-fluid cursor-pointer">
+                                            <img (click)="toggleClientDemographicCommentBookmark(comment.id)" *ngIf="comment.is_bookmarked"
+                                                src="assets/images/star-filled.svg" class="img-fluid cursor-pointer">
+                                        </td>
+                                        <td (click)="openModalContent(modalContent)">
+                                            <div class="d-flex align-items-center">
+                    
+                                                <!-- <img [src]="comment.user__avatar_url" class="img-fluid user-img mr-10"> -->
+                                                <div class="user-img-name text-uppercase">
+                                                    {{comment.user__first_name.substring(0, 1) + comment.user__last_name.substring(0, 1)}}
+                                                </div>
+                                               
+                                                {{comment.user__first_name + ' ' + comment.user__last_name}}
+                                            </div>
+                                            <!-- <img src="assets/images/add-comment.png" class="img-fluid user-img mr-10"> -->
+                                        </td>
+                                        <td class="commentHolder">
+                                            {{comment.comment_text}}
+                                        </td>
+                                        <td>
+                                            <!-- 02 Jan 20 -->
+                                            {{comment.updated_at | date : 'longDate'}}
+                                        </td>
+                                        <td>
+                                            <!-- 07:30 AM -->
+                                            {{comment.updated_at | date : 'shortTime'}}
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center cursor-pointer" *ngIf="comment.document_url">
+                                                <a [href]="comment.document_url" target="_blank">
+                                                    <img src="assets/images/attachments.png" class="img-fluid mr-10">
+                                                </a> JPG
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="commentList.length === 0 && !loader" class="text-center">
+                                        <td colspan="6">No Record Available</td>
+                                    </tr>
+                                </tbody> 
+                            </table>
+                            <div *ngIf="loader" class="table-loader absolute">
+                                <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                                    <div class="spinner-border theme-color" role="status">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    
+                            <div class="text-center mt-10 mb-10" *ngIf="commentList.length > 0">
+                                <!-- <a href="" class="btn btn-link small">Load More Comments</a> -->
+                                <button class="btn btn-link small font-16" *ngIf="isLoadMore" (click)="loadNext()">
+                                    Load More Comments
+                                </button>
+                            </div>
+                    
+                            <hr />
+                    
+                        </div> 
+                    </div>
+                </accordion-group> 
+            </accordion>
+        </div>
+    </div>
+    
+
+</div>
+
+
+<ng-template #addComments class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Add Comment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mb-30">
+                    <form [formGroup]="addCommentForm">
+                        <div class="form-label-group mb-40">
+                            <input formControlName="comment_text" type="text" class="form-control"
+                                placeholder="Short Name" required>
+                            <label for="">Type your comment here...</label>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <input type="file" accept=".csv,.xlsx,.pdf" class="d-none" #fileUpload (change)=uploadDocument(fileUpload)>
+                                <button type="button" class="btn btn-success btn-border btn-lg loader-btn" (click)="fileUpload.click()"
+                                    [disabled]="fileLoader">
+                                    <span>
+                                        Attach Documents
+                                        <span *ngIf="fileLoader" class="spinner-border float-right" role="status"
+                                            aria-hidden="true"></span>
+                                    </span>
+                                    </button> 
+                            </div>
+                            <div class="col-md-auto">
+                                <span class="text-light-50 small font-12"><em>Maximum size should be 2MB.</em></span>
+                            </div>
+                            <div class="col-12" *ngIf="fileUploadError">
+                                <div>
+                                    <span class="small text-danger">File larger then 2MB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-auto" *ngIf="addCommentForm.value.document_url">
+                                <span class="text-light-50 small">File uploaded</span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-default btn-lg previous" data-dismiss="modal"
+                        (click)="closeModal()">Cancel</button>
+                    <button type="button" class="btn btn-success btn-lg"
+                        [disabled]="!addCommentForm.valid || addCommentLoader"
+                        (click)="AddClientDemographicComment()">Save
+                        Comment
+                        <span *ngIf="addCommentLoader" class="spinner-border float-right" role="status"
+                            aria-hidden="true"></span></button>
+                    <!-- (click)="addComment()" -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #modalContent class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+            <div class="modal-body p-0 comment-content">
+                <div class="d-flex align-items-center">
+                    <div class="user-img-name text-uppercase">
+                        WI
+                    </div>
+                    <h4>Waheed Imran</h4>
+                    <span>09 Feb 20 <span>08:13 PM</span></span>
+                </div>
+                <div class="comment">
+                    <div>
+                        <img src="assets/images/quote.png" class="mr-10">
+                    </div>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page
+                        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                        distribution of letters, as opposed to using ‘Content here, content here’, making it look like
+                        readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as
+                        their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in
+                        their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on
+                        purpose (injected humour and the like).</p>
+                </div>
+                <div class="d-flex align-items-center client-name cursor-pointer" (click)="openModalContent(modalContent)">
+                    <img src="assets/images/attachments.png" class="img-fluid mr-10"> JPG
+                </div>
+
+                <div class="modal-footer pb-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous" data-dismiss="modal"
+                            (click)="modalRef.hide()">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

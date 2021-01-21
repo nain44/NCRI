@@ -1,0 +1,58 @@
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Account Settings</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Email</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-md-12">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-4 mb-md-5">Email</h5>
+                            <div class="p-md-5">
+                                <div class="row upload-file d-flex align-items-center justify-content-center">
+                                    <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+                                        <img src="../../../../../assets/images/email-change.png" class="img-fluid" alt="update Password">
+                                    </div>
+                                    <form [formGroup]="changeEmail" class="col-md-6 py-md-5 mt-2">
+                                        <div >
+                                            <h5 class="card-title mb-0">Change Email</h5>
+                                            <p class="mb-4">Your Current email address is {{currentEmail}}</p>
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">New email address</label>
+                                                <input type="text" formControlName="email" class="form-control" id="formGroupExampleInput" placeholder="Enter new email address" >
+                                                <div class="w-100" *ngIf="changeEmail.controls.email.status=='INVALID'">
+                                                    <div *ngIf="changeEmail.controls.email.errors.email && changeEmail.controls.email.dirty" class="invalid-feedback" [style.display]="changeEmail.controls.email.status=='INVALID' ? 'block' : 'none'">Please provide valid email address.</div>
+                                                </div>
+                                                <div [style.color]="error === true ? '#FF0000' : '#7bb31a'" class="invalid-feedback" style="display: block;" >{{errorText}}</div>
+                                            </div>
+                                            <div class="text-center mt-5">
+                                                <!-- <button type="button">Update</button> -->
+                                                <button (click)="updateEmail(changeEmail.value)" [style.pointer-events]="(loader || !changeEmail.valid) ? 'none' : 'all'" [disabled]="!changeEmail.valid" class="btn btn-success loader-btn mr-3" type="button">
+                                                    <span>
+                                                        Save Changes
+                                                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+    

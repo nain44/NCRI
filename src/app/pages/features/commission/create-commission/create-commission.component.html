@@ -1,0 +1,568 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Add Commission</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <div class="mb-30">
+            <h2>{{userDetails?.first_name + ' ' + userDetails?.last_name}}</h2>
+            <div class="lead text-muted">{{userDetails?.employee_type__name}}</div>
+            <p class="text-dark-80">{{userDetails?.department__name}} - {{userDetails?.branch_location__address}}</p>
+        </div>
+        <form [formGroup]="currencyForm">
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">SALARY INFORMATION</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                    <div class="row mt-20">
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <select #cCurrency [class.hasData]="cCurrency.value !== '' || cCurrency.value !== null" class="form-control" formControlName="currency_code" aria-label="Text input with segmented dropdown button" placeholder="Select Currency">
+                                                    <option *ngFor="let item of currencyCodesList" [value]="item">{{item}}</option>
+                                                </select>
+                                                <label class="selectHolder" for="">Currency*</label>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.user_role_id.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.user_role_id.errors.required && userForm.controls.user_role_id.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">
+                                                        Please select role.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group slash-field">
+                                                <img src="assets/images/slash.png" class="ing-fluid">
+                                                <input type="text" formControlName="salaryOne" (blur)="calculateSalary('y')" (keyup)="disableField()" class="form-control" id="formGroupExampleInput" placeholder="Gross Salary (Yearly)">
+                                                <label class="selectHolder" for="">Gross Salary (Yearly)*</label>
+                                                <!-- <div class="w-100" *ngIf="userForm.controls.branch_location_id.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.branch_location_id.errors.required && userForm.controls.branch_location_id.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">
+                                                        Please provide branch location.</div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-4"> 
+                                            <div class="form-label-group">
+                                                <input type="text" formControlName="salaryTwo" (blur)="calculateSalary('m')" (keyup)="disableField()" class="form-control" id="formGroupExampleInput" placeholder="Gross Salary (Monthly)">
+                                                <label for="">Gross Salary (Monthly)*</label>
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">COMMISSION TYPE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="w-100 mt-20">
+                                        <div class="row mt-20 mb-20">
+                                            <div class="col">
+                                                <div class="form-inline toggle-radio">
+                                                    <div class="btn-group" btnRadioGroup formControlName="commissionType">
+                                                    <label class="btn btn-success" (click)="changeType()" btnRadio="salary">Salary Based</label>
+                                                    <label class="btn btn-success" (click)="changeType()" btnRadio="target">Target Based</label> 
+                                                    </div> 
+                                                </div>
+                                                <!-- {{currencyForm.controls.commissionType.value}} -->
+                                            </div>
+                                            <!-- <div class="col-auto d-flex align-items-center">
+                                                <a href="javascript:void(0)" (click)="openModal(historyModal)" class="text-purpal">View History</a>
+                                            </div> -->
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="d-flex align-items-center comment-content commission-history">
+                                                    <div class="user-img-name">WI</div>
+                                                    <div class="commission-history__name">
+                                                        <span>Waheed Imran</span>Posted a comments on commission type at 21 Jan 20 at 3:30PM
+                                                        <p>" We need to change the commission with this agent type.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="set-commssion">
+                                            <div class="row mb-10" *ngIf="currencyForm.controls.commissionType.value === 'salary'">
+                                                <div class="col-md-12 d-flex">
+                                                    <div class="field-view d-flex justify-content-center align-items-center">
+                                                        <div class="custom-radio custom-control-inline">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input"  type="radio" (click)="resetForm()" formControlName="break_even_type" id="gridRadios11" value="fs">
+                                                                <label class="form-check-label" for="gridRadios11">Flat</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-radio custom-control-inline">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" (click)="resetForm()" formControlName="break_even_type" type="radio" id="gridRadios1122" value="ts">
+                                                                <label class="form-check-label" for="gridRadios1122">Tier Based</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="row" *ngIf="currencyForm.controls.commissionType.value === 'target'">
+                                                <div class="col-12"> 
+                                                    <div class="toggle-wrap d-flex align-items-center">
+                                                        <label class="switch switch--commission m-0">
+                                                            <input type="checkbox" (change)="resetForm()" formControlName="break_even_type">
+                                                            <span class="slider round">
+                                                                <i class="fa fa-usd"></i>
+                                                                <i class="fa fa-percent"></i>
+                                                            </span> 
+                                                        </label>
+                                                        <span class="font-16 text-dark-80 font-weight-bold ml-10">
+                                                            
+                                                            {{
+                                                                currencyForm.controls.break_even_type.value === false ? 'Tier-rate Flat Commission' :
+                                                                currencyForm.controls.break_even_type.value === true ? 'Tier-rate Variable Commission' 
+                                                                : ''
+                                                             }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- flat -->
+                                            <div class="row d-flex align-items-center" >
+                                                <div *ngIf="currencyForm.controls.break_even_type.value === 'fs'" class="col-md-8 d-flex align-items-center">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5"> 
+                                                            <div class="form-label-group">
+                                                                <input type="text" formControlName="break_even_times" class="form-control bg-none" aria-label="Text input with segmented dropdown button" placeholder="Enter Break Even Time">
+                                                                <label class="selectHolder" for="">Break Even Times*</label>
+                                                                <!-- <div class="w-100" *ngIf="userForm.controls.user_role_id.status=='INVALID'">
+                                                                    <div *ngIf="userForm.controls.user_role_id.errors.required && userForm.controls.user_role_id.touched"
+                                                                        class="invalid-feedback"
+                                                                        [style.display]="userForm.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">
+                                                                        Please select role.</div>
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group commission">
+                                                                <img src="assets/images/percent.png" class="img-fluid">
+                                                                <input type="text" class="form-control bg-none" placeholder="Short Name"
+                                                                    formControlName="commission_rate">
+                                                                <label for="">Commission(%)*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" class="btn btn-success btn-lg btn-border" (click)="calculateAmount()">
+                                                                Calculate
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4" *ngIf="currencyForm.controls.break_even_type.value === 'fs'">
+                                                    <div class="mb-15">
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Salary</div>
+                                                            <div>{{currencyForm.controls.salaryTwo.value}}</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Break Even Amount:</div>
+                                                            <div>{{breakEvenAmount}}</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Break Even Times:</div>
+                                                            <div>{{currencyForm.controls.break_even_times.value}}</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center c-calculate">
+                                                            <div>Commission(%)</div>
+                                                            <div>{{currencyForm.controls.commission_rate.value}}%</div>
+                                                        </div>  
+                                                    </div>
+                                                </div> 
+                                                
+                                                <div class="col-12" *ngIf="currencyForm.controls.break_even_type.value === 'fs' && basePlanList.length > 0">
+                                                    <div class="col-md-7 mt-20">
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title text-capitalize">CURRENT COMMISSION</h6>
+                                                        <div class="d-flex align-items-center calculated-commission">
+                                                            <div>
+                                                                <div>Break Even Times: <b>{{currencyForm.controls.break_even_times.value}}</b></div>
+                                                            </div>
+                                                            <div>
+                                                                <div>Commission: <b>{{currencyForm.controls.commission_rate.value}}%</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- flat end -->
+                                            <!-- Tier Based -->
+                                            <div class="row mt-20"  *ngIf="currencyForm.controls.break_even_type.value === 'ts'">
+                                                <div class="col-md-8 d-flex align-items-center">
+                                                    <div class="row w-100"> 
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group commission">
+                                                                <img src="assets/images/percent.png" class="img-fluid">
+                                                                <input type="text" formControlName="commission_rate" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Commission(%)*</label> 
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+                                                <div class="w-100"></div>
+                                                <div class="col-md-8" >
+                                                    <div class="w-100 mt-20 mb-30" *ngIf="basePlanList.length > 0"> 
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title text-dark-80">Current Tier Based Plan</h6>
+                                                        <div class="table-wrap p-4 dash-border pt-0"> 
+                                                            <div class="row no-gutters">
+                                                                <div class="col-md-10">
+                                                                    <div class="table-responsive mnh-200p">
+                                                                        <table class="table theme-table role-map-table role-map-table--tiredbase w-100 display border-0">
+                                                                            <thead>
+                                                                                <tr> 
+                                                                                    <th>Break Even Times*</th>
+                                                                                    <th>MTD Base Target*  </th>  
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>  
+                                                                                <tr *ngFor="let row of basePlanList"> 
+                                                                                    <td>{{row.break_even_times}}</td>     
+                                                                                    <td>{{row.mtd_base_target}}</td>     
+                                                                                </tr> 
+                                                                            </tbody>  
+                                                                            <tbody *ngIf="basePlanList.length === 0">
+                                                                                <tr style="text-align: center;">
+                                                                                    <td colspan="3">No Record Found</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        </div> 
+                                                                </div>
+                                                                <div class="col-md-2 d-flex align-items-center">
+                                                                    <span class="font-16 text-red text-center w-100 cursor-pointer">Remove<br> Current Plan</span>
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="calculated-commission pb-10">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group "> 
+                                                                <input type="text" formControlName="break_even_times" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Break Even Times*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group">  
+                                                                <input type="text" formControlName="mtd_base_target" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">MTD Base Target*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" (click)="AddToList()" class="btn btn-success btn-lg btn-border w-100"
+                                                            [disabled]="currencyForm.value.commission_rate === '' &&  currencyForm.value.break_even_type === 'ts'">
+                                                                Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Tier Based end --> 
+
+
+                                            <!-- target base tier rate flat -->
+                                            <div class="row mt-20"  *ngIf="currencyForm.controls.break_even_type.value === false">
+                                                <!-- <div class="col-md-8 d-flex align-items-center">
+                                                    <div class="row w-100"> 
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group commission">
+                                                                <img src="assets/images/percent.png" class="img-fluid">
+                                                                <input type="number" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Commission*</label> 
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>  -->
+                                                <div class="w-100"></div>
+                                                <div class="col-md-8">
+                                                    <div class="w-100 mt-20 mb-30" *ngIf="basePlanList.length > 0"> 
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title text-dark-80">Current Target Base Plan</h6>
+                                                        <div class="table-wrap p-4 dash-border pt-0"> 
+                                                            <div class="row no-gutters">
+                                                                <div class="col-md-10">
+                                                                    <div class="table-responsive mnh-200p">
+                                                                        <table class="table theme-table role-map-table role-map-table--tiredbase w-100 display">
+                                                                            <thead>
+                                                                                <tr> 
+                                                                                    <th>Break Even %*</th>
+                                                                                    <th>Commission Amount*  </th>  
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>  
+                                                                                <tr *ngFor="let row of basePlanList"> 
+                                                                                    <td>{{row.break_even_target}}</td>     
+                                                                                    <td>{{row.commission_rate}}</td>     
+                                                                                </tr> 
+                                                                            </tbody>  
+                                                                            <tbody *ngIf="basePlanList.length === 0">
+                                                                                <tr style="text-align: center;">
+                                                                                    <td colspan="3">No Record Found</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        </div> 
+                                                                </div>
+                                                                <div class="col-md-2 d-flex align-items-center">
+                                                                    <span class="font-16 text-red text-center w-100 cursor-pointer">Remove<br> Current Plan</span>
+                                                                </div>
+                                                            </div>
+                                                             
+                                                        </div>
+                                                    </div>
+                                                    <div class="calculated-commission pb-10">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group "> 
+                                                                <input type="text" formControlName="break_even_target" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Break Even %*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group">  
+                                                                <input type="text" formControlName="commission_rate" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Commission Amount*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" (click)="addTargetList()" class="btn btn-success btn-lg w-100">
+                                                                Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- target base plan second -->
+                                            <div class="row mt-20"  *ngIf="currencyForm.controls.break_even_type.value === true">
+                                                <div class="w-100"></div>
+                                                <div class="col-md-8">
+                                                    <div class="w-100 mt-20 mb-30" *ngIf="basePlanList.length > 0"> 
+                                                        <h6 class="accor-name w-100 text-left hk-sec-title text-dark-80">Current Tier Based Plan</h6>
+                                                        <div class="table-wrap p-4 dash-border pt-0"> 
+                                                            <div class="row no-gutters">
+                                                                <div class="col-md-10">
+                                                                    <div class="table-responsive mnh-200p">
+                                                                        <table class="table theme-table role-map-table role-map-table--tiredbase w-100 display">
+                                                                            <thead>
+                                                                                <tr> 
+                                                                                    <th>Break Even Percentage*</th>
+                                                                                    <th>Commission Percentage*  </th>  
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>  
+                                                                                <tr *ngFor="let row of basePlanList"> 
+                                                                                    <td>{{row.break_even_target}}</td>     
+                                                                                    <td>{{row.commission_rate}}</td>     
+                                                                                </tr> 
+                                                                            </tbody>  
+                                                                            <tbody *ngIf="basePlanList.length === 0">
+                                                                                <tr style="text-align: center;">
+                                                                                    <td colspan="3">No Record Found</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        </div>  
+                                                                </div>
+                                                                <div class="col-md-2 d-flex align-items-center">
+                                                                    <span class="font-16 text-red text-center w-100 cursor-pointer">Remove<br> Current Plan</span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="calculated-commission pb-10">
+                                                    <div class="row w-100">
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group "> 
+                                                                <input type="text" formControlName="break_even_target" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Break Even %*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-label-group">  
+                                                                <input type="text" formControlName="commission_rate" class="form-control bg-none" placeholder="Short Name">
+                                                                <label for="">Commission Percentage*</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">  
+                                                            <button type="button" (click)="addTargetList()" class="btn btn-success btn-lg w-100">
+                                                                Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" (click)="addCommission()" [disabled]="!currencyForm.valid || basePlanList.length === 0 || loader" class="btn btn-success loader-btn btn-lg" >
+                    <span>
+                        Submit Request for Approval
+                        <span *ngIf="loader" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<!-- history modal -->
+<ng-template #historyModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-xl unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">History of Commission</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                <div  class="table-responsive mnh-200p">
+                <table id="datable_1"
+                        class="table theme-table commission-setting-history-table w-100 display pb-30">
+                        <thead>
+                            <tr> 
+                                <th>COMMISSION TYPE</th>
+                                <th>BREAK EVEN</th>
+                                <th></th>
+                                <th>FROM DATE</th>
+                                <th>TO DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>  
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history"> 
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Break Even Time</div>
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div>
+                                                <div class="be-time">Commission(%)*</div>
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr>
+                            <tr>  
+                                <td>Salary Based</td>
+                                <td>Flat</td>
+                                <td class="p-0">
+                                    <div class="commission-setting-history"> 
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div class="be-time">Commission</div>
+                                                <div class="be-value">60,000</div>
+                                            </div> 
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div> 
+                                                <div class="be-value">60,000</div>
+                                            </div>
+                                            <div> 
+                                                <div class="be-value">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20 Jan 20</td>
+                                <td>25 Feb 21</td>
+                            </tr>
+                            <tr *ngIf="false" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer pb-0 pr-0">
+                <div class="text-right mt-20">
+                    <button type="button" class="btn btn-success btn-lg previous" (click)="modalRef.hide()" data-dismiss="modal"
+                    >Close</button>  
+                </div> 
+            </div> 
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;" style="color: black;">
+                    <li *ngFor="let error of errors">{{error}}</li>
+                    <!-- <li>{{errorMessage}}</li> -->
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="errorModalRef.hide()" class="btn btn-success">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

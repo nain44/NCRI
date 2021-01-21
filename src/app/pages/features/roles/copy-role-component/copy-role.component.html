@@ -1,0 +1,269 @@
+<div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">User and Permission</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Roles and permission</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Copy Role</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">   
+                <div class="col-md-12 mb-30">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="card-title mb-4">Copy Role</h5>
+                                </div>
+                            </div>
+                            <div class="row mt-4 mb-3">
+                                <div class="col-md-12 mb-4">
+                                    <div class="custom-radio custom-control-inline mr-md-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" [(ngModel)]="roleType" (change)="changeType()" type="radio" id="gridRadios21" value="C">
+                                            <label class="form-check-label" for="gridRadios21">Customized Roles</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-radio custom-control-inline mr-md-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" [(ngModel)]="roleType" (change)="changeType()" type="radio" id="gridRadios11" value="G">
+                                            <label class="form-check-label" for="gridRadios11">Global Roles</label>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <form [formGroup]="role">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                        <label for="formGroupExampleInput">Role Name</label>
+                                            <input type="text" disabled (blur)="checkRoleName()" formControlName="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Role Name" >
+                                            <!-- <div *ngIf="roleNameCheck" [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback" style="display: block;" >Role Name Already Exists</div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="roleType === 'C'">
+                                        <div class="input-group form-group">
+                                            <label for="inputState">Country</label>
+                                            <span class="wrapper-select">
+                                                <select type="text" formControlName="country_code" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Country">
+                                                    <option *ngFor="let country of countryList" [value]="country.code">{{country.name}}</option>
+                                                    <!-- <option *ngIf="countryList.length === 0">No Record Found</option> -->
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="roleType === 'C'">
+                                        <div class="input-group form-group">
+                                            <label for="inputState">Branch</label>
+                                            <span class="wrapper-select">
+                                                <select type="text" formControlName="branch_location_id" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Branch">
+                                                    <option *ngFor="let branch of branchList" [value]="branch.id">{{branch.address}}</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group form-group">
+                                            <label for="inputState">Department</label>
+                                            <span class="wrapper-select">
+                                                <select type="text" formControlName="department_id" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Department">
+                                                    <option *ngFor="let department of departmentList" [value]="department.id">{{department.name}}</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <accordion [isAnimated]="true" [closeOthers]="oneAtATime">
+                                        <accordion-group [isOpen]="isFirstOpen">
+                                            <button class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix" accordion-heading type="button">
+                                                <div class="accor-name w-100 text-left font-weight-bold">Privilege</div> 
+                                                <div class="w-auto" (click)="$event.stopPropagation()"> 
+                                                    <div class="form-inline" (click)="$event.stopPropagation()"> 
+                                                        <div class="pull-md-right ml-auto d-flex align-items-center" (click)="$event.stopPropagation()"> 
+                                                            <span class="mr-2">Select All</span>
+                                                            <label class="switch w-auto" >
+                                                                <input (change)="selectAllPrivileges()" [(ngModel)]="selectAll" type="checkbox">
+                                                                <span class="slider c-all round"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </button> 
+                                            <div class="row">
+                                                <div class="col-sm-6" *ngFor="let item of privilegesList">
+                                                    <div class="custom-control-inline mb-20">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox" (change)="selectPrivilege()" [(ngModel)]="item.check" class="form-check-input" [id]="item.resource_code">
+                                                            <label class="form-check-label" [for]="item.resource_code">{{item.resource_code}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 text-center" *ngIf="!requestLoader && privilegesList.length === 0">
+                                                    <p>No Record Available</p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="requestLoader" class="d-flex justify-content-center">
+                                                <div class="spinner-border theme-color" role="status">
+                                                  <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </accordion-group>
+                                        <!-- <accordion-group heading="Group 1">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck1">
+                                                            <label class="form-check-label" for="exampleCheck1">Edit project</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck12">
+                                                            <label class="form-check-label" for="exampleCheck12">Select types</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </accordion-group>
+                                        <accordion-group heading="Group 2">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck1">
+                                                            <label class="form-check-label" for="exampleCheck1">Edit project</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck12">
+                                                            <label class="form-check-label" for="exampleCheck12">Select types</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </accordion-group>
+                                        <accordion-group heading="Group 3">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck1">
+                                                            <label class="form-check-label" for="exampleCheck1">Edit project</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control-inline mb-3">
+                                                        <div class="form-check checkbox">
+                                                            <input type="checkbox"Edit project class="form-check-input" id="exampleCheck12">
+                                                            <label class="form-check-label" for="exampleCheck12">Select types</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </accordion-group> -->
+                                    </accordion>
+                                </div>
+                                <!-- <div class="col-md-6 mt-4">
+                                    <div [style.color]="error === true ? '#FF0000' : '#7bb31a'" style="font-size: 100%;" class="invalid-feedback" style="display: block;" >{{responseText}}</div>
+                                </div> -->
+                                <div class="col-md-12 mt-4">
+                                    <hr class="mb-20">
+                                    <div class="pull-right">
+                                        <button [disabled]="!role.valid || roleNameCheck" type="button" (click)="loader === false ? submitForm(role.value) : ''" class="btn btn-success loader-btn">
+                                            <span>Add
+                                            <span *ngIf="loader" class="spinner-border mr-3" role="status" aria-hidden="true"></span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="container-fluid container-wrapper">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                    <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Home</a></li>
+                        <li class="breadcrumb-item active gray-04-color">Dashboard</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">   
+                <div class="col-md-12">     
+                    <div class="card card-statistics h-100"> 
+                        <div class="card-body">  
+                            <h5 class="card-title mb-4 mb-md-5">Change Logo</h5>
+                            <div class="row mx-0">
+                                <accordion>
+                                    <accordion-group heading="Static Header">
+                                      This content is straight in the template.
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                    <accordion-group heading="Another group">
+                                      <p>Some content</p>
+                                    </accordion-group>
+                                  </accordion>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;">
+                    <li *ngFor="let error of responseText">{{error.name + " " +error.list}}</li>
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="modalRef.hide()" class="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

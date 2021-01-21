@@ -1,0 +1,661 @@
+
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a [routerLink]="['/user']" href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">User Management</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">User Management</h1>
+            <div class="d-flex align-items-end">
+                <div class="form-label-group mb-0 mr-10">
+                    <input type="text" class="form-control input-label ng-valid bg-transparent"
+                        placeholder="User ID" [value]="userDetails?.user_id">
+                    <label for="">User ID.</label>
+                </div>
+                <button type="button" class="btn btn-success btn-border btn-lg px-3">
+                    <i class="fa fa-search font-20"></i>
+                </button>
+            </div>
+        </div> 
+    </div>
+<!-- user management -->
+<div class="hk-sec-wrapper">
+    <div class="top">
+        <span class="badge badge-blue">{{userDetails?.user_id}}</span>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="d-flex align-items-center" *ngIf="userDetails?.first_name">
+                            {{userDetails?.first_name + ' ' + userDetails?.last_name}} <div class="lead text-muted font-16 ml-10 pt-3">{{userDetails?.user_role__name}}</div></h2> 
+                        <div class="lead text-muted">
+                            <!-- VP - Digital Marketing -->
+                            {{userDetails?.employee_type__name}}
+                        </div>
+                        <span class="text-muted">
+                            Report To:
+                            <span class="text-dark"> {{userDetails?.reporting_to__first_name}} {{userDetails?.reporting_to__last_name}}</span>
+                        </span> 
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-30">
+                            <div *ngIf="userDetails?.cell_number" class="d-flex align-items-center text-dark-80 font-16 mb-5"> 
+                                <img src="assets/images/phone.png" class="text-secondary mr-10" alt="">  
+                                <span>{{userDetails?.cell_number}}</span>
+                            </div>
+                            <div *ngIf="userDetails?.email" class="d-flex align-items-center text-dark-80 font-16 mb-5">
+                                <img src="assets/images/email.png" class="text-secondary mr-10" alt="">
+                                <span>{{userDetails?.email}}</span> 
+                            </div>
+                            <div *ngIf="userDetails?.date_of_joining" class="d-flex align-items-center text-dark-80 font-16 mb-5" data-toggle="tooltip" data-placement="top" title="Phone">
+                                <img src="assets/images/calendar.png" class="text-secondary mr-10 small-calender" alt=""> 
+                                <span>
+                                    <!-- 02 Jan 20 -->
+                                    {{userDetails?.date_of_joining | date : 'mediumDate'}}
+                                </span> 
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-50 info-widgets">
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-12 d-flex w-100">
+                                <accordion [isAnimated]="true" class="accord-section w-100">
+                                    <accordion-group [isOpen]="true">
+                                        <button 
+                                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                            accordion-heading type="button"> 
+                                            <h6 class="accor-name w-100 text-left hk-sec-title">CONTACT INFORMATION</h6>
+                                        </button>
+                                        <div class="cg-role">   
+                                            <div class="w-100 mt-20"> 
+                                                <img
+                                                *ngIf="privileges.privilegeHash['uam.views.EditUser']['m']"
+                                                 src="assets/images/edit.png" class="edit-widget cursor-pointer" alt="" (click)="openModal(contactInfo)">  
+                                                <div *ngIf="userDetails?.email" class="row mb-5">
+                                                    <div class="col text-secondary">Email</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.email}}</div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.country_code">
+                                                    <div class="col text-secondary">Country Code</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.country_code}}
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.cell_number">
+                                                    <div class="col text-secondary">Cell Number</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.cell_number}}</div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.phone">
+                                                    <div class="col text-secondary">Phone Number</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.phone}}
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.branch_location__address">
+                                                    <div class="col text-secondary">Branch Location</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.branch_location__address}}
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </accordion-group> 
+                                </accordion>
+                            </div>
+                        </div>
+                         
+                    </div> 
+                    <div class="col-5"> 
+                        <div class="row">
+                            <div class="col-12 d-flex w-100">
+                                <accordion [isAnimated]="true" class="accord-section w-100">
+                                    <accordion-group [isOpen]="true">
+                                        <button 
+                                            class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                            accordion-heading type="button"> 
+                                            <h6 class="accor-name w-100 text-left hk-sec-title">ACCESS CONTROL
+                                                <small class="ml-20 text-secondary text-lowercase font-12"><em>Last updated on 16 Jan 20</em></small>
+                                            </h6>
+                                        </button>
+                                        <div class="cg-role">   
+                                            <div class="mt-20 w-100">
+                                                <img *ngIf="privileges.privilegeHash['uam.views.EditUser']['m']" src="assets/images/edit.png" class="edit-widget cursor-pointer" alt="" (click)="openModal(accessControls)"> 
+                                                <div class="row mb-5">
+                                                    <div class="col text-secondary">Enable User</div>
+                                                    <div class="col text-dark-80 text-medium text-right">Yes</div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.access_hours_enabled">
+                                                    <div class="col text-secondary">Access Control Hours</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.access_hours_enabled === true ? 'Yes' : 'No'}}</div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.logout_inactivity_minutes">
+                                                    <div class="col text-secondary">Logout after Particular Minute of Inactivity</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.logout_inactivity_minutes}}</div>
+                                                </div>
+                                                <div class="row mb-5">
+                                                    <div class="col text-secondary">Device</div>
+                                                    <div class="col text-dark-80 text-medium text-right">
+                                                        {{
+                                                            userDetails?.desktop_access_enabled === true ? 'Desktop' : 
+                                                            userDetails?.laptop_access_enabled === true ?  'Laptop' :
+                                                            userDetails?.mobile_access_enabled === true ?  'Mobile' : '-'
+                                                        }}
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-5" >
+                                                    <div class="col text-secondary">Device Identification No</div>
+                                                    <div class="col text-dark-80 text-medium text-right">
+                                                      {{
+                                                        userDetails?.desktop_access_enabled === true ? userDetails?.desktop_access_mac_address : 
+                                                        userDetails?.laptop_access_enabled === true ?  userDetails?.laptop_access_mac_address :
+                                                        userDetails?.mobile_access_enabled === true ?  userDetails?.mobile_access_imei : '-'
+                                                      }}
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-5" *ngIf="userDetails?.ip_address_access_enabled">
+                                                    <div class="col text-secondary">IP Address Access Control Panel</div>
+                                                    <div class="col text-dark-80 text-medium text-right">{{userDetails?.ip_address_access_enabled === true ? 'Yes' : 'No'}}</div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </accordion-group> 
+                                </accordion>
+                            </div>
+                        </div>
+                         
+                    </div> 
+                </div>
+
+                <hr class="invisible" />
+
+            </div> 
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- contact information start -->
+<ng-template #contactInfo class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Update Contact</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                <form [formGroup]="userForm">
+                    <!-- permission -->
+                    <div class="cg-role">  
+                        <div class="w-100 mt-20"> 
+                            <div class="row mb-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <!-- (blur)="validateEmail()" -->
+                                        <input disabled type="text" formControlName="email" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter Email id">
+                                        <label for="">Email*</label>
+                                        <div class="w-100" *ngIf="userForm.controls.email.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.email.errors.required && userForm.controls.email.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.email.status=='INVALID' ? 'block' : 'none'">Please
+                                                provide email.</div>
+                                            <div *ngIf="userForm.controls.email.errors.email && userForm.controls.email.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.email.status=='INVALID' ? 'block' : 'none'">Please
+                                                provide correct email formate.</div>
+                                            <div *ngIf="userForm.controls.email.errors.minlength && userForm.controls.email.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.email.status=='INVALID' ? 'block' : 'none'">Email must
+                                                be at least 1 character.</div>
+                                        </div>
+                                        <div *ngIf="isEmailAvailable" class="invalid-feedback" style="display: block;">Email already
+                                            exists.</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select #country [class.hasData]="country.value !== '' || country.value !== null" class="form-control selectDropdown" formControlName="country_code">
+                                            <option *ngFor="let item of countryCodes" [value]="item?.code"> ({{item.dial_code}}) {{item.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Country Code</label>
+                                        <div class="w-100" *ngIf="userForm.controls.country_code.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.country_code.errors.minlength && userForm.controls.country_code.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.country_code.status=='INVALID' ? 'block' : 'none'">
+                                                Country code must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.country_code.errors.maxlength && userForm.controls.country_code.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.country_code.status=='INVALID' ? 'block' : 'none'">
+                                                Country code must be at most 2 characters</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-10"></div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <input type="text" formControlName="cell_number" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter cell number">
+                                        <label for="">Cell Number</label>
+                                        <div class="w-100" *ngIf="userForm.controls.cell_number.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.cell_number.errors.minlength && userForm.controls.cell_number.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Cell
+                                                number must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.cell_number.errors.maxlength && userForm.controls.cell_number.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Cell
+                                                number must be at most 17 characters</div>
+                                            <div *ngIf="userForm.controls.cell_number.errors.pattern && userForm.controls.cell_number.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.cell_number.status=='INVALID' ? 'block' : 'none'">Cell
+                                                number must have correct pattern.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-label-group">
+                                                <input type="text" formControlName="phone" class="form-control"
+                                                    id="formGroupExampleInput" placeholder="Enter Phone number">
+                                                <label for="">Phone</label>
+                                                <div class="w-100" *ngIf="userForm.controls.phone.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.phone.errors.minlength && userForm.controls.phone.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.phone.status=='INVALID' ? 'block' : 'none'">
+                                                        Phone number must be at least 1 character.</div>
+                                                    <div *ngIf="userForm.controls.phone.errors.maxlength && userForm.controls.phone.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.phone.status=='INVALID' ? 'block' : 'none'">
+                                                        Phone number must be at most 17 characters</div>
+                                                    <div *ngIf="userForm.controls.phone.errors.pattern && userForm.controls.phone.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.phone.status=='INVALID' ? 'block' : 'none'">
+                                                        Phone number must have correct pattern.</div>
+            
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-label-group">
+                                                <input type="text" class="form-control" formControlName="ext" id="formGroupExampleInput"
+                                                    placeholder="Ext.">
+                                                <label for="">Ext.</label>
+                                            </div>
+                                        </div>
+
+                                      
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select #branch [class.hasData]="branch.value !== '' || branch.value !== null" class="form-control selectDropdown" formControlName="branch_location_id">
+                                            <option *ngFor="let item of branchLocations" [value]="item?.id"> {{item.address}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Branch Location</label>
+                                        <div class="w-100" *ngIf="userForm.controls.branch_location_id.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.branch_location_id.errors.minlength && userForm.controls.branch_location_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">
+                                                Branch code must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.branch_location_id.errors.maxlength && userForm.controls.branch_location_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">
+                                                Branch code must be at most 2 characters</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </form>
+                <div class="modal-footer pb-0 pr-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous" [disabled]="editLoader"
+                            data-dismiss="modal" (click)="modalRef.hide()">Close</button>
+                        <button type="button" 
+                        (click)="editUser()"
+                            [disabled]="editLoader" class="btn btn-success btn-lg loader-btn "
+                            data-dismiss="modal">
+                            <span>
+                                Update Contact Information
+                                <span *ngIf="editLoader" class="spinner-border float-right" role="status"
+                                    aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- contact information end -->
+
+<!-- access controls start -->
+
+<ng-template #accessControls class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered model-lg unlock">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <h4 class="modal-title pull-left">Update Access Controls</h4>
+            </div>
+            <div class="modal-body p-0 comment-content">
+                <form [formGroup]="userForm">
+                    <!-- permission -->
+                    <div class="cg-role">   
+                        <div class="w-100 mt-20"> 
+                            <div class="row mt-20">
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" formControlName="user_role_id" required>
+                                            <option *ngFor="let item of userGroups" [value]="item?.id">{{item?.name}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">User Role*</label>
+                                        <div class="w-100" *ngIf="userForm.controls.user_role_id.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.user_role_id.errors.required && userForm.controls.user_role_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.user_role_id.status=='INVALID' ? 'block' : 'none'">
+                                                Please select role.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" formControlName="branch_location_id" required>
+                                            <option *ngFor="let item of branchLocations" [value]="item?.id">{{item?.address}}
+                                            </option>
+                                        </select>
+                                        <label class="selectHolder" for="">Branch Location*</label>
+                                        <div class="w-100" *ngIf="userForm.controls.branch_location_id.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.branch_location_id.errors.required && userForm.controls.branch_location_id.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">
+                                                Please provide branch location.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-30">
+                                        <input type="checkbox" formControlName="system_access_enabled" class="custom-control-input"
+                                            id="exampleCheck1">
+                                        <label class="custom-control-label" for="exampleCheck1">Enable User *</label>
+                                        <div class="w-100" *ngIf="userForm.controls.system_access_enabled.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.system_access_enabled.errors.required && userForm.controls.system_access_enabled.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.system_access_enabled.status=='INVALID' ? 'block' : 'none'">
+                                                Please check enabling the user .</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-30">
+                                        <input type="checkbox" formControlName="weekends_access_blocked" class="custom-control-input"
+                                            id="weekends_access_blocked">
+                                        <label class="custom-control-label" for="weekends_access_blocked">Block Access on Weekend</label>
+                                      
+                                    </div>
+                                </div>
+                                <div class="w-100 mb-10"></div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-checkbox mt-20">
+                                        <input type="checkbox" formControlName="access_hours_enabled" class="custom-control-input"
+                                            (change)="toggleAccessControl()" id="accessHour">
+                                        <label class="custom-control-label" for="accessHour">Access Hours Control</label>
+                                      
+                                    </div>
+                                </div>
+                                <!-- *ngIf="access?.checked" -->
+                                <div class="col-4" *ngIf="userForm.controls.access_hours_enabled.value">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-label-group custom-calender">
+                                                <!-- <input formControlName="start_date" type="text" class="form-control" required> -->
+                                                <div class="position-relative">
+                                                    <img src="assets/images/clock.png" class="img-fluid w-10">
+                                                    <input [ngxTimepicker]="startTime" readonly type="text" formControlName="access_hours_start_time"
+                                                        class="form-control" id="formGroupExampleInput" placeholder="08:00:00 AM">
+                                                        <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                                                    <label for="">Start Time*</label>
+                                                </div>
+                                                <div class="w-100" *ngIf="userForm.controls.access_hours_start_time.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.access_hours_start_time.errors.required && userForm.controls.access_hours_start_time.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.access_hours_start_time.status=='INVALID' ? 'block' : 'none'">
+                                                        Please select start time.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-label-group custom-calender">
+                                                <div class="position-relative">
+                                                    <img src="assets/images/clock.png" class="img-fluid w-10">
+                                                    <input type="text" [ngxTimepicker]="endTime" readonly formControlName="access_hours_end_time"
+                                                        class="form-control" id="formGroupExampleInput" placeholder="05:00:00 PM">
+                                                        <ngx-material-timepicker #endTime></ngx-material-timepicker>
+                                                    <label for="">End Time*</label>
+                                                </div>
+                                                <div class="w-100" *ngIf="userForm.controls.access_hours_end_time.status=='INVALID'">
+                                                    <div *ngIf="userForm.controls.access_hours_end_time.errors.required && userForm.controls.access_hours_end_time.touched"
+                                                        class="invalid-feedback"
+                                                        [style.display]="userForm.controls.access_hours_end_time.status=='INVALID' ? 'block' : 'none'">
+                                                        Please select end time.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- *ngIf="access?.checked" -->
+                                <div class="col-4" *ngIf="userForm.controls.access_hours_enabled.value">
+                                    <div class="form-label-group">
+                                        <select class="form-control selectDropdown" formControlName="access_hours_timezone" required>
+                                            <option *ngFor="let item of timeZones" [value]="item">{{item}}</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Time Zone Selector*</label>
+                                        <div class="w-100" *ngIf="userForm.controls.access_hours_timezone.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.access_hours_timezone.errors.required && userForm.controls.access_hours_timezone.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.access_hours_timezone.status=='INVALID' ? 'block' : 'none'">
+                                                Please provide branch location.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6" *ngIf="userForm.controls.access_hours_enabled.value">
+                                    <div class="form-label-group">
+                                        <input type="text" formControlName="logout_inactivity_minutes" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter Minutes">
+                                        <label for="">Logout after particular minute of inactivity</label>
+                                        <div class="w-100"
+                                            *ngIf="userForm.controls.logout_inactivity_minutes.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.logout_inactivity_minutes.errors.required && userForm.controls.logout_inactivity_minutes.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.logout_inactivity_minutes.status=='INVALID' ? 'block' : 'none'">
+                                                Please provide inactivity time in minutes.</div>
+                                            <div *ngIf="userForm.controls.logout_inactivity_minutes.errors.pattern && userForm.controls.logout_inactivity_minutes.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.logout_inactivity_minutes.status=='INVALID' ? 'block' : 'none'">
+                                                Only digits are allowed.</div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-4">
+                                    <div class="form-label-group">
+                                        <select (change)="changeDevice()" class="form-control selectDropdown" formControlName="device_type">
+                                            <!-- <option *ngFor="let item of branchLocations" [value]="item?.id">{{item?.address}}</option> -->
+                                            <option value="Desktop">Desktop</option>
+                                            <option value="Laptop">Laptop</option>
+                                            <option value="Mobile">Mobile</option>
+                                        </select>
+                                        <label class="selectHolder" for="">Select Device</label>
+                                        <!-- <div class="w-100" *ngIf="userForm.controls.branch_location_id.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.branch_location_id.errors.required && userForm.controls.branch_location_id.touched" class="invalid-feedback" [style.display]="userForm.controls.branch_location_id.status=='INVALID' ? 'block' : 'none'">Please provide branch location.</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="col-4" *ngIf="userForm.controls.device_type.value === 'Laptop'">
+                                    <div class="form-label-group">
+                                        <input type="text" formControlName="laptop_access_mac_address" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter Laptop Mac Address">
+                                        <label for="">
+                                            Laptop ID
+                                            
+                                        </label>
+                                        <div class="w-100" *ngIf="userForm.controls.laptop_access_mac_address.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.laptop_access_mac_address.errors.minlength && userForm.controls.laptop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.laptop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Laptop mac address must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.laptop_access_mac_address.errors.maxlength && userForm.controls.laptop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.laptop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Laptop mac address must be at most 17 characters</div>
+                                            <div *ngIf="userForm.controls.laptop_access_mac_address.errors.pattern && userForm.controls.laptop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.laptop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Must provide valid laptop mac address.</div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4" *ngIf="userForm.controls.device_type.value === 'Desktop'">
+                                    <div class="form-label-group">
+                                        <input type="text" formControlName="desktop_access_mac_address" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter Laptop Mac Address">
+                                        <label for="">
+                                            Desktop ID
+                                            
+                                        </label>
+                                        <div class="w-100" *ngIf="userForm.controls.desktop_access_mac_address.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.desktop_access_mac_address.errors.minlength && userForm.controls.desktop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.desktop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Desktop mac address must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.desktop_access_mac_address.errors.maxlength && userForm.controls.desktop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.desktop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Desktop mac address must be at most 17 characters</div>
+                                            <div *ngIf="userForm.controls.desktop_access_mac_address.errors.pattern && userForm.controls.desktop_access_mac_address.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.desktop_access_mac_address.status=='INVALID' ? 'block' : 'none'">
+                                                Must provide valid Desktop mac address.</div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4" *ngIf="userForm.controls.device_type.value === 'Mobile'">
+                                    <div class="form-label-group">
+                                        <input type="text" formControlName="mobile_access_imei" class="form-control"
+                                            id="formGroupExampleInput" placeholder="Enter Laptop Mac Address">
+                                        <label for="">
+                                            Mobile IMEI
+                                            
+                                        </label>
+                                        <div class="w-100" *ngIf="userForm.controls.mobile_access_imei.status=='INVALID'">
+                                            <div *ngIf="userForm.controls.mobile_access_imei.errors.minlength && userForm.controls.mobile_access_imei.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.mobile_access_imei.status=='INVALID' ? 'block' : 'none'">
+                                               IMEI must be at least 1 character.</div>
+                                            <div *ngIf="userForm.controls.mobile_access_imei.errors.maxlength && userForm.controls.mobile_access_imei.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.mobile_access_imei.status=='INVALID' ? 'block' : 'none'">
+                                                IMEI must be at most 17 characters</div>
+                                            <div *ngIf="userForm.controls.mobile_access_imei.errors.pattern && userForm.controls.mobile_access_imei.touched"
+                                                class="invalid-feedback"
+                                                [style.display]="userForm.controls.mobile_access_imei.status=='INVALID' ? 'block' : 'none'">
+                                                Must provide valid IMEI.</div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-4 mb-30">
+                                    <div class="custom-control custom-checkbox mt-30">
+                                        <input type="checkbox" formControlName="ip_address_access_enabled" class="custom-control-input"
+                                            id="IPAddress">
+                                        <label class="custom-control-label" for="IPAddress">IP Address Access Control Panel</label>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-12" *ngIf="userForm.controls.ip_address_access_enabled.value">
+                                    <div class="row">
+                                        <div class="col-4" *ngFor="let ipForm of userForm.controls.system_access_ip_addresses['controls'];let first = first;">
+                                          
+                                            <form [formGroup]="ipForm">
+                                                <div class="row" *ngIf="first">
+                                                    <div class="col-12">
+                                                        <div class="form-label-group">
+                                                            
+                                                            <input type="text" formControlName="ip" class="form-control"
+                                                                 placeholder="IP Address">
+                                                            <label for="">IP Address</label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input type="text" [(ngModel)]="range" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                                 placeholder="Range">
+                                                            <label for="">Range</label>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="form-label-group" *ngIf="!first">
+                                                    <input type="text" formControlName="ip" class="form-control"
+                                                         placeholder="IP Address">
+                                                    <label for="">IP Address</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-4 mb-20">
+                                            <button type="button" (click)="addIPAddress()" [disabled]="userForm.controls.system_access_ip_addresses['controls'].length === 4" class="btn btn-success">Add More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer pb-0 pr-0">
+                    <div class="text-right mt-20">
+                        <button type="button" class="btn btn-success btn-lg previous" [disabled]="editLoader"
+                            data-dismiss="modal" (click)="modalRef.hide()">Close</button>
+                        <button type="button" 
+                        (click)="editUser()"
+                            [disabled]="!userForm.valid || editLoader" class="btn btn-success btn-lg loader-btn "
+                            data-dismiss="modal">
+                            <span>
+                                Update Access Controls
+                                <span *ngIf="editLoader" class="spinner-border float-right" role="status"
+                                    aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- access controls end -->
+
+<ng-template #errorModal class="modal fade bg-none" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <div class="modal-body p-0 text-center">
+                <img src="assets/images/error.png" class="img-fluid mb-20">
+                <ul class="mb-20" style="list-style-type: none;" style="color: black;">
+                    <li *ngFor="let error of errors">{{error}}</li>
+                    <!-- <li>{{errorMessage}}</li> -->
+                </ul>
+                <div class="center-text">
+                    <button type="button" (click)="errorModalRef.hide()" class="btn btn-success">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

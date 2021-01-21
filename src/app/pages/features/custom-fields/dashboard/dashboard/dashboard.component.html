@@ -1,0 +1,1107 @@
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Custom Fields Dashboard</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Custom Fields Dashboard</h1>
+            <div class="float-right mb-0">
+                <button type="button" [routerLink]="['/custom-fields/select-type']" class="btn btn-success">Add New
+                    Custom Field</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="hk-sec-wrapper">
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end flex-column">
+                            <div class="d-flex align-items-end justify-content-start w-100">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span>
+                                    <select [(ngModel)]="pageConfig.size" (change)="changePageSize()"
+                                        class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" class="form-control" #searchInput
+                                    [(ngModel)]="pageConfig.search_text" placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative table-responsive mnh-200p">
+                    <table id="datable_1" class="table theme-table user-dashboard custom-fileds w-100 display pb-30">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </th>
+                                <th>FIELD NAME</th>
+                                <th>TYPE</th>
+                                <th>ASSIGNED SCREENS</th>
+                                <th>CREATED BY</th>
+                                <th>DATE</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="true">
+                            <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
+                            <tr [class.disabled]="!field.is_enabled" *ngFor="let field of customFieldList">
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td>{{field.field_label}}</td>
+                                <td>{{store?.fieldTypeMap[field.field_type]}}</td>
+                                <td>{{field.assigned_screens_count}}</td>
+                                <td>{{field.user__first_name}} {{field.user__last_name}}</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>{{field.created_at | date: 'dd MMM yy'}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p *ngIf="!field.is_enabled" class="bg-danger text-white radius-5 px-2" 
+                                    >DISABLED</p>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt=""
+                                            [routerLink]="
+                                            (field?.field_type === 'SLS' || field?.field_type === 'SLM') ?
+                                            ['/custom-fields/edit-dropdown', field.id] : ['/custom-fields/edit-input', field.id]
+                                            "
+                                            routerLinkActive="router-link-active">
+                                        <img (click)="openDeleteUser(deleteUser,field)"
+                                            src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                        <!-- <img src="assets/images/view.png" class="img-fluid cursor-pointer mr-10" alt=""> -->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="disabled" *ngIf="false">
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Acceptance Criteria</td>
+                                <td>Text Field</td>
+                                <td>2</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>01 Jan 20</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status incomplete">DISABLED</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="customFieldList?.length === 0 && !gridLoader" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="gridLoader" class="table-loader absolute">
+                        <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                            <div class="spinner-border theme-color" role="status">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span>
+                                    <select [(ngModel)]="pageConfig.size" (change)="changePageSize()"
+                                        class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)"
+                                [(itemsPerPage)]="pageConfig.size" [maxSize]="5" [rotate]="true"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+ 
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Custom Fields Dashboard</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Preview Uploaded File</h1> 
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please enter the details of dropdown input field.</h5>
+
+
+        <div class="row">
+            <div class="col-12"> 
+                <div class="table-responsive mh-30 mnh-200p">
+                    <table id="datable_1" class="table theme-table upload-table upload-table--system w-100 display pb-30">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>FIELD VALUE</th>
+                                <th>ALIAS</th>
+                                <th>ENABLE/DISABLE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">
+                                    <span>NL</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility.png" class="img-fluid cursor-pointer mr-10" alt="" (click)="openfileAdded()">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="" (click)="openimportList()">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="in-active">
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">NL</td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">NL</td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility-none.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">NL</td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">NL</td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/graber.png" class="img-fluid cursor-pointer mr-10"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">Netherlands</td>
+                                <td class="text-uppercase">NL</td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/visibility.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="false" class="text-center">
+                                <td colspan="8">
+                                    <p class="p-5 font-16">No data found</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-50" />
+        <div class="text-right mt-30 mb-40">
+            <button class="btn btn-success btn-lg previous border-0">Cancel</button> 
+            <button type="button" class="btn btn-success btn-lg ">save</button>
+        </div>
+
+
+    </section>
+
+
+</div>
+
+<ng-template #deleteUser class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+            <div class="modal-body text-center p-0">
+                <img src="assets/images/delete.png" class="img-fluid mb-20">
+                <h2 class="modal-title">Delete Custom Field?</h2>
+                <p class="modal-title text-secondary font-21">Are you sure you want to delete this custom field?</p>
+                <p class="modal-title client-name">{{selectedField?.field_label}}</p>
+
+                <div class="modal-footer pb-0">
+                    <div class="text-right mt-20">
+                        <button type="button" [disabled]="loader" class="btn btn-danger btn-lg loader-btn mr-15"
+                            (click)="DeleteCustomField()">
+                            Yes,delete custom field
+                            <span *ngIf="loader" class="spinner-border float-right" role="status"
+                                aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal"
+                            (click)="modalRef.hide()">Cancel</button>
+
+                    </div>
+                </div>
+                <div class="invalid-feedback" style="display: block;">{{responseText}}</div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div class="snack-bar" *ngIf="global.customFieldAddTeaser">
+    <i class="fa fa-close"></i>
+    <div class="snack-bar__content">
+        <h4>{{global.customFieldTeaserText}} Added</h4>
+        <p>Assigned To: Client Management</p>
+        <span>{{currentDate | date : 'dd MMM yy'}}</span>
+    </div>
+</div>
+
+<ng-template #fileAddeds  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="modal-body text-center p-0">
+        <img src="assets/images/xls.png" class="img-fluid mb-20">
+        <h2 class="modal-title">File Added</h2>
+        <p class="modal-title text-secondary font-21 mt-30">You've successfully added file to client</p>
+        <p class="modal-title client-name">Roger Communications</p>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">
+                <span>
+                    Go to Dashboard
+                    <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+                </button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>
+<ng-template #fileAdded  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content">
+    <!-- <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="modal-body text-left p-0"> 
+        <h2 class="modal-title">Pre-Imported Checklist</h2>
+        <p class="modal-title text-secondary font-21">Before uploading file here. Please go through the 
+            pre-imported check list.</p>
+        <ul class="pre-import-list">
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <div>
+                        <span>FILE TYPE:</span>
+                         Must be an Excel (.xls or .xlsx) OR Comma Separated Value (.csv) OR Fixed Width file.    
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <div>
+                        <span>EXCEL SHEET NAME:</span>
+                         With .xlsx or .xls files, the sheet name (located in the bottom left hand corner) must be spelled exactly as: “Sheet1” (without quotes). Only the sheet named Sheet1 can be imported. Files that are .csv are exempt from this step.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <div>
+                        <span>REQUIRED COLUMNS:</span>
+                         Your spreadsheet must contain columns that have data which corresponds with: (1) “Client Name”, (2) “Debtor First Name” & (3) “Debtor Last Name” for CONSUMER accounts OR (1) “Client Name”, (2) “Debtor Company Name” for COMMERCIAL accounts. If you forget to add these columns to your spreadsheet, you won’t be able to save your mapping.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <div>
+                        For consumer accounts the debtor’s first and last name must be in two separate fields (E.x. “Debtor First Name” and “Debtor Last Name”). 
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <div>
+                        <span>ACCOUNT NUMBERS:</span>
+                         If you import an Account Number column, it MUST contain unique values for each account. If you do not have an Account Number column to map (or choose not to map it), an Account Number will be automatically generated for each account. (These auto-generated Account Numbers are formatted in a style unique to each client. To check or change the format, please go to Client Management> Clients) 6) CUSTOM FIELDS: You can first review a list of our stock fields by going to the Custom Field module. For any columns you wish to import that do not have a stock field they can be mapped to, you can create a custom field for it prior to import. 7) COLUMN HEADERS: Each column header in your spreadsheet must be unique. You cannot import a spreadsheet with duplicate headers. For example, multiple columns named “Phone” should be renamed with unique values such as “Phone 1” and “Phone 2”. 8) ONLY AFTER working carefully through this checklist, you are ready to map your file.
+                    </div>
+                </div>
+            </li> 
+        </ul>
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button type="button" class="btn btn-success btn-lg previous"  data-dismiss="modal"> 
+                    Cancel 
+                </button>
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">
+                <span>
+                    Proceed
+                    <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+                </button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>
+
+
+<!-- account import views -->
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Custom Fields Dashboard</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Account Importer</h1>
+            <div class="float-right mb-0">
+                <button type="button" [routerLink]="['/custom-fields/select-type']" class="btn btn-success">Import New</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="hk-sec-wrapper">
+            <div class="table-wrap">
+                <div class="custom-pagination mt-0">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end flex-column">
+                            <div class="d-flex align-items-end justify-content-start w-100">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span>
+                                    <select [(ngModel)]="pageConfig.size" (change)="changePageSize()"
+                                        class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <div class="form-group has-search filter-search mr-15">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="text" class="form-control" #searchInput
+                                    [(ngModel)]="pageConfig.search_text" placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative table-responsive mnh-200p">
+                    <table id="datable_1" class="table theme-table user-dashboard custom-fileds w-100 display pb-30">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </th>
+                                <th>CLIENT FILE NAME</th>
+                                <th>CLIENT NAME</th>
+                                <th>PRODUCT</th>
+                                <th>CREATED BY</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="true">
+                            <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td>TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status incomplete">ERROR</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status uploaded">UPLOADED</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status decline">DECLINED</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status incomplete">ERROR</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status uploaded">UPLOADED</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5"></label>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase">TeraNet Active Inventory File</td>
+                                <td>Rogers Communications INC.</td>
+                                <td>Wireless</td>
+                                <td>Waheed Imran</td>
+                                <td>
+                                    <div class="d-flex align-items-start">
+                                        <span>
+                                            <!-- {{field.created_at | date: 'longDate'}} -->
+                                            01 Jan 20
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <span class="status decline">DECLINED</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10" alt="" >
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                        <img src="assets/images/reload.png" class="img-fluid cursor-pointer mr-10" alt="">
+                                    </div>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                    <div *ngIf="false" class="table-loader absolute">
+                        <div class="d-flex p-4 justify-content-center align-items-center h-100">
+                            <div class="spinner-border theme-color" role="status">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-pagination">
+                    <div class="row justify-content-between">
+                        <div class="col-auto d-flex align-items-end justify-content-end">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <div class="form-label-group w-auto mb-0 mr-20 data-per-page">
+                                    <span class="mr-10">Show</span>
+                                    <select [(ngModel)]="pageConfig.size" (change)="changePageSize()"
+                                        class="form-control selectDropdown w-auto p-0 h-auto" name="Business Type">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                    <span class="ml-10">of &nbsp; {{paginationConfig?.count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-end justify-content-end">
+                            <pagination [(totalItems)]="paginationConfig.count" (pageChanged)="pageChanged($event)"
+                                [(itemsPerPage)]="pageConfig.size" [maxSize]="5" [rotate]="true"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Client Demographics</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Account Import Status</h1>
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please upload the required file.</h5>
+
+        <form>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">UPLOAD FILE</h6>
+                            </button>
+                            <div class="cg-role">
+                                <div class="row mt-20">
+                                    <div class="col-md-4">
+                                        <div class="form-label-group custom-calender">
+                                            <div class="position-relative">
+                                                <img src="assets/images/clock.png" class="img-fluid w-20p">
+                                            <input [ngxTimepicker]="startTime" readonly type="text"
+                                                class="form-control" id="formGroupExampleInput" placeholder="08:00:00 AM">
+                                                <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                                            <label for="">Transaction Date</label>
+                                            </div>
+                                            <!-- <div class="w-100" *ngIf="userForm.controls.access_hours_start_time.status=='INVALID'">
+                                                <div *ngIf="userForm.controls.access_hours_start_time.errors.required && userForm.controls.access_hours_start_time.touched"
+                                                    class="invalid-feedback"
+                                                    [style.display]="userForm.controls.access_hours_start_time.status=='INVALID' ? 'block' : 'none'">
+                                                    Please select start time.</div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Client Number">
+                                            <label for="">Client Number</label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Client Number">
+                                            <label for="">Client Name</label> 
+                                        </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-label-group">
+                                            <div class="d-flex custom-fields-type-item align-items-center">
+                                                <div class="item-field w-100">
+                                                    <div class="form-label-group m-0">
+                                                        <ng-select2  
+                                                        options="asdasd">
+                                                        </ng-select2>
+                                                        <!-- placeholder="Product"
+                                                        data="field.options" -->
+                                                        <label for="" class="up">Custom Field</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-label-group">
+                                            <div class="d-flex custom-fields-type-item align-items-center">
+                                                <div class="item-field w-100">
+                                                    <div class="form-label-group m-0">
+                                                        <ng-select2  
+                                                        options="asdasd">
+                                                        </ng-select2>
+                                                        <label for="" class="up">Account Mapping File</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-label-group">
+                                            <input type="text" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Client Number">
+                                            <label for="">Client File Name</label> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-20">
+                                    <div class="col-md-8 d-flex flex-column">
+                                        <p class="text-dark-80 mt-20 mb-10">Upload your documents</p>
+                                        <!-- (click)="fileUpload.click()"
+                                        (fileDropped)="onFileDropped($event)" -->
+                                        <div class="text-center" id="uploadDocuments" ncriDnd>
+                                            <img src="assets/images/upload-documents.svg" width="60" class="mb-10" />
+                                            <p class="light">Drag and Drop your documents here</p>
+                                        </div>
+                                    </div> 
+                                    <div class="w-100"></div>
+                                    <div class="col-md-8">
+                                        <p class="text-light-50 mt-30 mb-10 font-16">Uploaded Documents</p>
+                                        <!-- *ngFor="let file of fileList;let i = index" -->
+                                        <div class="row align-items-start documents-upload">
+                                            <div class="col-md-auto mb-10">
+                                                <img src="assets/images/doc-pdf.svg" width="30" />
+                                                <!-- [src]="global.setExtension(doc.filename) === 'pdf' ? 'assets/images/doc-pdf.svg' : 'assets/images/doc-xls.svg'" -->
+                                            </div>
+                                            <div class="col-4 perHolder p-0">
+                                                <div class="file">
+                                                    <div class="file__name">TeraNet Active Inventory File</div>
+                                                    <div class="textPer">100%</div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-animated" role="progressbar"
+                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 100%"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-auto">
+                                                <!-- (click)="deleteFile(i)" -->
+                                                <img src="assets/images/trash-can.png" class="del-file" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30">
+                <div *ngIf="false">
+                    Values are not valid
+                </div>
+                <button type="button" class="btn btn-default btn-lg">Cancel</button>
+                <!-- (click)="nextPage()" [disabled]="!store.documentsForm.valid" -->
+                <button type="button" class="btn btn-success btn-lg">Upload File</button>
+            </div>
+        </form>
+
+    </section>
+</div>
+<div class="hk-pg-wrapper" *ngIf="false">
+    <!-- Container -->
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item "><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Client Demographics</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Account Import Status</h1>
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <h5 class="hk-sec-title hk-sec-title--all">Please upload the required file.</h5>
+
+        <form>
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button">
+                                <h6 class="accor-name w-100 text-left hk-sec-title">STATUS</h6>
+                            </button>
+                            <div class="snack-bar snack-bar--inner">
+                                <i class="fa fa-close"></i> 
+                                <div class="snack-bar__content">
+                                    <img src="assets/images/info.png" class="img-fluid mr-20" alt="">
+                                    <div>
+                                        <h4>Uploading file was declined.</h4> 
+                                        <span>24 Feb 19 05:23PM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cg-role">
+                                <div class="row mt-20">
+                                    <div class="col-12 mb-20">
+                                        <div class="modal-dialog modal-dialog-centered unlock">
+                                            <div class="modal-content"> 
+                                        <div class="modal-body text-center p-0">
+                                            <img src="assets/images/xls.png" class="img-fluid mb-20">
+                                            <h2 class="modal-title text-theme-green">File Imported Successfully!</h2>
+                                            <p class="modal-title text-secondary font-14">Importing Time & Date: 20 Jan 20 00:15AM</p> 
+                                            <p class="modal-title text-secondary font-14">Transaction Date & Time: 20 Jan 20 00:15AM</p> 
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-md-8"> 
+                                        <!-- *ngFor="let file of fileList;let i = index" -->
+                                        <div class="row align-items-start documents-upload"> 
+                                            <div class="col-md-8 perHolder p-0">
+                                                <div class="file">
+                                                    <div class="file__name">Importing is in Progress</div>
+                                                    <div class="textPer">5.23%</div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-animated" role="progressbar"
+                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 50%"></div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-auto">
+                                                <!-- (click)="deleteFile(i)" -->
+                                                <img src="assets/images/trash-can.png" class="del-file" />
+                                            </div>
+                                            <div class="col-12 p-0">
+                                                <p class="text-light-50 mb-10 mt-10 font-14">Importing Time & Date: 20 Jan 20 00:15AM</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-12 p-0">
+                                        <div class="status-stats">
+                                            <div>
+                                                <h1>20</h1>
+                                                <p>Total # of Entries Processed</p>
+                                            </div>
+                                            <div>
+                                                <h1>1,000</h1>
+                                                <p>Total $ of Entries Processed</p>
+                                            </div>
+                                            <div>
+                                                <h1>15234990</h1>
+                                                <p>Batch No.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-8 p-0">
+                                    <div class="d-flex sorry-error">
+                                        <img src="assets/images/sorry.png" class="mr-20" alt="">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h4>Sorry, We are not able to upload file.</h4>
+                                            <p>We found an error in your uploading file. Please recheck your file and upload again.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30">
+                <div *ngIf="false">
+                    Values are not valid
+                </div>
+                <button type="button" class="btn btn-default btn-lg">Cancel</button>
+                <!-- (click)="nextPage()" [disabled]="!store.documentsForm.valid" -->
+                <button type="button" class="btn btn-success btn-lg">Download</button>
+            </div>
+        </form>
+
+    </section>
+</div>
+<ng-template #rollback  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered unlock">
+        <div class="modal-content"> 
+    <div class="modal-body text-center p-0">
+        <!-- <img src="assets/images/xls.png" class="img-fluid mb-20"> -->
+        <img src="assets/images/roll-back.png" class="img-fluid mb-20">
+        <h2 class="modal-title">Rollback is in Progress</h2>
+        <p class="modal-title text-secondary font-21">It may take time so you can stay or continue your working on other screens. System will generate a notification when it will be rollback successfully.</p> 
+
+        <div class="modal-footer pb-0">
+            <div class="text-right mt-20"> 
+                <button type="button" class="btn btn-success btn-lg previous border-0"  data-dismiss="modal"
+                (click)="modalRef.hide()">Stay on Rollback Progress</button>
+
+                <button type="button" class="btn btn-success btn-lg"  data-dismiss="modal"
+                (click)="modalRef.hide()">
+                <span>
+                    Go to Dashboard
+                    <span *ngIf="false" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                </span>
+                </button>
+                
+            </div> 
+        </div> 
+
+    </div>
+    </div>
+</div>
+</ng-template>
+<!-- account import views end  -->

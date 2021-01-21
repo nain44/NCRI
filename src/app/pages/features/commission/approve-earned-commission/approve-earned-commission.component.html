@@ -1,0 +1,240 @@
+<div class="hk-pg-wrapper" *ngIf="true">
+    <!-- Container -->
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item " [routerLink]="['/user']"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Commission</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Dashboard</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Approve Commission</h1>
+        </div>
+    </div>
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-30">
+                    <h2>{{commissionDetails?.user__first_name}} {{commissionDetails?.user__last_name}}</h2>
+                    <div class="lead text-muted">{{commissionDetails?.user__user_role__name}}</div>
+                    <p class="text-dark-80">{{commissionDetails?.user__branch_location__address}}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="set-commssion p-3 mb-20">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Currency:</div>
+                            <div>{{commissionDetails?.currency_code}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Gross Salary (Monthly)*</div>
+                            <div>{{commissionDetails?.base_salary_type === 'M' ?
+                                commissionDetails?.base_salary : commissionDetails?.base_salary/12  | number:'1.0'}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between c-calculate">
+                            <div>Gross Salary (Yearly)*</div>
+                            <div>{{commissionDetails?.base_salary_type === 'M' ?
+                                commissionDetails?.base_salary*12 : commissionDetails?.base_salary  | number:'1.0'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center" *ngIf="commissionDetails?.target_amount <= commissionDetails?.gross_recovery">
+                    <div class="text-center mr-40">
+                        <h2 class="text-theme-green mb-10 marketPro font-weight-normal">Congratulations!</h2>
+                        <h5 class="marketPro font-weight-normal">You have achieved your target</h5>
+                    </div>
+                    <img src="assets/images/congratulation.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="mt-20">
+            <div class="row">
+                <div class="col-12">
+                    <tabset #staticTabs class="commission-edit-tabs-content">
+                        <tab heading="Salary Tier">
+                            <section class="hk-sec-wrapper rounded-30 position-relative">
+                                <div class="view-percent">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row border-0">
+                                                <div class="col-md-6">
+                                                    <div class="d-flex justify-content-between mb-30">
+                                                        <div *ngIf="commissionDetails?.break_even_type === 'FS'">
+                                                            <p class="text-gray font-16">Commission Type:<span
+                                                                    class="text-dark-80 font-semi-bold">Salary Based</span></p>
+                                                            <p class="text-gray font-16">Break Even:<span
+                                                                    class="text-dark-80 font-semi-bold">Flat</span></p>
+                                                        </div>
+                                                        <div *ngIf="commissionDetails?.break_even_type === 'TS'">
+                                                            <p class="text-gray font-16">Commission Type:<span
+                                                                    class="text-dark-80 font-semi-bold">Salary Based</span></p>
+                                                            <p class="text-gray font-16">Break Even:<span
+                                                                    class="text-dark-80 font-semi-bold">Tier
+                                                                    Based</span></p>
+                                                        </div>
+                                                        <div *ngIf="commissionDetails?.break_even_type === 'FT'">
+                                                            <p class="text-gray font-16">Commission Type:<span
+                                                                    class="text-dark-80 font-semi-bold">Target Based</span></p>
+                                                            <p class="text-gray font-16">Break Even:<span
+                                                                    class="text-dark-80 font-semi-bold">Tier-rate
+                                                                    Flat Commission</span></p>
+                                                        </div>
+                                                        <div *ngIf="commissionDetails?.break_even_type === 'VT'">
+                                                            <p class="text-gray font-16">Commission Type:<span
+                                                                    class="text-dark-80 font-semi-bold">Target Based</span></p>
+                                                            <p class="text-gray font-16">Break Even:<span
+                                                                    class="text-dark-80 font-semi-bold">Tier-rate Variable
+                                                                    Commission</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 d-flex align-items-center">
+                                                    <div class="d-flex justify-content-between mb-30">
+                                                        <div>
+                                                            <div class="d-flex align-items-center text-dark-80 font-16">
+                                                                Target<h3 class="text-dark-80 ml-20">
+                                                                    ${{commissionDetails?.target_amount | number:'1.0':'en-US'}}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row border-0 mt-20">
+                                                <div class="col-md-6">
+                                                    <div>
+                                                        <div>
+                                                            <div class="be-time mb-10">Gross Recovery</div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="be-value">
+                                                                ${{commissionDetails?.gross_recovery | number:'1.0':'en-US'}}
+                                                            </div>
+                                                        </div>
+                                                        <h6 class="text-gray mt-10">Salary - (Break Even Time * Gross
+                                                            Collection) * 20%</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 d-flex align-items-center">
+                                                    <div>
+                                                        <div>
+                                                            <div class="be-time mb-10">Earned Commission</div>
+                                                        </div>
+                                                        <div>
+                                                            <h1 class="text-theme-green earned-value">
+                                                                ${{commissionDetails?.collector_commission | number:'1.0':'en-US'}}
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col d-flex align-items-end justify-content-end">
+                                                <div class="d-flex align-items-end justify-content-end">
+                                                    <span class="label mr-10 mb-5">Date Range</span>
+                                                    <div class="form-label-group custom-calender date-range mb-0">
+                                                        <img src="assets/images/calendar.png" class="img-fluid w-10">
+                                                        <input type="text" placeholder="Daterangepicker"
+                                                            class="form-control" bsDaterangepicker 
+                                                            [(ngModel)]="dateRange"
+                                                            [bsConfig]="{ rangeInputFormat : 'DD-MMM-YYYY' }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" set-commssion p-4 mt-40">
+                                                <h6 class="accor-name w-100 text-left hk-sec-title text-uppercase font-semi-bold">Active
+                                                    Commission Plan</h6>
+
+                                                <ng-container
+                                                    *ngFor="let child of commissionDetails?.child_break_even_points">
+                                                    <div class="row no-gutters" *ngIf="commissionType === 'FS'">
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Break Even Time
+                                                                <h6 class="text-dark-80">
+                                                                    {{child?.break_even_times}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Commission(%)<h6
+                                                                    class="text-dark-80">{{child.commission_rate}}%</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row no-gutters" *ngIf="commissionType === 'TS'">
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Commission
+                                                                <h6 class="text-dark-80">
+                                                                    {{child?.commission_rate}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Break Even Time<h6
+                                                                    class="text-dark-80">{{child.break_even_times}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">MTD Base Target<h6
+                                                                    class="text-dark-80">{{child.mtd_base_target}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row no-gutters" *ngIf="commissionType === 'FT'">
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Break Even(%)
+                                                                <h6 class="text-dark-80">
+                                                                    {{child?.break_even_target}}%</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Commission Amount<h6
+                                                                    class="text-dark-80">{{child.commission_rate}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row no-gutters" *ngIf="commissionType === 'VT'">
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Break Even(%)
+                                                                <h6 class="text-dark-80">
+                                                                    {{child?.break_even_target}}%</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 my-5">
+                                                            <div class="text-gray font-16">Commission(%)<h6
+                                                                    class="text-dark-80">{{child.commission_rate}}%</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+            <div class="commission-testimonial">
+                <p>The future belongs to those who believe in the beauty of their dreams</p>
+            </div>
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-40">
+                <button type="button" class="btn btn-success loader-btn btn-lg"
+                (click)="ApproveMultipleCommissionCompensation()">
+                    <span>
+                        Approve Commission
+                        <span *ngIf="loaderApprove" class="spinner-border float-right" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

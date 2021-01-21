@@ -1,0 +1,223 @@
+<div class="hk-pg-wrapper">
+    <div>
+        <!-- Breadcrumbs -->
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a [routerLink]="['/client-dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item active">Settings</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Client Summary</li> -->
+            </ol>
+        </nav>
+        <!-- /Breadcrumbs -->
+
+        <div class="hk-pg-header">
+            <h1 class="hk-pg-title">Settings</h1>
+        </div>
+    </div>
+
+
+
+    <section class="hk-sec-wrapper shadow-xl rounded-30">
+
+
+        <h5 class="hk-sec-title hk-sec-title--all">Upload your logo.</h5>
+
+        <form [formGroup]="uploadForm">
+            <div class="row">
+                <div class="col-12">
+                    <accordion [isAnimated]="true" class="accord-section">
+                        <accordion-group [isOpen]="true">
+                            <button
+                                class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix"
+                                accordion-heading type="button"> 
+                                <h6 class="accor-name w-100 text-left hk-sec-title">LOGO</h6>
+                            </button>
+                            <div class="cg-role">   
+                                <div class="w-100 mt-20 mb-70"> 
+                                    <div class="row">
+                                        <div class="col-8 d-flex flex-column">
+                                            <p class="text-dark-80 mt-10 mb-10 font-18">One logo file only, maximum size 3 MB, resolution
+                                                300*150. Only <b class="font-semi-bold">PNG</b> file format.</p>
+                                            <!-- (click)="fileUpload.click()" -->
+                                            <div class="text-center" id="uploadDocuments" (click)="fileUpload.click()" ncriDnd
+                                                (fileDropped)="onFileDropped($event)">
+                                                <img src="assets/images/upload-documents.svg" width="60" class="mb-10" />
+                                                <p class="light">Drag and Drop your file here</p>
+                                                <p class="light">Only PNG format is acceptable.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <span class="text-light-50 font-20 pr-30">OR</span>
+                                            <button type="button" class="btn btn-success btn-lg" (click)="fileUpload.click()">Choose Logo
+                                                Image</button>
+                                        </div>
+                                        <div class="w-100"></div>
+                    
+                                        <div [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback"
+                                            style="display: block;">{{responseText}}</div>
+                                        <div class="w-100"></div>
+                                        <div class="col-8" *ngIf="uploadForm.value.profile !== '' && responseText === ''">
+                                            <p class="text-light-50 mt-30 mb-10 font-16">Uploaded Logo</p>
+                                            <!-- *ngFor="let file of fileList" -->
+                                            <div class="row align-items-start documents-upload" >
+                                                <div class="col-md-auto mb-10">
+                                                    <!-- <img src="assets/images/doc-pdf.svg" width="30" /> -->
+                                                    <img *ngIf="logo !== '' && logo !== 'error'" class="img-fluid uploaded-logo"
+                                                        [src]="logo" alt="Company Logo">
+                                                </div>
+                                                <div class="col-4 perHolder p-0">
+                                                    <div class="file">
+                                                        <div class="file__name font-semi-bold">{{uploadForm.value.profile.name}}</div>
+                                                        <div class="textPer">100%</div>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-animated" role="progressbar"
+                                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                        </div>
+                                                    </div>
+                    
+                                                </div>
+                                                <div class="col-md-auto" (click)="deleteFile()">
+                                                    <!-- (click)="deleteFile(file)" -->
+                                                    <img src="assets/images/trash-can.png" class="del-file" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group> 
+                    </accordion>
+                </div>
+            </div>
+            
+            <hr class="mt-50" />
+            <div class="text-right mt-30 mb-30">
+                <!-- <div *ngIf="!formValid">
+                Values are not valid
+            </div>  -->
+                <!-- [disabled]="!store.documentsForm.valid" [routerLink]="['/add-client/portal-settings']" -->
+                <button type="button" class="btn btn-success btn-lg" [disabled]="logo === ''" (click)="saveLogo()">Save New Logo
+                    <!-- <span class="spinner-border" *ngIf="logoLoader" role="status"
+                    aria-hidden="true"></span> -->
+                </button>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+<!-- old code -->
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                        <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Settings</a>
+                            </li>
+                            <li class="breadcrumb-item active gray-04-color">Change Logo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main body -->
+            <form [formGroup]="uploadForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 mb-md-5">Change Logo</h5>
+                                <div class="row mx-0">
+                                    <div class="file-view text-center w-100 mb-4">
+                                        <!-- <img class="img-fluid" src="../../../../../assets/images/ncri-dashlogo.png" alt=""> -->
+                                        <img *ngIf="logo !== '' && logo !== 'error'" class="img-fluid upload-logo"
+                                            [src]="logo" alt="Company Logo">
+                                        <span class="spinner-border" *ngIf="logo === ''" role="status"
+                                            aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="upload-wrapper">
+
+                                        <div
+                                            class="upload-file d-flex flex-column align-items-center justify-content-center my-5">
+                                            <a href="javascript:void(0)" class="button w-auto">Upload New Logo</a>
+                                            <span class="my-3">-Or-</span>
+                                            <span class="upload-icon"><i class="ti-cloud-up"></i></span>
+                                            <span class="mb-2">Drop logo here</span>
+                                            <span class="">(One File Only, Maximum Size 3 MB, Resolution 150*300, File
+                                                Type PNG)</span>
+                                            <input class="input-upload" title="Choose a file to upload logo" type="file"
+                                                name="profile" (change)="onSelectFile($event)">
+
+                                        </div>
+                                        <div [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback"
+                                            style="display: block;">{{responseText}}</div>
+                                        <span class="spinner-border mt-4" *ngIf="logoLoader" role="status"
+                                            aria-hidden="true"></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- old code end-->
+
+<!-- dashboard static view -->
+<div class="container-fluid container-wrapper" *ngIf="false">
+    <div class="row">
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row px-3 px-md-0">
+                    <div class="col-sm-12 pl-0">
+                        <ol class="breadcrumb pr-0 my-2 float-left mb-2 ">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)" class="gray-color">Home</a></li>
+                            <li class="breadcrumb-item active gray-04-color">Change Logo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <img src="assets/images/dashboard.png" class="img-fluid" alt="">
+        </div>
+    </div>
+</div>
+<!-- dashboard static view end -->
+
+
+<ng-template #changeLogo class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bb-none">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true"><i class="ti-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <div class="icon-box danger-bg rounded-circle mx-auto mb-4">
+                    <span class="text-white">
+                        <i class="fa fa-trash-o highlight-icon" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <p class="mb-4">Are you sure you want to change logo ? </p>
+                <div class="center-text">
+                    <!-- <button type="button" (click)="deleteUser()" class="button">Delete</button> -->
+                    <button type="button" (click)="uploadLogo()" class="button">
+                        Yes, I'm Sure
+                        <!-- <span *ngIf="logoLoader" class="spinner-border ml-3" role="status" aria-hidden="true"></span> -->
+                    </button>
+
+                </div>
+                <!-- <div class="invalid-feedback" style="display: block;" >{{responseText}}</div> -->
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<input type="file" class="d-none" #fileUpload (change)="uploadDocument(fileUpload, 'upload')">
