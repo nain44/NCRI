@@ -27,21 +27,16 @@ const routes: Routes = [
         {path: 'client-management/:id', loadChildren: () =>
         import('./features/client-management/client-management.module').then(m => m.ClientManagementModule) },
         {path: 'client-dashboard', loadChildren: () =>
-        import('./features/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule) },
-        
-
-      {
-        path: 'custom-fields', loadChildren: () =>
-          import('./features/custom-fields/custom-fields.module').then(m => m.CustomFieldsModule)
-      },
-
-      {
-        path: 'system-fields', loadChildren: () =>
-          import('./features/system-fields/system-fields.module').then(m => m.SystemFieldsModule)
-      },
-      
+        import('./features/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule) },     
+        {path: 'custom-fields', loadChildren: () =>
+          import('./features/custom-fields/custom-fields.module').then(m => m.CustomFieldsModule)},
+        {path: 'system-fields', loadChildren: () =>
+          import('./features/system-fields/system-fields.module').then(m => m.SystemFieldsModule)},
+        {path: 'user-teams', loadChildren: () => 
+          import('./features/user-teams/user-teams.module').then(m => m.UserTeamsModule) }      
     ]
-}
+},
+  
 ];
 
 @NgModule({

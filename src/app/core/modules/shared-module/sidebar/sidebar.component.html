@@ -97,7 +97,8 @@
                     <li [routerLink]="['/user']" routerLinkActive="active"> <a href="javascript:void(0)">User</a> </li>
                     <!-- <li [routerLink]="['/user/user-teams']" routerLinkActive="active"> <a href="javascript:void(0)">User Teams</a> </li> -->
                     <li [routerLink]="['/grade']" routerLinkActive="active"> <a href="javascript:void(0)">Grades</a> </li>
-                    <li [routerLinkActive]="router.url.includes('/user')?'active': ''" [routerLink]="['/user/user-teams']"> <a href="javascript:void(0)">User Teams</a> </li>
+                    <li [routerLink]="['/user-teams']" routerLinkActive="active"> <a href="javascript:void(0)">User Teams</a> </li>
+                    <li [routerLinkActive]="router.url.includes('/user-teams')?'active': ''" [routerLink]="['/user-teams']"> <a href="javascript:void(0)">User Teams</a> </li>
                     <li [routerLinkActive]="router.url !== '/role/system' && router.url.includes('/role')?'active': ''" [routerLink]="['/role']"> <a href="javascript:void(0)">Roles and Permission</a> </li>
                     <!-- <li> <a href="javascript:void(0)">Groups</a> </li> -->
                     <li [routerLink]="['/role/system']" [routerLinkActive]="router.url === '/role/system'?'active': ''"> <a href="javascript:void(0)">Employee Title-Role Mapping</a> </li>
@@ -472,8 +473,11 @@
                                     <a class="nav-link" href="javascript:void(0);">User Teams</a>
                                 </li>
                                 <li [routerLink]="['/grade']" class="nav-item" routerLinkActive="active">
-                                    <a class="nav-link" href="javascript:void(0);">Grades</a>
-                                </li>
+                                  <a class="nav-link" href="javascript:void(0);">Grades</a>
+                              </li>
+                              <li [routerLink]="['/user-teams']" class="nav-item" routerLinkActive="active">
+                                <a class="nav-link" href="javascript:void(0);">User Teams</a>
+                            </li>
                                 <!-- <li [routerLink]="router.url.includes('/user')?'active': ''" [routerLink]="['/user/user-teams']"> <a href="javascript:void(0)">User Teams</a> </li> -->
                                 <li [routerLink]="['/role']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                                     <a class="nav-link" href="javascript:void(0);">Roles and Permissions</a>
