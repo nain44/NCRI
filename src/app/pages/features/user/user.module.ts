@@ -22,9 +22,10 @@ import { NgSelect2Module } from 'ng-select2';
 import { DragulaModule } from 'ng2-dragula';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
+import { NewTeamComponent } from './new-team/new-team.component';
 
 @NgModule({
-  declarations: [UsersComponent, CreateUserComponent, ChangePasswordComponent, FetchUserComponent, ApproveUserComponent, UserTeamsComponent],
+  declarations: [UsersComponent, CreateUserComponent, ChangePasswordComponent, FetchUserComponent, ApproveUserComponent, UserTeamsComponent, NewTeamComponent],
   imports: [
     CommonModule, 
     UserRoutingModule,

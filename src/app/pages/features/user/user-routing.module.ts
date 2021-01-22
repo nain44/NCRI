@@ -6,11 +6,13 @@ import { ChangePasswordComponent } from './change-password-component/change-pass
 import { FetchUserComponent } from './fetch-user/fetch-user.component';
 import { ApproveUserComponent } from './approve-user/approve-user.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
+import { NewTeamComponent } from './new-team/new-team.component';
 
 const routes: Routes = [
   {path:'', component: UsersComponent},
-  { path: 'add', component: CreateUserComponent },
-  { path: 'user-teams', component: UserTeamsComponent },
+  {path: 'add', component: CreateUserComponent},
+  {path: 'user-teams', component: UserTeamsComponent},
+  {path: 'new-team', component: NewTeamComponent },
   {path:'view/:id', component: FetchUserComponent},
   {path:'approve/:id', component: ApproveUserComponent},
   {path:'change-password', component: ChangePasswordComponent}
