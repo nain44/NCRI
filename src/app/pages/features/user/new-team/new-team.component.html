@@ -18,14 +18,13 @@
     </div>
     <section class="hk-sec-wrapper shadow-xl rounded-30">
         <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User </h5>
-
         <form [formGroup]="gradeForm" novalidate>
             <div class="row">
                 <div class="col-12">
                     <accordion [isAnimated]="true" class="accord-section">
                         <accordion-group [isOpen]="true">
                             <button class="btn btn-link focus-none btn-block d-flex justify-content-center align-items-center clearfix" accordion-heading type="button"> 
-                                <h6 class="accor-name w-100 text-left hk-sec-title">GRADE</h6>
+                                <h6 class="accor-name w-100 text-left hk-sec-title">Team</h6>
                             </button>
                             <div class="cg-role">
                                 <div class="w-100 mt-20">
@@ -33,7 +32,7 @@
                                         <div class="col-4">
                                             <div class="form-label-group">
                                                 <input type="text" (blur)="isGradeAvailable()" formControlName="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Grade Name">
-                                                <label for="">Grade Name</label>
+                                                <label for="">Team Name</label>
                                                 <div class="w-100" *ngIf="gradeForm.controls.name.status=='INVALID'">
                                                     <div *ngIf="gradeForm.controls.name.errors.required && gradeForm.controls.name.touched" class="invalid-feedback" [style.display]="gradeForm.controls.name.status=='INVALID' ? 'block' : 'none'">
                                                         Please provide Grade Name.</div>
@@ -44,22 +43,25 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-8">
-                                            <div class="form-label-group">
+                                            <!-- <div class="form-label-group">
                                                 <input type="text" formControlName="description" class="form-control" id="formGroupExampleInput1" placeholder="Enter Description">
                                                 <label for="formGroupExampleInput1">Description</label>
                                                 <div class="w-100" *ngIf="gradeForm.controls.description.status=='INVALID'">
                                                     <div *ngIf="gradeForm.controls.description.errors.required && gradeForm.controls.description.touched" class="invalid-feedback" [style.display]="gradeForm.controls.description.status=='INVALID' ? 'block' : 'none'">
                                                         Please provide Grade Description.</div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="row mt-40">
-                                        <div class="col-md-4 d-flex">
+                                        <div class="col-md-6 d-flex">
                                             <div class="roles-list">
                                                 <div class="custom-pagination mt-0">
                                                     <div class="row justify-content-between">
-                                                        <div class="col-12 d-flex align-items-end justify-content-end">
+                                                        <div class="col-6 d-flex">
+                                                            <h6 class="hk-sec-title hk-sec-title--all">Available Users </h6>
+                                                        </div>
+                                                        <div class="col-6 d-flex align-items-end justify-content-end">
                                                             <div class="form-group has-search filter-search w-100">
                                                                 <span class="fa fa-search form-control-feedback"></span>
                                                                 <input type="text" [(ngModel)]="searchRolesText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search Roles">
@@ -68,26 +70,53 @@
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <!-- <li *ngFor="let role of roleList | search : searchRolesText : 'role'; let i=index">
+                                                    <li>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" [checked]="role.check" class="custom-control-input" [id]="role.id" (change)="roleList[i].check = !roleList[i].check">
-                                                            <label class="custom-control-label" [for]="role.id">{{role.name}}</label>
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User Available</label>
                                                         </div>
-                                                    </li> -->
-                                                    <div class="no-data" *ngIf="roleList.length === 0 && !roleLoader">
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User Available</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User Available</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User Available</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User Available</label>
+                                                        </div>
+                                                    </li>
+                                                    <!-- <div class="no-data" *ngIf="roleList.length === 0 && !roleLoader">
                                                         No Data Found to Select Roles
                                                     </div>
                                                     <div class="no-data" *ngIf="userList.length === 0 && roleLoader">
                                                         Loading Roles...
-                                                    </div>
+                                                    </div> -->
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 d-flex">
+                                        <div class="col-md-6 d-flex">
                                             <div class="roles-list">
                                                 <div class="custom-pagination mt-0">
                                                     <div class="row justify-content-between">
-                                                        <div class="col-12 d-flex align-items-end justify-content-end">
+                                                        <div class="col-6 d-flex">
+                                                            <h6 class="hk-sec-title hk-sec-title--all">Selected Users </h6>
+                                                        </div>
+                                                        <div class="col-6 d-flex align-items-end justify-content-end">
                                                             <div class="form-group has-search filter-search w-100">
                                                                 <span class="fa fa-search form-control-feedback"></span>
                                                                 <input type="text" [(ngModel)]="searchUsersText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search User">
@@ -96,19 +125,37 @@
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <!-- <li *ngFor="let user of userList | search : searchUsersText : 'user'; let i=index">
+                                                    <li>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" (change)="userList[i].check = !userList[i].check" [value]="user.check" [checked]="user.check" class="custom-control-input" [id]="user.id">
-                                                            <label class="custom-control-label" [for]="user.id">{{user.first_name}}</label>
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User 1</label>
                                                         </div>
-                                                    </li> -->
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User 1</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User 1</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label">User 1</label>
+                                                        </div>
+                                                    </li>
                                                 </ul>
-                                                <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
+                                                <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
                                                     No Data Found to Selected Users
                                                 </div>
                                                 <div class="no-data" *ngIf="userList.length === 0 && userLoader">
                                                     Loading Users...
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
