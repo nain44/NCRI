@@ -40,6 +40,6 @@ import { TeamService } from './services/user-teams.service';
     DragulaModule.forRoot(),
     BsDropdownModule.forRoot(),
   ],
-  providers:[TeamService]
+  providers:[TeamService,AccordionModule]
 })
 export class UserTeamsModule { }

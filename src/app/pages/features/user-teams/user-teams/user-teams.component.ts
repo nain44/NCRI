@@ -219,13 +219,14 @@ export class UserTeamsComponent implements OnInit {
   // openModal(template: TemplateRef<any>) {
   //   this.modalRef = this.modalService.show(template);
   // }
-
+  
   getTeams(){
     this.userLoader=true;
     this.service.TeamList(this.pageConfig).subscribe((res) => {
       
       if(res.status === "success"){
         this.teamList = res.data.qs;
+        debugger
         this.teamList.map(it => it.check = false);
       
         this.paginationConfig = res.data;
@@ -239,7 +240,7 @@ export class UserTeamsComponent implements OnInit {
     })
   }
 
-
+ 
  
   pageChanged(event: any): void {
     //debugger
@@ -291,7 +292,8 @@ export class UserTeamsComponent implements OnInit {
   }
 
   showbtn(){
-    let check = this.userList.some(it => it.check === true)
+    
+    let check = this.teamList.some(it => it.check === true)
     return check;
   }
   openErrorModal(){
