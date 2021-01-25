@@ -1,14 +1,6 @@
-.showme{ 
+.editMe{ 
 display: none;
 }
-.showhim:hover .showme{
+.editRow:hover .editMe{
 display : block;
-}
-
-.row:hover .select{
-    display: block
-}
-
-.select{
-    display: none;
 }

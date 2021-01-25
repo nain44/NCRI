@@ -73,7 +73,7 @@
                         </thead>
                         <tbody *ngIf="!userLoader">
                             <!-- [class]="user.imported_from_active_directory && user.required_columns_missing_values ? 'active' : ''" -->
-                            <tr *ngFor="let team of teamList" class="showhim">
+                            <tr *ngFor="let team of teamList" class="editRow">
                                 
                                   
                                 <td>
@@ -102,8 +102,8 @@
                                 <td>
                                    
                                     <div class="d-flex justify-content-center align-items-center ">
-                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10 showme" (click)="redirectToCreateUser(team.id, 'edit')" alt="">
-                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10 showme" (click)="openDeleteTeam(deleteTeam,team)" alt="">
+                                        <img src="assets/images/edit.png" class="img-fluid cursor-pointer mr-10 editMe" (click)="redirectToCreateUser(team.id, 'edit')" alt="">
+                                        <img src="assets/images/trash-can.png" class="img-fluid cursor-pointer mr-10 editMe" (click)="openDeleteTeam(deleteTeam,team)" alt="">
                                     </div>
                                 </td>
                           
@@ -116,6 +116,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class='container'0 [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
+                        <div *ngFor='let text of many' [innerHtml]='text'></div>
+                    </div>
+                    <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
+                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                    </div>
                     <div *ngIf="userLoader" class="table-loader absolute">
                         <div class="d-flex p-4 justify-content-center align-items-center h-100">
                             <div class="spinner-border theme-color" role="status">

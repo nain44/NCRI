@@ -228,7 +228,6 @@ export class UserTeamsComponent implements OnInit {
         this.teamList = res.data.qs;
         debugger
         this.teamList.map(it => it.check = false);
-      
         this.paginationConfig = res.data;
         this.userLoader=false;
       } else{
@@ -238,21 +237,13 @@ export class UserTeamsComponent implements OnInit {
     }, (error)=>{
       this.userLoader=false;
     })
-  }
-
- 
- 
+  } 
   pageChanged(event: any): void {
     //debugger
     this.pageConfig.page = event.page;
     this.getTeams();
     
   }
-
-  
-
-
-
   redirectToCreateUser(id:any,type:any){
     if(type === "view"){
       this.router.navigate(['/user/add'], { queryParams: { type: 'view', id:id } });
@@ -268,7 +259,6 @@ export class UserTeamsComponent implements OnInit {
   // }
 
   deleteTeamsMethod(){
-    debugger
     this.loader = true;
     this.responseText = "";
     let obj = {
