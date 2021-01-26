@@ -127,7 +127,7 @@ export class UserTeamsComponent implements OnInit {
   ngOnInit(): void {
     this.getTeams();
   //  this.many = ['The', 'possibilities', 'are', 'endless!'];
-  debugger
+  
   
   
     //if(this.privileges.privilegeHash['uam.views.UsersList']['c']){
@@ -265,6 +265,7 @@ export class UserTeamsComponent implements OnInit {
         this.teamList = res.data.qs;
         
         for (var val of this.teamList) {
+          
           this.many.push(val.added_by__first_name)
           this.many2.push (val.name)
 
