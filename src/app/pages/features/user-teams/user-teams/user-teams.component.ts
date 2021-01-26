@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { APP_CONFIG, PrivilegesStore } from 'src/app/core';
 import { TeamService } from '../services/user-teams.service';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import {DragulaService} from 'ng2-dragula'
 
 @Component({
   selector: 'ncri-user-teams',
@@ -86,19 +87,53 @@ export class UserTeamsComponent implements OnInit {
   records = "records";
   preview_fields = "preview_fields";
   preview_fields_edit = "preview_fields_edit";
+  MANY_ITEMS = 'MANY_ITEMS';
+
+
+  subs = new Subscription();
+  many: string[]=[];
+  many2: string[]=[];
  constructor(
    private modalService: BsModalService,
    private service: TeamService,
    private router: Router,
-  // public privileges: PrivilegesStore
-   ) {}
+   private dragulaService: DragulaService,  // public privileges: PrivilegesStore
+   ) {
+    this.subs.add(dragulaService.dropModel(this.MANY_ITEMS)
+      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+        console.log('dropModel:');
+        console.log(el);
+        console.log(source);
+        console.log(target);
+        console.log(sourceModel);
+        console.log(targetModel);
+        console.log(item);
+      })
+    );
+    this.subs.add(dragulaService.removeModel(this.MANY_ITEMS)
+      .subscribe(({ el, source, item, sourceModel }) => {
+        console.log('removeModel:');
+        console.log(el);
+        console.log(source);
+        console.log(sourceModel);
+        console.log(item);
+      })
+    );
+    
+   }
+
+  
 
   ngOnInit(): void {
     this.getTeams();
+  //  this.many = ['The', 'possibilities', 'are', 'endless!'];
+  debugger
+  
+  
     //if(this.privileges.privilegeHash['uam.views.UsersList']['c']){
       // this.getStats();
    // }
-    // select2 
+ 
     this.exampleData = [
       {
         id: '',
@@ -128,9 +163,11 @@ export class UserTeamsComponent implements OnInit {
       placeholder: 'Input Type',
     }; 
     // end
+
+    
   }
   statusFilter(): void {
-    debugger
+    
     this.pageConfig.filter_by = this.selectedStatusFilter;
     this.pageConfig.page = 1;
     this.getTeams();
@@ -226,7 +263,13 @@ export class UserTeamsComponent implements OnInit {
       
       if(res.status === "success"){
         this.teamList = res.data.qs;
-        debugger
+        
+        for (var val of this.teamList) {
+          this.many.push(val.added_by__first_name)
+          this.many2.push (val.name)
+
+        }
+       // this.many=[this.teamList[0].added_by__first_name,this.teamList[1].added_by__first_name]
         this.teamList.map(it => it.check = false);
         this.paginationConfig = res.data;
         this.userLoader=false;
