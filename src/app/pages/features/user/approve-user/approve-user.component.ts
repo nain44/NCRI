@@ -415,10 +415,12 @@ export class ApproveUserComponent implements OnInit {
   }
 
   approveUser(){
+    
     this.approveLoader = true;
     let obj = {
       ids: [this.id]
     }
+    debugger
     this.service.approveMultiple(obj).subscribe((res) => {
       this.approveLoader = false;
       if(res.status === "success"){
