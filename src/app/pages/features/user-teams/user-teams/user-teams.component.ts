@@ -267,7 +267,7 @@ export class UserTeamsComponent implements OnInit {
         for (var val of this.teamList) {
           
           this.many.push(val.added_by__first_name)
-          this.many2.push (val.name)
+          this.many2.push(val.name)
 
         }
        // this.many=[this.teamList[0].added_by__first_name,this.teamList[1].added_by__first_name]

@@ -97,8 +97,8 @@
                                 <td><span>{{team.added_by__first_name}}</span>
                                     <span> {{team.added_by__first_name}}</span></td>
                                 <td>{{team.updated_at | date:('d MMM yy')}} </td>
-                                <td><span>{{team.team_users_lead[0].user__first_name}}</span>
-                                    <span> {{team.team_users_lead[0].user__last_name}}</span></td>
+                                <td><span *ngIf="team.team_users_lead[0]">{{team.team_users_lead[0].user__first_name}}</span>
+                                    <span *ngIf="team.team_users_lead[0]"> {{team.team_users_lead[0].user__last_name}}</span></td>
                                 <td>
                                    
                                     <div class="d-flex justify-content-center align-items-center ">
@@ -117,10 +117,10 @@
                         </tbody>
                     </table>
                     
-                    <div class='form-control' [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
+                    <div class='Container' *ngIf="many" [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
                         <div *ngFor='let text of many' class="form-control" [innerHtml]='text'></div>
                     </div>
-                    <div class='form-control' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
+                    <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
                         <div *ngFor='let text of many2' class="form-control" [innerHtml]='text'></div>
                     </div>
                 <div class="custom-pagination">
