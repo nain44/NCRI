@@ -125,7 +125,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <ul>
+                                                <div class="container" [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
+                                                    <div *ngFor="let text of many" [innerHtml]="text"></div>
+                                                </div>
+                                                <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
+                                                    <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                                </div>
+                                                <!-- <ul>
                                                     <li>
                                                         <div class="custom-control custom-checkbox">
                                                             <label class="custom-control-label">User 1</label>
@@ -152,7 +158,7 @@
                                                             <label class="custom-control-label">User 1</label>
                                                         </div>
                                                     </li>
-                                                </ul>
+                                                </ul> -->
                                                 <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
                                                     No Data Found to Selected Users
                                                 </div>
