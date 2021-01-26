@@ -41,18 +41,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <!-- <div class="form-label-group">
-                                                <input type="text" formControlName="description" class="form-control" id="formGroupExampleInput1" placeholder="Enter Description">
-                                                <label for="formGroupExampleInput1">Description</label>
-                                                <div class="w-100" *ngIf="gradeForm.controls.description.status=='INVALID'">
-                                                    <div *ngIf="gradeForm.controls.description.errors.required && gradeForm.controls.description.touched" class="invalid-feedback" [style.display]="gradeForm.controls.description.status=='INVALID' ? 'block' : 'none'">
-                                                        Please provide Grade Description.</div>
-                                                </div>
-                                            </div> -->
-                                        </div>
-                                    </div>
+                                    <!-- <div class="row">
+                                        <div class="col-12">
+                                            <div class="container" [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
+                                                <div *ngFor="let text of many" [innerHtml]="text"></div>
+                                            </div>
+                                            <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
+                                                <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                            </div>
+                                        </div> 
+                                    </div> -->
 
                                     <div class="row mt-40">
                                         <div class="col-md-6 d-flex">
@@ -125,13 +123,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="container" [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
-                                                    <div *ngFor="let text of many" [innerHtml]="text"></div>
-                                                </div>
-                                                <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
-                                                    <div *ngFor='let text of many2' [innerHtml]='text'></div>
-                                                </div>
-                                                <!-- <ul>
+                                                <ul>
                                                     <li>
                                                         <div class="custom-control custom-checkbox">
                                                             <label class="custom-control-label">User 1</label>
@@ -158,7 +150,7 @@
                                                             <label class="custom-control-label">User 1</label>
                                                         </div>
                                                     </li>
-                                                </ul> -->
+                                                </ul>
                                                 <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
                                                     No Data Found to Selected Users
                                                 </div>
@@ -220,6 +212,9 @@
                                         </div>
                                     </div>
                                     <div class="row mt-20 tile">
+                                        <div class="col-12">
+                                        <h6 class="">Client(s) Assigned to this Team </h6>
+                                        </div>
                                         <div class="col-3">
                                             <div class="toggle-wrap d-flex align-items-center">
                                                 <span class="font-16 text-dark-80 font-weight-bold ml-10"> Clients ID</span>
@@ -251,9 +246,8 @@
 
             <hr class="mt-50" />
             <div class="text-right mt-30 mb-40">
-                <!-- <button type="button" [routerLink]="['/grade']" class="btn btn-success btn-lg previous">Reject
-                    User</button> -->
-                <button type="button" [disabled]="!gradeForm.valid || gradeAvailable !== '' || loader" (click)="submitForm()" class="btn btn-success btn-lg ">Add New Grade</button>
+                <button type="button" [routerLink]="['/user/user-team']" class="btn btn-success btn-lg previous">Cancel</button>
+                <button type="button" [disabled]="!gradeForm.valid || gradeAvailable !== '' || loader" (click)="submitForm()" class="btn btn-success btn-lg ">Create Team</button>
             </div>
         </form>
 
