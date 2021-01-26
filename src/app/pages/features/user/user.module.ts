@@ -22,10 +22,11 @@ import { NgSelect2Module } from 'ng-select2';
 import { DragulaModule } from 'ng2-dragula';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
-import { NewTeamComponent } from './new-team/new-team.component';
+import { NewTeamComponent } from './new-team/new-team.component'; 
+import { SortableModule } from 'ngx-bootstrap/sortable';
 
 @NgModule({
-  declarations: [UsersComponent, CreateUserComponent, ChangePasswordComponent, FetchUserComponent, ApproveUserComponent, UserTeamsComponent, NewTeamComponent],
+  declarations: [UsersComponent, CreateUserComponent, ChangePasswordComponent, FetchUserComponent, ApproveUserComponent, UserTeamsComponent, NewTeamComponent,],
   imports: [
     CommonModule, 
     UserRoutingModule,
@@ -44,6 +45,7 @@ import { NewTeamComponent } from './new-team/new-team.component';
     NgSelect2Module,
     DragulaModule.forRoot(),
     BsDropdownModule.forRoot(),
+    SortableModule.forRoot(),
   ],
   providers: [UserService]
 })

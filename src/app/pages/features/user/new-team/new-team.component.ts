@@ -10,7 +10,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./new-team.component.scss']
 })
 export class NewTeamComponent implements OnInit {
-roleList: any = [];
+  roleList: any = [];
   userList: any = [];
   userLoader = false;
   roleLoader = false;
@@ -42,6 +42,12 @@ roleList: any = [];
 
   openErrorModal(): void {
     this.modalRef = this.modalService.show(this.errorModal);
+  }
+  
+  openDeleteclient(deleteclient: TemplateRef<any>,data) {
+    // this.userData = data
+    this.modalRef = this.modalService.show(deleteclient);
+    // this.modalRef.content.userActivate = 'Close';
   }
 
   getRoleList(): void {
