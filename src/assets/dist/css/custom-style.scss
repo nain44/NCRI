@@ -3701,6 +3701,115 @@ ng-select2 {
     }
 }
 
+.teams-list {
+    width: 100%;
+    // border: 2px dashed #D9D9D9;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: -29px;
+    ul {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 20px;
+        padding-right: 5px;
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #707070;
+        }
+        .userborder {
+            background: #F1F1F1;
+            border: 2px dashed #D9D9D9;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            padding: 15px;
+        }
+        li {
+            background: #ffffff;
+            border: #F1F1F1 1px solid;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            padding: 15px;
+            .custom-control-label {
+                color: #1A1A1A;
+                font-family: "OmnesSemiBold";
+            }
+            .custom-control-label-teams {
+                color: #1A1A1A;
+                font-family: "OmnesSemiBold";
+            }
+        }
+    }
+    .no-data {
+        color: #1A1A1A;
+        font-size: 1rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &.custom-fields-type {
+        position: relative;
+        border-radius: 20px;
+        i {
+            display: none;
+        }
+        .custom-fields-type-item {
+            .item-field {
+                position: relative;
+                width: 12rem;
+                margin-right: 1rem;
+                input {
+                    border: 2px solid #e2e2e2;
+                    border-radius: 5px;
+                    height: auto;
+                    padding: 5px 10px;
+                    &::placeholder {
+                        color: #999999;
+                        opacity: .3;
+                    }
+                }
+                i.drop-angle {
+                    display: block;
+                    color: #999999;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 1rem;
+                }
+            }
+            .item-labels {
+                h4 {
+                    color: #1A1A1A;
+                    font-size: 21px;
+                    font-family: "OmnesSemiBold";
+                }
+                p {
+                    font-size: 1rem;
+                    color: #999999;
+                    margin: 0;
+                }
+            }
+        }
+        &.done {
+            border: 2px solid #89C540;
+            i.fa-check-circle {
+                display: block;
+                color: #89C540;
+                font-size: 20px;
+                position: absolute;
+                top: 7px;
+                left: 7px;
+            }
+        }
+    }
+}
+
 .tile {
     margin-top: 5px;
     position: relative;
@@ -3709,13 +3818,24 @@ ng-select2 {
     border-radius: 11px;
 }
 
-// add new alias design end
+.user-aval {
+    font-size: 18px;
+    color: #999999;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    margin-top: 10px;
+}
 
+.search-back {
+    background: #413e3e00 !important;
+}
+
+// add new alias design end
 //display and hide
-.editMe{ 
+.editMe {
     display: none;
-    }
-    .editRow:hover .editMe{
-    display : block;
-    }
-    
+}
+
+.editRow:hover .editMe {
+    display: block;
+}

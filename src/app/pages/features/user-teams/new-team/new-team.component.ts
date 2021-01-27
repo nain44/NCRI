@@ -96,11 +96,13 @@ removeFromList(){
 
 checkBx(usr){
   this.userList2.push(usr)
+  this.userList.map(it => it.check = false);
   console.log(this.userList2)
   this.removeBx(usr)
-    }
+     }
     removeBx(usr){
       this.userList = this.userList.filter(item => item !== usr);
+      
     }
     checkBx2(usr2){
       this.userList2 = this.userList2.filter(item => item !== usr2);
@@ -109,6 +111,7 @@ checkBx(usr){
         }
         addBack(usr2){
           this.userList.unshift(usr2)
+          this.userList.map(it => it.check = false);
           console.log(this.userList)
             }
         removeBx2(usr2){
