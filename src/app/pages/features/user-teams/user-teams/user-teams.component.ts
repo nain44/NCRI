@@ -89,48 +89,20 @@ export class UserTeamsComponent implements OnInit {
   preview_fields_edit = "preview_fields_edit";
   MANY_ITEMS = 'MANY_ITEMS';
 
-
-  subs = new Subscription();
-  many: string[]=[];
-  many2: string[]=[];
  constructor(
    private modalService: BsModalService,
    private service: TeamService,
    private router: Router,
    private dragulaService: DragulaService,  // public privileges: PrivilegesStore
    ) {
-    this.subs.add(dragulaService.dropModel(this.MANY_ITEMS)
-      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        console.log('dropModel:');
-        console.log(el);
-        console.log(source);
-        console.log(target);
-        console.log(sourceModel);
-        console.log(targetModel);
-        console.log(item);
-      })
-    );
-    this.subs.add(dragulaService.removeModel(this.MANY_ITEMS)
-      .subscribe(({ el, source, item, sourceModel }) => {
-        console.log('removeModel:');
-        console.log(el);
-        console.log(source);
-        console.log(sourceModel);
-        console.log(item);
-      })
-    );
-    
+   
    }
 
   
 
   ngOnInit(): void {
     this.getTeams();
-  //  this.many = ['The', 'possibilities', 'are', 'endless!'];
-  
-  
-  
-    //if(this.privileges.privilegeHash['uam.views.UsersList']['c']){
+     //if(this.privileges.privilegeHash['uam.views.UsersList']['c']){
       // this.getStats();
    // }
  
@@ -263,14 +235,6 @@ export class UserTeamsComponent implements OnInit {
       
       if(res.status === "success"){
         this.teamList = res.data.qs;
-        
-        for (var val of this.teamList) {
-          
-          this.many.push(val.added_by__first_name)
-          this.many2.push(val.name)
-
-        }
-       // this.many=[this.teamList[0].added_by__first_name,this.teamList[1].added_by__first_name]
         this.teamList.map(it => it.check = false);
         this.paginationConfig = res.data;
         this.userLoader=false;
@@ -290,9 +254,9 @@ export class UserTeamsComponent implements OnInit {
   }
   redirectToCreateUser(id:any,type:any){
     if(type === "view"){
-      this.router.navigate(['/user/add'], { queryParams: { type: 'view', id:id } });
+      this.router.navigate(['/user-team/add'], { queryParams: { type: 'view', id:id } });
     }else{
-      this.router.navigate(['/user/view/', id]);
+      this.router.navigate(['/user-team/view/', id]);
     }
     
   }
@@ -330,6 +294,7 @@ export class UserTeamsComponent implements OnInit {
     let check = this.teamList.some(it => it.check === true)
     return check;
   }
+  
   openErrorModal(){
     this.modalRef = this.modalService.show(this.errorModal);
   }
