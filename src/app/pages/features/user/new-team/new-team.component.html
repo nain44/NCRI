@@ -17,7 +17,7 @@
         </div>
     </div>
     <section class="hk-sec-wrapper shadow-xl rounded-30">
-        <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User </h5>
+        <h5 class="hk-sec-title hk-sec-title--all">Please enter the details of input text field</h5>
         <form [formGroup]="gradeForm" novalidate>
             <div class="row">
                 <div class="col-12">
@@ -53,117 +53,90 @@
                                     </div> -->
 
                                     <div class="row mt-40">
-                                        <div class="col-md-6 d-flex">
-                                            <div class="roles-list">
-                                                <div class="custom-pagination mt-0">
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-6 d-flex">
-                                                            <h6 class="hk-sec-title hk-sec-title--all">Available Users </h6>
-                                                        </div>
-                                                        <div class="col-6 d-flex align-items-end justify-content-end">
-                                                            <div class="form-group has-search filter-search w-100">
-                                                                <span class="fa fa-search form-control-feedback"></span>
-                                                                <input type="text" [(ngModel)]="searchRolesText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search Roles">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User Available</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User Available</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User Available</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User Available</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User Available</label>
-                                                        </div>
-                                                    </li>
-                                                    <!-- <div class="no-data" *ngIf="roleList.length === 0 && !roleLoader">
-                                                        No Data Found to Select Roles
-                                                    </div>
-                                                    <div class="no-data" *ngIf="userList.length === 0 && roleLoader">
-                                                        Loading Roles...
-                                                    </div> -->
-                                                </ul>
+                                        <div class="col-12">
+                                            <div class="toggle-wrap d-flex align-items-center">
+                                                <span class="font-16 text-dark-80 font-weight-bold mb-4"> Users</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 d-flex">
-                                            <div class="roles-list">
-                                                <div class="custom-pagination mt-0">
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-6 d-flex">
-                                                            <h6 class="hk-sec-title hk-sec-title--all">Selected Users </h6>
+                                        <div class="col-md-6">
+                                            <div class="set-commssion">
+                                                <div class="w-100"></div>
+                                                <div class="row d-flex align-items-center">
+                                                </div>
+                                                <div class="row mt-20">
+                                                    <div class="teams-list">
+                                                        <div class="custom-pagination mt-0">
+                                                            <div class="row justify-content-between">
+                                                                <div class="col-6">
+                                                                    <h6 class="user-aval">Available Users </h6>
+                                                                </div>
+                                                                <div class="col-6 align-items-end justify-content-end">
+                                                                    <div class="form-group has-search filter-search w-100">
+                                                                        <span class="fa fa-search form-control-feedback"></span>
+                                                                        <input type="text" [(ngModel)]="searchRolesText" [ngModelOptions]="{standalone: true}" class="form-control search-back" id="inlineFormInputGroupUsername2" placeholder="Search Users">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6 d-flex align-items-end justify-content-end">
-                                                            <div class="form-group has-search filter-search w-100">
-                                                                <span class="fa fa-search form-control-feedback"></span>
-                                                                <input type="text" [(ngModel)]="searchUsersText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search User">
+                                                        <ul>
+                                                            <li class="userborder">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input">
+                                                                    <label class="custom-control-label">User Available</label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <accordion [isAnimated]="true" class="accord-section">
+                                                <accordion-group [isOpen]="true">
+                                                    <div class="cg-role">
+                                                        <div class="row mt-20">
+                                                            <div class="w-100"></div>
+                                                            <div class="teams-list">
+                                                                <div class="custom-pagination mt-0">
+                                                                    <div class="row justify-content-between">
+                                                                        <div class="col-6">
+                                                                            <h6 class="user-aval">Selected Users </h6>
+                                                                        </div>
+                                                                        <div class="col-6 align-items-end justify-content-end">
+                                                                            <div class="form-group has-search filter-search w-100">
+                                                                                <span class="fa fa-search form-control-feedback"></span>
+                                                                                <input type="text" [(ngModel)]="searchUsersText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search User">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <span class="font-16 text-dark-80 font-weight-bold">User 1</span>
+                                                                            <img src="assets/images/x.svg" class="float-right">
+                                                                            <input type="checkbox" class="custom-control-input float-right">
+                                                                            <label class="custom-control-label float-right mr-15">Make Team Lead</label>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
+                                                                No Data Found to Selected Users
+                                                            </div>
+                                                            <div class="no-data" *ngIf="userList.length === 0 && userLoader">
+                                                                Loading Users...
+                                                            </div> -->
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <ul>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <label class="custom-control-label">User 1</label>
-                                                            <i class="fa fa-times float-righ mt-2" style="color: black"></i>
-                                                            <input type="checkbox" class="custom-control-input float-right">
-                                                            <label class="custom-control-label float-right mr-15">Make Team Lead</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User 1</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User 1</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <label class="custom-control-label">User 1</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
-                                                    No Data Found to Selected Users
-                                                </div>
-                                                <div class="no-data" *ngIf="userList.length === 0 && userLoader">
-                                                    Loading Users...
-                                                </div> -->
-                                            </div>
+                                                </accordion-group>
+                                            </accordion>
                                         </div>
                                     </div>
                                     <div class="row mt-20">
                                         <div class="col-12">
                                             <div class="toggle-wrap d-flex align-items-center">
-                                                <span class="font-16 text-dark-80 font-weight-bold ml-10"> Clients & Products</span>
+                                                <span class="font-16 text-dark-80 font-weight-bold mb-3"> Clients & Products</span>
                                             </div>
                                         </div>
                                         <div class="col-3">
@@ -213,7 +186,7 @@
                                     </div>
                                     <div class="row mt-20 tile">
                                         <div class="col-12">
-                                            <h6 class="">Client(s) Assigned to this Team </h6>
+                                            <h6 class="mb-3">Client(s) Assigned to this Team </h6>
                                         </div>
                                         <div class="col-3">
                                             <div class="toggle-wrap d-flex align-items-center">
