@@ -103,6 +103,7 @@ checkBx(usr){
       this.userList = this.userList.filter(item => item !== usr);
     }
     checkBx2(usr2){
+      this.userList2 = this.userList2.filter(item => item !== usr2);
       this.userList2.unshift(usr2)
       console.log(this.userList)
         }

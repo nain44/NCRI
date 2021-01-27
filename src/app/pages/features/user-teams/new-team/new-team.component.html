@@ -90,7 +90,7 @@
                                             
                                                 <ul [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2' >
                                                     <div *ngFor='let usr2 of userList2'>
-                                                    <li   *ngIf="userList2.length!=0" class="editRow">
+                                                    <li *ngIf="userList2.length!=0" class="editRow">
                                                         <div >
                                                             <label class="label">{{usr2.first_name}} {{usr2.last_name}}</label>
                                                             <input class="custom-control custom-checkbox float-right editMe"  [(ngModel)]="usr2.check" name="usr2.check" (ngModelChange)="checkBx2(usr2)" type="checkbox"  id={{usr2.id}}>
