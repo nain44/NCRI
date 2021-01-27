@@ -3831,3 +3831,11 @@ ng-select2 {
 }
 
 // add new alias design end
+//display and hide
+.editMe {
+    display: none;
+}
+
+.editRow:hover .editMe {
+    display: block;
+}

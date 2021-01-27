@@ -36,10 +36,21 @@ export class TeamService {
         return this.httpClient.post(APP_CONFIG.apiBaseUrl + url, body);
     }
 
-      TeamDropdownList(body: any): Observable<any> {
+    TeamDropdownList(body: any): Observable<any> {
         const url = '/api/v1/uam/TeamDropdownList/';
         return this.httpClient.post(APP_CONFIG.apiBaseUrl + url, body);
       }    
+      ClientDemographicDropdownList(): Observable<any> {
+        let url = APP_CONFIG.apiBaseUrl + "/api/v1/cmg/ClientDemographicDropdownList/";
+        return this.httpClient.get(url);
+    }
+      
+    UserDropdownList(): Observable<any> {
+        let url = APP_CONFIG.apiBaseUrl + "/api/v1/uam/UserDropdownList/";
+        return this.httpClient.get(url);
+    }
+    
+      
       
       
 }

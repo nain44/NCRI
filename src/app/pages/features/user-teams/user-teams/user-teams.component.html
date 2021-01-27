@@ -14,7 +14,7 @@
         <div class="hk-pg-header">
             <h1 class="hk-pg-title">User Teams</h1>
             <div class="float-right mb-0">
-                <button  type="button" [routerLink]="['/user/add']" class="btn btn-success">Create Teams</button>
+                <button  type="button" [routerLink]="['/user-teams/add']" class="btn btn-success">Create Teams</button>
             </div>
         </div>
     </div>
@@ -117,12 +117,7 @@
                         </tbody>
                     </table>
                     
-                    <div class='Container' *ngIf="many" [dragula]="MANY_ITEMS" [(dragulaModel)]='many'>
-                        <div *ngFor='let text of many' class="form-control" [innerHtml]='text'></div>
-                    </div>
-                    <div class='container' [dragula]="MANY_ITEMS" [(dragulaModel)]='many2'>
-                        <div *ngFor='let text of many2' class="form-control" [innerHtml]='text'></div>
-                    </div>
+                   
                 <div class="custom-pagination">
                     <div class="row justify-content-between">
                         <div class="col-auto d-flex align-items-end justify-content-end">

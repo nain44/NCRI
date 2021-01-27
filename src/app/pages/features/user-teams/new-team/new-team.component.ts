@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { TeamService } from '../../user-teams/services/user-teams.service';
-// import { GradeService } from '../../grade/service';
+import { TeamService } from '../services/user-teams.service';
 
 @Component({
   selector: 'ncri-new-team',
@@ -14,11 +13,10 @@ import { TeamService } from '../../user-teams/services/user-teams.service';
 })
 export class NewTeamComponent implements OnInit {
   MANY_ITEMS = 'MANY_ITEMS';
-  public many = ['The', 'possibilities', 'are', 'endless!'];
-  public many2 = ['Explore', 'them'];
+  userList2 = [];
+  many2=["Please drag and drop a user from the list or select from the list"]
 
   subs = new Subscription();
-  roleList: any = [];
   userList: any = [];
   userLoader = false;
   roleLoader = false;
@@ -31,38 +29,28 @@ export class NewTeamComponent implements OnInit {
   gradeAvailable = '';
   searchRolesText = '';
   searchUsersText = '';
+  clinetList: any;
+  teamForm: FormGroup;
+  usr :any={};
+  clientObj:any={
+  }
   constructor(
-     private service: TeamService,
+    private service: TeamService,
     private dragulaService: DragulaService,
     private fb: FormBuilder,
     private modalService: BsModalService,
     private router: Router
   ) {
-    this.gradeForm = this.fb.group({
+    this.teamForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      client_id: ['', Validators.required],
+      client_name: ['', Validators.required],
+      client_product: ['', Validators.required],
+      check:[""]
     });
-
-    this.subs.add(dragulaService.dropModel(this.MANY_ITEMS)
-      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        console.log('dropModel:');
-        console.log(el);
-        console.log(source);
-        console.log(target);
-        console.log(sourceModel);
-        console.log(targetModel);
-        console.log(item);
-      })
-    );
-    this.subs.add(dragulaService.removeModel(this.MANY_ITEMS)
-      .subscribe(({ el, source, item, sourceModel }) => {
-        console.log('removeModel:');
-        console.log(el);
-        console.log(source);
-        console.log(sourceModel);
-        console.log(item);
-      })
-    );
+   
+    
   }
 
   ngOnDestroy() {
@@ -70,10 +58,66 @@ export class NewTeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUserDropdownList();
     this.getClientDemographicDropdownList();
-    this.getUserList();
   }
+  addToList(){
+    
+    this.subs.add(this.dragulaService.dropModel(this.MANY_ITEMS)
+      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+        debugger
+        console.log('dropModel:');
+        console.log(el);
+        console.log(source);
+        console.log(target);
+        console.log(sourceModel);
+        console.log(targetModel);
+        console.log(item);
+        console.log("userlist",this.userList2)
+      })
+    );
+}
+removeFromList(){
+  debugger
+  this.subs.add(this.dragulaService.removeModel(this.MANY_ITEMS)
+      .subscribe(({ el, source, item, sourceModel }) => {
+        
+        console.log('removeModel:');
+        console.log(el);
+        console.log(source);
+        console.log(sourceModel);
+        console.log(item);
+        
+      })
+    );
+}
 
+
+
+checkBx(usr){
+  this.userList2.push(usr)
+  this.userList.map(it => it.check = false);
+  console.log(this.userList2)
+  this.removeBx(usr)
+     }
+    removeBx(usr){
+      this.userList = this.userList.filter(item => item !== usr);
+      
+    }
+    checkBx2(usr2){
+      this.userList2 = this.userList2.filter(item => item !== usr2);
+      this.userList2.unshift(usr2)
+      console.log(this.userList)
+        }
+        addBack(usr2){
+          this.userList.unshift(usr2)
+          this.userList.map(it => it.check = false);
+          console.log(this.userList)
+            }
+        removeBx2(usr2){
+          this.userList2 = this.userList2.filter(item => item !== usr2);
+          this.addBack(usr2)
+        }
   openErrorModal(): void {
     this.modalRef = this.modalService.show(this.errorModal);
   }
@@ -84,14 +128,12 @@ export class NewTeamComponent implements OnInit {
     // this.modalRef.content.userActivate = 'Close';
   }
 
-  
-  getClientDemographicDropdownList(): void {
+  getUserDropdownList(): void {
     this.roleLoader = true;
-    
-    this.service.ClientDemographicDropdownList().subscribe((res) => {
+    this.service.UserDropdownList().subscribe((res) => {
       if (res.status === 'success') {
-        this.roleList = res.data;
-        this.roleList.map(it => it.check = false);
+        this.userList = res.data;
+        this.userList.map(it => it.check = false);
       }
       this.roleLoader = false;
     }, (error) => {
@@ -99,17 +141,19 @@ export class NewTeamComponent implements OnInit {
     });
   }
 
-  getUserList(): void {
+  getClientDemographicDropdownList(): void {
+    
     this.userLoader = true;
-    // this.service.getUserList().subscribe((res) => {
-    //   if (res.status === 'success') {
-    //     this.userList = res.data.qs;
-    //     this.userList.map(it => it.check = false);
-    //   }
-    //   this.userLoader = false;
-    // }, (error) => {
-    //   this.userLoader = false;
-    // });
+   
+    this.service.ClientDemographicDropdownList().subscribe((res) => {
+      if (res.status === 'success') {
+        this.clinetList = res.data;
+        
+      }
+      this.userLoader = false;
+    }, (error) => {
+      this.userLoader = false;
+    });
   }
 
   assignGradeToUser(obj: any): void {
@@ -204,7 +248,7 @@ export class NewTeamComponent implements OnInit {
   }
 
   submitForm(): void {
-    const roleCheck = this.roleList.some(it => it.check === true);
+    const roleCheck = this.userList.some(it => it.check === true);
     const userCheck = this.userList.some(it => it.check === true);
     if (roleCheck === false) {
       this.responseText = [{ name: 'Error: ', list: 'Please select at least one role to create grade.' }];
@@ -218,7 +262,7 @@ export class NewTeamComponent implements OnInit {
     const obj = {
       name: this.gradeForm.get('name').value,
       description: this.gradeForm.get('description').value,
-      user_role_ids: this.roleList.filter(it => it.check === true).map(it => it.id),
+      user_role_ids: this.userList.filter(it => it.check === true).map(it => it.id),
       user_ids: this.userList.filter(it => it.check === true).map(it => it.id)
     };
 
