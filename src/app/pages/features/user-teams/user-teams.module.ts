@@ -18,10 +18,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
 import {NewTeamComponent} from './new-team/new-team.component'
 import { TeamService } from './services/user-teams.service';
+import { EditTeamComponent } from './edit-team/edit-team.component';
 
 
 @NgModule({
-  declarations: [UserTeamsComponent,NewTeamComponent],
+  declarations: [UserTeamsComponent,NewTeamComponent, EditTeamComponent],
   imports: [
     CommonModule, 
     UserTeamsRoutingModule,
