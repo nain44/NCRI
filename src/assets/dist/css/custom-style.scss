@@ -3810,32 +3810,4 @@ ng-select2 {
     }
 }
 
-.tile {
-    margin-top: 5px;
-    position: relative;
-    background: #f1f1f1;
-    padding: 20px;
-    border-radius: 11px;
-}
-
-.user-aval {
-    font-size: 18px;
-    color: #999999;
-    font-weight: 600;
-    margin-bottom: 2.5rem;
-    margin-top: 10px;
-}
-
-.search-back {
-    background: #413e3e00 !important;
-}
-
 // add new alias design end
-//display and hide
-.editMe {
-    display: none;
-}
-
-.editRow:hover .editMe {
-    display: block;
-}

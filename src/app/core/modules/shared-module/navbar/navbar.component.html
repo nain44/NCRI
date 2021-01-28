@@ -43,32 +43,37 @@
             </a>
         </li>
         <li class="nav-item dropdown dropdown-notifications">
-            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle no-caret mt-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="" src="assets/images/bell.png">
                 <span class="feather-icon">
-                <i data-feather="bell"></i>
-              </span>
+                    <i data-feather="bell"></i>
+                </span>
                 <span class="badge-wrap">
-                <span class="badge badge-primary badge-indicator badge-indicator-sm badge-pill pulse"></span>
+                    <span class="notify-signal-alert">
+                        <span class="notify-count text-white">6</span>
+                </span>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                <h6 class="dropdown-header">Notifications <a href="javascript:void(0);" class="">View all</a>
-                </h6>
                 <div class="notifications-nicescroll-bar">
                     <a href="javascript:void(0);" class="dropdown-item">
                         <div class="media">
                             <div class="media-img-wrap">
-                                <div class="avatar avatar-sm">
-                                    <img src="assets/dist/img/avatar1.jpg" alt="user" class="avatar-img rounded-circle">
+                                <div class="avatar avatar-sm mt-2">
+                                    <img src="assets/dist/img/avatar1.jpg" alt="user" class="avatar-img">
                                 </div>
                             </div>
                             <div class="media-body">
                                 <div>
-                                    <div class="notifications-text"><span class="text-dark text-capitalize">Evie
-                      Ono</span> accepted your invitation to join the team</div>
-                                    <div class="notifications-time">12m</div>
+                                    <div class="notifications-text">
+                                        <span class="notify-signal"></span>
+                                        <span class="text-dark font-weight-bold font-16">Zeeshan Shahid</span><br>
+                                        <span class="text-dark font-14">Added you in team <span class="font-weight-bold">Organization manager</span></span>
+                                    </div>
+                                    <!-- <div class="notifications-time">12m</div> -->
                                 </div>
+                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
+                                <span class="date-time font-weight-light mt-2">03:33 pm</span>
                             </div>
                         </div>
                     </a>
@@ -76,15 +81,21 @@
                     <a href="javascript:void(0);" class="dropdown-item">
                         <div class="media">
                             <div class="media-img-wrap">
-                                <div class="avatar avatar-sm">
-                                    <img src="assets/dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+                                <div class="avatar avatar-sm mt-2">
+                                    <img src="assets/dist/img/avatar1.jpg" alt="user" class="avatar-img">
                                 </div>
                             </div>
                             <div class="media-body">
                                 <div>
-                                    <div class="notifications-text">New message received from <span class="text-dark text-capitalize">Misuko Heid</span></div>
-                                    <div class="notifications-time">1h</div>
+                                    <div class="notifications-text">
+                                        <span class="notify-signal"></span>
+                                        <span class="text-dark font-weight-bold font-16">Zeeshan Shahid</span><br>
+                                        <span class="text-dark font-14">Sent a user <span class="font-weight-bold">Arshad</span> for <span class="mark-color font-weight-bold ">Aproval</span></span>
+                                    </div>
+                                    <!-- <div class="notifications-time">12m</div> -->
                                 </div>
+                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
+                                <span class="date-time font-weight-light mt-2">03:03 pm</span>
                             </div>
                         </div>
                     </a>
@@ -92,18 +103,20 @@
                     <a href="javascript:void(0);" class="dropdown-item">
                         <div class="media">
                             <div class="media-img-wrap">
-                                <div class="avatar avatar-sm">
-                                    <span class="avatar-text avatar-text-primary rounded-circle">
-                    <span class="initial-wrap"><span><i class="zmdi zmdi-account font-18"></i></span></span>
-                                    </span>
+                                <div class="avatar avatar-sm mt-2">
+                                    <img src="assets/dist/img/avatar1.jpg" alt="user" class="avatar-img">
                                 </div>
                             </div>
                             <div class="media-body">
                                 <div>
-                                    <div class="notifications-text">You have a follow up with<span class="text-dark text-capitalize">
-                      Mintos head</span> on <span class="text-dark text-capitalize">friday, dec 19</span> at <span class="text-dark">10.00 am</span></div>
-                                    <div class="notifications-time">2d</div>
+                                    <div class="notifications-text">
+                                        <span class="text-dark font-16">Zeeshan Shahid</span><br>
+                                        <span class="text-dark font-14">Sent a user <span class="">Arshad</span> for <span class="mark-color">Aproval</span></span>
+                                    </div>
+                                    <!-- <div class="notifications-time">12m</div> -->
                                 </div>
+                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
+                                <span class="date-time font-weight-light mt-2">02:33 pm</span>
                             </div>
                         </div>
                     </a>
@@ -145,6 +158,10 @@
                         </div>
                     </a>
                 </div>
+                <h6 class="dropdown-header">
+                    <span class="mark-color">Mark them Read</span>
+                    <a href="javascript:void(0);" class="notify-color">View all Notifications</a>
+                </h6>
             </div>
         </li>
         <li class="nav-item dropdown dropdown-authentication">
