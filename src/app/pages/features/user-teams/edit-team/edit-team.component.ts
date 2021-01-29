@@ -16,7 +16,7 @@ export class EditTeamComponent implements OnInit {
   userList2 = [];
   many2=["Please drag and drop a user from the list or select from the list"]
  
-
+  editLoader:boolean=false;
   subs = new Subscription();
   roleList: any = [];
   userList: any = [];
@@ -41,7 +41,8 @@ export class EditTeamComponent implements OnInit {
   showEditClient:boolean=false;
   demId:any;
   demName:any;
-  productList:any={}
+  productList:any=[];
+  productListE:any=[];
   constructor(
     private service: TeamService,
     private dragulaService: DragulaService,
@@ -190,7 +191,7 @@ removeFromList(){
         this.selectedClientList = this.teamData.team_client_demographics.map(it => ({
           code: it.client_demographic__client_number,
           name: it.client_demographic__company_name,
-          product: JSON.parse(it.product_list)[0] ? JSON.parse(it.product_list)[0] : "",
+          product: JSON.parse(it.product_list) ? JSON.parse(it.product_list) : [],
           id: it.client_demographic_id
         }));
        // this.teamForm.controls.name.setValue(this.userList.name);
@@ -201,34 +202,73 @@ removeFromList(){
       this.userLoader = false;
     });
   }
-  //-------------------------------------
+  //-------------------------------------ncri code
   selectValues(value:any){
     debugger
     this.clientObj.client_id=value;
     this.clientObj.client_name=value;
     // this.teamForm.controls.product_list.setValue(value);
-    let index = this.selectedClientList.findIndex(it => it.id === value);
+    let index = this.clinetList.findIndex(it => it.id === value);
     if(index >= 0){
       // this.teamForm.controls.product_list.setValue([this.clientList[index].product]);
       let obj = {
         id:value,
-        name:this.selectedClientList[index].product
+        name:this.clinetList[index].product
       }
       this.productList = [obj];
     }
     
   }
-  //------------------------------------
+  addClient() {
+    debugger;
+    let data = this.clinetList.find(it => it.id === this.clientObj.client_id);
+    let index = this.selectedClientList.findIndex(it => it.id === this.clientObj.client_name);
+    if(data && index === -1){
+      let obj = {
+        code: data.client_number,
+        name: data.company_name,
+        product: data.product,
+        id: data.id
+      }
+
+      this.selectedClientList.unshift(obj);
+      this.clientObj={};
+    }
+    
+    // this.t.push(
+    //   this.fb.group(
+    //     {
+    //       client_demographic_id: ['', Validators.required],
+    //       product_list: ['', Validators.required]
+    //     }
+    //   )
+    // )
+  }
+  //------------------------------------ncri code
   showEdit(obj:any,indx){
     debugger;
+    this.clientObj={};
     this.showEditClient=true;
-    this.clientObjE.client_idE=obj;
-    this.clientObjE.client_nameE=obj.name;
+    this.clientObjE.client_idE=obj.id;
+    this.clientObjE.client_nameE=obj.id;
     this.clientObjE.client_productE=obj.product;
     this.clientObjE.index1=indx;
-
-
-
+  }
+  selectValuesE(value:any){
+    debugger
+    this.clientObjE.client_idE=value;
+    this.clientObjE.client_nameE=value;
+    // this.teamForm.controls.product_list.setValue(value);
+    let index = this.clinetList.findIndex(it => it.id === value);
+    if(index >= 0){
+      // this.teamForm.controls.product_list.setValue([this.clientList[index].product]);
+      let obj = {
+        id:value,
+        name:this.clinetList[index].product
+      }
+      this.productListE = [obj];
+    }
+   // this.clientObjE={};
   }
   getClientInfo(event){
     debugger;
@@ -236,21 +276,28 @@ removeFromList(){
     this.demName=event.client_id.client_number;
 
   }
-  addClients(obj:any){
-    debugger
-    this.selectedClientList.push({id:obj.client_id.id,code:obj.client_id.client_number,name:obj.client_name,product:obj.client_product})
-    this.clientObj={};
-  }
+  // addClients(obj:any){
+  //   debugger
+  //   this.selectedClientList.push({id:obj.client_id.id,code:obj.client_id.client_number,name:obj.client_name,product:obj.client_product})
+  //   this.clientObj={};
+  // }
   updateClient(objUpdate:any, indx){
-   debugger
-    this.showEditClient=false;
-    this.clientObjE={};
-    this.selectedClientList[indx].id=objUpdate.client_idE.id;
-    this.selectedClientList[indx].code=objUpdate.client_idE.client_number;
-    this.selectedClientList[indx].name=objUpdate.client_nameE;
-    this.selectedClientList[indx].product=objUpdate.client_productE;
+ 
     
-    console.log("this.selectedClientList====",this.selectedClientList)
+   
+    //========================
+    debugger;
+    let data = this.clinetList.find(it => it.id === this.clientObjE.client_idE);
+     
+    this.selectedClientList[indx].id=data.id;
+    this.selectedClientList[indx].code=data.client_number;
+    this.selectedClientList[indx].name=data.company_name;
+    this.selectedClientList[indx].product=data.product;
+    this.clientObjE={};
+      this.clientObj={};
+      console.log("this.selectedClientList====",this.selectedClientList);
+    
+    //======================
   }
 
    removeClient(obj:any){
@@ -258,14 +305,37 @@ removeFromList(){
    }
    updateUserTeam()
     {
-      const obj = {
-        id: this.gradeID ,
-        name: this.clientObj.tName,
-        team_users:[{user_id:'333',is_team_lead:"ffff"}],
-        team_client_demographics:[{client_demographic_id:'hhhh',product_list:["dfdfsd","fasfsafs"]}]
+      // const obj = {
+      //   id: this.gradeID ,
+      //   name: this.clientObj.tName,
+      //   team_users:[{user_id:'333',is_team_lead:"ffff"}],
+      //   team_client_demographics:[{client_demographic_id:'hhhh',product_list:["dfdfsd","fasfsafs"]}]
+      // }
+      
       }
+      submitForm(){
+        debugger;
+        this.editLoader = true;
+        let form = Object.assign({}, this.clientObj);
+        form.team_users = this.selectedClientList.map(it => ({user_id: it.id, is_team_lead:(it.isTeamLead ? it.isTeamLead : false)}))
+    
+        form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:[it.product]}))
+    
+        form.id = this.gradeID
+        
+        // this.service.updateTeam(form).subscribe((res) =>{
+        //   this.editLoader = false;
+        //   if(res.status === "success"){
+        //     this.router.navigate(['/teams']);
+        //   }else{
+        //     this.responseText = res.message;
+        //     this.openErrorModal();
+        //   }
+        //  },(error) =>{
+        //   this.editLoader = false;
+        // })
       }
-     
+    
   
   assignGradeToUser(obj: any): void {
     // this.service.assignGradeToUser(obj).subscribe((res) => {
@@ -358,27 +428,27 @@ removeFromList(){
     // });
   }
 
-  submitForm(): void {
-    const roleCheck = this.roleList.some(it => it.check === true);
-    const userCheck = this.userList.some(it => it.check === true);
-    if (roleCheck === false) {
-      this.responseText = [{ name: 'Error: ', list: 'Please select at least one role to create grade.' }];
-      this.openErrorModal();
-      return;
-    } else if (userCheck === false) {
-      this.responseText = [{ name: 'Error: ', list: 'Please select at least one user to create grade.' }];
-      this.openErrorModal();
-      return;
-    }
-    const obj = {
-      name: this.teamForm.get('name').value,
-      description: this.teamForm.get('description').value,
-      user_role_ids: this.roleList.filter(it => it.check === true).map(it => it.id),
-      user_ids: this.userList.filter(it => it.check === true).map(it => it.id)
-    };
+  // submitForm(): void {
+  //   const roleCheck = this.roleList.some(it => it.check === true);
+  //   const userCheck = this.userList.some(it => it.check === true);
+  //   if (roleCheck === false) {
+  //     this.responseText = [{ name: 'Error: ', list: 'Please select at least one role to create grade.' }];
+  //     this.openErrorModal();
+  //     return;
+  //   } else if (userCheck === false) {
+  //     this.responseText = [{ name: 'Error: ', list: 'Please select at least one user to create grade.' }];
+  //     this.openErrorModal();
+  //     return;
+  //   }
+  //   const obj = {
+  //     name: this.teamForm.get('name').value,
+  //     description: this.teamForm.get('description').value,
+  //     user_role_ids: this.roleList.filter(it => it.check === true).map(it => it.id),
+  //     user_ids: this.userList.filter(it => it.check === true).map(it => it.id)
+  //   };
 
-    this.addGrade(obj);
-  }
+  //   this.addGrade(obj);
+  // }
 
   isGradeAvailable(): void {
     this.gradeAvailable = '';
