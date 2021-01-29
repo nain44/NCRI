@@ -94,6 +94,7 @@ employeeTypeList: any = [];
   }
 
   addRole(obj:any){
+    debugger
     if(obj.selectedRoles.length === 0){
       return;
     }else if(obj.selectedDepartment === ""){
