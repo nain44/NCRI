@@ -19,7 +19,7 @@
     <section class="hk-sec-wrapper shadow-xl rounded-30">
         <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User Team </h5>
         <!-- <form [formGroup]="teamForm" novalidate> -->
-            <form  novalidate>
+        <form novalidate>
             <div class="row">
                 <div class="col-12">
                     <accordion [isAnimated]="true" class="accord-section">
@@ -43,8 +43,8 @@
                                         </div>
                                     </div>
                                     <div class="row mt-40">
-                                        <div class="col-md-6 d-flex" >
-                                            <div class="roles-list" >
+                                        <div class="col-md-6 d-flex">
+                                            <div class="roles-list">
                                                 <div class="custom-pagination mt-0">
                                                     <div class="row justify-content-between">
                                                         <div class="col-6 d-flex">
@@ -57,23 +57,23 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>                       
-                                                <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList' >
-                                                      <li *ngFor="let usr of userList let i=index" >
-                                                        <div class="custom-control custom-checkbox" >
-                                                            
-                                                               <input  [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
-                                                            
-                                                            <label class="custom-control-label"for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
+                                                </div>
+                                                <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList'>
+                                                    <li *ngFor="let usr of userList let i=index">
+                                                        <div class="custom-control custom-checkbox">
+
+                                                            <input [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
+
+                                                            <label class="custom-control-label" for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
                                                         </div>
                                                     </li>
-                                                 
-                                                   
+
+
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 d-flex" >
-                                            <div class="roles-list" >
+                                        <div class="col-md-6 d-flex">
+                                            <div class="roles-list">
                                                 <div class="custom-pagination mt-0">
                                                     <div class="row justify-content-between">
                                                         <div class="col-6 d-flex">
@@ -87,25 +87,25 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
-                                                <ul [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2' >
+
+                                                <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList2'>
                                                     <div *ngFor='let usr2 of userList2'>
-                                                    <li *ngIf="userList2.length!=0" class="editRow">
-                                                        <div >
-                                                            <label  class="label">{{usr2.first_name}} {{usr2.last_name}}</label>
-                                                            <input class="custom-control custom-checkbox float-right editMe"  [(ngModel)]="usr2.check" name="usr2.check" (ngModelChange)="checkBx2(usr2)" type="checkbox"  id={{usr2.id}}>
-                                                            <a href="javascript:void(0)" (click)="removeBx2(usr2)" > <i class="fa fa-times float-righ mt-2 editMe" style="color: black"></i></a> 
-                                                            <label class="float-right editMe">Make Team Lead</label>
-                                                        </div>                                                        
-                                                    </li> 
-                                                </div>
-                                                <div *ngIf="userList2.length==0" class="editRow">
-                                                    <li>                                            
-                                                        <h6>Drag and Drop user here or select a  check box</h6>
-                                                    </li>                                                 
-                                                </div>
+                                                        <li *ngIf="userList2.length!=0" class="editRow">
+                                                            <div>
+                                                                <label class="label">{{usr2.first_name}} {{usr2.last_name}}</label>
+                                                                <input class="custom-control custom-checkbox float-right editMe" [(ngModel)]="usr2.check" name="usr2.check" (ngModelChange)="checkBx2(usr2)" type="checkbox" id={{usr2.id}}>
+                                                                <a href="javascript:void(0)" (click)="removeBx2(usr2)"> <i class="fa fa-times float-righ mt-2 editMe" style="color: black"></i></a>
+                                                                <label class="float-right editMe">Make Team Lead</label>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                    <div *ngIf="userList2.length==0" class="editRow">
+                                                        <li>
+                                                            <h6>Drag and Drop user here or select a check box</h6>
+                                                        </li>
+                                                    </div>
                                                 </ul>
-                                               </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mt-20">
@@ -145,7 +145,6 @@
                                                     <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product" name="client_product" [(ngModel)]="clientObj.client_product">
                                                         <option value="" >Select Product</option>
                                                         <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.product}}</option>
-                                                        
                                                     </select> 
                                                 </span>
                                             </div>
@@ -161,7 +160,7 @@
                                             <h6 class="">Client(s) Assigned to this Team </h6>
                                         </div>
                                         <div class="col-3">
-                                            
+
                                             <div class="toggle-wrap d-flex align-items-center">
                                                 <span class="font-16 text-dark-80 font-weight-bold ml-10"> Clients ID</span>
                                             </div>

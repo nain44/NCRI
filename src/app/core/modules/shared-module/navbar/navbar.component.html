@@ -54,7 +54,7 @@
                 </span>
                 </span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+            <div class="dropdown-menu dropdown-menu-right notify-width" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <div class="notifications-nicescroll-bar">
                     <a href="javascript:void(0);" class="dropdown-item">
                         <div class="media">
@@ -67,13 +67,14 @@
                                 <div>
                                     <div class="notifications-text">
                                         <span class="notify-signal"></span>
-                                        <span class="text-dark font-weight-bold font-16">Zeeshan Shahid</span><br>
-                                        <span class="text-dark font-14">Added you in team <span class="font-weight-bold">Organization manager</span></span>
+                                        <p class="text-dark font-weight-bold font-16">Zeeshan Shahid</p>
+                                        <p class="text-dark font-14">Added you in team <span class="font-weight-bold">Organization manager</span></p>
                                     </div>
                                     <!-- <div class="notifications-time">12m</div> -->
                                 </div>
-                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
-                                <span class="date-time font-weight-light mt-2">03:33 pm</span>
+                                <p class="date-time font-weight-light mt-2 mr-4">28 Jan 21
+                                    <span class="date-time font-weight-light mt-2">03:33 pm</span>
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -89,13 +90,14 @@
                                 <div>
                                     <div class="notifications-text">
                                         <span class="notify-signal"></span>
-                                        <span class="text-dark font-weight-bold font-16">Zeeshan Shahid</span><br>
-                                        <span class="text-dark font-14">Sent a user <span class="font-weight-bold">Arshad</span> for <span class="mark-color font-weight-bold ">Aproval</span></span>
+                                        <p class="text-dark font-weight-bold font-16">Zeeshan Shahid</p>
+                                        <p class="text-dark font-14">Sent a user <span class="font-weight-bold">Arshad</span> for <span class="mark-color font-weight-bold ">Aproval</span></p>
                                     </div>
                                     <!-- <div class="notifications-time">12m</div> -->
                                 </div>
-                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
-                                <span class="date-time font-weight-light mt-2">03:03 pm</span>
+                                <p class="date-time font-weight-light mt-2 mr-4">28 Jan 21
+                                    <span class="date-time font-weight-light mt-2">03:03 pm</span>
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -110,13 +112,36 @@
                             <div class="media-body">
                                 <div>
                                     <div class="notifications-text">
-                                        <span class="text-dark font-16">Zeeshan Shahid</span><br>
-                                        <span class="text-dark font-14">Sent a user <span class="">Arshad</span> for <span class="mark-color">Aproval</span></span>
+                                        <p class="text-dark font-16">Zeeshan Shahid</p>
+                                        <p class="text-dark font-14">Sent a user <span class="">Arshad</span> for <span class="mark-color">Aproval</span></p>
                                     </div>
                                     <!-- <div class="notifications-time">12m</div> -->
                                 </div>
-                                <span class="date-time font-weight-light mt-2 mr-4">28 Jan 21</span>
-                                <span class="date-time font-weight-light mt-2">02:33 pm</span>
+                                <p class="date-time font-weight-light mt-2 mr-4">28 Jan 21
+                                    <span class="date-time font-weight-light mt-2">02:33 pm</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="javascript:void(0);" class="dropdown-item">
+                        <div class="media">
+                            <div class="media-img-wrap">
+                                <div class="avatar avatar-sm mt-2">
+                                    <img src="assets/dist/img/avatar1.jpg" alt="user" class="avatar-img">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div>
+                                    <div class="notifications-text">
+                                        <p class="text-dark font-16">Zeeshan Shahid</p>
+                                        <p class="text-dark font-14">Sent a user <span class="">Arshad</span> for <span class="mark-color">Aproval</span></p>
+                                    </div>
+                                    <!-- <div class="notifications-time">12m</div> -->
+                                </div>
+                                <p class="date-time font-weight-light mt-2 mr-4">28 Jan 21
+                                    <span class="date-time font-weight-light mt-2">02:33 pm</span>
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -158,8 +183,8 @@
                         </div>
                     </a> -->
                 </div>
-                <h6 class="dropdown-header">
-                    <span class="mark-color">Mark them Read</span>
+                <h6 class="dropdown-header notify-mark">
+                    <a href="javascript:void(0);" class="mark-color">Mark them Read</a>
                     <a href="javascript:void(0);" class="notify-color">View all Notifications</a>
                 </h6>
             </div>
@@ -193,20 +218,20 @@
                     <span>Account Preferences</span></a>
                 <!-- <div class="dropdown-divider"></div> -->
                 <!-- <div class="sub-dropdown-menu show-on-hover">
-          <a href="#" class="dropdown-toggle dropdown-item no-caret"><i
-              class="zmdi zmdi-check text-success"></i>Online</a>
-          <div class="dropdown-menu open-left-side">
-            <a class="dropdown-item" href="#"><i
-                class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>
-            <a class="dropdown-item" href="#"><i
-                class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>
-            <a class="dropdown-item" href="#"><i
-                class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
-          </div>
-        </div> -->
+                <a href="#" class="dropdown-toggle dropdown-item no-caret"><i
+                    class="zmdi zmdi-check text-success"></i>Online</a>
+                <div class="dropdown-menu open-left-side">
+                    <a class="dropdown-item" href="#"><i
+                        class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>
+                    <a class="dropdown-item" href="#"><i
+                        class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>
+                    <a class="dropdown-item" href="#"><i
+                        class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
+                </div>
+                </div> -->
                 <!-- <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i class="dropdown-icon zmdi zmdi-power"></i><span>Log
-            out</span></a> -->
+                <a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i class="dropdown-icon zmdi zmdi-power"></i><span>Log
+                    out</span></a> -->
             </div>
         </li>
         <li>

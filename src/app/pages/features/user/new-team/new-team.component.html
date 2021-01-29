@@ -18,7 +18,7 @@
     </div>
     <section class="hk-sec-wrapper shadow-xl rounded-30">
         <h5 class="hk-sec-title hk-sec-title--all">Please enter the details of input text field</h5>
-        <form [formGroup]="gradeForm" novalidate>
+        <form novalidate>
             <div class="row">
                 <div class="col-12">
                     <accordion [isAnimated]="true" class="accord-section">
@@ -31,11 +31,11 @@
                                     <div class="row mt-20">
                                         <div class="col-4">
                                             <div class="form-label-group">
-                                                <input type="text" (blur)="isGradeAvailable()" formControlName="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Grade Name">
+                                                <input type="text" (blur)="isGradeAvailable()" [(ngModel)]="clientObj.name" name="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Grade Name">
                                                 <label for="">Team Name</label>
-                                                <div class="w-100" *ngIf="gradeForm.controls.name.status=='INVALID'">
-                                                    <div *ngIf="gradeForm.controls.name.errors.required && gradeForm.controls.name.touched" class="invalid-feedback" [style.display]="gradeForm.controls.name.status=='INVALID' ? 'block' : 'none'">
-                                                        Please provide Grade Name.</div>
+                                                <div class="w-100" *ngIf="teamForm.controls.name.status=='INVALID'">
+                                                    <div *ngIf="teamForm.controls.name.errors.required && teamForm.controls.name.touched" class="invalid-feedback" [style.display]="teamForm.controls.name.status=='INVALID' ? 'block' : 'none'">
+                                                        Please provide Team Name.</div>
                                                 </div>
                                                 <div [style.color]="'#FF0000'" style="font-size: 100%;" class="invalid-feedback" style="display: block;">{{gradeAvailable}}</div>
                                             </div>
@@ -78,11 +78,11 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <ul>
-                                                            <li class="userborder">
+                                                        <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList'>
+                                                            <li *ngFor="let usr of userList let i=index" class="userborder">
                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input">
-                                                                    <label class="custom-control-label">User Available</label>
+                                                                    <input [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
+                                                                    <label class="custom-control-label" for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -110,22 +110,26 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <ul>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <span class="font-16 text-dark-80 font-weight-bold">User 1</span>
-                                                                            <img src="assets/images/x.svg" class="float-right">
-                                                                            <input type="checkbox" class="custom-control-input float-right">
-                                                                            <label class="custom-control-label float-right mr-15">Make Team Lead</label>
-                                                                        </div>
-                                                                    </li>
+                                                                <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList2'>
+                                                                    <div *ngFor='let usr2 of userList2'>
+                                                                        <li *ngIf="userList2.length!=0" class="editRow">
+                                                                            <div>
+                                                                                <span class="font-16 text-dark-80 font-weight-bold">{{usr2.first_name}} {{usr2.last_name}}</span>
+                                                                                <a href="javascript:void(0)" (click)="removeBx2(usr2)"><img src="assets/images/x.svg" class="float-right editMe"></a>
+                                                                                <label class="float-right editMe mr-15">Make Team Lead</label>
+                                                                                <input class="custom-control custom-checkbox float-right editMe mr-15 mt-1" type="checkbox" [(ngModel)]="usr2.check" name="usr2.check" (ngModelChange)="checkBx2(usr2)" id={{usr2.id}}>
+                                                                                <!-- <img src="assets/images/x.svg" class="float-right">
+                                                                                <input type="checkbox" class="custom-control-input float-right">
+                                                                                <label class="custom-control-label float-right mr-15">Make Team Lead</label> -->
+                                                                            </div>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div *ngIf="userList2.length==0" class="editRow">
+                                                                        <li>
+                                                                            <h6>Drag and Drop user here or select a check box</h6>
+                                                                        </li>
+                                                                    </div>
                                                                 </ul>
-                                                                <!-- <div class="no-data" *ngIf="userList.length === 0 && !userLoader">
-                                                                No Data Found to Selected Users
-                                                            </div>
-                                                            <div class="no-data" *ngIf="userList.length === 0 && userLoader">
-                                                                Loading Users...
-                                                            </div> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -142,40 +146,31 @@
                                         <div class="col-3">
                                             <div class="form-label-group">
                                                 <span class="wrapper-select w-100">
-                                                    <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Client ID">
-                                                        <option value="" >Client ID</option>
-                                                        <option value="" >#2556</option>
-                                                        <option value="" >#2556</option>
-                                                        <option value="" >#2556</option>
-                                                        <option value="" >#2556</option>
-                                                    </select>
-                                                </span>
+                                                <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Client ID" name="cliend_id" [(ngModel)]="clientObj.client_id">
+                                                    <option value="" >Client ID</option>
+                                                    <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.client_number}}</option>
+                                                </select>
+                                            </span>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-label-group">
                                                 <span class="wrapper-select w-100">
-                                                    <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Client Name">
-                                                        <option value="" >Client Name</option>
-                                                        <option value="" >Name</option>
-                                                        <option value="" >Name</option>
-                                                        <option value="" >Name</option>
-                                                        <option value="" >Name</option>
-                                                    </select>
-                                                </span>
+                                                <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Client Name"  name="client_name" [(ngModel)]="clientObj.client_name">
+                                                    <option value="" >Client Name</option>
+                                                    <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.company_name}}</option>
+                                                </select>
+                                            </span>
                                             </div>
                                         </div>
                                         <div class="col-3">
                                             <div class="form-label-group">
                                                 <span class="wrapper-select w-100">
-                                                    <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product">
-                                                        <option value="" >Select Product</option>
-                                                        <option value="" >Select Product</option>
-                                                        <option value="" >Select Product</option>
-                                                        <option value="" >Select Product</option>
-                                                        <option value="" >Select Product</option>
-                                                    </select>
-                                                </span>
+                                                <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product" name="client_product" [(ngModel)]="clientObj.client_product">
+                                                    <option value="" >Select Product</option>
+                                                    <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.product}}</option>
+                                                </select> 
+                                            </span>
                                             </div>
                                         </div>
                                         <div class="col-2">
@@ -225,7 +220,6 @@
                 <button type="button" class="btn btn-success btn-lg ">Create Team</button>
             </div>
         </form>
-
     </section>
 </div>
 
