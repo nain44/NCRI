@@ -141,19 +141,26 @@
                                             </div>
                                         </div>
                                         <div class="col-3">
-                                            <div class="form-label-group">
-                                                <span class="wrapper-select w-100">
+                                            <div class="form-label-group" >
+                                                <!-- <span class="wrapper-select w-100">
                                                     <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product" name="client_product" [(ngModel)]="clientObj.client_product">
                                                         <option value="" >Select Product</option>
                                                         <option *ngFor="let item of clinetList" [value]="item?.product">{{item?.product}}</option>
                                                         
                                                     </select> 
-                                                </span>
+                                                </span> -->
+                                               
+                                                <tag-input placeholder="Select Product" name="client_product"  [(ngModel)]="clientObj.client_product" [maxItems]='5' [onlyFromAutocomplete]="true">
+                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="productList"
+                                                       [identifyBy]="'id'" [displayBy]="'name'">
+                                                   </tag-input-dropdown>
+                                               </tag-input>
+                                           <label for="">Product</label>
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <div class="form-label-group">
-                                                <button type="button" (click)="addClients(clientObj)" class="btn btn-success btn-lg w-100 btn-border">Add Client</button>
+                                                <button type="button" (click)="addClient()" class="btn btn-success btn-lg w-100 btn-border">Add Client</button>
                                             </div>
                                         </div>
                                     </div>
@@ -193,9 +200,9 @@
                                             <div class="col-3">
                                                     <div class="form-label-group">
                                                         <span class="wrapper-select w-100">
-                                                            <select class="form-control" aria-label="Text input with segmented dropdown button"  placeholder="Client ID" name="cliend_id" [(ngModel)]="clientObjE.client_idE">
+                                                            <select class="form-control" (change)="selectValuesE(clientObjE.client_idE)" aria-label="Text input with segmented dropdown button"  placeholder="Client ID" name="cliend_idE" [(ngModel)]="clientObjE.client_idE">
                                                                 <option value="" >Client ID</option>
-                                                                <option *ngFor="let item of clinetList" [ngValue]="item">{{item?.client_number}}</option>
+                                                                <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.client_number}}</option>
                                                                 
                                                             </select> 
                                                             <!-- <select #userRole [class.hasData]="userRole.value !== '' || userRole.value !== null" class="form-control selectDropdown" [(ngModel)]="user_role_id" required>
@@ -207,9 +214,9 @@
                                             <div class="col-4">
                                                     <div class="form-label-group">
                                                         <span class="wrapper-select w-100">
-                                                            <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Client Name"  name="client_name" [(ngModel)]="clientObjE.client_nameE">
+                                                            <select class="form-control" (change)="selectValuesE(clientObjE.client_nameE)" aria-label="Text input with segmented dropdown button" placeholder="Client Name"  name="client_nameE" [(ngModel)]="clientObjE.client_nameE">
                                                                 <option value="" >Client Name</option>
-                                                                <option *ngFor="let item of clinetList" [value]="item?.company_name">{{item?.company_name}}</option>
+                                                                <option *ngFor="let item of clinetList" [value]="item?.id">{{item?.company_name}}</option>
                                                                 
                                                             </select> 
                                                         </span>
@@ -218,11 +225,17 @@
                                             <div class="col-3">
                                                     <div class="form-label-group">
                                                         <span class="wrapper-select w-100">
-                                                            <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product" name="client_product" [(ngModel)]="clientObjE.client_productE">
+                                                            <!-- <select class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Select Product" name="client_product" [(ngModel)]="clientObjE.client_productE">
                                                                 <option value="" >Select Product</option>
                                                                 <option *ngFor="let item of clinetList" [value]="item?.product">{{item?.product}}</option>
                                                                 
-                                                            </select> 
+                                                            </select>  -->
+                                                            <tag-input placeholder="Select Product" name="client_productE"  [(ngModel)]="clientObjE.client_productE" [maxItems]='5' [onlyFromAutocomplete]="true">
+                                                                <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="productListE"
+                                                                   [identifyBy]="'id'" [displayBy]="'name'">
+                                                               </tag-input-dropdown>
+                                                           </tag-input>
+                                                       <!-- <label for="">Product</label> -->
                                                         </span>
                                                     </div>
                                             </div>
@@ -253,7 +266,7 @@
             <hr class="mt-50" />
             <div class="text-right mt-30 mb-40">
                 <button type="button" [routerLink]="['/user/user-team']" class="btn btn-success btn-lg previous">Cancel</button>
-                <button type="button" class="btn btn-success btn-lg ">Create Team</button>
+                <button type="button" (click)="submitForm()" class="btn btn-success btn-lg ">Create Team</button>
             </div>
         </form>
 
