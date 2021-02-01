@@ -29,11 +29,16 @@ export class NewTeamComponent implements OnInit {
   gradeAvailable = '';
   searchRolesText = '';
   searchUsersText = '';
-  clinetList: any;
+  clientList: any;
   teamForm: FormGroup;
   usr :any={};
   clientObj:any={
   }
+  teamLoader:any
+  searchSelectedUserText: string = "";
+  IsTeamLeadCheck: boolean;
+  userList3: any=[];
+  errMsg: boolean=false;
   constructor(
     private service: TeamService,
     private dragulaService: DragulaService,
@@ -47,7 +52,8 @@ export class NewTeamComponent implements OnInit {
       client_id: ['', Validators.required],
       client_name: ['', Validators.required],
       client_product: ['', Validators.required],
-      check:[""]
+      check:[""],
+
     });
    
     
@@ -95,8 +101,11 @@ removeFromList(){
 
 
 checkBx(usr){
+  
   this.userList2.push(usr)
   this.userList.map(it => it.check = false);
+  this.userList2.map(it=>it.isTeamLead=false)
+
   console.log(this.userList2)
   this.removeBx(usr)
      }
@@ -104,19 +113,52 @@ checkBx(usr){
       this.userList = this.userList.filter(item => item !== usr);
       
     }
+    showbtn(){
+      let check = this.userList2.some(it => it.check === true)
+      return check;
+    }
     checkBx2(usr2){
       this.userList2 = this.userList2.filter(item => item !== usr2);
       this.userList2.unshift(usr2)
-      console.log(this.userList)
+      this.userList2.some(it => it.check = true)
+      this.userList2.some(it => it.isTeamLead = true)
+      this.showbtn();
+      
         }
         addBack(usr2){
           this.userList.unshift(usr2)
           this.userList.map(it => it.check = false);
-          console.log(this.userList)
+          
             }
         removeBx2(usr2){
           this.userList2 = this.userList2.filter(item => item !== usr2);
           this.addBack(usr2)
+        }
+        addTeam(obj)
+        {
+          
+          let userList3:any[]= this.userList2.map(it => ({user_id:it.id,is_team_lead:it.isTeamLead})) 
+          let param = {
+            
+              "name":this.teamForm.value.name,
+              "team_users":userList3,
+              "team_client_demographics":[{"client_demographic_id":obj.client_id,"product_list":[obj.client_product]}]
+          }
+          
+          this.service.AddTeam(param).subscribe((res) => {
+            if (res.status === 'success') {
+              
+            }
+            debugger
+            if(res.message=="An item already exists in the DB with this identity."){
+            this.errMsg =true;
+            }
+            this.roleLoader = false;
+          }, (error) => {
+            debugger
+            this.roleLoader = false;
+           
+          });
         }
   openErrorModal(): void {
     this.modalRef = this.modalService.show(this.errorModal);
@@ -127,27 +169,29 @@ checkBx(usr){
     this.modalRef = this.modalService.show(deleteclient);
     // this.modalRef.content.userActivate = 'Close';
   }
-
+  
   getUserDropdownList(): void {
-    this.roleLoader = true;
+    this.loader = true;
     this.service.UserDropdownList().subscribe((res) => {
       if (res.status === 'success') {
         this.userList = res.data;
         this.userList.map(it => it.check = false);
       }
-      this.roleLoader = false;
+      this.loader = false;
     }, (error) => {
-      this.roleLoader = false;
+      this.loader = false;
     });
   }
-
+  errMsgFunc(){
+    this.errMsg=false;
+  }
   getClientDemographicDropdownList(): void {
     
     this.userLoader = true;
    
     this.service.ClientDemographicDropdownList().subscribe((res) => {
       if (res.status === 'success') {
-        this.clinetList = res.data;
+        this.clientList = res.data;
         
       }
       this.userLoader = false;
