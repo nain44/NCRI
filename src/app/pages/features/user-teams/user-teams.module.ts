@@ -18,10 +18,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
 import {NewTeamComponent} from './new-team/new-team.component'
 import { TeamService } from './services/user-teams.service';
+import { EditTeamComponent } from './edit-team/edit-team.component';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
-  declarations: [UserTeamsComponent,NewTeamComponent],
+  declarations: [UserTeamsComponent,NewTeamComponent, EditTeamComponent],
   imports: [
     CommonModule, 
     UserTeamsRoutingModule,
@@ -40,6 +42,7 @@ import { TeamService } from './services/user-teams.service';
     NgSelect2Module,
     DragulaModule.forRoot(),
     BsDropdownModule.forRoot(),
+    TagInputModule,
   ],
   providers:[TeamService,AccordionModule]
 })

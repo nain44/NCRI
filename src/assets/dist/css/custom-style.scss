@@ -3810,6 +3810,7 @@ ng-select2 {
     }
 }
 
+// add new alias design end
 .tile {
     margin-top: 5px;
     position: relative;
@@ -3830,12 +3831,82 @@ ng-select2 {
     background: #413e3e00 !important;
 }
 
-// add new alias design end
-//display and hide
 .editMe {
     display: none;
 }
 
 .editRow:hover .editMe {
     display: block;
+}
+
+.mark-color {
+    color: #89C540;
+    margin-left: 0px !important;
+    &:hover {
+        color: #6dad1f;
+        font-weight: 700 !important;
+    }
+}
+
+.notify-color {
+    color: #7F63F4;
+}
+
+.date-time {
+    color: #8a8787;
+    font-size: 14px;
+}
+
+.notify-signal-alert {
+    background: #89c540;
+}
+
+a .notify-signal-alert {
+    border: 2px #fff solid;
+    height: 18px;
+    right: -6px;
+    bottom: -8px;
+    width: 19px;
+    position: absolute;
+    background: #89c540;
+    border-radius: 50%;
+}
+
+.notify-count {
+    margin-top: 7px;
+    position: absolute;
+    font-size: 10px;
+    left: 5px;
+}
+
+.notify-signal {
+    background: #89C540;
+}
+
+.notify-signal {
+    height: 9px;
+    width: 10px;
+    position: absolute;
+    left: 350px;
+    border-radius: 50%;
+}
+
+.edit-product {
+    background: #cbcaca;
+    padding: 0px 10px 0px 3px;
+    border-radius: 2px;
+}
+
+.notify-width {
+    min-width: 378px !important;
+    min-height: 436px;
+    border-radius: 0 0 20px 20px;
+}
+
+.notify-mark {
+    // min-width: 378px;
+    // position: absolute;
+    margin-top: 67px;
+    border-top: 1px solid #e0e3e4;
+    border-bottom: none !important;
 }

@@ -253,10 +253,12 @@ export class UserTeamsComponent implements OnInit {
     
   }
   redirectToCreateUser(id:any,type:any){
-    if(type === "view"){
-      this.router.navigate(['/user-team/add'], { queryParams: { type: 'view', id:id } });
+    debugger
+    // this.router.navigate(['/grade/edit-grade'], { queryParams: { id: obj.id } });
+    if(type === "edit"){
+      this.router.navigate(['/user-teams/edit'], { queryParams: {  id:id } });
     }else{
-      this.router.navigate(['/user-team/view/', id]);
+      this.router.navigate(['/user-teams/view/', id]);
     }
     
   }
