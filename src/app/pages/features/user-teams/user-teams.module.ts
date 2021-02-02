@@ -20,6 +20,8 @@ import {NewTeamComponent} from './new-team/new-team.component'
 import { TeamService } from './services/user-teams.service';
 import { EditTeamComponent } from './edit-team/edit-team.component';
 import { TagInputModule } from 'ngx-chips';
+import { DirectivesModule, PipesModule } from '../.././../core';
+
 
 
 @NgModule({
@@ -43,6 +45,9 @@ import { TagInputModule } from 'ngx-chips';
     DragulaModule.forRoot(),
     BsDropdownModule.forRoot(),
     TagInputModule,
+    PipesModule,
+    DirectivesModule
+
   ],
   providers:[TeamService,AccordionModule]
 })

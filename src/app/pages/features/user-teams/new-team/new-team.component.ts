@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { TeamService } from '../services/user-teams.service';
-
+import {GlobalService} from '../../../../core/services/global.service'
 @Component({
   selector: 'ncri-new-team',
   templateUrl: './new-team.component.html',
@@ -15,7 +15,7 @@ export class NewTeamComponent implements OnInit {
   MANY_ITEMS = 'MANY_ITEMS';
   userList2 = [];
   many2=["Please drag and drop a user from the list or select from the list"]
-
+  selectedClientList:any=[];
   subs = new Subscription();
   userList: any = [];
   userLoader = false;
@@ -27,24 +27,31 @@ export class NewTeamComponent implements OnInit {
   loader = false;
   newGradeID: any;
   gradeAvailable = '';
-  searchRolesText = '';
+  
   searchUsersText = '';
   clientList: any;
   teamForm: FormGroup;
   usr :any={};
-  clientObj:any={
-  }
+  clientObj:any={};
+  clientObjE:any={};
   teamLoader:any
   searchSelectedUserText: string = "";
   IsTeamLeadCheck: boolean;
   userList3: any=[];
   errMsg: boolean=false;
+  showEditClient:boolean=false;
+  productList:any=[];
+  productListE:any=[];
+  errors: any=[];
+  loaderC: boolean=false;
   constructor(
     private service: TeamService,
     private dragulaService: DragulaService,
     private fb: FormBuilder,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
+    public global:GlobalService,
+    
   ) {
     this.teamForm = this.fb.group({
       name: ['', Validators.required],
@@ -66,41 +73,110 @@ export class NewTeamComponent implements OnInit {
   ngOnInit(): void {
     this.getUserDropdownList();
     this.getClientDemographicDropdownList();
+    
+  }
+  get Date(): Date {
+    return new Date();
   }
   addToList(){
     
     this.subs.add(this.dragulaService.dropModel(this.MANY_ITEMS)
       .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        debugger
-        console.log('dropModel:');
-        console.log(el);
-        console.log(source);
-        console.log(target);
-        console.log(sourceModel);
-        console.log(targetModel);
-        console.log(item);
-        console.log("userlist",this.userList2)
-      })
+             })
     );
 }
 removeFromList(){
-  debugger
+  
   this.subs.add(this.dragulaService.removeModel(this.MANY_ITEMS)
       .subscribe(({ el, source, item, sourceModel }) => {
-        
-        console.log('removeModel:');
-        console.log(el);
-        console.log(source);
-        console.log(sourceModel);
-        console.log(item);
-        
+              
       })
     );
 }
 
+selectValues(value:any){
+  
+  this.clientObj.client_id=value;
+  this.clientObj.client_name=value;
+  // this.teamForm.controls.product_list.setValue(value);
+  let index = this.clientList.findIndex(it => it.id === value);
+  if(index >= 0){
+    // this.teamForm.controls.product_list.setValue([this.clientList[index].product]);
+    let obj = {
+      id:value,
+      name:this.clientList[index].product
+    }
+    this.productList = [obj];
+  }
+  
+}
+addClient() {
+  
+  let data = this.clientList.find(it => it.id === this.clientObj.client_id);
+  let index = this.selectedClientList.findIndex(it => it.id === this.clientObj.client_name);
+  if(data && index === -1){
+    let obj = {
+      code: data.client_number,
+      name: data.company_name,
+      product: [data.product],
+      id: data.id
+    }
+    this.selectedClientList.unshift(obj);
 
+    this.clientObj={};
 
-checkBx(usr){
+  }
+ 
+}
+showEdit(obj:any,indx){
+  
+  this.clientObj={};
+  this.showEditClient=true;
+  this.clientObjE.client_idE=obj.id;
+  this.clientObjE.client_nameE=obj.id;
+  this.clientObjE.client_productE=obj.product;
+  this.clientObjE.index1=indx;
+}
+selectValuesE(value:any){
+  
+  this.clientObjE.client_idE=value;
+  this.clientObjE.client_nameE=value;
+  // this.teamForm.controls.product_list.setValue(value);
+  let index = this.clientList.findIndex(it => it.id === value);
+  if(index >= 0){
+    // this.teamForm.controls.product_list.setValue([this.clientList[index].product]);
+    let obj = {
+      id:value,
+      name:this.clientList[index].product
+    }
+    this.productListE = [obj];
+  }
+ // this.clientObjE={};
+}
+
+ updateClient(objUpdate:any, indx){
+ 
+    
+   
+  //========================
+
+  let data = this.clientList.find(it => it.id === this.clientObjE.client_idE);
+   
+  this.selectedClientList[indx].id=data.id;
+  this.selectedClientList[indx].code=data.client_number;
+  this.selectedClientList[indx].name=data.company_name;
+  this.selectedClientList[indx].product=data.product;
+  this.clientObjE={};
+    this.clientObj={};
+    console.log("this.selectedClientList====",this.selectedClientList);
+  
+  //======================
+}
+
+  removeClient(obj:any){
+  this.selectedClientList = this.selectedClientList.filter(item => item !== obj);
+ }
+  checkBx(usr){
   
   this.userList2.push(usr)
   this.userList.map(it => it.check = false);
@@ -109,15 +185,15 @@ checkBx(usr){
   console.log(this.userList2)
   this.removeBx(usr)
      }
-    removeBx(usr){
+  removeBx(usr){
       this.userList = this.userList.filter(item => item !== usr);
       
     }
-    showbtn(){
+  showbtn(){
       let check = this.userList2.some(it => it.check === true)
       return check;
     }
-    checkBx2(usr2){
+  checkBx2(usr2){
       this.userList2 = this.userList2.filter(item => item !== usr2);
       this.userList2.unshift(usr2)
       this.userList2.some(it => it.check = true)
@@ -125,7 +201,7 @@ checkBx(usr){
       this.showbtn();
       
         }
-        addBack(usr2){
+  addBack(usr2){
           this.userList.unshift(usr2)
           this.userList.map(it => it.check = false);
           
@@ -134,41 +210,56 @@ checkBx(usr){
           this.userList2 = this.userList2.filter(item => item !== usr2);
           this.addBack(usr2)
         }
-        addTeam(obj)
+ addTeam(obj)
         {
-          
+          this.loaderC=true;
+          this.errors=[];  
+ 
+          let form = Object.assign({}, this.clientObj);      
+          form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:[it.product]}))      
           let userList3:any[]= this.userList2.map(it => ({user_id:it.id,is_team_lead:it.isTeamLead})) 
           let param = {
             
               "name":this.teamForm.value.name,
               "team_users":userList3,
-              "team_client_demographics":[{"client_demographic_id":obj.client_id,"product_list":[obj.client_product]}]
+              "team_client_demographics": form.team_client_demographics
           }
           
           this.service.AddTeam(param).subscribe((res) => {
             if (res.status === 'success') {
-              
+              this.loaderC=false;
+              if(this.errors.length==0){
+              this.global.setCustomFieldAddTeaser('Team Added Successfuly');
+              this.router.navigate(['/user-teams']);
+              }
             }
-            debugger
             if(res.message=="An item already exists in the DB with this identity."){
-            this.errMsg =true;
-            }
-            this.roleLoader = false;
-          }, (error) => {
-            debugger
-            this.roleLoader = false;
+              
+              this.errors.push(res.message);
+              
+              
+              console.log(this.errors)
+              this.openErrorModal()
+           
+           // debugger
+          }
+          if(res.errors){
+            this.loaderC=false;
+          this.errors=res.errors.name; 
+          if(this.errors.length!=0)
+          {
+              this.openErrorModal();
+          }
+        }
+        this.loaderC=false;
+      }, (error) => {
+            this.openErrorModal()
+            this.loaderC=false;
            
           });
         }
-  openErrorModal(): void {
-    this.modalRef = this.modalService.show(this.errorModal);
-  }
+
   
-  openDeleteclient(deleteclient: TemplateRef<any>,data) {
-    // this.userData = data
-    this.modalRef = this.modalService.show(deleteclient);
-    // this.modalRef.content.userActivate = 'Close';
-  }
   
   getUserDropdownList(): void {
     this.loader = true;
@@ -200,131 +291,17 @@ checkBx(usr){
     });
   }
 
-  assignGradeToUser(obj: any): void {
-    // this.service.assignGradeToUser(obj).subscribe((res) => {
-    //   if (res.status === 'success') {
-    //     let obj = {
-    //       user_grade_id: this.newGradeID,
-    //       user_role_ids: this.roleList.filter(it => it.check === true).map(it => it.id)
-    //     };
-    //     this.assignGradeToRole(obj);
-    //   } else {
-    //     this.loader = false;
-    //     if (res.errors) {
-    //       const list = [];
-    //       for (var key in res.errors) {
-    //         let error = { name: key, list: res.errors[key].toString() };
-    //         list.push(error);
-    //       }
-    //       this.responseText = list;
-    //     } else {
-    //       this.responseText = [{ name: 'Error', list: res.code }];
-    //     }
-    //     this.openErrorModal();
-    //   }
-
-    // }, (error) => {
-    //   this.loader = false;
-    //   this.openErrorModal();
-    //   this.responseText = [{ name: 'Error', list: error.message }];
-    // });
+////////////////// Pop Region//////////////////////
+  openErrorModal(): void {
+    debugger
+    this.modalRef = this.modalService.show(this.errorModal);
   }
-
-  assignGradeToRole(obj: any): void {
-    // this.service.assignGradeToRole(obj).subscribe((res) => {
-    //   if (res.status === 'success') {
-    //     this.loader = false;
-    //     this.router.navigate(['/grade']);
-    //   } else {
-    //     this.loader = false;
-    //     if (res.errors) {
-    //       const list = [];
-    //       for (var key in res.errors) {
-    //         let error = { name: key, list: res.errors[key].toString() };
-    //         list.push(error);
-    //       }
-    //       this.responseText = list;
-    //     } else {
-    //       this.responseText = [{ name: 'Error', list: res.code }];
-    //     }
-    //     this.openErrorModal();
-    //   }
-    // }, (error) => {
-    //   this.loader = false;
-    //   this.openErrorModal();
-    //   this.responseText = [{ name: 'Error', list: error.message }];
-    // });
+  
+  openDeleteclient(deleteclient: TemplateRef<any>,data) {
+    // this.userData = data
+    this.modalRef = this.modalService.show(deleteclient);
+    // this.modalRef.content.userActivate = 'Close';
   }
-  redirectToList(): void {
-    this.router.navigate(['/grade']);
-  }
-
-  addGrade(obj: any): void {
-    this.loader = true;
-    // this.service.addGrade(obj).subscribe((res) => {
-    //   if (res.status === 'success') {
-    //     this.newGradeID = res.data.id;
-    //     const obj = {
-    //       user_grade_id: this.newGradeID,
-    //       user_ids: this.userList.filter(it => it.check === true).map(it => it.id)
-    //     };
-    //     this.redirectToList();
-    //   } else {
-    //     this.loader = false;
-    //     if (res.errors) {
-    //       let list = [];
-    //       for (var key in res.errors) {
-    //         let error = { name: key, list: res.errors[key].toString() };
-    //         list.push(error);
-    //       }
-    //       this.responseText = list;
-    //     } else {
-    //       this.responseText = [{ name: 'Error', list: res.code }];
-    //     }
-    //     this.openErrorModal();
-    //   }
-
-    // }, (error) => {
-    //   this.loader = false;
-    //   this.openErrorModal();
-    //   this.responseText = [{ name: 'Error', list: error.message }];
-    // });
-  }
-
-  submitForm(): void {
-    const roleCheck = this.userList.some(it => it.check === true);
-    const userCheck = this.userList.some(it => it.check === true);
-    if (roleCheck === false) {
-      this.responseText = [{ name: 'Error: ', list: 'Please select at least one role to create grade.' }];
-      this.openErrorModal();
-      return;
-    } else if (userCheck === false) {
-      this.responseText = [{ name: 'Error: ', list: 'Please select at least one user to create grade.' }];
-      this.openErrorModal();
-      return;
-    }
-    const obj = {
-      name: this.gradeForm.get('name').value,
-      description: this.gradeForm.get('description').value,
-      user_role_ids: this.userList.filter(it => it.check === true).map(it => it.id),
-      user_ids: this.userList.filter(it => it.check === true).map(it => it.id)
-    };
-
-    this.addGrade(obj);
-  }
-
-  isGradeAvailable(): void {
-    this.gradeAvailable = '';
-    // this.service.isGradeAvailable({ name: this.gradeForm.controls.name.value }).subscribe((res) => {
-    //   if (res.status === 'success') {
-    //     if (res.data.is_available === false) {
-    //       this.gradeAvailable = 'Grade name already taken.';
-    //     }
-    //   }
-    // }, (error) => {
-    //   this.gradeAvailable = '';
-    // });
-  }
-
+////////////////End pop Region//////////////////
 }
 

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
-import { APP_CONFIG, PrivilegesStore } from 'src/app/core';
+import { APP_CONFIG, GlobalService, PrivilegesStore } from 'src/app/core';
 import { TeamService } from '../services/user-teams.service';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
-import {DragulaService} from 'ng2-dragula'
+import {DragulaService} from 'ng2-dragula';
 
 @Component({
   selector: 'ncri-user-teams',
@@ -93,7 +93,8 @@ export class UserTeamsComponent implements OnInit {
    private modalService: BsModalService,
    private service: TeamService,
    private router: Router,
-   private dragulaService: DragulaService,  // public privileges: PrivilegesStore
+   private dragulaService: DragulaService, 
+   public global:GlobalService
    ) {
    
    }
@@ -144,6 +145,7 @@ export class UserTeamsComponent implements OnInit {
     this.pageConfig.page = 1;
     this.getTeams();
   }
+
   public valueChanged(event: string) {
     console.log('value changed: ' + event);
   }
@@ -159,9 +161,7 @@ export class UserTeamsComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged(),
         tap((text) => {
-          // console.log(this.searchInput.nativeElement.value)
           this.pageConfig.page = 1;
-          // this.pageConfig.search_text = this.searchInput.nativeElement.value;
           this.getTeams()
         })
     )
@@ -178,7 +178,9 @@ export class UserTeamsComponent implements OnInit {
   setTab(tab: string){
      this.tab = tab;
   }
-
+  get Date(): Date {
+    return new Date();
+  }
   selectAll(){
       if(this.checkAll === true){
       this.teamList.map(it => {it.check = true
