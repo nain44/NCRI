@@ -49,7 +49,7 @@ export class TeamService {
         let url = APP_CONFIG.apiBaseUrl + "/api/v1/uam/UserDropdownList/";
         return this.httpClient.get(url);
     }
-    
+   
       
       
 }
