@@ -232,7 +232,9 @@ selectValuesE(value:any){
               debugger
               if(this.errors.length==0){
                 this.team_name=this.teamForm.value.name
-              this.global.setCustomFieldAddTeaser('Team Added Successfuly');
+                let str ='Team Added Successful';
+                            
+                 this.global.setCustomFieldAddTeaser2(str,"User Team"+' '+this.team_name+"  added Successfuly");
               this.router.navigate(['/user-teams']);
               }
             }

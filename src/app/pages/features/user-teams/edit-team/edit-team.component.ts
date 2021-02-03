@@ -343,7 +343,7 @@ removeFromList(){
       
       }
       submitForm(){
-        debugger;
+       
         this.errors=[];  
         this.editLoader = true;
         let form = Object.assign({}, this.clientObj);
@@ -358,9 +358,9 @@ removeFromList(){
          
 
           if(res.status === "success"){
-            
+           let str ='Team Updated Successful';
             if(this.errors.length==0){
-              this.global.setCustomFieldAddTeaser('Team Updated Successfuly');
+              this.global.setCustomFieldAddTeaser2(str,"User Team"+' '+this.clientObj.name+"  updated Successfuly");             // this.global.setCustomFieldAddTeaser('Team' +' '+ this.clientObj);
               this.router.navigate(['/user-teams']);
               }
           }else{

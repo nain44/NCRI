@@ -17,7 +17,10 @@ export class GlobalService {
   //clock
   private clock: Observable<Date>;
   customFieldAddTeaser = false;
+  customFieldAddTeaser2 = false;
   customFieldTeaserText = '';
+  customFieldTeaserText2='';
+  customFieldTeaserText1: any;
   constructor(private router: Router,private httpClient: HttpClient) {
     //setting clock observable
     // this.clock = interval(1000).pipe(
@@ -50,7 +53,14 @@ export class GlobalService {
       this.customFieldAddTeaser = false;
     }, 6000);
   }
-
+  setCustomFieldAddTeaser2(type,type2) {
+    this.customFieldTeaserText1 = type;
+    this.customFieldTeaserText2 = type2;
+    this.customFieldAddTeaser2 = true;
+    setTimeout(() => {
+      this.customFieldAddTeaser2 = false;
+    }, 6000);
+  }
   //token getter
   get token() {
     let token = localStorage.getItem("details");

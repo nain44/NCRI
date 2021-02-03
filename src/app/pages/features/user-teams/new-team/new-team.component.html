@@ -16,11 +16,12 @@
             <h1 class="hk-pg-title">Add New Team</h1>
         </div>
     </div>
-    <div class="snack-bar" *ngIf="global.customFieldAddTeaser">
+    <div class="snack-bar" *ngIf="global.customFieldAddTeaser2">
         <i class="fa fa-close"></i>
         <div class="snack-bar__content">
-            <h4>{{global.customFieldTeaserText}}</h4>
-            <span>User Team " {{team_name}}" added Successfuly</span><br>
+            <h4><span>{{global.customFieldTeaserText1}}</span></h4>
+
+            <span><span>{{global.customFieldTeaserText2}}</span> </span><br>
             <span>{{Date | date: ('d MMM yy h:m a')}}</span>
         </div>
     </div>
