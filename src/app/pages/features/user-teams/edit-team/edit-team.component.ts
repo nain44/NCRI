@@ -187,13 +187,14 @@ removeFromList(){
         this.clientObj.tName=this.teamData.name;
         this.userList2=this.teamData.team_users;
         console.log('json data',JSON.parse(this.teamData.team_client_demographics[0].product_list) );
-       
+       if(this.teamData.team_client_demographics.length > 0){
         this.selectedClientList = this.teamData.team_client_demographics.map(it => ({
           code: it.client_demographic__client_number,
           name: it.client_demographic__company_name,
           product: JSON.parse(it.product_list) ? JSON.parse(it.product_list) : [],
           id: it.client_demographic_id
         }));
+      }
        // this.teamForm.controls.name.setValue(this.userList.name);
         //this.userList.map(it => it.check = false);
       }
@@ -227,7 +228,7 @@ removeFromList(){
       let obj = {
         code: data.client_number,
         name: data.company_name,
-        product: data.product,
+        product: [data.product],
         id: data.id
       }
 
@@ -317,7 +318,7 @@ removeFromList(){
         debugger;
         this.editLoader = true;
         let form = Object.assign({}, this.clientObj);
-        form.team_users = this.selectedClientList.map(it => ({user_id: it.id, is_team_lead:(it.isTeamLead ? it.isTeamLead : false)}))
+        form.team_users = this.userList2.map(it => ({user_id: it.id, is_team_lead:(it.isTeamLead ? it.isTeamLead : false)}))
     
         form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:[it.product]}))
     
