@@ -44,6 +44,7 @@ export class NewTeamComponent implements OnInit {
   productListE:any=[];
   errors: any=[];
   loaderC: boolean=false;
+  team_name: string="";
   constructor(
     private service: TeamService,
     private dragulaService: DragulaService,
@@ -214,7 +215,7 @@ selectValuesE(value:any){
         {
           this.loaderC=true;
           this.errors=[];  
- 
+          
           let form = Object.assign({}, this.clientObj);      
           form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:[it.product]}))      
           let userList3:any[]= this.userList2.map(it => ({user_id:it.id,is_team_lead:it.isTeamLead})) 
@@ -228,7 +229,9 @@ selectValuesE(value:any){
           this.service.AddTeam(param).subscribe((res) => {
             if (res.status === 'success') {
               this.loaderC=false;
+              debugger
               if(this.errors.length==0){
+                this.team_name=this.teamForm.value.name
               this.global.setCustomFieldAddTeaser('Team Added Successfuly');
               this.router.navigate(['/user-teams']);
               }
