@@ -19,7 +19,7 @@
     <section class="hk-sec-wrapper shadow-xl rounded-30">
         <h5 class="hk-sec-title hk-sec-title--all">Please fill the basic information about User Team </h5>
         <!-- <form [formGroup]="teamForm" novalidate> -->
-            <form  novalidate>
+           
             <div class="row">
                 <div class="col-12">
                     <accordion [isAnimated]="true" class="accord-section">
@@ -29,10 +29,12 @@
                             </button>
                             <div class="cg-role">
                                 <div class="w-100 mt-20">
+                                    <form  novalidate>
+
                                     <div class="row mt-20">
                                         <div class="col-4">
                                             <div class="form-label-group">
-                                                <input type="text" (blur)="isGradeAvailable()" [(ngModel)]="clientObj.tName" name="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Team Name">
+                                                <input type="text" (blur)="isGradeAvailable()" [(ngModel)]="clientObj.name" name="name" class="form-control" id="formGroupExampleInput" placeholder="Enter Team Name">
                                                 <label for="">Team Name</label>
                                                 <div class="w-100" *ngIf="teamForm.controls.name.status=='INVALID'">
                                                     <div *ngIf="teamForm.controls.name.errors.required && teamForm.controls.name.touched" class="invalid-feedback" [style.display]="teamForm.controls.name.status=='INVALID' ? 'block' : 'none'">
@@ -42,73 +44,118 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
+                                    <form>
                                     <div class="row mt-40">
-                                        <div class="col-md-6 d-flex" >
-                                            <div class="roles-list" >
-                                                <div class="custom-pagination mt-0">
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-6 d-flex">
-                                                            <h6 class="hk-sec-title hk-sec-title--all">Available Users </h6>
-                                                        </div>
-                                                        <div class="col-6 d-flex align-items-end justify-content-end">
-                                                            <div class="form-group has-search filter-search w-100">
-                                                                <span class="fa fa-search form-control-feedback"></span>
-                                                                <input type="text" [(ngModel)]="searchRolesText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search Roles">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>                       
-                                                <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList' >
-                                                      <li *ngFor="let usr of userList let i=index" >
-                                                        <div class="custom-control custom-checkbox" >
-                                                            
-                                                               <input  [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
-                                                            
-                                                            <label class="custom-control-label"for={{usr.id}}>{{usr.first_name?usr.first_name :usr.user__first_name}} {{usr.last_name?usr.last_name:usr.user__last_name}}</label>
-                                                        </div>
-                                                    </li>
-                                                 
-                                                   
-                                                </ul>
+                                        <div class="col-12">
+                                            <div class="toggle-wrap d-flex align-items-center">
+                                                <span class="font-16 text-dark-80 font-weight-bold mb-4"> Users</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 d-flex" >
-                                            <div class="roles-list" >
-                                                <div class="custom-pagination mt-0">
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-6 d-flex">
-                                                            <h6 class="hk-sec-title hk-sec-title--all">Selected Users </h6>
+                                        <div class="col-md-6">
+                                            <div class="set-commssion">
+                                                <div class="w-100"></div>
+                                                <div class="row d-flex align-items-center">
+                                                </div>
+                                                <div class="row mt-20">
+                                                    <div class="teams-list">
+                                                        <div class="custom-pagination mt-0">
+                                                            <div class="row justify-content-between">
+                                                                <div class="col-6">
+                                                                    <h6 class="user-aval">Available Users </h6>
+                                                                </div>
+                                                                <div class="col-6 align-items-end justify-content-end">
+                                                                    <div class="form-group has-search filter-search w-100">
+                                                                        <span class="fa fa-search form-control-feedback"></span>
+                                                                        <input type="text" [(ngModel)]="searchUsersText" [ngModelOptions]="{standalone: true}" class="form-control search-back" id="inlineFormInputGroupUsername2" placeholder="Search Users">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6 d-flex align-items-end justify-content-end">
-                                                            <div class="form-group has-search filter-search w-100">
-                                                                <span class="fa fa-search form-control-feedback"></span>
-                                                                <input type="text" [(ngModel)]="searchUsersText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search User">
+                                                        <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList' >
+                                                            <li *ngFor="let usr of userList | searchUser:searchUsersText let i=index" class="userborder" >
+                                                              <div class="custom-control custom-checkbox" >
+                                                                  
+                                                                     <input  [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
+                                                                  
+                                                                  <label class="custom-control-label"for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
+                                                              </div>
+                                                          </li>
+                                                          <li class="userborder" *ngIf="userList.length === 0 && loader">
+                                                          <div class="no-data" >
+                                                            Loading Users...
+                                                            </div></li>
+                                                          <div class="no-data" *ngIf="userList.length === 0 && !loader">
+                                                            No Data Found to Select Users
+                                                        </div>
+                                                       
+                                                         
+                                                      </ul>
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <accordion [isAnimated]="true" class="accord-section">
+                                                <accordion-group [isOpen]="true">
+                                                    <div class="cg-role">
+                                                        <div class="row mt-20">
+                                                            <div class="w-100"></div>
+                                                            <div class="teams-list">
+                                                                <div class="custom-pagination mt-0">
+                                                                    <div class="row justify-content-between">
+                                                                        <div class="col-6">
+                                                                            <h6 class="user-aval">Selected Users </h6>
+                                                                        </div>
+                                                                        <div class="col-6 align-items-end justify-content-end">
+                                                                            <div class="form-group has-search filter-search w-100">
+                                                                                <span class="fa fa-search form-control-feedback"></span>
+                                                                                <input type="text" [(ngModel)]="searchSelectedUserText" [ngModelOptions]="{standalone: true}" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search User">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                          
+                                                                <ul class="mnh-200p" [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2'>
+                                                                    <div *ngFor='let usr2 of userList2 | searchUser:searchSelectedUserText  let i=index' >
+                                                                    <li *ngIf="userList2.length!=0" class="editRow">                                                                
+
+
+                                                                          <div class="d-flex justify-content-between">
+                                                                            <p class="team-user-name text-dark-80">{{usr2.first_name + ' ' + usr2.last_name}}</p>
+                                                                            <div class="custom-control custom-checkbox w-50">
+                                                                                <input [checked]="i==0" [(ngModel)]="usr2.check" name="usr2.check2" (ngModelChange)="checkBx2(usr2)"
+                                                                                 type="checkbox" [ngModelOptions]="{standalone: true}" class="custom-control-input editMe"
+                                                                                    [id]="usr2.id">
+                                                                                <label class="custom-control-label editMe" [for]="usr2.id">Make Team Lead</label> 
+                                                                            </div>
+                                                                            <i class="fa fa-times remove-user text-dark-80" (click)="removeBx2(usr2)"></i>
+
+                                                                        </div> 
+                                                                  </li> 
+                                                                  <li class="userborder" *ngIf="userList2.length === 0 && loader"> <div class="no-data" >
+                                                                    Loading Users...
+                                                                </div></li>
+                                                                    </div>
+                                                                    <div *ngIf="userList2.length==0">
+                                                                        <li>                                            
+                                                                            <h6>Drag and Drop user here or select a  check box</h6>
+                                                                        </li>                                                 
+                                                                    </div>
+                                                                   
+                                                                </ul>
+                                                            
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            
-                                                <ul [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2' >
-                                                    <div *ngFor='let usr2 of userList2'>
-                                                    <li *ngIf="userList2.length!=0" class="editRow">
-                                                        <div >
-                                                            <label  class="label">{{usr2.user__first_name?usr2.user__first_name:usr2.first_name}} {{usr2.user__last_name? usr2.user__last_name:usr2.last_name}}</label>
-                                                                                  
-                                                            <input class="custom-control custom-checkbox float-right editMe"  [(ngModel)]="usr2.check" name="usr2.check" (ngModelChange)="checkBx2(usr2)" type="checkbox"  id={{usr2.id}}>
-                                                            <a href="javascript:void(0)" (click)="removeBx2(usr2)" > <i class="fa fa-times float-righ mt-2 editMe" style="color: black"></i></a> 
-                                                            <label class="float-right editMe">Make Team Lead</label>
-                                                        </div>                                                        
-                                                    </li> 
-                                                </div>
-                                                <div *ngIf="userList2.length==0" class="editRow">
-                                                    <li>                                            
-                                                        <h6>Drag and Drop user here or select a  check box</h6>
-                                                    </li>                                                 
-                                                </div>
-                                                </ul>
-                                               </div>
+                                                </accordion-group>
+                                            </accordion>
                                         </div>
                                     </div>
+                                    </form>
+                                    <form >
                                     <div class="row mt-20">
                                         <div class="col-12">
                                             <div class="toggle-wrap d-flex align-items-center">
@@ -164,7 +211,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tile">
+                                    <div class="tile" *ngIf="selectedClientList.length!==0">
                                         <div class="col-12">
                                             <h6 class="">Client(s) Assigned to this Team </h6>
                                         </div>
@@ -252,7 +299,7 @@
                                            
                                         </div>
                                     </div>
-                                   
+                                </form>
                                             <!-- </div> -->
                                     <!-- </div> -->
                                     </div>
@@ -268,7 +315,7 @@
                 <button type="button" [routerLink]="['/user/user-team']" class="btn btn-success btn-lg previous">Cancel</button>
                 <button type="button" (click)="submitForm()" class="btn btn-success btn-lg ">Create Team</button>
             </div>
-        </form>
+        
 
     </section>
 </div>

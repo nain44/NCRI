@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { TeamService } from '../../user-teams/services/user-teams.service';
-
+import {GlobalService} from '../../../../core/services/global.service'
 @Component({
   selector: 'ncri-edit-team',
   templateUrl: './edit-team.component.html',
@@ -43,6 +43,8 @@ export class EditTeamComponent implements OnInit {
   demName:any;
   productList:any=[];
   productListE:any=[];
+  searchSelectedUserText: string = "";
+  errors: any=[];
   constructor(
     private service: TeamService,
     private dragulaService: DragulaService,
@@ -50,6 +52,7 @@ export class EditTeamComponent implements OnInit {
     private modalService: BsModalService,
     private router: Router,
     private route: ActivatedRoute,
+    public global:GlobalService,
   ) {
     this.teamForm = this.fb.group({
       name: ['', Validators.required],
@@ -78,81 +81,91 @@ export class EditTeamComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchTeam();
-    this.getUserDropdownList();
+    //this.getUserDropdownList();
     this.getClientDemographicDropdownList();
     
   }
+  get Date(): Date {
+    return new Date();
+  }
   addToList(){
-    
+    debugger
     this.subs.add(this.dragulaService.dropModel(this.MANY_ITEMS)
       .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        debugger
-        console.log('dropModel:');
-        console.log(el);
-        console.log(source);
-        console.log(target);
-        console.log(sourceModel);
-        console.log(targetModel);
-        console.log(item);
-        console.log("userlist",this.userList2)
-      })
+             })
     );
 }
 removeFromList(){
   debugger
   this.subs.add(this.dragulaService.removeModel(this.MANY_ITEMS)
       .subscribe(({ el, source, item, sourceModel }) => {
-        
-        console.log('removeModel:');
-        console.log(el);
-        console.log(source);
-        console.log(sourceModel);
-        console.log(item);
-        
+              
       })
     );
+}
  
+
+  checkBx(usr){
+  debugger
+  this.userList2.push(usr)
+  this.userList.map(it => it.check = false);
+  this.userList2.map(it=>it.isTeamLead=false)
+
+  console.log(this.userList2)
+  this.removeBx(usr)
+     }
+  removeBx(usr){
+    debugger
+      this.userList = this.userList.filter(item => item !== usr);
+      
     }
- 
-    checkBx(usr){
-      this.userList2.push(usr)
-      this.userList.map(it => it.check = false);
-      console.log(this.userList2)
-      this.removeBx(usr)
-         }
-        removeBx(usr){
-          this.userList = this.userList.filter(item => item !== usr);
-          
+  showbtn(){
+      let check = this.userList2.some(it => it.check === true)
+      return check;
+    }
+  checkBx2(usr2){
+    debugger
+      this.userList2 = this.userList2.filter(item => item !== usr2);
+      this.userList2.unshift(usr2)
+      this.userList2.some(it => it.check = true)
+      this.userList2.some(it => it.isTeamLead = true)
+      
         }
-        checkBx2(usr2){
+  addBack(usr2){
+    debugger
+          this.userList.unshift(usr2)
+          this.userList.map(it => it.check = false);
+          
+            }
+        removeBx2(usr2){
           this.userList2 = this.userList2.filter(item => item !== usr2);
-          this.userList2.unshift(usr2)
-          console.log(this.userList)
-            }
-            addBack(usr2){
-              this.userList.unshift(usr2)
-              this.userList.map(it => it.check = false);
-              console.log(this.userList)
-                }
-            removeBx2(usr2){
-              this.userList2 = this.userList2.filter(item => item !== usr2);
-              this.addBack(usr2)
-            }
+          this.addBack(usr2)
+        }
+  ////////////////// Pop Region//////////////////////
   openErrorModal(): void {
+    debugger
     this.modalRef = this.modalService.show(this.errorModal);
   }
   
   openDeleteclient(deleteclient: TemplateRef<any>,data) {
+    debugger
     // this.userData = data
     this.modalRef = this.modalService.show(deleteclient);
     // this.modalRef.content.userActivate = 'Close';
   }
+////////////////End pop Region//////////////////
   getUserDropdownList(): void {
     this.roleLoader = true;
     this.service.UserDropdownList().subscribe((res) => {
       if (res.status === 'success') {
+        debugger
         this.userList = res.data;
         this.userList.map(it => it.check = false);
+        console.log('userList2==',this.userList2);
+        console.log('userList==',this.userList);
+        this.userList = this.userList.filter(item => this.userList2.every(f=>f.id!==item.id));
+        console.log('newArr==',this.userList)
+
       }
       this.roleLoader = false;
     }, (error) => {
@@ -176,16 +189,31 @@ removeFromList(){
   }
 
   fetchTeam(): void {
+    
     this.userLoader = true;
     const obj = {
       id: this.gradeID
     };
     this.service.FetchTeam(obj).subscribe((res) => {
       if (res.status === 'success') {
+    this.getUserDropdownList();
       
         this.teamData = res.data;
-        this.clientObj.tName=this.teamData.name;
-        this.userList2=this.teamData.team_users;
+        this.clientObj.name=this.teamData.name;
+        this.userList2=this.teamData.team_users.map(it=> ({
+          first_name: it.user__first_name,
+          last_name: it.user__last_name,
+          id: it.user_id,
+          isTeamLead: it.is_team_lead,
+          check:false
+        }));
+          debugger
+     let userL= this.userList2.filter(item => item.isTeamLead==true)[0];
+     
+
+     this.userList2 = this.userList2.filter(item => item!==userL);
+     userL.check=true;
+        this.userList2.unshift(userL)
         console.log('json data',JSON.parse(this.teamData.team_client_demographics[0].product_list) );
        if(this.teamData.team_client_demographics.length > 0){
         this.selectedClientList = this.teamData.team_client_demographics.map(it => ({
@@ -316,25 +344,32 @@ removeFromList(){
       }
       submitForm(){
         debugger;
+        this.errors=[];  
         this.editLoader = true;
         let form = Object.assign({}, this.clientObj);
-        form.team_users = this.userList2.map(it => ({user_id: it.id, is_team_lead:(it.isTeamLead ? it.isTeamLead : false)}))
+        form.team_users = this.userList2.map(it => ({user_id: it.id, is_team_lead:(it.isTeamLead ? it.isTeamLead : false)}));
     
-        form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:[it.product]}))
+        form.team_client_demographics = this.selectedClientList.map(it => ({client_demographic_id:it.id,product_list:it.product}));
     
-        form.id = this.gradeID
+        form.id = this.gradeID;
         
-        // this.service.updateTeam(form).subscribe((res) =>{
-        //   this.editLoader = false;
-        //   if(res.status === "success"){
-        //     this.router.navigate(['/teams']);
-        //   }else{
-        //     this.responseText = res.message;
-        //     this.openErrorModal();
-        //   }
-        //  },(error) =>{
-        //   this.editLoader = false;
-        // })
+        this.service.EditTeam(form).subscribe((res) =>{
+          this.editLoader = false;
+         
+
+          if(res.status === "success"){
+            
+            if(this.errors.length==0){
+              this.global.setCustomFieldAddTeaser('Team Updated Successfuly');
+              this.router.navigate(['/user-teams']);
+              }
+          }else{
+            this.responseText = res.message;
+            this.openErrorModal();
+          }
+         },(error) =>{
+          this.editLoader = false;
+        })
       }
     
   
