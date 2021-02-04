@@ -14,7 +14,6 @@ import {GlobalService} from '../../../../core/services/global.service'
 export class NewTeamComponent implements OnInit {
   MANY_ITEMS = 'MANY_ITEMS';
   userList2 = [];
-  many2=["Please drag and drop a user from the list or select from the list"]
   selectedClientList:any=[];
   subs = new Subscription();
   userList: any = [];
@@ -26,8 +25,7 @@ export class NewTeamComponent implements OnInit {
   @ViewChild('errorModal') errorModal: TemplateRef<any>;
   loader = false;
   newGradeID: any;
-  gradeAvailable = '';
-  
+  gradeAvailable = '';  
   searchUsersText = '';
   clientList: any;
   teamForm: FormGroup;
@@ -61,7 +59,6 @@ export class NewTeamComponent implements OnInit {
       client_name: ['', Validators.required],
       client_product: ['', Validators.required],
       check:[""],
-
     });
    
     
@@ -86,14 +83,14 @@ export class NewTeamComponent implements OnInit {
              })
     );
 }
-removeFromList(){
+// removeFromList(){
   
-  this.subs.add(this.dragulaService.removeModel(this.MANY_ITEMS)
-      .subscribe(({ el, source, item, sourceModel }) => {
+//   this.subs.add(this.dragulaService.removeModel(this.MANY_ITEMS)
+//       .subscribe(({ el, source, item, sourceModel }) => {
               
-      })
-    );
-}
+//       })
+//     );
+// }
 
 selectValues(value:any){
   
@@ -169,7 +166,6 @@ selectValuesE(value:any){
   this.selectedClientList[indx].product=data.product;
   this.clientObjE={};
     this.clientObj={};
-    console.log("this.selectedClientList====",this.selectedClientList);
   
   //======================
 }
@@ -276,9 +272,7 @@ selectValuesE(value:any){
       this.loader = false;
     });
   }
-  errMsgFunc(){
-    this.errMsg=false;
-  }
+ 
   getClientDemographicDropdownList(): void {
     
     this.userLoader = true;
@@ -294,17 +288,14 @@ selectValuesE(value:any){
     });
   }
 
-////////////////// Pop Region//////////////////////
+////////////////// Pop up Region//////////////////////
   openErrorModal(): void {
-    debugger
     this.modalRef = this.modalService.show(this.errorModal);
   }
   
   openDeleteclient(deleteclient: TemplateRef<any>,data) {
-    // this.userData = data
     this.modalRef = this.modalService.show(deleteclient);
-    // this.modalRef.content.userActivate = 'Close';
   }
-////////////////End pop Region//////////////////
+////////////////End pop up Region//////////////////
 }
 

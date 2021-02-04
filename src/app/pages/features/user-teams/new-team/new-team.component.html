@@ -80,37 +80,41 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                          
                                                             <ul [dragula]="MANY_ITEMS" [(dragulaModel)]='userList' >
+                                                                <li *ngIf="userList.length === 0 && loader" class="userborder text-dark-80"  >
+                                                                    
+                                                                        Loading Users...
+                                                                      
+                                                                </li>
+
                                                                 <li *ngFor="let usr of userList | searchUser:searchUsersText let i=index" class="userborder" >
-                                                                  <div class="custom-control custom-checkbox" >
-                                                                      
-                                                                         <input  [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
-                                                                      
-                                                                      <label class="custom-control-label"for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
-                                                                  </div>
-                                                              </li>
-                                                              <li class="userborder" *ngIf="userList.length === 0 && loader">
-                                                              <div class="no-data" >
-                                                                Loading Users...
-                                                                </div></li>
-                                                              <div class="no-data" *ngIf="userList.length === 0 && !loader">
-                                                                No Data Found to Select Users
-                                                            </div>
+                                                                    <div class="custom-control custom-checkbox" >
+                                                                        
+                                                                           <input  [(ngModel)]="usr.check" name="usr.check" (ngModelChange)="checkBx(usr)" type="checkbox" class="custom-control-input" id={{usr.id}}>
+                                                                        
+                                                                        <label class="custom-control-label"for={{usr.id}}>{{usr.first_name}} {{usr.last_name}}</label>
+                                                                    </div>
+                                                                </li>
+                                                             
+                                                              
                                                            
                                                              
                                                           </ul>
-                                                          
+                                                          <div class="no-data" *ngIf="userList.length === 0 && !loader">
+                                                            No Data Found to Select Users
+                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6"  >
                                                 <accordion [isAnimated]="true" class="accord-section">
                                                     <accordion-group [isOpen]="true">
                                                         <div class="cg-role">
                                                             <div class="row mt-20">
                                                                 <div class="w-100"></div>
-                                                                <div class="teams-list">
+                                                                <div class="teams-list" [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2'>
                                                                     <div class="custom-pagination mt-0">
                                                                         <div class="row justify-content-between">
                                                                             <div class="col-6">
@@ -126,9 +130,12 @@
                                                                     </div>
                                                                     
                                               
-                                                                    <ul class="mnh-200p" [dragula]="MANY_ITEMS"  [(dragulaModel)]='userList2'>
+                                                                    <ul class="mnh-200p">
                                                                         <div *ngFor='let usr2 of userList2 | searchUser:searchSelectedUserText  let i=index' >
-                                                                        <li *ngIf="userList2.length!=0" class="editRow">                                                                
+                                                                            <li *ngIf="userList2.length === 0 && loader" class="userborder text-dark-80">                                                                    
+                                                                                Loading Users...                                                                              
+                                                                        </li>
+                                                                            <li *ngIf="userList2.length!=0" class="editRow">                                                                
 
 
                                                                               <div class="d-flex justify-content-between">
@@ -143,13 +150,11 @@
 
                                                                             </div> 
                                                                       </li> 
-                                                                      <li class="userborder" *ngIf="userList2.length === 0 && loader"> <div class="no-data" >
-                                                                        Loading Users...
-                                                                    </div></li>
+                                                                     
                                                                         </div>
                                                                         <div *ngIf="userList2.length==0">
                                                                             <li>                                            
-                                                                                <h6>Drag and Drop user here or select a  check box</h6>
+                                                                                <h6>Please drag and drop or select a user from the list</h6>
                                                                             </li>                                                 
                                                                         </div>
                                                                        
